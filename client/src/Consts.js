@@ -1,0 +1,16 @@
+export const DISTRICT = [
+  "MALAPPURAM",
+  "ALAPPUZHA",
+  "ERNAMKULAM",
+  "IDUKKI",
+  "KANNUR",
+  "CALICUT",
+  "TRISSUR",
+  "KOLLAM",
+  "KASARAGOD",
+  "KOTTAYAM",
+  "PALAKKAD",
+  "PATHANAMTHITTA",
+  "TRIVANDRUM",
+  "WAYANAD",
+];
