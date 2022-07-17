@@ -39,10 +39,6 @@ const branchSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  // admin: {
-  //   type: mongoose.Types.ObjectId,
-  //   ref: "Auth",
-  // },
   image: String,
 });
 

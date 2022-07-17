@@ -32,8 +32,8 @@ function ClassBasedFilter() {
 
   return (
     <>
-      <h1 className="text-violet-500 font-bold text-3xl mt-4">
-        {authData?.adminCollegeName?.branchName}
+      <h1 className="text-gray-800 font-bold text-3xl mt-4 text-center">
+        {authData?.branch.branchName}
       </h1>
 
       <div className="w-full items-center px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-3">

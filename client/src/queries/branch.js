@@ -6,9 +6,7 @@ const GET_BRANCHES = gql`
     branches {
       id
       branchName
-      admin {
-        username
-      }
+      phone
     }
   }
 `;

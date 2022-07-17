@@ -9,7 +9,7 @@ function ExcelUpload() {
   const uploadFile = async (e) => {
     e.preventDefault();
     let data = await axios({
-      url: `http://localhost:5000/api/student/excel`,
+      url: `/api/student/excel`,
       method: "POST",
       data: formData,
       withCredentials: true,

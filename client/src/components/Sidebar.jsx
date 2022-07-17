@@ -29,8 +29,16 @@ function Sidebar() {
       route: "/create-branch",
     },
     {
-      name: "Create User",
-      route: "/create-user",
+      name: "All Branches",
+      route: "/all-branches",
+    },
+    {
+      name: "All Users",
+      route: "/all-users",
+    },
+    {
+      name: "New Admission",
+      route: "/add-student",
     },
   ];
   return (

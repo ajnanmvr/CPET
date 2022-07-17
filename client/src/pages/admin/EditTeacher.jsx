@@ -73,7 +73,6 @@ function EditTeacher() {
       let res = await Axios.patch("/teacher/" + id, formData);
       if (res.status === 200) {
         setLoading(false);
-        setFormData(initialState);
         toast.success("Teacher edited Successfully", {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
@@ -177,7 +176,7 @@ function EditTeacher() {
                   onChange={(e) => onChange(e)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 >
-                  <option>select admin college</option>
+                  <option>select branch</option>
                   {branches.map((branch, index) => (
                     <option key={index} value={branch._id}>
                       {branch.branchName}
@@ -195,7 +194,7 @@ function EditTeacher() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
                 >
-                  <option>select subjects  </option>
+                  <option>select subjects </option>
                   {Subjects.map((subject, index) => (
                     <option key={index} value={subject}>
                       {subject}

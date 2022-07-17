@@ -9,6 +9,7 @@ import { UserAuthContext } from "../../context/user";
 function CreateTeacher() {
   const navigate = useNavigate();
   const { authData } = useContext(UserAuthContext);
+
   const Subjects = [
     "ENGLISH",
     "MALAYALAM",
@@ -55,7 +56,7 @@ function CreateTeacher() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setFormData({ ...formData, branch: authData?.adminCollegeName?._id });
+    setFormData({ ...formData, branch: authData?.branch?._id });
     try {
       let res = await Axios.post("/teacher", formData);
       if (res.status === 200) {
@@ -162,8 +163,8 @@ function CreateTeacher() {
                   id=""
                 >
                   <option>select branch </option>
-                  <option value={authData?.adminCollegeName._id}>
-                    {authData?.adminCollegeName.branchName}
+                  <option value={authData?.branch._id}>
+                    {authData?.branch.branchName}
                   </option>
                 </select>
               </div>

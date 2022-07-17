@@ -60,7 +60,7 @@ function Dashboard() {
     {
       text: "ALL STUDENTS",
       icon: faGraduationCap,
-      link: "/all-class-students",
+      link: "/all-classes",
     },
     {
       text: "ALL TEACHERS",
@@ -97,7 +97,7 @@ function Dashboard() {
             <div className="w-full items-center px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-3">
               {SuperAdminItems.map((item, key) => (
                 <Link to={item.link} key={key} className="w-full p-2">
-                  <div className="flex flex-col px-6 py-10 overflow-hidden bg-gray-900 rounded-xl  duration-300 shadow-2xl group">
+                  <div className="flex flex-col px-6 py-10 overflow-hidden bg-cyan-800 rounded-xl  duration-300 shadow-2xl group">
                     <div className="flex flex-row justify-between items-center">
                       <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-5xl">
                         <FontAwesomeIcon

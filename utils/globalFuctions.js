@@ -53,6 +53,7 @@ exports.updateOne = (Model) => async (req, res) => {
       res.status(400).json({ message: "document not found" });
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json(error);
   }
 };

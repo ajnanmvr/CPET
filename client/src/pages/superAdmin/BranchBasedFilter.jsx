@@ -1,18 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faSchool,
-  faUser,
-  faDonate,
-  faGraduationCap,
-  faChalkboardUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { UserAuthContext } from "../../context/user";
-import { useState } from "react";
 import Axios from "../../Axios";
-import { useEffect } from "react";
 import Loading from "../../components/Loading";
 
 function BranchBasedFilter() {

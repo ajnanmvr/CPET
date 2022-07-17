@@ -11,7 +11,7 @@ import { GET_BRANCHES } from "../../queries/branch";
 function AllBranches() {
   const [branches, setBranches] = useState([]);
   const { data, error, loading } = useQuery(GET_BRANCHES);
-  
+
   const getAllBranches = async () => {
     try {
       let { data } = await Axios.get("/branch");
@@ -30,7 +30,14 @@ function AllBranches() {
       console.log(error);
     }
   };
-
+  if (error)
+    return (
+      <h1 className="text-red-500 text-center font-bold">
+        Something Went Wrong{" "}
+      </h1>
+    );
+  if (loading)
+    return <h1 className="text-blue-500 text-center font-bold">Loading ...</h1>;
   return (
     <>
       <div className="flex flex-col ">
@@ -74,7 +81,7 @@ function AllBranches() {
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
-                      ADMIN
+                      PHONE
                     </th>
 
                     <th
@@ -101,7 +108,7 @@ function AllBranches() {
                         {branch.branchName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.admin?.username}
+                        {branch.phone}
                       </td>
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

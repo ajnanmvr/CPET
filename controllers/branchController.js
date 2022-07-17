@@ -5,6 +5,7 @@ const uuid = require("uuid-v4");
 const dotenv = require("dotenv");
 const fs = require("fs");
 const Auth = require("../models/authModel");
+const sharp = require("sharp");
 
 dotenv.config();
 admin.initializeApp({
@@ -40,8 +41,12 @@ async function uploadFile(fileName) {
 
 exports.createBranch = async (req, res) => {
   try {
+    await sharp(`${__dirname + "/uploads/" + req.file.filename}`)
+      .resize(320, 240)
+      .toFile(`${__dirname + "/sharped/" + req.file.filename}`);
+
     let uploadData = await uploadFile(
-      `${__dirname + "/uploads/" + req.file.filename}`
+      `${__dirname + "/sharped/" + req.file.filename}`
     );
 
     let data = await Branch.create({
@@ -49,12 +54,12 @@ exports.createBranch = async (req, res) => {
       image: uploadData[1].mediaLink,
     });
     let user = await Auth.create({ ...req.body, branch: data._id });
+    fs.unlinkSync(`${__dirname + "/uploads/" + req.file.filename}`);
     res.status(200).json({
       data,
       user,
     });
   } catch (error) {
-    console.log(error);
     res.status(400).json(error);
   }
 };

@@ -36,12 +36,7 @@ const BranchType = new GraphQLObjectType({
     place: { type: GraphQLString },
     district: { type: GraphQLString },
     image: { type: GraphQLString },
-    admin: {
-      type: UserType,
-      resolve(parent, args) {
-        return Auth.findById(parent.admin);
-      },
-    },
+    phone: { type: GraphQLString },
   }),
 });
 const UserType = new GraphQLObjectType({
@@ -116,6 +111,22 @@ const mutation = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return Auth.create(args);
+      },
+    },
+    getAllUsers: {
+      type: UserType,
+      resolve(parent, args) {
+        return Auth.find();
+      },
+    },
+
+    deleteUser: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Auth.findByIdAndDelete(args.id);
       },
     },
   },

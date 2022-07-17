@@ -2,6 +2,7 @@ const Student = require("../models/studentModel");
 const excelToJson = require("convert-excel-to-json");
 const fs = require("fs");
 const globalFunctions = require("../utils/globalFuctions");
+const mongoose = require("mongoose");
 
 exports.getAllStudents = globalFunctions.getAll(Student, "branch");
 exports.getStudent = globalFunctions.getOne(Student, "branch");
@@ -20,7 +21,18 @@ exports.getMyStudents = async (req, res) => {
 
 exports.getBranchDetails = async (req, res) => {
   try {
-    let data = await Student.find({ branch: req.params.branch });
+    let data = await Student.aggregate([
+      {
+        $match: { branch: mongoose.Types.ObjectId(req.params.branch) },
+      },
+      {
+        $group: {
+          _id: "$class",
+          numStudents: { $sum: 1 },
+          verified: { $sum: "$verified" },
+        },
+      },
+    ]);
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json(error);

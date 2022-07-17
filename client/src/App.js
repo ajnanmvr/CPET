@@ -44,7 +44,7 @@ export default function App() {
       component: <AllStudents />,
     },
     {
-      route: "/all-class-students",
+      route: "/all-classes",
       component: <ClassBasedFilter />,
     },
     {
@@ -79,11 +79,6 @@ export default function App() {
     {
       route: "/edit-branch/:id",
       component: <EditBranch />,
-      role: "superAdmin",
-    },
-    {
-      route: "/create-user",
-      component: <CreateUser />,
       role: "superAdmin",
     },
     {
@@ -133,7 +128,7 @@ export default function App() {
                 element={<ProtectedRoutes>{route.component}</ProtectedRoutes>}
               />
             ))}
-            { RestrictedRoutes.map((route, index) => (
+            {RestrictedRoutes.map((route, index) => (
               <Route
                 path={route.route}
                 key={index}

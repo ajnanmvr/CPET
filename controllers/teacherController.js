@@ -9,7 +9,7 @@ exports.updateTeacher = globalFunction.updateOne(Teacher);
 exports.getMyTeachers = async (req, res) => {
   try {
     let data = await Teacher.find({
-      branch: req.user.adminCollegeName,
+      branch: req.user.branch,
       deleted:false
     }).populate("branch");
     res.status(200).json(data);

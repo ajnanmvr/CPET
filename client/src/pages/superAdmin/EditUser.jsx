@@ -94,26 +94,6 @@ function EditUser() {
                 />
               </div>
             </div>
-            {/* <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  EMAIL
-                </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  id="username"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => onChange(e)}
-                  placeholder="EMAIL"
-                  name="email"
-                />
-              </div>
-            </div> */}
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
@@ -134,48 +114,7 @@ function EditUser() {
                 />
               </div>
             </div>
-
             <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Phone Number
-                </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  id="username"
-                  type="text"
-                  required
-                  value={formData.phone}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Phone No:"
-                  name="phone"
-                />
-              </div>
-            </div>
-            {/* <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  ROLE
-                </label>
-                <select
-                  name="role"
-                  id=""
-                  onChange={(e) => onChange(e)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                >
-                  <option>Select Role</option>
-                  <option value="user">USER</option>
-                  <option value="admin">ADMIN</option>
-                </select>
-              </div>
-            </div> */}
-            {/* <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
                   className="block  text-sm font-bold mb-2"
@@ -188,7 +127,7 @@ function EditUser() {
                   onChange={(e) => onChange(e)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                 >
-                  <option>select admin college</option>
+                  <option>Select Branch </option>
                   {branches.map((branch, index) => (
                     <option key={index} value={branch._id}>
                       {branch.branchName}
@@ -196,7 +135,7 @@ function EditUser() {
                   ))}
                 </select>
               </div>
-            </div> */}
+            </div>
           </form>
           <div className="lg:col-span-1 mt-4">
             <div className="px-4 sm:px-0">
