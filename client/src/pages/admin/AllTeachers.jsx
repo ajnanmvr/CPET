@@ -10,10 +10,14 @@ import { UserAuthContext } from "../../context/user";
 
 function AllTeachers() {
   const [teachers, setTeachers] = useState([]);
+  const { authData } = useContext(UserAuthContext);
 
   const getAllTeachers = async () => {
     try {
-      let { data } = await Axios.get('/teacher/my-teachers');
+      let url;
+      url =
+        authData.role === "superAdmin" ? "/teacher" : "/teacher/my-teachers";
+      let { data } = await Axios.get(url);
       setTeachers(data);
     } catch (error) {
       console.log(error.response);
@@ -39,7 +43,6 @@ function AllTeachers() {
           All Teachers
         </h3>{" "}
         <div className="w-full mx-auto">
-         
           <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               {teachers.length > 0 ? <TeacherTable /> : <Loading />}

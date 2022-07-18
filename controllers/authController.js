@@ -102,9 +102,7 @@ exports.logout = (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const user = await Auth.findById(req.params.id).populate(
-      "branch"
-    );
+    const user = await Auth.findById(req.params.id).populate("branch");
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json({
@@ -199,10 +197,10 @@ exports.restrictTo = (...roles) => {
 exports.checkUserLoggedIn = async (req, res, next) => {
   let token = req.cookies.jwt;
   if (!token) {
-    res.status(200).json("user not logged in");
+    res.status(200).json({ error: "user not logged in" });
   } else {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     let user = await Auth.findById(decoded.userId).populate("branch");
-    res.status(200).json(user);
+    res.status(200).json({ user :user});
   }
 };

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "../../Axios";
 import { Link, useParams } from "react-router-dom";
-import Loading from "../../components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye, faL } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
@@ -15,27 +14,12 @@ function AllStudents() {
   const [branch, setBranch] = useState("");
   const { classId } = useParams();
 
-  const [wordEntered, setwordEntered] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleChange = (e) => {
-    let searchWord = e.target.value;
-    setwordEntered(searchWord);
-    if (searchWord !== "") {
-      let newFilter = students.filter((value) => {
-        return value.studentName
-          .toLowerCase()
-          .includes(searchWord.toLowerCase());
-      });
-      setSearchResults(newFilter);
-    } else {
-      setSearchResults(students);
-    }
-  };
   const getAllStudents = async () => {
     try {
       let { data } = await Axios.post(
-        `/student?branch=${authData.adminCollegeName._id}&class=${classId}`
+        `/student?branch=${authData.branch._id}&class=${classId}`
       );
       setStudents(data);
     } catch (error) {
@@ -56,10 +40,6 @@ function AllStudents() {
     getAllStudents();
     getAllBranches();
   }, []);
-
-  useEffect(() => {
-    getAllStudents();
-  }, [branch]);
   return (
     <>
       <div className="flex flex-col ml-6">

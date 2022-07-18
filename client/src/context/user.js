@@ -9,8 +9,8 @@ export const UserAuthProvider = (props) => {
   const checkUserLogin = async () => {
     try {
       const res = await Axios.post("/auth/checkLogin");
-      if (res.data) {
-        setAuthData(res.data);
+      if (res.status === 200) {
+        setAuthData(res.data.user);
       }
     } catch (error) {
       console.log(error.response);
@@ -33,9 +33,7 @@ export const UserAuthProvider = (props) => {
     setAuthData,
     logout,
   };
-  useEffect(() => {
-    checkUserLogin();
-  }, []);
+
   return (
     <UserAuthContext.Provider value={value}>
       {props.children}

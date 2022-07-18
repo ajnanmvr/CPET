@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -9,7 +9,7 @@ import FileDataPage from "./components/New Admission/FileDataPage";
 import Sidebar from "./components/Sidebar";
 import { UserAuthContext } from "./context/user";
 import AllTeachers from "./pages/admin/AllTeachers";
-import ClassBasedFilter from "./pages/admin/ClassBasedFilter";
+import AllClasses from "./pages/admin/AllClasses";
 import CreateTeacher from "./pages/admin/CreateTeacher";
 import EditStudent from "./pages/admin/EditStudent";
 import EditTeacher from "./pages/admin/EditTeacher";
@@ -32,7 +32,8 @@ import ProtectedRoutes from "./ProtectRoutes";
 import Restricted from "./Restricted";
 
 export default function App() {
-  const { authData } = useContext(UserAuthContext);
+  const { authData, checkUserLogin } = useContext(UserAuthContext);
+  console.log(authData);
 
   const ProtectRoutes = [
     {
@@ -45,7 +46,7 @@ export default function App() {
     },
     {
       route: "/all-classes",
-      component: <ClassBasedFilter />,
+      component: <AllClasses />,
     },
     {
       route: "/all-teachers",
@@ -102,6 +103,9 @@ export default function App() {
       role: "superAdmin",
     },
   ];
+  useEffect(() => {
+    checkUserLogin();
+  }, []);
   return (
     <>
       <div className="flex">
