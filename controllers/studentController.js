@@ -81,3 +81,4 @@ function importExcelData2MongoDB(filePath) {
   });
   fs.unlinkSync(filePath);
 }
+

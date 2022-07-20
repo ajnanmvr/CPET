@@ -6,7 +6,7 @@ const router = require("express").Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./controllers/uploads");
+    cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -14,7 +14,10 @@ const storage = multer.diskStorage({
 });
 const uploads = multer({ storage: storage });
 
-router.post("/register", studentController.registerStudent);
+router.post(
+  "/register",
+  studentController.registerStudent,
+);
 router.post(
   "/excel",
   protect,

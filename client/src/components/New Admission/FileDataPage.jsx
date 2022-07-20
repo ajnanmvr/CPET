@@ -1,12 +1,19 @@
+import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "../../Axios";
+import { toast } from "react-toastify";
 
 function FileDataPage() {
   const { aadhar } = useParams();
   const [student, setStudent] = useState({});
+  const [image1, setImage1] = useState(null);
+  console.log(image1);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+  const [image4, setImage4] = useState(null);
 
   const getStudent = async () => {
     try {
@@ -16,7 +23,49 @@ function FileDataPage() {
       console.log(error.response);
     }
   };
-
+  const updateStudent = async () => {
+    try {
+      let { data } = await Axios.patch(`/student/${student._id}`, {
+        certificateOne: image1,
+        certificateTwo: image2,
+        certificateThree: image3,
+        certificateFour: image4 && image4,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const sendToCloudinary = async (file, setFile) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "mern-chat");
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/mern-chat/image/upload",
+        formData
+      );
+      const { secure_url } = res.data;
+      setFile(secure_url);
+      return secure_url;
+    } catch (error) {
+      console.log(error.response);
+      toast.error("Image Uploading Error", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000,
+      });
+    }
+  };
+  console.log(typeof image1);
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    await sendToCloudinary(image1, setImage1);
+    await sendToCloudinary(image2, setImage2);
+    await sendToCloudinary(image3, setImage3);
+    if (typeof image1 === "string" && typeof image2 === "string") {
+      updateStudent();
+    }
+  };
   useEffect(() => {
     getStudent();
   }, []);
@@ -67,7 +116,11 @@ function FileDataPage() {
                     Select a photo
                   </p>
                 </div>
-                <input type="file" className="opacity-0" />
+                <input
+                  type="file"
+                  className="opacity-0"
+                  onChange={(e) => setImage1(e.target.files[0])}
+                />
               </label>
             </div>
           </div>
@@ -94,7 +147,11 @@ function FileDataPage() {
                     Select a photo
                   </p>
                 </div>
-                <input type="file" className="opacity-0" />
+                <input
+                  type="file"
+                  className="opacity-0"
+                  onChange={(e) => setImage2(e.target.files[0])}
+                />
               </label>
             </div>
           </div>
@@ -121,8 +178,25 @@ function FileDataPage() {
                     Select a photo
                   </p>
                 </div>
-                <input type="file" className="opacity-0" />
+                <input
+                  type="file"
+                  className="opacity-0"
+                  onChange={(e) => setImage3(e.target.files[0])}
+                />
               </label>
+            </div>
+          </div>
+          <div className="m-4">
+            <label className="inline-block mb-2 text-gray-500">
+              Upload Plus Two Certificate
+            </label>
+            <div className="flex items-center justify-center w-full my-4">
+              <button
+                onClick={(e) => handleUpload(e)}
+                className="bg-green-400 w-full py-4 text-white font-bold"
+              >
+                Upload{" "}
+              </button>
             </div>
           </div>
         </div>

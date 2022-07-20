@@ -119,7 +119,6 @@ const mutation = new GraphQLObjectType({
         return Auth.find();
       },
     },
-
     deleteUser: {
       type: UserType,
       args: {

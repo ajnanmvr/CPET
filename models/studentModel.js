@@ -94,7 +94,11 @@ const studentSchema = new mongoose.Schema({
   academicYear: {
     type: String,
   },
-  
+  certificateOne: String,
+  certificateTwo: String,
+  certificateThree: String,
+  certificateFour: String,
+  image:String
 });
 
 const Student = mongoose.model("Student", studentSchema);

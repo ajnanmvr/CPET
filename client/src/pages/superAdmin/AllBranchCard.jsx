@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 
-function BranchBasedFilter() {
+function AllBranchCard() {
   const [branches, setBranches] = useState([]);
 
   const getAllBranches = async () => {
@@ -51,4 +51,4 @@ function BranchBasedFilter() {
   );
 }
 
-export default BranchBasedFilter;
+export default AllBranchCard;

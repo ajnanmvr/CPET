@@ -27,6 +27,11 @@ const teacherSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+    emum: ["male", "female"],
+  },
 });
 
 const Teacher = mongoose.model("Teacher", teacherSchema);

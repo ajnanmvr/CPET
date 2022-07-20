@@ -15,7 +15,7 @@ admin.initializeApp({
 
 const bucket = admin.storage().bucket();
 
-async function uploadFile(fileName) {
+async function uploadFile(fileName1, fileName2) {
   try {
     const metadata = {
       metadata: {
@@ -27,12 +27,13 @@ async function uploadFile(fileName) {
     };
 
     // Uploads a local file to the bucket
-    let data = await bucket.upload(fileName, {
+    let data = await bucket.upload(fileName1, {
       // Support for HTTP requests made with `Accept-Encoding: gzip`
       gzip: true,
       metadata: metadata,
     });
-    fs.unlinkSync(fileName);
+    fs.unlinkSync(fileName1);
+    fs.unlinkSync(fileName2);
     return data;
   } catch (error) {
     console.log(error);
@@ -46,7 +47,8 @@ exports.createBranch = async (req, res) => {
       .toFile(`${__dirname + "/sharped/" + req.file.filename}`);
 
     let uploadData = await uploadFile(
-      `${__dirname + "/sharped/" + req.file.filename}`
+      `${__dirname + "/sharped/" + req.file.filename}`,
+      `${__dirname + "/uploads/" + req.file.filename}`
     );
 
     let data = await Branch.create({
@@ -54,12 +56,12 @@ exports.createBranch = async (req, res) => {
       image: uploadData[1].mediaLink,
     });
     let user = await Auth.create({ ...req.body, branch: data._id });
-    fs.unlinkSync(`${__dirname + "/uploads/" + req.file.filename}`);
     res.status(200).json({
       data,
       user,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json(error);
   }
 };

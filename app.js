@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan("dev"));
-
+app.use(express.static('uploads'))
 app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/branch", branchRoutes);

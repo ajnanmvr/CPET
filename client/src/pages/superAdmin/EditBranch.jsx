@@ -16,12 +16,13 @@ function EditBranch() {
     state: "",
     pinCode: "",
     phone: "",
-    admin: "",
+    username: "",
+    password: "",
     image: "",
   };
   const [inputData, setInputData] = useState(initialState);
   const [branchImg, setBranchImg] = useState(null);
-  const [admins, setAdmins] = useState([]);
+
   const [loading, setLoading] = useState(false);
 
   const formData = new FormData();
@@ -33,16 +34,10 @@ function EditBranch() {
   formData.append("state", inputData.state);
   formData.append("pinCode", inputData.pinCode);
   formData.append("phone", inputData.phone);
-  formData.append("admin", inputData.admin);
+  formData.append("username", inputData.username);
+  formData.append("password", inputData.password);
 
-  const getAllAdmins = async () => {
-    try {
-      let { data } = await Axios.get("/auth/users");
-      setAdmins(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+
 
   const getBranch = async () => {
     let { data } = await Axios.get("/branch/" + id);
@@ -79,7 +74,6 @@ function EditBranch() {
   };
   useEffect(() => {
     getBranch();
-    getAllAdmins();
   }, []);
   return (
     <div className="w-3/4 ml-6">
@@ -254,24 +248,37 @@ function EditBranch() {
                   className="block  text-sm font-bold mb-2"
                   htmlFor="username"
                 >
-                  Admin
+                  Admin Username
                 </label>
-                <select
-                  name="admin"
+                <input
+                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  type="text"
+                  value={inputData.username}
+                  required
                   onChange={(e) => onChange(e)}
-                  id=""
-                  value={inputData.admin}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  placeholder="Admin Username"
+                  name="username"
+                />
+              </div>
+            </div>
+
+            <div className="lg:col-span-1">
+              <div className="px-4 sm:px-0">
+                <label
+                  className="block  text-sm font-bold mb-2"
+                  htmlFor="username"
                 >
-                  <option>SELECT ADMIN </option>
-                  {admins.map((admin, index) => (
-                    <>
-                      <option key={index} value={admin._id}>
-                        {admin && admin.username}
-                      </option>
-                    </>
-                  ))}
-                </select>
+                  Admin Password
+                </label>
+                <input
+                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  type="text"
+                  value={inputData.password}
+                  required
+                  onChange={(e) => onChange(e)}
+                  placeholder="Admin Password"
+                  name="password"
+                />
               </div>
             </div>
           </form>

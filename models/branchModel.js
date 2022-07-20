@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const branchSchema = new mongoose.Schema({
   branchName: {
@@ -39,12 +40,20 @@ const branchSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  slug: String,
   image: String,
 });
 
 branchSchema.pre(/^find/, function (next) {
   //Effects all queries starts with FIND
   this.find({ deleted: { $ne: true } });
+  next();
+});
+
+branchSchema.pre("save", function (next) {
+  //pre middleware have a (next) key
+  //works before .save() & .create() , not work in .insert() and not for findByIdAnd...
+  this.slug = slugify(this.branchName, { lower: true });
   next();
 });
 

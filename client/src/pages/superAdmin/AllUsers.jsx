@@ -1,46 +1,53 @@
 import Axios from "../../Axios";
 import { Link } from "react-router-dom";
-import Loading from "../../components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { useQuery } from "@apollo/client";
-import { GET_USERS } from "../../queries/userQuery";
-
+import { useState } from "react";
+import { useEffect } from "react";
+import Loading from "../../components/Loading";
 function AllUsers() {
-  const { data, error, loading } = useQuery(GET_USERS);
+  const [users, setUsers] = useState([]);
 
   const deleteUser = async (id) => {
     try {
       if (window.confirm("Do you want to delete?")) {
-        await Axios.delete("/auth/user/" + id);
+        let data = await Axios.delete("/auth/user/" + id);
+        if (data.status === 200) {
+          getAllUsers();
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
-  if (error)
-    return <h1 className="text-center text-red-600">Something Went Wrong </h1>;
-  if (loading)
-    return <h1 className="text-center text-blue-600">Loading .. </h1>;
-  if (!error && !loading) {
-    return (
-      <>
-        <div className="flex flex-col">
-          <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
-            All users
-          </h3>
-          <div className="w-full mx-auto">
-            <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
-              <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                {data.users.length > 0 && <UsersTable />}
-                <div className="overflow-hidden h-screen"></div>
-              </div>
+  const getAllUsers = async (id) => {
+    try {
+      let { data } = await Axios.get("/auth/users/");
+      setUsers(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+  return (
+    <>
+      <div className="flex flex-col">
+        <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
+          All users
+        </h3>
+        <div className="w-full mx-auto">
+          <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
+            <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              {users.length > 0 ? <UsersTable /> : <Loading />}
+              <div className="overflow-hidden h-screen"></div>
             </div>
           </div>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 
   function UsersTable() {
     return (
@@ -73,12 +80,18 @@ function AllUsers() {
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
+                      EDIT
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
                       DELETE
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data.users.map((user, index) => (
+                  {users.map((user, index) => (
                     <tr className="border-b">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {index + 1}
@@ -91,7 +104,7 @@ function AllUsers() {
                       </td>
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Link to={"/edit-user/" + user.id}>
+                        <Link to={"/edit-user/" + user._id}>
                           <FontAwesomeIcon icon={faEdit} />
                         </Link>
                       </td>
@@ -99,7 +112,7 @@ function AllUsers() {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <div
                           className="cursor-pointer"
-                          onClick={() => deleteUser(user.id)}
+                          onClick={() => deleteUser(user._id)}
                         >
                           <FontAwesomeIcon icon={faTrash} />
                         </div>

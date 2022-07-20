@@ -3,37 +3,40 @@ import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AddStudents from "./components/New Admission/AddStudents";
 import AdmissionCreated from "./components/New Admission/AdmissionCreated";
 import FileDataPage from "./components/New Admission/FileDataPage";
 import Sidebar from "./components/Sidebar";
 import { UserAuthContext } from "./context/user";
-import AllTeachers from "./pages/admin/AllTeachers";
-import AllClasses from "./pages/admin/AllClasses";
-import CreateTeacher from "./pages/admin/CreateTeacher";
-import EditStudent from "./pages/admin/EditStudent";
-import EditTeacher from "./pages/admin/EditTeacher";
+import BranchPayments from "./pages/admin/BranchPayments";
+
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import NotAllowed from "./pages/NotAllowed";
-import NotLoggedIn from "./pages/NotLoggedIn";
-import NotFound from "./pages/Not_found";
-import Profile from "./pages/Profile";
-import AllBranches from "./pages/superAdmin/AllBranches";
-import AllStudents from "./pages/superAdmin/AllStudents";
-import AllUsers from "./pages/superAdmin/AllUsers";
-import BranchBasedDetails from "./pages/superAdmin/BranchBasedDetails";
-import AllBranchCard from "./pages/superAdmin/BranchBasedFilter";
-import CreateBranch from "./pages/superAdmin/CreateBranch";
-import CreateUser from "./pages/superAdmin/CreateUser";
-import EditBranch from "./pages/superAdmin/EditBranch";
-import EditUser from "./pages/superAdmin/EditUser";
-import ProtectedRoutes from "./ProtectRoutes";
-import Restricted from "./Restricted";
+import {
+  Login,
+  AllBranches,
+  EditBranch,
+  EditStudent,
+  EditUser,
+  EditTeacher,
+  AllStudents,
+  NotFound,
+  NotAllowed,
+  Profile,
+  AddStudents,
+  AllTeachers,
+  CreateBranch,
+  CreateTeacher,
+  ProtectedRoutes,
+  Restricted,
+  AllBranchCard,
+  BranchBasedDetails,
+  NotLoggedIn,
+  AllUsers,
+  AllClasses,
+} from "./pages/index";
+import AllPayments from "./pages/superAdmin/AllPayments";
 
 export default function App() {
   const { authData, checkUserLogin } = useContext(UserAuthContext);
-  console.log(authData);
 
   const ProtectRoutes = [
     {
@@ -64,6 +67,10 @@ export default function App() {
     {
       route: "/create-teacher",
       component: <CreateTeacher />,
+    },
+    {
+      route: "/branch-payment",
+      component: <BranchPayments />,
     },
   ];
   const RestrictedRoutes = [
@@ -100,6 +107,11 @@ export default function App() {
     {
       route: "/all-branch-students/:id",
       component: <BranchBasedDetails />,
+      role: "superAdmin",
+    },
+    {
+      route: "/all-payments",
+      component: <AllPayments />,
       role: "superAdmin",
     },
   ];

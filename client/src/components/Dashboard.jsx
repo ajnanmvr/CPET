@@ -51,9 +51,9 @@ function Dashboard() {
       link: "/all-branch-students",
     },
     {
-      text: "ALL DONATIONS",
+      text: "ALL PAYMENTS",
       icon: faDonate,
-      link: "/all-donations",
+      link: "/all-payments",
     },
   ];
   const AdminItems = [
@@ -69,9 +69,9 @@ function Dashboard() {
     },
 
     {
-      text: "ALL DONATIONS",
+      text: "ALL PAYMENTS",
       icon: faDonate,
-      link: "/all-donations",
+      link: "/all-payments",
     },
   ];
 
