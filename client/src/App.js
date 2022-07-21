@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/Footer";
 import AdmissionCreated from "./components/New Admission/AdmissionCreated";
 import FileDataPage from "./components/New Admission/FileDataPage";
 import Sidebar from "./components/Sidebar";
@@ -34,6 +35,8 @@ import {
   AllClasses,
 } from "./pages/index";
 import AllPayments from "./pages/superAdmin/AllPayments";
+import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
+import EditPaymentData from "./pages/superAdmin/EditPayment";
 
 export default function App() {
   const { authData, checkUserLogin } = useContext(UserAuthContext);
@@ -114,6 +117,16 @@ export default function App() {
       component: <AllPayments />,
       role: "superAdmin",
     },
+    {
+      route: "/create-payment",
+      component: <CreatePaymentData />,
+      role: "superAdmin",
+    },
+    {
+      route: "/edit-payment/:id",
+      component: <EditPaymentData />,
+      role: "superAdmin",
+    },
   ];
   useEffect(() => {
     checkUserLogin();
@@ -156,6 +169,7 @@ export default function App() {
           </Routes>
         </div>
       </div>
+      {/* <Footer/> */}
     </>
   );
 }

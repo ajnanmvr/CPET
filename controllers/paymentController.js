@@ -1,6 +1,8 @@
 const Razorpay = require("razorpay");
 const dotenv = require("dotenv");
 dotenv.config();
+const globalFuctions = require("../utils/globalFuctions");
+const Payment = require("../models/paymentModel");
 
 const instance = new Razorpay({
   key_id: process.env.RAZOR_PAY_KEY_ID,
@@ -12,15 +14,9 @@ const options = {
   currency: "INR",
   receipt: "order_rcptid_11",
 };
-instance.orders.create(options, function (err, order) {
-  console.log(order);
-});
 
-instance.payments
-  .all({ from: "2022-07-14", to: "2022-07-15" })
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+exports.createPaymentData = globalFuctions.createOne(Payment);
+exports.getAllPayments = globalFuctions.getAll(Payment);
+exports.getPayment = globalFuctions.getOne(Payment)
+exports.updatePayment = globalFuctions.updateOne(Payment);
+exports.deletePayment = globalFuctions.deleteStatus(Payment);

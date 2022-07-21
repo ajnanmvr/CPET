@@ -59,7 +59,10 @@ function CreateTeacher() {
     setLoading(true);
     setFormData({ ...formData, branch: authData?.branch?._id });
     try {
-      let res = await Axios.post("/teacher", formData);
+      let res = await Axios.post("/teacher", {
+        ...formData,
+        branch: authData.branch._id,
+      });
       if (res.status === 200) {
         setLoading(false);
         setFormData(initialState);
@@ -80,14 +83,14 @@ function CreateTeacher() {
   };
 
   return (
-    <div className="w-3/4 ml-6">
+    <div className="w-2/4 mx-auto">
       <section className="bg-white p-6">
         <div className="max-w-screen-xl mx-auto">
           <h3 className="text-4xl font-bold text-violet-600 uppercase my-4">
             Create Teacher
           </h3>
 
-          <form className="lg:grid lg:grid-cols-2 lg:gap-8">
+          <form className="lg:grid lg:grid-cols-1 lg:gap-8">
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
@@ -149,27 +152,7 @@ function CreateTeacher() {
                 />
               </div>
             </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Branch
-                </label>
-                <select
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                  name="branch"
-                  onChange={(e) => onChange(e)}
-                  id=""
-                >
-                  <option>select branch </option>
-                  <option value={authData?.branch._id}>
-                    {authData?.branch.branchName}
-                  </option>
-                </select>
-              </div>
-            </div>
+
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
@@ -220,6 +203,13 @@ function CreateTeacher() {
                     </h1>
                   </div>
                 ))}
+                <br />
+                {formData.subjects.length > 0 && (
+                  <span className="text-sm text-red-400 italic">
+                    * If you want to remove a subject, click on the subject to
+                    remove{" "}
+                  </span>
+                )}
               </div>
             </div>
           </form>
