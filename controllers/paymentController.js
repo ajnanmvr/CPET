@@ -40,12 +40,10 @@ exports.paymentSuccess = async (req, res) => {
   try {
     let body = req.body.razorpayOrderId + "|" + req.body.razorpayPaymentId;
 
-    var expectedSignature = crypto
+    let expectedSignature = crypto
       .createHmac("sha256", process.env.RAZOR_PAY_KEY_SECRET)
       .update(body.toString())
       .digest("hex");
-    console.log("sig received ", req.body.razorpaySignature);
-    console.log("sig generated ", expectedSignature);
 
     if (expectedSignature === req.body.razorpaySignature) {
       let data = await Order.findOneAndUpdate(
@@ -60,5 +58,18 @@ exports.paymentSuccess = async (req, res) => {
     }
   } catch (error) {
     res.status(400).json(error);
+  }
+};
+
+exports.getPaidDetails = async (req, res) => {
+  try {
+    let data = await Order.find({
+      paymentId: req.params.id,
+      status: "paid",
+    }).populate("branch", "branchName");
+
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(400).error(error);
   }
 };

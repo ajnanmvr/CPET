@@ -24,6 +24,7 @@ function AddStudents() {
     phone: "",
     branch: "",
     class: "",
+    academicYear: "",
   };
 
   const [page, setPage] = useState(1);
@@ -31,8 +32,9 @@ function AddStudents() {
   const [formData, setFormData] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
   const [goNext, setGoNext] = useState(false);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  let currentYear = new Date().getFullYear().toString();
+  let nextYear = (new Date().getFullYear() + 1).toString();
 
   const validate = (values) => {
     let errors = {};
@@ -93,7 +95,10 @@ function AddStudents() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let res = await Axios.post("/student/register", formData);
+      let res = await Axios.post("/student/register", {
+        ...formData,
+        academicYear: currentYear + "-" + nextYear,
+      });
       if (res.status === 200) {
         setFormData(initialState);
         toast.success("Student Added Successfully", {

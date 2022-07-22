@@ -38,6 +38,37 @@ exports.getBranchDetails = async (req, res) => {
     res.status(400).json(error);
   }
 };
+exports.getAllDetails = async (req, res) => {
+  try {
+    let data = await Student.aggregate([
+      {
+        $match: { verified: true },
+      },
+      {
+        $group: {
+          _id: "$branch",
+          numStudents: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "branches",
+          localField: "_id",
+          foreignField: "_id",
+          as: "branch",
+        },
+      },
+      {
+        $project: { "branch.branchName": 1, numStudents: 1 },
+      },
+    ]);
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
 
 exports.excelUpload = async (req, res) => {
   try {
@@ -81,4 +112,3 @@ function importExcelData2MongoDB(filePath) {
   });
   fs.unlinkSync(filePath);
 }
-

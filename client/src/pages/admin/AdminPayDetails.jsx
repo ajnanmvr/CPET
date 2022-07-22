@@ -5,10 +5,13 @@ import { useParams } from "react-router-dom";
 import Axios from "../../Axios";
 import useRazorpay from "react-razorpay";
 import axios from "axios";
+import { useContext } from "react";
+import { UserAuthContext } from "../../context/user";
 
 function AdminPayDetails() {
   const params = useParams();
   const [payment, setPayment] = useState({});
+  const { authData } = useContext(UserAuthContext);
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -34,7 +37,7 @@ function AdminPayDetails() {
     }
 
     const result = await Axios.post("/payment/create-orderId", {
-      amount: payment.amount ,
+      amount: payment.amount,
     });
 
     if (!result) {
@@ -58,6 +61,7 @@ function AdminPayDetails() {
           razorpayOrderId: response.razorpay_order_id,
           razorpaySignature: response.razorpay_signature,
           paymentId: params.id,
+          branch: authData.branch,
         };
 
         await Axios.post("/payment/success", data);

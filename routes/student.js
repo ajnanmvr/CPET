@@ -32,6 +32,8 @@ router.post(
   studentController.getMyStudents
 );
 router.get("/details/:branch", studentController.getBranchDetails);
+router.post("/all-details/", studentController.getAllDetails);
+
 router.get("/:id", studentController.getStudent);
 router.delete("/:id", studentController.deleteStudent);
 router.patch("/:id", studentController.updateStudent);

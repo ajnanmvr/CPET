@@ -31,7 +31,7 @@ function Profile() {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
-        navigate("/all-students");
+        navigate(`/all-students/${student.class}`);
       }
     } catch (error) {
       setLoading(false);
@@ -53,7 +53,7 @@ function Profile() {
         <section className="bg-white p-6">
           <div className="max-w-screen-xl mx-auto">
             <h3 className="text-4xl font-bold text-blue-900 uppercase my-4">
-              STUDENT PROFILE 
+              STUDENT PROFILE
             </h3>
             <form className="lg:grid lg:grid-cols-2 lg:gap-8">
               <div className="lg:col-span-1">

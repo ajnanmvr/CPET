@@ -6,6 +6,7 @@ const {
   updatePayment,
   createOrderId,
   paymentSuccess,
+  getPaidDetails,
 } = require("../controllers/paymentController");
 
 const router = require("express").Router();
@@ -19,5 +20,10 @@ router
   .route("/:id")
   .get(protect, getPayment)
   .patch(protect, restrictTo("superAdmin"), updatePayment);
-
+router.get(
+  "/paid-details/:id",
+  protect,
+  restrictTo("superAdmin"),
+  getPaidDetails
+);
 module.exports = router;

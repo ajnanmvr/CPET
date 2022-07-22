@@ -13,6 +13,7 @@ const paymentSchema = new mongoose.Schema(
     paidBranches: [
       {
         type: mongoose.Types.ObjectId,
+        ref: "Branch",
       },
     ],
     deadLine: {

@@ -9,11 +9,18 @@ const orderSchema = new mongoose.Schema({
     default: "pending",
     enum: ["pending", "paid"],
   },
+  branch: {
+    type: mongoose.Types.ObjectId,
+    ref: "Branch",
+  },
   razorpayPaymentId: String,
   razorpayOrderId: String,
-  razorpaySignature: String,
+  razorpaySignature: {
+    type: String,
+    select: false,
+  },
   orderCreationId: String,
-  amount:Number
+  amount: Number,
 });
 
 const Order = mongoose.model("Order", orderSchema);

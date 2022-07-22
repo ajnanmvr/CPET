@@ -52,16 +52,13 @@ function AllPayments() {
                     {payment.paymentName}
                   </h1>
                   <h1 className="text-sm text-center my-4 text-white group-hover:text-gray-50 uppercase">
-                  ₹ {payment.amount}
+                    ₹ {payment.amount}
                   </h1>
                   <Link to={"/payment-details/" + payment._id}>
                     <span className="bg-white px-8 py-2 ml-12  rounded-3xl uppercase font-bold text-gray-500">
                       View Details
                     </span>
                   </Link>
-                  <p className="text-sm text-gray-200 ml-16 mt-2">
-                    Deadline: {moment(payment.deadLine).format("MMM Do YY")}
-                  </p>
                 </div>
               ))}
             </>
