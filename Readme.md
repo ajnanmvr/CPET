@@ -30,10 +30,10 @@ To run this project, you will need to add the following environment variables to
 
 `you can test account using this credentials`
 
-  email (admin) : user01@gmail.com 
+  email (admin) : user01
   password : 1234
 
-  email (super admin) : superadmin@gmail.com 
+  email (super admin) : superadmin
   password : 1234
 
 
