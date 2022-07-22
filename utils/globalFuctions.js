@@ -31,13 +31,7 @@ exports.getAll = (Model, populateOptions) => async (req, res) => {
 
 exports.getOne = (Model, populateOptions) => async (req, res) => {
   try {
-    let data;
-    console.log(req.query);
-    if (req.query) {
-      data = await await Model.findOne(req.query).populate(populateOptions);
-    } else {
-      data = await Model.findById(req.params.id).populate(populateOptions);
-    }
+    let data = await Model.findById(req.params.id).populate(populateOptions);
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json(error);

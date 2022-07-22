@@ -5,9 +5,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../../Axios";
+import moment from "moment";
 
 function AllPayments() {
   const [payments, setPayments] = useState([]);
+
   const getAllPayments = async () => {
     try {
       let { data } = await Axios.get("/payment");
@@ -46,14 +48,20 @@ function AllPayments() {
                       color="white"
                     ></FontAwesomeIcon>
                   </Link>
-                  <h1 className="text-xl text-center font-bold mb-16 text-white mt-4 group-hover:text-gray-50 uppercase">
+                  <h1 className="text-xl text-center font-bold mb-4 text-white mt-4 group-hover:text-gray-50 uppercase">
                     {payment.paymentName}
                   </h1>
-                  <Link to={"/"}>
+                  <h1 className="text-sm text-center my-4 text-white group-hover:text-gray-50 uppercase">
+                  ₹ {payment.amount}
+                  </h1>
+                  <Link to={"/payment-details/" + payment._id}>
                     <span className="bg-white px-8 py-2 ml-12  rounded-3xl uppercase font-bold text-gray-500">
                       View Details
                     </span>
                   </Link>
+                  <p className="text-sm text-gray-200 ml-16 mt-2">
+                    Deadline: {moment(payment.deadLine).format("MMM Do YY")}
+                  </p>
                 </div>
               ))}
             </>

@@ -21,7 +21,7 @@ function Dashboard() {
   const getBranch = async () => {
     try {
       let { data } = await Axios.get(
-        "/branch/" + authData.adminCollegeName?._id
+        "/branch/" + authData.branch?._id
       );
       setBranch(data);
     } catch (error) {
@@ -71,7 +71,7 @@ function Dashboard() {
     {
       text: "ALL PAYMENTS",
       icon: faDonate,
-      link: "/all-payments",
+      link: "/admin-payment",
     },
   ];
 

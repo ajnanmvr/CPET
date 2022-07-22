@@ -8,6 +8,8 @@ import AdmissionCreated from "./components/New Admission/AdmissionCreated";
 import FileDataPage from "./components/New Admission/FileDataPage";
 import Sidebar from "./components/Sidebar";
 import { UserAuthContext } from "./context/user";
+import AdminPayDetails from "./pages/admin/AdminPayDetails";
+import AdminPaymentList from "./pages/admin/AdminPaymentList";
 import BranchPayments from "./pages/admin/BranchPayments";
 
 import Home from "./pages/Home";
@@ -37,6 +39,7 @@ import {
 import AllPayments from "./pages/superAdmin/AllPayments";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
+import PaymentDetails from "./pages/superAdmin/PaymentDetails";
 
 export default function App() {
   const { authData, checkUserLogin } = useContext(UserAuthContext);
@@ -74,6 +77,14 @@ export default function App() {
     {
       route: "/branch-payment",
       component: <BranchPayments />,
+    },
+    {
+      route: "/admin-payment",
+      component: <AdminPaymentList />,
+    },
+    {
+      route: "/admin-payment-details/:id",
+      component: <AdminPayDetails />,
     },
   ];
   const RestrictedRoutes = [
@@ -125,6 +136,11 @@ export default function App() {
     {
       route: "/edit-payment/:id",
       component: <EditPaymentData />,
+      role: "superAdmin",
+    },
+    {
+      route: "/payment-details/:id",
+      component: <PaymentDetails />,
       role: "superAdmin",
     },
   ];

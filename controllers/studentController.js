@@ -12,7 +12,7 @@ exports.updateStudent = globalFunctions.updateOne(Student);
 
 exports.getMyStudents = async (req, res) => {
   try {
-    let data = await Student.find({ branch: req.user.adminCollegeName });
+    let data = await Student.find({ branch: req.user.branch });
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json(error);
