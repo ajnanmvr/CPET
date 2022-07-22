@@ -106,7 +106,7 @@ function AddStudents() {
           position: toast.POSITION.TOP_CENTER,
         });
         if (formData.class === "mahdiyya-third-year") {
-          navigate("/mahdiyya-third/" + res.data.aadhar);
+          navigate("/mahdiyya-third/" + res.data._id);
         } else {
           navigate("/admission-created");
         }

@@ -122,11 +122,6 @@ export default function App() {
       role: "superAdmin",
     },
     {
-      route: "/all-notifications",
-      component: <AllNotifications />,
-      role: "superAdmin",
-    },
-    {
       route: "/edit-payment/:id",
       component: <EditPaymentData />,
       role: "superAdmin",
@@ -154,11 +149,12 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admission-created" element={<AdmissionCreated />} />
-            <Route path="/mahdiyya-third/:aadhar" element={<FileDataPage />} />
+            <Route path="/mahdiyya-third/:id" element={<FileDataPage />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/add-student" element={<AddStudents />} />
             <Route path="/not-logged" element={<NotLoggedIn />} />
             <Route path="/not-allowed" element={<NotAllowed />} />
+            <Route path="/all-notifications" element={<AllNotifications />} />
             {ProtectRoutes.map((route, index) => (
               <Route
                 key={index}

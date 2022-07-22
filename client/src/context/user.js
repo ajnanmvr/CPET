@@ -23,6 +23,7 @@ export const UserAuthProvider = (props) => {
       const res = await Axios.post("/auth/logout");
       if (res.data.success) {
         setAuthData(null);
+        window.location.href = "/login";
       }
     } catch (error) {
       console.log(error.response);

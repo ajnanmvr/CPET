@@ -37,6 +37,11 @@ function Sidebar() {
       route: "/create-teacher",
       icon: faPersonChalkboard,
     },
+    {
+      name: "Notifications",
+      route: "/all-notifications",
+      icon: faBell,
+    },
   ];
   const SuperAdmin = [
     {
@@ -60,8 +65,8 @@ function Sidebar() {
       icon: faBook,
     },
     {
-      name: "Add Notification",
-      route: "/create-notification",
+      name: "Notifications",
+      route: "/all-notifications",
       icon: faBell,
     },
   ];
@@ -117,7 +122,7 @@ function Sidebar() {
                     : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                 }
               >
-                <FontAwesomeIcon icon={navigation.icon}/>
+                <FontAwesomeIcon icon={navigation.icon} />
                 <span className="text-[15px] ml-4 text-gray-200 font-bold">
                   {navigation.name}
                 </span>

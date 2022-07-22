@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Axios from "../../Axios";
 
-function VerifyDetails({ formData, handleSubmit, prevPage }) {
+function VerifyDetails({ formData, handleSubmit, prevPage, }) {
   const [branch, setBranch] = useState("");
   const forms = [
     { lableName: "Student Name", value: formData.studentName },

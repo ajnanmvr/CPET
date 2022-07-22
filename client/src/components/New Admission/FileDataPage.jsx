@@ -7,22 +7,24 @@ import Axios from "../../Axios";
 import { toast } from "react-toastify";
 
 function FileDataPage() {
-  const { aadhar } = useParams();
+  const { id } = useParams();
   const [student, setStudent] = useState({});
   const [image1, setImage1] = useState(null);
-  console.log(image1);
+  const [loading, setLoading] = useState(false);
+
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
   const [image4, setImage4] = useState(null);
 
   const getStudent = async () => {
     try {
-      let { data } = await Axios.get(`/student/student?aadhar=${aadhar}`);
+      let { data } = await Axios.get(`/student/${id}`);
       setStudent(data);
     } catch (error) {
       console.log(error.response);
     }
   };
+
   const updateStudent = async () => {
     try {
       let { data } = await Axios.patch(`/student/${student._id}`, {
@@ -31,12 +33,14 @@ function FileDataPage() {
         certificateThree: image3,
         certificateFour: image4 && image4,
       });
-      console.log(data);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.log(error);
     }
   };
   const sendToCloudinary = async (file, setFile) => {
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -47,22 +51,31 @@ function FileDataPage() {
       );
       const { secure_url } = res.data;
       setFile(secure_url);
+      setLoading(false);
       return secure_url;
     } catch (error) {
-      console.log(error.response);
+      setLoading(false);
       toast.error("Image Uploading Error", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
     }
   };
-  console.log(typeof image1);
+
   const handleUpload = async (e) => {
     e.preventDefault();
+    setLoading(true);
     await sendToCloudinary(image1, setImage1);
     await sendToCloudinary(image2, setImage2);
     await sendToCloudinary(image3, setImage3);
-    if (typeof image1 === "string" && typeof image2 === "string") {
+    if (
+      typeof image1 === "object" &&
+      typeof image2 === "object" &&
+      typeof image3 === "object"
+    ) {
+      setLoading(false);
+      return;
+    } else {
       updateStudent();
     }
   };
@@ -76,13 +89,6 @@ function FileDataPage() {
       </h1>
       <div className="flex flex-col lg:flex-row justify-center">
         <div className="flex-col flex">
-          <label className="text-center">Aadhar Number</label>
-          <input
-            type="text"
-            className="border-2 border-blue-400 py-2 px-2 text-center "
-            placeholder="Aadhar Number"
-            value={aadhar}
-          />
           <h1 className="text-gray-900  text-center mt-2">
             Name: <span className="font-bold">{student?.studentName}</span>
           </h1>
@@ -187,16 +193,19 @@ function FileDataPage() {
             </div>
           </div>
           <div className="m-4">
-            <label className="inline-block mb-2 text-gray-500">
-              Upload Plus Two Certificate
-            </label>
             <div className="flex items-center justify-center w-full my-4">
-              <button
-                onClick={(e) => handleUpload(e)}
-                className="bg-green-400 w-full py-4 text-white font-bold"
-              >
-                Upload{" "}
-              </button>
+              {loading ? (
+                <button className="bg-green-800 w-full py-4 text-white font-bold">
+                  Processing....
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => handleUpload(e)}
+                  className="bg-green-400 w-full py-4 text-white font-bold"
+                >
+                  Upload{" "}
+                </button>
+              )}
             </div>
           </div>
         </div>

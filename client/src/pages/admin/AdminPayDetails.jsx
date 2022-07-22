@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "../../Axios";
-import useRazorpay from "react-razorpay";
-import axios from "axios";
 import { useContext } from "react";
 import { UserAuthContext } from "../../context/user";
 
