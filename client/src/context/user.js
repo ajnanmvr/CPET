@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Axios from "../Axios";
 
 export const UserAuthContext = createContext({});
 
 export const UserAuthProvider = (props) => {
   const [authData, setAuthData] = useState(null);
+  const { pathname } = useLocation();
 
   const checkUserLogin = async () => {
     try {
@@ -33,7 +35,9 @@ export const UserAuthProvider = (props) => {
     setAuthData,
     logout,
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return (
     <UserAuthContext.Provider value={value}>
       {props.children}

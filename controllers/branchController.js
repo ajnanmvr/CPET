@@ -32,8 +32,8 @@ async function uploadFile(fileName1, fileName2) {
       gzip: true,
       metadata: metadata,
     });
-    fs.unlinkSync(fileName1);
-    fs.unlinkSync(fileName2);
+    // fs.unlinkSync(fileName1);
+    // fs.unlinkSync(fileName2);
     return data;
   } catch (error) {
     console.log(error);

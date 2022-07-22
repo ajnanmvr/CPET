@@ -13,6 +13,8 @@ import { UserAuthContext } from "../context/user";
 import Axios from "../Axios";
 import { useState } from "react";
 import { useEffect } from "react";
+import AllBranchPie from "../pages/superAdmin/AllBranchPie";
+import AllClassPie from "../pages/superAdmin/AllClassPie";
 
 function Dashboard() {
   const { authData } = useContext(UserAuthContext);
@@ -20,9 +22,7 @@ function Dashboard() {
 
   const getBranch = async () => {
     try {
-      let { data } = await Axios.get(
-        "/branch/" + authData.branch?._id
-      );
+      let { data } = await Axios.get("/branch/" + authData.branch?._id);
       setBranch(data);
     } catch (error) {
       console.log(error);
@@ -94,25 +94,29 @@ function Dashboard() {
           )}
 
           {authData.role === "superAdmin" ? (
-            <div className="px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-4">
-              {SuperAdminItems.map((item, key) => (
-                <Link to={item.link} key={key} className="w-full p-2">
-                  <div className=" py-4 overflow-hidden bg-gray-800 rounded-xl  duration-300 shadow-2xl group">
-                    <div className="flex">
-                      <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-2xl">
-                        <FontAwesomeIcon
-                          icon={item.icon}
-                          color="white"
-                        ></FontAwesomeIcon>
+            <>
+              <div className="px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-4">
+                {SuperAdminItems.map((item, key) => (
+                  <Link to={item.link} key={key} className="w-full p-2">
+                    <div className=" py-4 overflow-hidden bg-gray-800 rounded-xl  duration-300 shadow-2xl group">
+                      <div className="flex">
+                        <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-2xl">
+                          <FontAwesomeIcon
+                            icon={item.icon}
+                            color="white"
+                          ></FontAwesomeIcon>
+                        </div>
                       </div>
+                      <h1 className="text-xl text-center font-bold text-white mt-4 group-hover:text-gray-50">
+                        {item.text}
+                      </h1>
                     </div>
-                    <h1 className="text-xl text-center font-bold text-white mt-4 group-hover:text-gray-50">
-                      {item.text}
-                    </h1>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                  </Link>
+                ))}
+              </div>
+              <AllBranchPie />
+              <AllClassPie />
+            </>
           ) : (
             <div className="w-full items-center px-4 py-8 mt-5 grid grid-cols-1 lg:grid-cols-3">
               {AdminItems.map((item, key) => (

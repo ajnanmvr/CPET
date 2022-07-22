@@ -17,6 +17,7 @@ function VerifyDetails({ formData, handleSubmit, prevPage }) {
     { lableName: "Pin Code", value: formData.pinCode },
     { lableName: "District", value: formData.district },
     { lableName: "State", value: formData.state },
+    { lableName: "Selected Class", value: formData.class },
   ];
   const getBranch = async () => {
     let { data } = await Axios.get("/branch/" + formData.branch);

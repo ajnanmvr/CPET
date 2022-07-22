@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
-import { toast } from "react-toastify";
-import { DISTRICT } from "../../Consts";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Axios from "../../Axios";
+import { DISTRICT } from "../../Consts";
 
 function EditStudent() {
   const { id } = useParams();
@@ -21,11 +20,18 @@ function EditStudent() {
     pinCode: "",
     aadhar: "",
     phone: "",
-    branch: "",
+    class: "",
   };
-  const [branches, setBranches] = useState([]);
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
+
+  const classes = [
+    "plus-one",
+    "plus-two",
+    "mahdiyya-first-year",
+    "mahdiyya-second-year",
+    "mahdiyya-third-year",
+  ];
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -39,14 +45,7 @@ function EditStudent() {
       console.log(error.response);
     }
   };
-  const getAllBranches = async () => {
-    try {
-      let { data } = await Axios.get("/branch");
-      setBranches(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -71,7 +70,6 @@ function EditStudent() {
   };
   useEffect(() => {
     getStudent();
-    getAllBranches();
   }, []);
 
   return (
@@ -347,16 +345,16 @@ function EditStudent() {
               </label>
 
               <select
-                name="branch"
+                name="class"
                 onChange={(e) => onChange(e)}
                 id=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option>SELECT STUDENT'S BRANCH </option>
-                {branches.map((branch, index) => (
+                <option>SELECT STUDENT'S CLASS </option>
+                {classes.map((branch, index) => (
                   <>
-                    <option key={index} value={branch._id}>
-                      {branch.branchName}
+                    <option key={index} value={branch}>
+                      {branch}
                     </option>
                   </>
                 ))}

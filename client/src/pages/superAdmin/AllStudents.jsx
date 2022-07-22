@@ -3,19 +3,15 @@ import { useState } from "react";
 import Axios from "../../Axios";
 import { Link, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faEye, faL } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { UserAuthContext } from "../../context/user";
-import { useQuery } from "@apollo/client";
-import { BRANCH_STUDENTS } from "../../queries/student";
 
 function AllStudents() {
   const [students, setStudents] = useState([]);
   const { authData } = useContext(UserAuthContext);
-  // const { data, loading, error } = useQuery(BRANCH_STUDENTS, {
-  //   variables: { branchId: authData?.branch._id },
-  // });
-  // console.log(data);
+
+
   const { classId } = useParams();
 
   const getAllStudents = async () => {
@@ -32,7 +28,6 @@ function AllStudents() {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     getAllStudents();
   }, []);
   return (

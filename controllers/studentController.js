@@ -40,28 +40,43 @@ exports.getBranchDetails = async (req, res) => {
 };
 exports.getAllDetails = async (req, res) => {
   try {
-    let data = await Student.aggregate([
-      {
-        $match: { verified: true },
-      },
-      {
-        $group: {
-          _id: "$branch",
-          numStudents: { $sum: 1 },
+    let data;
+    if (req.query.branch) {
+      data = await Student.aggregate([
+        {
+          $match: { verified: true },
         },
-      },
-      {
-        $lookup: {
-          from: "branches",
-          localField: "_id",
-          foreignField: "_id",
-          as: "branch",
+        {
+          $group: {
+            _id: "$branch",
+            numStudents: { $sum: 1 },
+          },
         },
-      },
-      {
-        $project: { "branch.branchName": 1, numStudents: 1 },
-      },
-    ]);
+        {
+          $lookup: {
+            from: "branches",
+            localField: "_id",
+            foreignField: "_id",
+            as: "branch",
+          },
+        },
+        {
+          $project: { "branch.branchName": 1, numStudents: 1 },
+        },
+      ]);
+    } else {
+      data = await Student.aggregate([
+        {
+          $match: { verified: true },
+        },
+        {
+          $group: {
+            _id: "$class",
+            numStudents: { $sum: 1 },
+          },
+        },
+      ]);
+    }
 
     res.status(200).json(data);
   } catch (error) {

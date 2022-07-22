@@ -11,8 +11,12 @@ const notificationSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ["students", "admins"],
+    enum: ["students", "admins", "all"],
     required: true,
+  },
+  deleted: {
+    type: Boolean,
+    default: false,
   },
 });
 

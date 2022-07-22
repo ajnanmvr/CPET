@@ -2,9 +2,16 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
+  faBell,
+  faBook,
   faClose,
+  faHome,
+  faPersonChalkboard,
+  faPlus,
   faPowerOff,
+  faSchool,
   faUser,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -18,32 +25,44 @@ function Sidebar() {
     {
       name: "Home",
       route: "/",
+      icon: faHome,
     },
     {
       name: "New Admission",
       route: "/add-student",
+      icon: faBook,
     },
     {
       name: "New Teacher",
       route: "/create-teacher",
+      icon: faPersonChalkboard,
     },
   ];
   const SuperAdmin = [
     {
       name: "Create Branch",
       route: "/create-branch",
+      icon: faPlus,
     },
     {
       name: "All Branches",
       route: "/all-branches",
+      icon: faSchool,
     },
     {
       name: "All Users",
       route: "/all-users",
+      icon: faUsers,
     },
     {
       name: "New Admission",
       route: "/add-student",
+      icon: faBook,
+    },
+    {
+      name: "Add Notification",
+      route: "/create-notification",
+      icon: faBell,
     },
   ];
   return (
@@ -79,9 +98,9 @@ function Sidebar() {
             <div className="p-2.5 mt-1 flex items-center">
               <Link
                 to={"/"}
-                className="font-bold text-gray-200 text-[25px] ml-3"
+                className="font-bold text-[#76BA99] text-[25px] ml-3"
               >
-                CPET
+                MAHDIYYA
               </Link>
             </div>
             <div className="my-2 bg-gray-600 h-[1px]" />
@@ -98,7 +117,7 @@ function Sidebar() {
                     : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                 }
               >
-                <i className="bi bi-house-door-fill" />
+                <FontAwesomeIcon icon={navigation.icon}/>
                 <span className="text-[15px] ml-4 text-gray-200 font-bold">
                   {navigation.name}
                 </span>
@@ -115,7 +134,7 @@ function Sidebar() {
                     : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
                 }
               >
-                <i className="bi bi-house-door-fill" />
+                <FontAwesomeIcon icon={navigation.icon} />
                 <span className="text-[15px] ml-4 text-gray-200 font-bold">
                   {navigation.name}
                 </span>

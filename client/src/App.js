@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/Footer";
 import AdmissionCreated from "./components/New Admission/AdmissionCreated";
 import FileDataPage from "./components/New Admission/FileDataPage";
 import Sidebar from "./components/Sidebar";
@@ -14,29 +12,14 @@ import BranchPayments from "./pages/admin/BranchPayments";
 
 import Home from "./pages/Home";
 import {
-  Login,
-  AllBranches,
-  EditBranch,
-  EditStudent,
-  EditUser,
-  EditTeacher,
-  AllStudents,
-  NotFound,
-  NotAllowed,
-  Profile,
-  AddStudents,
-  AllTeachers,
-  CreateBranch,
-  CreateTeacher,
-  ProtectedRoutes,
-  Restricted,
-  AllBranchCard,
-  BranchBasedDetails,
-  NotLoggedIn,
-  AllUsers,
-  AllClasses,
+  AddStudents, AllBranchCard, AllBranches, AllClasses, AllStudents, AllTeachers, AllUsers, BranchBasedDetails, CreateBranch,
+  CreateTeacher, EditBranch,
+  EditStudent, EditTeacher, EditUser, Login, NotAllowed, NotFound, NotLoggedIn, Profile, ProtectedRoutes,
+  Restricted
 } from "./pages/index";
+import AllNotifications from "./pages/superAdmin/AllNotifications";
 import AllPayments from "./pages/superAdmin/AllPayments";
+import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
@@ -131,6 +114,16 @@ export default function App() {
     {
       route: "/create-payment",
       component: <CreatePaymentData />,
+      role: "superAdmin",
+    },
+    {
+      route: "/create-notification",
+      component: <CreateNotification />,
+      role: "superAdmin",
+    },
+    {
+      route: "/all-notifications",
+      component: <AllNotifications />,
       role: "superAdmin",
     },
     {
