@@ -43,13 +43,24 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(express.static('uploads'))
+app.use(express.static("uploads"));
+
+app.set("views", path.join(__dirname + "/views"));
+app.set("view engine", "hbs");
+
 app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/branch", branchRoutes);
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
+
+app.get("/", function (req, res) {
+  res.render("Home", {
+    array: ["One", "Two", "Three", "Four"],
+    message: "Greetings from geekforgeeks",
+  });
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

@@ -11,7 +11,6 @@ function AllStudents() {
   const [students, setStudents] = useState([]);
   const { authData } = useContext(UserAuthContext);
 
-
   const { classId } = useParams();
 
   const getAllStudents = async () => {
@@ -53,7 +52,7 @@ function AllStudents() {
   function StudentsTable() {
     return (
       <div>
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 w-full">
+        <div className=" sm:-mx-6 lg:-mx-8 w-full">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
               <table className="min-w-full">
@@ -70,25 +69,6 @@ function AllStudents() {
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
                       NAME
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      PLACE
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      BRANCH
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      CLASS
                     </th>
 
                     <th
@@ -125,16 +105,6 @@ function AllStudents() {
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {student.studentName}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {student.place}
-                      </td>
-
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {student.branch?.branchName}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {student.class}
                       </td>
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

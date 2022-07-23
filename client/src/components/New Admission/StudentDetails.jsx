@@ -40,7 +40,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
     },
     {
       labelName: "Aadhar Number",
-      type: "text",
+      type: "number",
       name: "aadhar",
       placeholder: "Enter Aadhar Number",
       required: true,
@@ -58,7 +58,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
     },
     {
       labelName: "Phone Number",
-      type: "text",
+      type: "tel",
       name: "phone",
       placeholder: "Enter Phone Number",
       required: true,

@@ -10,13 +10,31 @@ import AdminPayDetails from "./pages/admin/AdminPayDetails";
 import AdminPaymentList from "./pages/admin/AdminPaymentList";
 import BranchPayments from "./pages/admin/BranchPayments";
 
-import Home from "./pages/Home";
+import AdminHome from "./pages/AdminHome";
 import {
-  AddStudents, AllBranchCard, AllBranches, AllClasses, AllStudents, AllTeachers, AllUsers, BranchBasedDetails, CreateBranch,
-  CreateTeacher, EditBranch,
-  EditStudent, EditTeacher, EditUser, Login, NotAllowed, NotFound, NotLoggedIn, Profile, ProtectedRoutes,
-  Restricted
+  AddStudents,
+  AllBranchCard,
+  AllBranches,
+  AllClasses,
+  AllStudents,
+  AllTeachers,
+  AllUsers,
+  BranchBasedDetails,
+  CreateBranch,
+  CreateTeacher,
+  EditBranch,
+  EditStudent,
+  EditTeacher,
+  EditUser,
+  Login,
+  NotAllowed,
+  NotFound,
+  NotLoggedIn,
+  Profile,
+  ProtectedRoutes,
+  Restricted,
 } from "./pages/index";
+import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import AllPayments from "./pages/superAdmin/AllPayments";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
@@ -29,8 +47,8 @@ export default function App() {
 
   const ProtectRoutes = [
     {
-      route: "/",
-      component: <Home />,
+      route: "/admin",
+      component: <AdminHome />,
     },
     {
       route: "/all-students/:classId",
@@ -155,6 +173,7 @@ export default function App() {
             <Route path="/not-logged" element={<NotLoggedIn />} />
             <Route path="/not-allowed" element={<NotAllowed />} />
             <Route path="/all-notifications" element={<AllNotifications />} />
+            <Route path="/notification/:id" element={<NotificationView />} />
             {ProtectRoutes.map((route, index) => (
               <Route
                 key={index}

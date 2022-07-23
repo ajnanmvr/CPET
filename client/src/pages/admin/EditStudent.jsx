@@ -340,8 +340,7 @@ function EditStudent() {
               <label
                 className="block  text-sm font-bold mb-2"
                 htmlFor="username"
-              >
-                Branch
+              >Class
               </label>
 
               <select
@@ -351,10 +350,10 @@ function EditStudent() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
                 <option>SELECT STUDENT'S CLASS </option>
-                {classes.map((branch, index) => (
+                {classes.map((classItem, index) => (
                   <>
-                    <option key={index} value={branch}>
-                      {branch}
+                    <option key={index} value={classItem}>
+                      {classItem}
                     </option>
                   </>
                 ))}

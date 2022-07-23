@@ -16,7 +16,7 @@ function Login() {
         setUsername("");
         setPassword("");
         setAuthData(res.data);
-        window.location.href = "/";
+        window.location.href = "/admin";
       }
     } catch (error) {
       console.log(error.response);
@@ -34,7 +34,6 @@ function Login() {
             <img
               className="object-cover w-full h-full"
               src="/loginImage.jpg"
-              // src="https://img.freepik.com/free-photo/medium-shot-graduate-student_23-2148950577.jpg?w=1060&t=st=1656828586~exp=1656829186~hmac=353c773f7367fb11131fd9f9772f7e57a19b110a366326053e0b9dc691735930"
               alt="img"
             />
           </div>

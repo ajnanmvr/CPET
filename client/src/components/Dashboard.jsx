@@ -82,15 +82,19 @@ function Dashboard() {
     <div className="w-full">
       {authData ? (
         <>
-          <h1 className="text-violet-500 text-center font-bold text-3xl my-4">
-            {branch?.branchName}
-          </h1>
           {authData?.role === "admin" && (
-            <img
-              src={branch.image}
-              alt="branch image"
-              className="object-cover w-full h-56"
-            />
+            <div className="lg:flex">
+              <img
+                src={branch.image}
+                alt="branch image"
+                className="lg:w-1/4 w-full h-56"
+              />
+              <div className="bg-gray-900 w-full items-center">
+                <h1 className="text-white lg:my-[80px]  text-center font-bold text-3xl">
+                  {branch?.branchName}
+                </h1>
+              </div>
+            </div>
           )}
 
           {authData.role === "superAdmin" ? (

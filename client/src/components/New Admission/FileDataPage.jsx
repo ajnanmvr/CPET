@@ -55,6 +55,7 @@ function FileDataPage() {
       return secure_url;
     } catch (error) {
       setLoading(false);
+      console.log(error);
       toast.error("Image Uploading Error", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
@@ -65,18 +66,22 @@ function FileDataPage() {
   const handleUpload = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await sendToCloudinary(image1, setImage1);
-    await sendToCloudinary(image2, setImage2);
-    await sendToCloudinary(image3, setImage3);
-    if (
-      typeof image1 === "object" &&
-      typeof image2 === "object" &&
-      typeof image3 === "object"
-    ) {
-      setLoading(false);
-      return;
-    } else {
-      updateStudent();
+    try {
+      await sendToCloudinary(image1, setImage1);
+      await sendToCloudinary(image2, setImage2);
+      await sendToCloudinary(image3, setImage3);
+      if (
+        typeof image1 === "object" &&
+        typeof image2 === "object" &&
+        typeof image3 === "object"
+      ) {
+        setLoading(false);
+        return;
+      } else {
+        updateStudent();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   useEffect(() => {

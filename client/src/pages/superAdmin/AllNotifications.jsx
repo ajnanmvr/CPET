@@ -40,14 +40,16 @@ function AllNotifications() {
         {notifications.length > 0 ? (
           <>
             {notifications.map((notification, key) => (
-              <div
-                key={key}
-                className="py-4 h-[100px] m-4  overflow-hidden bg-teal-500 relative rounded-xl  duration-300 shadow-2xl group"
-              >
-                <h1 className="text-xl text-center font-bold mb-4 text-white mt-4 group-hover:text-gray-50 uppercase">
-                  {notification.title}
-                </h1>
-              </div>
+              <Link to={`/notification/${notification._id}`}>
+                <div
+                  key={key}
+                  className="py-4 h-[100px] m-4  overflow-hidden bg-teal-500 relative rounded-xl  duration-300 shadow-2xl group"
+                >
+                  <h1 className="text-xl text-center font-bold mb-4 text-white mt-4 group-hover:text-gray-50 uppercase">
+                    {notification.title}
+                  </h1>
+                </div>
+              </Link>
             ))}
           </>
         ) : (
