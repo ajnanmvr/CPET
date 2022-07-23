@@ -55,12 +55,12 @@ app.use("/api/teacher", teacherRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
 
-app.get("/", function (req, res) {
-  res.render("Home", {
-    array: ["One", "Two", "Three", "Four"],
-    message: "Greetings from geekforgeeks",
-  });
-});
+// app.get("/", function (req, res) {
+//   res.render("Home", {
+//     array: ["One", "Two", "Three", "Four"],
+//     message: "Greetings from geekforgeeks",
+//   });
+// });
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
