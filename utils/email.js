@@ -1,6 +1,8 @@
 const nodemailer = require("nodemailer");
 const hbs = require("hbs");
 const htmlToText = require("html-to-text");
+const pug=require('pug')
+
 module.exports = class Email {
   constructor(user, url) {
     this.to = user.email;
@@ -21,6 +23,7 @@ module.exports = class Email {
     }
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
+      // host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
       auth: {
         user: process.env.EMAIL_USERNAME,
@@ -30,7 +33,7 @@ module.exports = class Email {
   }
   async send(template, subject) {
     //1) render HTML based on hbs
-    const html = hbs.renderFile(`${__dirname}/../views/${template}.hbs`, {
+    const html = pug.renderFile(`${__dirname}/../views/${template}.pug`, {
       firstName: this.firstName,
       url: this.url,
       subject,

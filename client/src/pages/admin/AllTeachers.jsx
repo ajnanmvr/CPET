@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
-import { Link } from "react-router-dom";
-import Loading from "../../components/Loading";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Axios from "../../Axios";
+import Loading from "../../components/Loading";
 import { UserAuthContext } from "../../context/user";
 
 function AllTeachers() {
@@ -122,7 +120,7 @@ function AllTeachers() {
                         className="text-sm text-red-600 font-light px-6 py-4 whitespace-nowrap "
                       >
                         <FontAwesomeIcon
-                          icon={faRemove}
+                          icon={faTrash}
                           className={"cursor-pointer"}
                         />
                       </td>

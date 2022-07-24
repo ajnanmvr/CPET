@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import Axios from "../../Axios";
-import PieChart from "../../components/PieChart";
+import BarChart from "../../components/PieChart";
 
 function AllBranchPie() {
   const [details, setDetails] = useState([]);
@@ -83,7 +83,7 @@ function AllBranchPie() {
         All Students <span className="text-sm">(Branch Based)</span>
       </h1>
       <div className="mx-auto w-1/2">
-        <PieChart chartData={chartData} options={options} />
+        <BarChart chartData={chartData} options={options} />
       </div>
     </>
   );

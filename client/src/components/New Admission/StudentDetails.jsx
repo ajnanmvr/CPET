@@ -1,6 +1,7 @@
 import { DISTRICT } from "../../Consts";
 
 function StudentDetails({ onChange, formData, nextPage, formErrors }) {
+
   const forms = [
     {
       labelName: "Student Name",
@@ -73,6 +74,8 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
       required: true,
       value: formData.dob,
       error: formErrors.dob,
+      min: "1997-01-01",
+      max: "2030-12-31",
     },
     {
       labelName: "Place",
@@ -137,6 +140,8 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
                   placeholder={form.placeholder}
                   name={form.name}
                   value={form.value}
+                  // min={form.min}
+                  // max={form.max}
                 />
                 <div className="text-red-500 font-sm">{form.error}</div>
               </div>

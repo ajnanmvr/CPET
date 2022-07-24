@@ -7,6 +7,7 @@ import {
   faDonate,
   faGraduationCap,
   faChalkboardUser,
+  faBook,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { UserAuthContext } from "../context/user";
@@ -69,9 +70,9 @@ function Dashboard() {
     },
 
     {
-      text: "ALL PAYMENTS",
-      icon: faDonate,
-      link: "/admin-payment",
+      text: "Admission Requests",
+      icon: faBook,
+      link: "/admissions",
     },
   ];
 

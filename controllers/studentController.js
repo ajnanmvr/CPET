@@ -3,11 +3,20 @@ const excelToJson = require("convert-excel-to-json");
 const fs = require("fs");
 const globalFunctions = require("../utils/globalFuctions");
 const mongoose = require("mongoose");
+const Email =require('../utils/email')
 
 exports.getAllStudents = globalFunctions.getAll(Student, "branch");
 exports.getStudent = globalFunctions.getOne(Student, "branch");
 exports.deleteStudent = globalFunctions.deleteStatus(Student);
-exports.registerStudent = globalFunctions.createOne(Student);
+exports.registerStudent = async (req, res) => {
+  try {
+    let data = await Student.create(req.body);
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+};
 exports.updateStudent = globalFunctions.updateOne(Student);
 
 exports.getMyStudents = async (req, res) => {

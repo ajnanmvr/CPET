@@ -8,9 +8,12 @@ import Sidebar from "./components/Sidebar";
 import { UserAuthContext } from "./context/user";
 import AdminPayDetails from "./pages/admin/AdminPayDetails";
 import AdminPaymentList from "./pages/admin/AdminPaymentList";
+import AdmissionClassStudents from "./pages/admin/AdmissionClasses";
+import Admissions from "./pages/admin/Admissions";
 import BranchPayments from "./pages/admin/BranchPayments";
 
 import AdminHome from "./pages/AdminHome";
+import Homepage from "./pages/Homepage";
 import {
   AddStudents,
   AllBranchCard,
@@ -39,6 +42,7 @@ import AllNotifications from "./pages/superAdmin/AllNotifications";
 import AllPayments from "./pages/superAdmin/AllPayments";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
+import CreateSubject from "./pages/superAdmin/CreateSubject";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
 
@@ -80,12 +84,16 @@ export default function App() {
       component: <BranchPayments />,
     },
     {
-      route: "/admin-payment",
-      component: <AdminPaymentList />,
-    },
-    {
       route: "/admin-payment-details/:id",
       component: <AdminPayDetails />,
+    },
+    {
+      route: "/admissions",
+      component: <Admissions />,
+    },
+    {
+      route: "/admissions/:id",
+      component: <AdmissionClassStudents />,
     },
   ];
   const RestrictedRoutes = [
@@ -135,6 +143,11 @@ export default function App() {
       role: "superAdmin",
     },
     {
+      route: "/create-subject",
+      component: <CreateSubject />,
+      role: "superAdmin",
+    },
+    {
       route: "/create-notification",
       component: <CreateNotification />,
       role: "superAdmin",
@@ -165,6 +178,7 @@ export default function App() {
           <ToastContainer />
           <Routes>
             <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admission-created" element={<AdmissionCreated />} />
             <Route path="/mahdiyya-third/:id" element={<FileDataPage />} />

@@ -4,6 +4,7 @@ import {
   faBars,
   faBell,
   faBook,
+  faBookAtlas,
   faClose,
   faHome,
   faPersonChalkboard,
@@ -23,8 +24,8 @@ function Sidebar() {
   const [openSidebar, setOpenSidebar] = useState(false);
   const navigations = [
     {
-      name: "Home",
-      route: "/",
+      name: "Dashboard",
+      route: "/admin",
       icon: faHome,
     },
     {
@@ -45,6 +46,11 @@ function Sidebar() {
   ];
   const SuperAdmin = [
     {
+      name: "Dashboard",
+      route: "/admin",
+      icon: faHome,
+    },
+    {
       name: "Create Branch",
       route: "/create-branch",
       icon: faPlus,
@@ -63,6 +69,11 @@ function Sidebar() {
       name: "New Admission",
       route: "/add-student",
       icon: faBook,
+    },
+    {
+      name: "New Subject",
+      route: "/create-subject",
+      icon: faBookAtlas,
     },
     {
       name: "Notifications",

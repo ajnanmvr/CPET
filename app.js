@@ -9,6 +9,7 @@ const branchRoutes = require("./routes/branch");
 const teacherRoutes = require("./routes/teacher");
 const paymentRoutes = require("./routes/payment");
 const notificationRoutes = require("./routes/notification");
+const subjectRoutes = require("./routes/subject");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
@@ -16,6 +17,7 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const compression = require("compression");
+
 
 dotenv.config();
 app.use(
@@ -54,13 +56,7 @@ app.use("/api/branch", branchRoutes);
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
-
-app.get("/", function (req, res) {
-  res.render("Home", {
-    array: ["One", "Two", "Three", "Four"],
-    message: "Greetings from geekforgeeks",
-  });
-});
+app.use("/api/subject", subjectRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

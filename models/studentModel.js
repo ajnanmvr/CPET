@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
+
 const studentSchema = new mongoose.Schema({
   studentName: {
     type: String,
     uppercase: true,
     required: true,
   },
+  // email: {
+  //   type: String,
+  //   lowercase: true,
+  //   required: true,
+  //   validate: [validator.isEmail, "Please provide a valid email"],
+  // },
   houseName: {
     type: String,
     uppercase: true,
@@ -98,7 +106,7 @@ const studentSchema = new mongoose.Schema({
   certificateTwo: String,
   certificateThree: String,
   certificateFour: String,
-  image:String
+  image: String,
 });
 
 const Student = mongoose.model("Student", studentSchema);

@@ -47,7 +47,7 @@ function Profile() {
   }, []);
   return (
     <>
-      <div className="w-3/4 ml-6">
+      <div className="w-full ml-6">
         {showAlert && ConfirmAlert()}
 
         <section className="bg-white p-6">
@@ -55,7 +55,7 @@ function Profile() {
             <h3 className="text-4xl font-bold text-blue-900 uppercase my-4">
               STUDENT PROFILE
             </h3>
-            <form className="lg:grid lg:grid-cols-2 lg:gap-8">
+            <form className="lg:grid lg:grid-cols-4 lg:gap-8">
               <div className="lg:col-span-1">
                 <div className="px-4 sm:px-0">
                   <label

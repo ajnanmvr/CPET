@@ -18,7 +18,7 @@ function AllStudents() {
       let { data } = await Axios.post(
         `/student?branch=${
           authData ? authData.branch._id : authData.branch
-        }&class=${classId}`
+        }&class=${classId}&verified=true`
       );
       setStudents(data);
     } catch (error) {
@@ -81,13 +81,7 @@ function AllStudents() {
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
-                      STATUS
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      VERIFY
+                      View
                     </th>
                     <th
                       scope="col"
@@ -109,15 +103,6 @@ function AllStudents() {
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {student.phone}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <button
-                          className={`py-2 px-4 rounded-md text-white ${
-                            student.verified ? "bg-green-500" : "bg-orange-600"
-                          }`}
-                        >
-                          {student.verified ? "verified" : "not verified"}
-                        </button>
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <Link to={"/profile/" + student._id}>
