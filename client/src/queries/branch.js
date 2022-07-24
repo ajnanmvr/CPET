@@ -14,6 +14,12 @@ const GET_BRANCH = gql`
   query GetBranches($id: ID!) {
     branch(id: $id) {
       branchName
+      image
+      phone
+      district
+      place
+      pinCode
+      postOffice
     }
   }
 `;

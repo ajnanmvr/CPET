@@ -1,14 +1,16 @@
 import {
+  faAdd,
   faBars,
   faBell,
-  faBook, faClose,
+  faBook,
+  faClose,
   faHome,
   faPersonChalkboard,
   faPlus,
   faPowerOff,
   faSchool,
   faUser,
-  faUsers
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
@@ -24,20 +26,11 @@ function Sidebar() {
       route: "/admin",
       icon: faHome,
     },
-    {
-      name: "New Admission",
-      route: "/add-student",
-      icon: faBook,
-    },
+
     {
       name: "New Teacher",
       route: "/create-teacher",
       icon: faPersonChalkboard,
-    },
-    {
-      name: "Notifications",
-      route: "/all-notifications",
-      icon: faBell,
     },
   ];
   const SuperAdmin = [
@@ -60,17 +53,6 @@ function Sidebar() {
       name: "All Users",
       route: "/all-users",
       icon: faUsers,
-    },
-    {
-      name: "New Admission",
-      route: "/add-student",
-      icon: faBook,
-    },
-
-    {
-      name: "Notifications",
-      route: "/all-notifications",
-      icon: faBell,
     },
   ];
   return (
@@ -133,21 +115,35 @@ function Sidebar() {
             ))}
           {authData?.role === "superAdmin" &&
             SuperAdmin.map((navigation, index) => (
-              <NavLink
-                to={navigation.route}
-                key={index}
-                className={({ isActive }) =>
-                  isActive
-                    ? "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 bg-blue-600 cursor-pointer hover:bg-blue-600 text-white"
-                    : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
-                }
-              >
-                <FontAwesomeIcon icon={navigation.icon} />
-                <span className="text-[15px] ml-4 text-gray-200 font-bold">
-                  {navigation.name}
-                </span>
-              </NavLink>
+              <>
+                <NavLink
+                  to={navigation.route}
+                  key={index}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 bg-blue-600 cursor-pointer hover:bg-blue-600 text-white"
+                      : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+                  }
+                >
+                  <FontAwesomeIcon icon={navigation.icon} />
+                  <span className="text-[15px] ml-4 text-gray-200 font-bold">
+                    {navigation.name}
+                  </span>
+                </NavLink>
+              </>
             ))}
+          <a
+            href="/add-student"
+            target={"_blank"}
+            className={
+              "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300  cursor-pointer hover:bg-blue-600 text-white"
+            }
+          >
+            <FontAwesomeIcon icon={faAdd} />
+            <span className="text-[15px] ml-4 text-gray-200 font-bold">
+              new admission
+            </span>
+          </a>
 
           <div className="my-4 bg-gray-600 h-[1px]" />
 

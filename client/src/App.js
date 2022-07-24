@@ -34,7 +34,7 @@ import {
   NotLoggedIn,
   Profile,
   ProtectedRoutes,
-  Restricted
+  Restricted,
 } from "./pages/index";
 import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
@@ -44,6 +44,7 @@ import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
+import ViewBranch from "./pages/superAdmin/ViewBranch";
 
 export default function App() {
   const { authData, checkUserLogin } = useContext(UserAuthContext);
@@ -93,6 +94,10 @@ export default function App() {
     {
       route: "/admissions/:id",
       component: <AdmissionClassStudents />,
+    },
+    {
+      route: "/branch/:id",
+      component: <ViewBranch />,
     },
   ];
   const RestrictedRoutes = [
@@ -168,11 +173,7 @@ export default function App() {
   return (
     <>
       <div className="flex">
-        {authData && (
-          <div className="lg:w-[300px]">
-            <Sidebar />
-          </div>
-        )}
+        {authData && <div className="lg:w-[300px]" />}
         <div className="w-full">
           <ToastContainer />
           <Routes>

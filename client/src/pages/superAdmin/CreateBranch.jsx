@@ -79,7 +79,7 @@ function CreateBranch() {
     <div className="w-3/4 ml-6">
       <section className="bg-white p-6">
         <div className="max-w-screen-xl mx-auto">
-          <h3 className="text-4xl font-bold text-green-600 uppercase my-4">
+          <h3 className="text-4xl font-bold text-[#003865] uppercase my-4">
             Create Branch
           </h3>
 
@@ -292,12 +292,12 @@ function CreateBranch() {
               {!loading ? (
                 <button
                   onClick={(e) => handleSubmit(e)}
-                  className="w-full lg:w-1/2 bg-green-500 hover:bg-green-500 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                  className="w-full lg:w-1/2 bg-[#003865] hover:bg-[#231955] text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
                 >
                   Submit
                 </button>
               ) : (
-                <h1 className="text-white text-center w-full lg:w-1/2 bg-green-500 hover:bg-green-500  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
+                <h1 className="text-white text-center w-full lg:w-1/2 bg-[#003865]  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
                   Processing..
                 </h1>
               )}

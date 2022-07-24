@@ -9,7 +9,6 @@ function AllBranchPie() {
   const getStudentsDetails = async () => {
     try {
       let { data } = await Axios.post("/student/all-details?branch=true");
-      console.log(data);
       setDetails(data);
     } catch (error) {
       console.log(error);

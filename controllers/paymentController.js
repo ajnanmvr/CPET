@@ -13,8 +13,8 @@ const instance = new Razorpay({
 
 exports.createPaymentData = globalFuctions.createOne(Payment);
 exports.getAllPayments = globalFuctions.getAll(Payment);
-exports.getPayment = globalFuctions.getOne(Payment);
-exports.updatePayment = globalFuctions.updateOne(Payment);
+exports.getPayment = globalFuctions.getOne(Payment, "paidBranches.branch");
+// exports.updatePayment = globalFuctions.updateOne(Payment);
 exports.deletePayment = globalFuctions.deleteStatus(Payment);
 
 exports.createOrderId = async (req, res) => {
@@ -70,6 +70,29 @@ exports.getPaidDetails = async (req, res) => {
 
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).error(error);
+    res.status(400).json(error);
+  }
+};
+exports.updatePaidBranch = async (req, res) => {
+  try {
+    let payment = await Payment.findById(req.params.id);
+    if (payment) {
+      let alreadyPaid = payment.paidBranches.find((item) => {
+        return item.branch.toString() === req.body.branch;
+      });
+      if (!payment.amount < req.body.amount) {
+        if (!alreadyPaid) {
+          let data = await Payment.findByIdAndUpdate(req.params.id, {
+            $push: { paidBranches: req.body },
+          });
+          res.status(200).json(data);
+        } else {
+          res.status(400).json({ error: "This branch already paid !" });
+        }
+      }
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
   }
 };

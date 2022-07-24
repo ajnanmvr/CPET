@@ -7,19 +7,25 @@ const {
   createOrderId,
   paymentSuccess,
   getPaidDetails,
+  updatePaidBranch,
+  deletePayment,
 } = require("../controllers/paymentController");
 
 const router = require("express").Router();
 
+// router.post("/success", protect, paymentSuccess);
+// router.post("/create-orderId", protect, createOrderId);
+// .patch(protect, restrictTo("superAdmin"), updatePayment);
+
 router.post("/", protect, restrictTo("superAdmin"), createPaymentData);
 router.get("/", protect, getAllPayments);
 
-router.post("/success", protect, paymentSuccess);
-router.post("/create-orderId", protect, createOrderId);
 router
   .route("/:id")
   .get(protect, getPayment)
-  .patch(protect, restrictTo("superAdmin"), updatePayment);
+  .patch(protect, restrictTo("superAdmin"), updatePaidBranch)
+  .delete(protect, restrictTo("superAdmin"), deletePayment);
+
 router.get(
   "/paid-details/:id",
   protect,

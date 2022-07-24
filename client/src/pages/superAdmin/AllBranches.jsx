@@ -4,7 +4,7 @@ import Axios from "../../Axios";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit, faRemove } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useQuery } from "@apollo/client";
 import { GET_BRANCHES } from "../../queries/branch";
 
@@ -83,6 +83,12 @@ function AllBranches() {
                     >
                       PHONE
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      VIEW
+                    </th>
 
                     <th
                       scope="col"
@@ -110,7 +116,13 @@ function AllBranches() {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {branch.phone}
                       </td>
-
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <Link to={"/branch/" + branch.id}>
+                          <button className="bg-green-500 px-4 py-2 rounded-xl text-white">
+                            view
+                          </button>
+                        </Link>
+                      </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <Link to={"/edit-branch/" + branch.id}>
                           <FontAwesomeIcon icon={faEdit} />
@@ -118,7 +130,7 @@ function AllBranches() {
                       </td>
                       <td className="text-sm text-red-900 font-light px-6 py-4 whitespace-nowrap">
                         <FontAwesomeIcon
-                          icon={faRemove}
+                          icon={faTrash}
                           onClick={() => deleteBranch(branch.id)}
                         />
                       </td>
