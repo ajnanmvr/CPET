@@ -31,7 +31,7 @@ function Profile() {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
-        navigate(`/all-students/${student.class}`);
+        navigate(-1);
       }
     } catch (error) {
       setLoading(false);

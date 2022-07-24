@@ -1,22 +1,18 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faBell,
-  faBook,
-  faBookAtlas,
-  faClose,
+  faBook, faClose,
   faHome,
   faPersonChalkboard,
   faPlus,
   faPowerOff,
   faSchool,
   faUser,
-  faUsers,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useContext } from "react";
 import { UserAuthContext } from "./../context/user";
 
 function Sidebar() {
@@ -70,11 +66,7 @@ function Sidebar() {
       route: "/add-student",
       icon: faBook,
     },
-    {
-      name: "New Subject",
-      route: "/create-subject",
-      icon: faBookAtlas,
-    },
+
     {
       name: "Notifications",
       route: "/all-notifications",

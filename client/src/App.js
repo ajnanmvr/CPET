@@ -7,7 +7,6 @@ import FileDataPage from "./components/New Admission/FileDataPage";
 import Sidebar from "./components/Sidebar";
 import { UserAuthContext } from "./context/user";
 import AdminPayDetails from "./pages/admin/AdminPayDetails";
-import AdminPaymentList from "./pages/admin/AdminPaymentList";
 import AdmissionClassStudents from "./pages/admin/AdmissionClasses";
 import Admissions from "./pages/admin/Admissions";
 import BranchPayments from "./pages/admin/BranchPayments";
@@ -35,14 +34,14 @@ import {
   NotLoggedIn,
   Profile,
   ProtectedRoutes,
-  Restricted,
+  Restricted
 } from "./pages/index";
 import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import AllPayments from "./pages/superAdmin/AllPayments";
+import AllSubjects from "./pages/superAdmin/AllSubjects";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
-import CreateSubject from "./pages/superAdmin/CreateSubject";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
 
@@ -133,6 +132,11 @@ export default function App() {
       role: "superAdmin",
     },
     {
+      route: "/all-subjects",
+      component: <AllSubjects />,
+      role: "superAdmin",
+    },
+    {
       route: "/all-payments",
       component: <AllPayments />,
       role: "superAdmin",
@@ -140,11 +144,6 @@ export default function App() {
     {
       route: "/create-payment",
       component: <CreatePaymentData />,
-      role: "superAdmin",
-    },
-    {
-      route: "/create-subject",
-      component: <CreateSubject />,
       role: "superAdmin",
     },
     {

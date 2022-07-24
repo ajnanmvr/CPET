@@ -10,6 +10,8 @@ const teacherRoutes = require("./routes/teacher");
 const paymentRoutes = require("./routes/payment");
 const notificationRoutes = require("./routes/notification");
 const subjectRoutes = require("./routes/subject");
+const parentSubjectRoutes = require("./routes/parentSubject");
+
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
@@ -57,6 +59,7 @@ app.use("/api/teacher", teacherRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
 app.use("/api/subject", subjectRoutes);
+app.use("/api/parent-subject", parentSubjectRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

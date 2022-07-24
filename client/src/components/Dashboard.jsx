@@ -1,19 +1,17 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faSchool,
-  faUser,
+  faBook,
+  faBookOpenReader,
+  faChalkboardUser,
   faDonate,
   faGraduationCap,
-  faChalkboardUser,
-  faBook,
+  faSchool,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { UserAuthContext } from "../context/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "../Axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import { UserAuthContext } from "../context/user";
 import AllBranchPie from "../pages/superAdmin/AllBranchPie";
 import AllClassPie from "../pages/superAdmin/AllClassPie";
 
@@ -32,39 +30,44 @@ function Dashboard() {
 
   const SuperAdminItems = [
     {
-      text: "ALL BRANCHES",
+      text: "BRANCHES",
       icon: faSchool,
       link: "/all-branches",
     },
     {
-      text: "ALL USERS",
+      text: "USERS",
       icon: faUser,
       link: "/all-users",
     },
     {
-      text: "ALL TEACHERS",
+      text: "TEACHERS",
       icon: faChalkboardUser,
       link: "/all-teachers",
     },
     {
-      text: "ALL STUDENTS",
+      text: "STUDENTS",
       icon: faGraduationCap,
       link: "/all-branch-students",
     },
     {
-      text: "ALL PAYMENTS",
+      text: "SUBJECTS",
+      icon: faBookOpenReader,
+      link: "/all-subjects",
+    },
+    {
+      text: "PAYMENTS",
       icon: faDonate,
       link: "/all-payments",
     },
   ];
   const AdminItems = [
     {
-      text: "ALL STUDENTS",
+      text: "STUDENTS",
       icon: faGraduationCap,
       link: "/all-classes",
     },
     {
-      text: "ALL TEACHERS",
+      text: "TEACHERS",
       icon: faChalkboardUser,
       link: "/all-teachers",
     },
@@ -103,16 +106,16 @@ function Dashboard() {
               <div className="px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-4">
                 {SuperAdminItems.map((item, key) => (
                   <Link to={item.link} key={key} className="w-full p-2">
-                    <div className=" py-4 overflow-hidden bg-gray-800 rounded-xl  duration-300 shadow-2xl group">
+                    <div className=" py-4 overflow-hidden bg-gray-800 rounded-xl group  duration-300 shadow-2xl group">
                       <div className="flex">
-                        <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-2xl">
+                        <div className="px-4 py-4 bg-gray-300 group-hover:bg-gray-900 rounded-xl bg-opacity-30 mx-auto text-2xl">
                           <FontAwesomeIcon
                             icon={item.icon}
                             color="white"
                           ></FontAwesomeIcon>
                         </div>
                       </div>
-                      <h1 className="text-xl text-center font-bold text-white mt-4 group-hover:text-gray-50">
+                      <h1 className="text-xl text-center font-bold group-hover:text-gray-400 text-white mt-4">
                         {item.text}
                       </h1>
                     </div>
