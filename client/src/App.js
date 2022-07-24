@@ -92,10 +92,6 @@ export default function App() {
       component: <Admissions />,
     },
     {
-      route: "/admissions/:id",
-      component: <AdmissionClassStudents />,
-    },
-    {
       route: "/branch/:id",
       component: <ViewBranch />,
     },

@@ -10,15 +10,12 @@ import { UserAuthContext } from "../../context/user";
 function AdmissionClassStudents() {
   const [students, setStudents] = useState([]);
   const { authData } = useContext(UserAuthContext);
-
   const { id } = useParams();
 
   const getAllStudents = async () => {
     try {
       let { data } = await Axios.post(
-        `/student?branch=${
-          authData ? authData.branch._id : authData.branch
-        }&class=${id}&verified=false`
+        `/student?branch=${authData?.branch?._id}&class=${id}&verified=false`
       );
       setStudents(data);
     } catch (error) {
