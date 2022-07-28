@@ -95,11 +95,6 @@ function Dashboard() {
       icon: faBook,
       link: "/admissions",
     },
-    {
-      text: "Transfer",
-      icon: faRightLeft,
-      link: "/transfer",
-    },
   ];
 
   useEffect(() => {

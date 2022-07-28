@@ -22,6 +22,7 @@ function AllStudents() {
       });
       if (res.status === 200) {
         getAllStudents();
+        setStart(0);
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +47,27 @@ function AllStudents() {
   return (
     <>
       <div className="flex flex-col ml-6">
+        <div className="px-4 sm:px-0 max-w-sm ml-auto mt-4 mr-4">
+          <label className="block  text-sm font-bold mb-2" htmlFor="username">
+            ADMISSION NUMBER STARTING:
+          </label>
+          <input
+            className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+            id="username"
+            type="number"
+            required
+            value={start}
+            onChange={(e) => setStart(e.target.value)}
+          />
+          {students.length > 0 && start > 0 && (
+            <button
+              onClick={generateAdmissionNumber}
+              className="bg-blue-800 px-4 py-3 font-bold text-white"
+            >
+              Generate Admission Numbers{" "}
+            </button>
+          )}
+        </div>
         <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
           {classId} ({students.length})
         </h3>
@@ -54,33 +76,7 @@ function AllStudents() {
           <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
               {students.length > 0 && <StudentsTable />}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    ADMISSION NUMBER STARTING:
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    id="username"
-                    type="number"
-                    required
-                    value={start}
-                    onChange={(e) => setStart(e.target.value)}
-                    placeholder="ADMISSION  NUMBER STARTING:  "
-                  />
-                  {students.length > 0 && start > 0 && (
-                    <button
-                      onClick={generateAdmissionNumber}
-                      className="bg-blue-800 px-4 py-3 font-bold text-white"
-                    >
-                      Generate Admission Numbers{" "}
-                    </button>
-                  )}
-                </div>
-              </div>
+              <div className="lg:col-span-1"></div>
               <div className="overflow-hidden h-screen"></div>
             </div>
           </div>
@@ -137,24 +133,24 @@ function AllStudents() {
                       key={index}
                       className="border-b hover:bg-blue-900 hover:cursor-pointer group"
                     >
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-white ">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-white ">
                         {student?.admissionNo}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white ">
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
                         <Link to={`/profile/${student._id}`}>
                           {student.studentName}
                         </Link>
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap ">
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/profile/" + student._id}>
                           <FontAwesomeIcon icon={faEye} />
                         </Link>
                       </td>
 
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap ">
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/edit-student/" + student._id}>
                           <FontAwesomeIcon icon={faEdit} />
                         </Link>

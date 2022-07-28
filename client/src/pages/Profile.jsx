@@ -1,5 +1,8 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
 
@@ -69,6 +72,22 @@ function Profile() {
                     type="text"
                     disabled
                     value={student.studentName}
+                  />
+                </div>
+              </div>
+              <div className="lg:col-span-1">
+                <div className="px-4 sm:px-0">
+                  <label
+                    className="block  text-sm font-bold mb-2"
+                    htmlFor="username"
+                  >
+                    Admission Number
+                  </label>
+                  <input
+                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    type="text"
+                    disabled
+                    value={student?.admissionNo}
                   />
                 </div>
               </div>
@@ -260,7 +279,7 @@ function Profile() {
                     className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                     type="text"
                     disabled
-                    value={student.dob}
+                    value={moment(student.dob).format("DD-MM-YYYY")}
                   />
                 </div>
               </div>{" "}
@@ -306,6 +325,15 @@ function Profile() {
             </form>
           </div>
         </section>
+        <h3 className="text-4xl font-bold text-red-600 uppercase my-4">
+          TRANSFER STUDENT
+        </h3>
+        <Link to={`/transfer/${student._id}`}>
+          <button className="bg-red-400 px-4 py-3 font-bold text-white hover:bg-red-600 transition">
+            Go To Transfer Page
+            <FontAwesomeIcon className="mx-3" icon={faArrowRight} />
+          </button>
+        </Link>
       </div>
     </>
   );

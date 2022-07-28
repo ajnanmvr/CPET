@@ -148,7 +148,7 @@ export const ProtectRoutes = [
     component: <Branch.ViewBranch />,
   },
   {
-    route: "/transfer",
+    route: "/transfer/:id",
     component: <TransferStudent />,
   },
 ];
