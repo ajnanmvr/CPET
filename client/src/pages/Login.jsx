@@ -2,16 +2,14 @@ import React, { useContext, useState } from "react";
 import Axios from "../Axios";
 import { toast } from "react-toastify";
 import { UserAuthContext } from "../context/user";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthData, authData } = useContext(UserAuthContext);
-  const navigate = useNavigate();
 
   if (authData) {
-    return navigate("/admin");
+    window.location.href = "/admin";
   }
   const handleLogin = async (e) => {
     e.preventDefault();

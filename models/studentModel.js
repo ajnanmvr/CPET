@@ -63,6 +63,7 @@ const studentSchema = new mongoose.Schema({
   },
   admissionNo: {
     type: String,
+    // unique: true,
   },
   aadhar: {
     type: String,

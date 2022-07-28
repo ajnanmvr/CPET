@@ -19,27 +19,34 @@ import BranchBasedDetails from "./superAdmin/BranchBasedDetails";
 import NotLoggedIn from "./NotLoggedIn";
 import AllUsers from "./superAdmin/AllUsers";
 import AllClasses from "./admin/AllClasses";
+import ViewBranch from "./superAdmin/ViewBranch";
 
-export {
+export const Teacher = { EditTeacher, AllTeachers, CreateTeacher };
+export const Auth = {
   Login,
-  Profile,
-  NotAllowed,
-  NotFound,
-  AllBranches,
-  AllStudents,
-  EditBranch,
-  EditStudent,
-  EditUser,
-  EditTeacher,
-  AddStudents,
-  AllTeachers,
-  CreateBranch,
-  CreateTeacher,
   ProtectedRoutes,
   Restricted,
+  NotAllowed,
+  NotFound,
+  NotLoggedIn,
+};
+export const Student = {
+  AllStudents,
+  EditStudent,
+  AddStudents,
+  EditStudent,
+  Profile,
+  AllClasses,
+};
+export const Branch = {
+  AllBranches,
+  EditBranch,
+  CreateBranch,
   AllBranchCard,
   BranchBasedDetails,
-  NotLoggedIn,
+  ViewBranch,
+};
+export const Users = {
+  EditUser,
   AllUsers,
-  AllClasses,
 };

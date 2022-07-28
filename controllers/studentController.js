@@ -3,7 +3,7 @@ const excelToJson = require("convert-excel-to-json");
 const fs = require("fs");
 const globalFunctions = require("../utils/globalFuctions");
 const mongoose = require("mongoose");
-const Email =require('../utils/email')
+const Email = require("../utils/email");
 
 exports.getAllStudents = globalFunctions.getAll(Student, "branch");
 exports.getStudent = globalFunctions.getOne(Student, "branch");
@@ -91,6 +91,28 @@ exports.getAllDetails = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(400).json(error);
+  }
+};
+
+exports.updateAdmissionNumber = async (req, res) => {
+  try {
+    if (!req.body.start) {
+      res.status(400).json({ error: "please add a starting number" });
+    } else {
+      let students = await Student.find({
+        verified: true,
+        branch: req.user.branch,
+        class: req.body.class,
+      });
+
+      students.forEach((student, key) => {
+        students[key].admissionNo = "CMS" + (parseInt(req.body.start) + key);
+        student.save();
+      });
+      res.status(200).json(students);
+    }
+  } catch (error) {
+    res.status(200).json(error);
   }
 };
 

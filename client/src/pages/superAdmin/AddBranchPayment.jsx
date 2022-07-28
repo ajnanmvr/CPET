@@ -151,7 +151,7 @@ function AddBranchPayment({ setOpenForm, id, getPayment, amount }) {
             <div className="px-4 sm:px-0">
               {!loading ? (
                 <>
-                  {formData.amount && formData.branch &&  (
+                  {formData.amount && formData.branch && (
                     <button
                       onClick={(e) => handleSubmit(e)}
                       className="w-full lg:w-[200px] mx-3 bg-teal-500 hover:bg-teal-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition"

@@ -33,6 +33,7 @@ router.post(
 );
 router.get("/details/:branch", studentController.getBranchDetails);
 router.post("/all-details/", studentController.getAllDetails);
+router.post("/update-admission/",protect, studentController.updateAdmissionNumber);
 
 router.get("/:id", studentController.getStudent);
 router.delete("/:id", studentController.deleteStudent);

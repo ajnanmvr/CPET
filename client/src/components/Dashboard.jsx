@@ -4,6 +4,7 @@ import {
   faChalkboardUser,
   faDonate,
   faGraduationCap,
+  faRightLeft,
   faSchool,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +19,18 @@ import AllClassPie from "../pages/superAdmin/AllClassPie";
 function Dashboard() {
   const { authData } = useContext(UserAuthContext);
   const [branch, setBranch] = useState({});
+  const [admissionCount, setAdmissionCount] = useState([]);
+
+  const getAdmissions = async () => {
+    try {
+      let { data } = await Axios.post(
+        `student?branch=${authData?.branch?._id}&verified=false`
+      );
+      setAdmissionCount(data.length);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getBranch = async () => {
     try {
@@ -59,6 +72,11 @@ function Dashboard() {
       icon: faDonate,
       link: "/all-payments",
     },
+    {
+      text: "TRANSFER REQUESTS",
+      icon: faRightLeft,
+      link: "/transfer-request",
+    },
   ];
   const AdminItems = [
     {
@@ -77,10 +95,16 @@ function Dashboard() {
       icon: faBook,
       link: "/admissions",
     },
+    {
+      text: "Transfer",
+      icon: faRightLeft,
+      link: "/transfer",
+    },
   ];
 
   useEffect(() => {
     authData?.role === "admin" && getBranch();
+    getAdmissions();
   }, [authData]);
   return (
     <div className="w-full">
@@ -128,7 +152,18 @@ function Dashboard() {
           ) : (
             <div className="w-full items-center px-4 py-8 mt-5 grid grid-cols-1 lg:grid-cols-3">
               {AdminItems.map((item, key) => (
-                <Link to={item.link} key={key} className="w-full p-2">
+                <Link
+                  to={item.link}
+                  key={key}
+                  className={`w-full p-2 ${
+                    item.text === "Admission Requests" && "relative"
+                  }`}
+                >
+                  {item.text === "Admission Requests" && (
+                    <div className="absolute right-6 top-3 bg-orange-400 px-3 rounded-lg text-white font-bold">
+                      {admissionCount}
+                    </div>
+                  )}
                   <div className=" py-4 overflow-hidden bg-teal-800 rounded-xl  duration-300 shadow-2xl group">
                     <div className="flex">
                       <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-2xl">
