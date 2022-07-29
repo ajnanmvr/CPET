@@ -56,6 +56,8 @@ exports.createBranch = async (req, res) => {
       image: uploadData[1].mediaLink,
     });
     let user = await Auth.create({ ...req.body, branch: data._id });
+    data.admin = user._id;
+    data.save();
     res.status(200).json({
       data,
       user,
@@ -76,11 +78,11 @@ exports.editBranch = async (req, res) => {
     } else {
       uploadData = req.body.image;
     }
-
     let data = await Branch.findByIdAndUpdate(req.params.id, {
       ...req.body,
       image: uploadData,
     });
+
     res.status(200).json(data);
   } catch (error) {
     console.log(error);

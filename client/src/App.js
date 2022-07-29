@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdmissionCreated from "./components/New Admission/AdmissionCreated";
-import FileDataPage from "./components/New Admission/FileDataPage";
 import { ProtectRoutes, RestrictedRoutes } from "./Consts";
 import { UserAuthContext } from "./context/user";
 import { Auth, Student } from "./pages";
@@ -28,7 +27,6 @@ export default function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Auth.Login />} />
             <Route path="/admission-created" element={<AdmissionCreated />} />
-            <Route path="/mahdiyya-third/:id" element={<FileDataPage />} />
             <Route path="/profile/:id" element={<Student.Profile />} />
             <Route path="/add-student" element={<Student.AddStudents />} />
             <Route path="/not-logged" element={<Auth.NotLoggedIn />} />

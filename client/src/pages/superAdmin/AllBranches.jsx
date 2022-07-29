@@ -10,7 +10,7 @@ import { GET_BRANCHES } from "../../queries/branch";
 
 function AllBranches() {
   const [branches, setBranches] = useState([]);
-  const { data, error, loading } = useQuery(GET_BRANCHES);
+  const { data, error, loading, refetch } = useQuery(GET_BRANCHES);
 
   const getAllBranches = async () => {
     try {
@@ -24,7 +24,7 @@ function AllBranches() {
     try {
       if (window.confirm("Do you want to delete this branch")) {
         await Axios.delete("/branch/" + id);
-        getAllBranches();
+        refetch()
       }
     } catch (error) {
       console.log(error);
@@ -81,6 +81,12 @@ function AllBranches() {
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
+                      ADMIN
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
                       PHONE
                     </th>
                     <th
@@ -114,7 +120,10 @@ function AllBranches() {
                         {branch.branchName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.phone}
+                        {branch?.admin?.username}
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          {branch.phone}
+                        </td>
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <Link to={"/branch/" + branch.id}>
@@ -128,7 +137,7 @@ function AllBranches() {
                           <FontAwesomeIcon icon={faEdit} />
                         </Link>
                       </td>
-                      <td className="text-sm text-red-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="text-sm text-red-500 font-light cursor-pointer px-6 py-4 whitespace-nowrap">
                         <FontAwesomeIcon
                           icon={faTrash}
                           onClick={() => deleteBranch(branch.id)}

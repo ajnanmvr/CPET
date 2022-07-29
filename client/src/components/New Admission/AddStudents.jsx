@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
-import { toast } from "react-toastify";
-import StudentDetails from "./StudentDetails";
-import SelectedBranch from "./SelectedBranch";
-import VerifyDetails from "./VerifyDetails";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Axios from "../../Axios";
+import FileDataPage from "./FileDataPage";
+import SelectedBranch from "./SelectedBranch";
+import StudentDetails from "./StudentDetails";
+import VerifyDetails from "./VerifyDetails";
 
 function AddStudents() {
   const initialState = {
@@ -28,8 +28,8 @@ function AddStudents() {
   };
 
   const [page, setPage] = useState(1);
-
   const [formData, setFormData] = useState(initialState);
+  const [imageUploaded, setImageUploaded] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [goNext, setGoNext] = useState(false);
   const navigate = useNavigate();
@@ -83,6 +83,7 @@ function AddStudents() {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
   const nextPage = (e) => {
+    console.log(e);
     e.preventDefault();
     setGoNext(true);
     setFormErrors(validate(formData));
@@ -106,7 +107,6 @@ function AddStudents() {
           position: toast.POSITION.TOP_CENTER,
         });
         if (formData.class === "mahdiyya-third-year") {
-          navigate("/mahdiyya-third/" + res.data._id);
         } else {
           navigate("/admission-created");
         }
@@ -144,6 +144,8 @@ function AddStudents() {
           nextPage={nextPage}
           prevPage={prevPage}
           setFormData={setFormData}
+          setImageUploaded={setImageUploaded}
+          imageUploaded={imageUploaded}
         />
       );
     case 3:

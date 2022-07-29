@@ -38,6 +38,7 @@ exports.getOne = (Model, populateOptions) => async (req, res) => {
   }
 };
 exports.updateOne = (Model) => async (req, res) => {
+  console.log(req.body);
   try {
     const item = await Model.findById(req.params.id);
     if (item) {
@@ -47,7 +48,7 @@ exports.updateOne = (Model) => async (req, res) => {
       res.status(400).json({ message: "document not found" });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(400).json(error);
   }
 };

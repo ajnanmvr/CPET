@@ -42,6 +42,7 @@ const branchSchema = new mongoose.Schema({
   },
   slug: String,
   image: String,
+  admin: { type: mongoose.Types.ObjectId },
 });
 
 branchSchema.pre(/^find/, function (next) {
@@ -57,5 +58,7 @@ branchSchema.pre("save", function (next) {
   next();
 });
 
+
 const Branch = mongoose.model("Branch", branchSchema);
+
 module.exports = Branch;

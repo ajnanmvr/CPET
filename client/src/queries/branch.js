@@ -7,6 +7,9 @@ const GET_BRANCHES = gql`
       id
       branchName
       phone
+      admin {
+        username
+      }
     }
   }
 `;

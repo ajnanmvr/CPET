@@ -1,13 +1,12 @@
-import React from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
-import { toast } from "react-toastify";
-import { DISTRICT } from "../../Consts";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { toast } from "react-toastify";
+import Axios from "../../Axios";
+import { DISTRICT } from "../../Consts";
 
 function EditBranch() {
   const { id } = useParams();
+
   const initialState = {
     branchName: "",
     place: "",
@@ -20,9 +19,10 @@ function EditBranch() {
     password: "",
     image: "",
   };
-  const [inputData, setInputData] = useState(initialState);
-  const [branchImg, setBranchImg] = useState(null);
 
+  const [inputData, setInputData] = useState(initialState);
+  const [oldName, setOldName] = useState("");
+  const [branchImg, setBranchImg] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const formData = new FormData();
@@ -34,19 +34,16 @@ function EditBranch() {
   formData.append("state", inputData.state);
   formData.append("pinCode", inputData.pinCode);
   formData.append("phone", inputData.phone);
-  formData.append("username", inputData.username);
-  formData.append("password", inputData.password);
-
-
 
   const getBranch = async () => {
     let { data } = await Axios.get("/branch/" + id);
     setInputData(data);
+    setOldName(data.username);
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setInputData((prevState) => ({ ...prevState, [name]: value }));
+    setInputData((prevState) => ({ ...prevState, [name]: value, oldName }));
   };
 
   const handleSubmit = async (e) => {
@@ -239,45 +236,6 @@ function EditBranch() {
                   onChange={(e) => onChange(e)}
                   placeholder="State"
                   name="state"
-                />
-              </div>
-            </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Admin Username
-                </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  type="text"
-                  value={inputData.username}
-                  required
-                  onChange={(e) => onChange(e)}
-                  placeholder="Admin Username"
-                  name="username"
-                />
-              </div>
-            </div>
-
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Admin Password
-                </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  type="text"
-                  value={inputData.password}
-                  required
-                  onChange={(e) => onChange(e)}
-                  placeholder="Admin Password"
-                  name="password"
                 />
               </div>
             </div>

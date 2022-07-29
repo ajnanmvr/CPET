@@ -13,4 +13,16 @@ const GET_USERS = gql`
   }
 `;
 
-export { GET_USERS };
+const GET_USER = gql`
+  query user($userId: ID!) {
+    user(userId: $userId) {
+      id
+      username
+      branch {
+        branchName
+      }
+    }
+  }
+`;
+
+export { GET_USERS, GET_USER };

@@ -37,8 +37,14 @@ const BranchType = new GraphQLObjectType({
     district: { type: GraphQLString },
     image: { type: GraphQLString },
     phone: { type: GraphQLString },
-    postOffice:{type:GraphQLString},
-    pinCode:{type:GraphQLString}
+    postOffice: { type: GraphQLString },
+    pinCode: { type: GraphQLString },
+    admin: {
+      type: UserType,
+      resolve(parent, args) {
+        return Auth.findById(parent.admin);
+      },
+    },
   }),
 });
 const UserType = new GraphQLObjectType({
@@ -86,6 +92,15 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(UserType),
       resolve(parent, args) {
         return Auth.find({ role: { $ne: "superAdmin" } });
+      },
+    },
+    user: {
+      type: new GraphQLList(UserType),
+      args: {
+        userId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Auth.findById(args.userId);
       },
     },
     branchStudents: {

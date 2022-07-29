@@ -1,9 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
+import Axios from "../../Axios";
 import { DISTRICT } from "../../Consts";
-import { useEffect } from "react";
 
 function CreateBranch() {
   const initialState = {
@@ -14,14 +12,12 @@ function CreateBranch() {
     state: "",
     pinCode: "",
     phone: "",
-    admin: "",
     branchImg: "",
     password: "",
     username: "",
   };
   const [inputData, setInputData] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const [admins, setAdmins] = useState([]);
   const [branchImg, setBranchImg] = useState(null);
 
   const onChange = (e) => {
@@ -38,7 +34,6 @@ function CreateBranch() {
   formData.append("state", inputData.state);
   formData.append("pinCode", inputData.pinCode);
   formData.append("phone", inputData.phone);
-  formData.append("admin", inputData.admin);
   formData.append("username", inputData.username);
   formData.append("password", inputData.password);
 
@@ -64,17 +59,7 @@ function CreateBranch() {
       console.log(error.response);
     }
   };
-  const getAllAdmins = async () => {
-    try {
-      let { data } = await Axios.get("/auth/users");
-      setAdmins(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-  useEffect(() => {
-    getAllAdmins();
-  }, []);
+
   return (
     <div className="w-3/4 ml-6">
       <section className="bg-white p-6">
@@ -245,14 +230,14 @@ function CreateBranch() {
                 />
               </div>
             </div>
-          
+
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
                   className="block  text-sm font-bold mb-2"
                   htmlFor="username"
                 >
-                  Admin Username 
+                  Admin Username
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -265,7 +250,7 @@ function CreateBranch() {
                 />
               </div>
             </div>
-          
+
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
@@ -285,7 +270,6 @@ function CreateBranch() {
                 />
               </div>
             </div>
-          
           </form>
           <div className="lg:col-span-1 mt-4">
             <div className="px-4 sm:px-0">

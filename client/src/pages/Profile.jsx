@@ -54,286 +54,311 @@ function Profile() {
         {showAlert && ConfirmAlert()}
 
         <section className="bg-white p-6">
+          <div className="mt-4 absolute top-3 right-3">
+            <div className="px-4 sm:px-0">
+              {!loading ? (
+                <>
+                  {!student.verified && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowAlert(true);
+                      }}
+                      className="w-full  bg-purple-700 hover:bg-purple-900 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                    >
+                      Verify
+                    </button>
+                  )}
+                </>
+              ) : (
+                <h1 className="text-white text-center w-full  bg-indigo-900 hover:bg-indigo-800  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
+                  Processing..
+                </h1>
+              )}
+            </div>
+          </div>{" "}
           <div className="max-w-screen-xl mx-auto">
             <h3 className="text-4xl font-bold text-blue-900 uppercase my-4">
               STUDENT PROFILE
             </h3>
-            <form className="lg:grid lg:grid-cols-4 lg:gap-8">
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Student Name
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.studentName}
-                  />
+            <form>
+              <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Student Name
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.studentName}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Admission Number
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student?.admissionNo}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Father's Name
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.fatherName}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Mother's Name
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.motherName}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Guardian
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.guardian}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      House Name
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.houseName}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Aadhar Number
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.aadhar}
+                    />
+                  </div>
+                </div>{" "}
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.phone}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Place
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.place}
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Post Office
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.postOffice}
+                    />
+                  </div>
+                </div>{" "}
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Pin Code
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.pinCode}
+                    />
+                  </div>
+                </div>{" "}
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      District
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.district}
+                    />
+                  </div>
+                </div>{" "}
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      State
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.state}
+                    />
+                  </div>
+                </div>{" "}
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      DOB
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={moment(student.dob).format("DD-MM-YYYY")}
+                    />
+                  </div>
+                </div>{" "}
+                <div className="lg:col-span-1">
+                  <div className="px-4 sm:px-0">
+                    <label
+                      className="block  text-sm font-bold mb-2"
+                      htmlFor="username"
+                    >
+                      Branch
+                    </label>
+                    <input
+                      className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                      type="text"
+                      disabled
+                      value={student.branch?.branchName}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Admission Number
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student?.admissionNo}
+              {student.class === "mahdiyya-third-year" && (
+                <div className="grid grid-cols-3 my-6">
+                  <img
+                    className="object-cover h-48 w-96"
+                    src={student?.certificateOne}
+                    alt=""
+                  />
+                  <img
+                    className="object-cover h-48 w-96"
+                    src={student?.certificateTwo}
+                    alt=""
+                  />
+                  <img
+                    className="object-cover h-48 w-96"
+                    src={student?.certificateThree}
+                    alt=""
                   />
                 </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Father's Name
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.fatherName}
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Mother's Name
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.motherName}
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Guardian
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.guardian}
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    House Name
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.houseName}
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Aadhar Number
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.aadhar}
-                  />
-                </div>
-              </div>{" "}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.phone}
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Place
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.place}
-                  />
-                </div>
-              </div>
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Post Office
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.postOffice}
-                  />
-                </div>
-              </div>{" "}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Pin Code
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.pinCode}
-                  />
-                </div>
-              </div>{" "}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    District
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.district}
-                  />
-                </div>
-              </div>{" "}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    State
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.state}
-                  />
-                </div>
-              </div>{" "}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    DOB
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={moment(student.dob).format("DD-MM-YYYY")}
-                  />
-                </div>
-              </div>{" "}
-              <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Branch
-                  </label>
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="text"
-                    disabled
-                    value={student.branch?.branchName}
-                  />
-                </div>
-              </div>
-              <div className="mt-4">
-                <div className="px-4 sm:px-0">
-                  {!loading ? (
-                    <>
-                      {!student.verified && (
-                        <button
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setShowAlert(true);
-                          }}
-                          className="w-full  bg-purple-700 hover:bg-purple-900 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
-                        >
-                          Verify
-                        </button>
-                      )}
-                    </>
-                  ) : (
-                    <h1 className="text-white text-center w-full  bg-indigo-900 hover:bg-indigo-800  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
-                      Processing..
-                    </h1>
-                  )}
-                </div>
-              </div>{" "}
+              )}
             </form>
           </div>
         </section>
-        <h3 className="text-4xl font-bold text-red-600 uppercase my-4">
-          TRANSFER STUDENT
-        </h3>
-        <Link to={`/transfer/${student._id}`}>
-          <button className="bg-red-400 px-4 py-3 font-bold text-white hover:bg-red-600 transition">
-            Go To Transfer Page
-            <FontAwesomeIcon className="mx-3" icon={faArrowRight} />
-          </button>
-        </Link>
+        {student.verified && (
+          <>
+            <h3 className="text-4xl font-bold text-red-600 uppercase my-4">
+              TRANSFER STUDENT
+            </h3>
+            <Link to={`/transfer/${student._id}`}>
+              <button className="bg-red-400 px-4 py-3 font-bold text-white hover:bg-red-600 transition">
+                Go To Transfer Page
+                <FontAwesomeIcon className="mx-3" icon={faArrowRight} />
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </>
   );
@@ -359,12 +384,6 @@ function Profile() {
                 >
                   Do you want to verify this student?
                 </h5>
-                <button
-                  type="button"
-                  className="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
               </div>
               <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                 <button
