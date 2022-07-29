@@ -8,12 +8,12 @@ const Email = require("../utils/email");
 exports.getAllStudents = globalFunctions.getAll(Student, "branch");
 exports.getStudent = globalFunctions.getOne(Student, "branch");
 exports.deleteStudent = globalFunctions.deleteStatus(Student);
-exports.registerStudent = async (req, res) => {
+exports.registerStudent = async (req, res, next) => {
   try {
     let data = await Student.create(req.body);
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).json(error);
+    next(error);
   }
 };
 exports.updateStudent = globalFunctions.updateOne(Student);

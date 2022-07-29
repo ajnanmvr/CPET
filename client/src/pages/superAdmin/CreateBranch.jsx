@@ -1,3 +1,5 @@
+import { faFileCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
@@ -19,6 +21,7 @@ function CreateBranch() {
   const [inputData, setInputData] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [branchImg, setBranchImg] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -53,10 +56,11 @@ function CreateBranch() {
     } catch (error) {
       setLoading(false);
       toast.error("Something went wrong", {
-        autoClose: 2000,
+        autoClose: 3000,
         position: toast.POSITION.TOP_CENTER,
       });
-      console.log(error.response);
+      setErrors(error.response.data);
+      console.log(error.response.data);
     }
   };
 
@@ -76,7 +80,13 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   Branch Name
+                  {errors.branchName && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.branchName}
+                    </h1>
+                  )}
                 </label>
+
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
@@ -96,15 +106,30 @@ function CreateBranch() {
                 >
                   Branch Image
                 </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  type="file"
-                  onChange={(e) => setBranchImg(e.target.files[0])}
-                  required
-                  placeholder="Branch Name"
-                  name="branchImg"
-                  value={inputData.branchImg}
-                />
+                <div className="flex">
+                  <input
+                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    type="file"
+                    onChange={(e) => setBranchImg(e.target.files[0])}
+                    required
+                    placeholder="Branch Name"
+                    name="branchImg"
+                    value={inputData.branchImg}
+                  />
+                  {branchImg ? (
+                    <FontAwesomeIcon
+                      icon={faFileCircleCheck}
+                      color={"green"}
+                      className="text-3xl ml-3"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faFileCircleCheck}
+                      color={"red"}
+                      className="text-3xl ml-3"
+                    />
+                  )}
+                </div>
               </div>
             </div>
 
@@ -115,6 +140,11 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   Phone Number
+                  {errors.phone && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.phone}
+                    </h1>
+                  )}
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -136,6 +166,11 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   Place
+                  {errors.place && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.place}
+                    </h1>
+                  )}
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -154,6 +189,11 @@ function CreateBranch() {
                 htmlFor="username"
               >
                 District
+                {errors.district && (
+                  <h1 className="text-red-500 font-sm text-center">
+                    {errors.district}
+                  </h1>
+                )}
               </label>
 
               <select
@@ -180,6 +220,11 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   Post Office
+                  {errors.postOffice && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.postOffice}
+                    </h1>
+                  )}
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -199,6 +244,11 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   Pin Code
+                  {errors.pinCode && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.pinCode}
+                    </h1>
+                  )}
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -218,6 +268,11 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   State
+                  {errors.state && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.state}
+                    </h1>
+                  )}
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -291,10 +346,6 @@ function CreateBranch() {
       </section>
     </div>
   );
-
-  function FormEntry() {
-    return <></>;
-  }
 }
 
 export default CreateBranch;

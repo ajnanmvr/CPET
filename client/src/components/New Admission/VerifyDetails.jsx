@@ -1,23 +1,43 @@
 import { useEffect, useState } from "react";
 import Axios from "../../Axios";
 
-function VerifyDetails({ formData, handleSubmit, prevPage, }) {
+function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
   const [branch, setBranch] = useState("");
   const forms = [
-    { lableName: "Student Name", value: formData.studentName },
-    { lableName: "Father Name", value: formData.fatherName },
-    { lableName: "Mother Name", value: formData.motherName },
-    { lableName: "House Name", value: formData.houseName },
-    { lableName: "Place", value: formData.place },
-    { lableName: "Guardian", value: formData.guardian },
-    { lableName: "Aadhar", value: formData.aadhar },
-    { lableName: "Phone Number", value: formData.phone },
-    { lableName: "DOB", value: formData.dob },
-    { lableName: "Post Office", value: formData.postOffice },
-    { lableName: "Pin Code", value: formData.pinCode },
-    { lableName: "District", value: formData.district },
-    { lableName: "State", value: formData.state },
-    { lableName: "Selected Class", value: formData.class },
+    {
+      lableName: "Student Name",
+      value: formData.studentName,
+      error: errors.studentName,
+    },
+    {
+      lableName: "Father Name",
+      value: formData.fatherName,
+      error: errors.fatherName,
+    },
+    {
+      lableName: "Mother Name",
+      value: formData.motherName,
+      error: errors.motherName,
+    },
+    {
+      lableName: "House Name",
+      value: formData.houseName,
+      error: errors.houseName,
+    },
+    { lableName: "Place", value: formData.place, error: errors.place },
+    { lableName: "Guardian", value: formData.guardian, error: errors.guardian },
+    { lableName: "Aadhar", value: formData.aadhar, error: errors.aadhar },
+    { lableName: "Phone Number", value: formData.phone, error: errors.phone },
+    { lableName: "DOB", value: formData.dob, error: errors.dob },
+    {
+      lableName: "Post Office",
+      value: formData.postOffice,
+      error: errors.postOffice,
+    },
+    { lableName: "Pin Code", value: formData.pinCode, error: errors.pinCode },
+    { lableName: "District", value: formData.district, error: errors.district },
+    { lableName: "State", value: formData.state, error: errors.state },
+    { lableName: "Selected Class", value: formData.class, error: errors.class },
   ];
   const getBranch = async () => {
     let { data } = await Axios.get("/branch/" + formData.branch);
@@ -43,6 +63,11 @@ function VerifyDetails({ formData, handleSubmit, prevPage, }) {
                       htmlFor="username"
                     >
                       {form.lableName}
+                      {form.error && (
+                        <div className="text-red-500 text-sm text-center">
+                          {form.error}
+                        </div>
+                      )}
                     </label>
                     <input
                       className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
@@ -60,6 +85,11 @@ function VerifyDetails({ formData, handleSubmit, prevPage, }) {
                     htmlFor="username"
                   >
                     Selected Branch
+                    {errors.branch && (
+                      <div className="text-red-500 text-sm text-center">
+                        {errors.branch}
+                      </div>
+                    )}
                   </label>
                   <input
                     className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"

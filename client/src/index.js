@@ -8,7 +8,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = new ApolloClient({
-  uri: `http://localhost:5000/graphql`,
+  uri: `0/graphql`,
   cache: new InMemoryCache(),
 });
 root.render(

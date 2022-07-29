@@ -40,7 +40,7 @@ async function uploadFile(fileName1, fileName2) {
   }
 }
 
-exports.createBranch = async (req, res) => {
+exports.createBranch = async (req, res, next) => {
   try {
     await sharp(`${__dirname + "/uploads/" + req.file.filename}`)
       .resize(320, 240)
@@ -63,8 +63,7 @@ exports.createBranch = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
-    res.status(400).json(error);
+    next(error);
   }
 };
 exports.editBranch = async (req, res) => {

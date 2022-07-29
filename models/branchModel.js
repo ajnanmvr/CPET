@@ -5,36 +5,45 @@ const branchSchema = new mongoose.Schema({
   branchName: {
     type: String,
     uppercase: true,
-    required: true,
+    required: [true, "Branch Name is required"],
+    unique: true,
+    maxLength: [100, "100 characters are allowed"],
   },
   phone: {
     type: String,
     uppercase: true,
-    required: true,
+    unique: [true, "Phone number is already used"],
+    required: [true, "Phone number is required"],
+    maxLength: [15, "15 characters are allowed"],
   },
   district: {
     type: String,
     uppercase: true,
-    required: true,
+    required: [true, "District is required"],
+    maxLength: [30, "30 characters are allowed"],
   },
   state: {
     type: String,
     uppercase: true,
-    required: true,
+    required: [true, "State is required"],
+    maxLength: [30, "30 characters are allowed"],
   },
   postOffice: {
     type: String,
     uppercase: true,
-    required: true,
+    required: [true, "Post office is required"],
+    maxLength: [30, "30 characters are allowed"],
   },
   pinCode: {
     type: String,
-    required: true,
+    required: [true, "pincode is required"],
+    maxLength: [10, "10 characters are allowed"],
   },
   place: {
     type: String,
     uppercase: true,
-    required: true,
+    required: [true, "place is required"],
+    maxLength: [100, "100 characters are allowed"],
   },
   deleted: {
     type: Boolean,
@@ -57,7 +66,6 @@ branchSchema.pre("save", function (next) {
   this.slug = slugify(this.branchName, { lower: true });
   next();
 });
-
 
 const Branch = mongoose.model("Branch", branchSchema);
 

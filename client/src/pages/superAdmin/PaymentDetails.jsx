@@ -45,7 +45,7 @@ function PaymentDetails() {
           getPayment={getPayment}
           id={id}
           setOpenForm={setOpenForm}
-          amount={payment.amount}
+          amount={payment?.amount}
         />
       )}
 
@@ -128,11 +128,11 @@ function PaymentDetails() {
                         <td className="py-4 px-6 text-sm  text-gray-900 whitespace-nowrap">
                           {paid.branch?.branchName}
                         </td>
-                        <td className="py-4 px-6 text-sm  text-gray-500 whitespace-nowrap">
+                        <td className="py-4 px-6 font-semibold text-center  text-green-500 whitespace-nowrap">
                           {paid.amount}* {paid.studentCount} (₹
                           {paid.amount * paid.studentCount} )
                         </td>
-                        <td className="py-4 px-6 text-sm  text-gray-900 whitespace-nowrap">
+                        <td className="py-4 px-6 font-semibold text-center  text-red-500 whitespace-nowrap">
                           {payment.amount - paid.amount * paid.studentCount}
                         </td>
                         <td className="py-4 px-6 text-sm  text-gray-900 whitespace-nowrap">

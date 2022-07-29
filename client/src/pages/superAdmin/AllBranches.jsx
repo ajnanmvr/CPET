@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Axios from "../../Axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -9,35 +9,35 @@ import { useQuery } from "@apollo/client";
 import { GET_BRANCHES } from "../../queries/branch";
 
 function AllBranches() {
-  const [branches, setBranches] = useState([]);
   const { data, error, loading, refetch } = useQuery(GET_BRANCHES);
+  const { pathname } = useLocation();
 
-  const getAllBranches = async () => {
-    try {
-      let { data } = await Axios.get("/branch");
-      setBranches(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
   const deleteBranch = async (id) => {
     try {
       if (window.confirm("Do you want to delete this branch")) {
         await Axios.delete("/branch/" + id);
-        refetch()
+        refetch();
       }
     } catch (error) {
       console.log(error);
     }
   };
-  if (error)
+
+  useEffect(() => {
+    refetch();
+  }, [pathname]);
+
+  if (error) {
     return (
       <h1 className="text-red-500 text-center font-bold">
         Something Went Wrong{" "}
       </h1>
     );
-  if (loading)
+  }
+  if (loading) {
     return <h1 className="text-blue-500 text-center font-bold">Loading ...</h1>;
+  }
+
   return (
     <>
       <div className="flex flex-col ">
@@ -121,9 +121,9 @@ function AllBranches() {
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {branch?.admin?.username}
-                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {branch.phone}
-                        </td>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {branch.phone}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         <Link to={"/branch/" + branch.id}>

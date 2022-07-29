@@ -32,6 +32,8 @@ function AddStudents() {
   const [imageUploaded, setImageUploaded] = useState(false);
   const [formErrors, setFormErrors] = useState({});
   const [goNext, setGoNext] = useState(false);
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
   let currentYear = new Date().getFullYear().toString();
   let nextYear = (new Date().getFullYear() + 1).toString();
@@ -112,6 +114,7 @@ function AddStudents() {
         }
       }
     } catch (error) {
+      setErrors(error.response.data);
       toast.error("Something went wrong", {
         autoClose: 2000,
         position: toast.POSITION.TOP_CENTER,
@@ -154,6 +157,7 @@ function AddStudents() {
           formData={formData}
           prevPage={prevPage}
           handleSubmit={handleSubmit}
+          errors={errors}
         />
       );
   }

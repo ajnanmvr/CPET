@@ -99,7 +99,7 @@ function Dashboard() {
 
   useEffect(() => {
     authData?.role === "admin" && getBranch();
-    getAdmissions();
+    authData?.role === "admin" && getAdmissions();
   }, [authData]);
   return (
     <div className="w-full">

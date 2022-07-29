@@ -113,13 +113,7 @@ exports.getUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    const user = await Auth.findByIdAndUpdate(req.params.id, { deleted: true });
-    if (!user) {
-      return res.status(400).json({
-        message: "User does not exist",
-      });
-    }
-    await Auth.deleteOne({ _id: req.userId });
+    await Auth.findByIdAndDelete(req.params.id);
     res.status(200).json({
       message: "User deleted",
     });
@@ -201,6 +195,6 @@ exports.checkUserLoggedIn = async (req, res, next) => {
   } else {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
     let user = await Auth.findById(decoded.userId).populate("branch");
-    res.status(200).json({ user :user});
+    res.status(200).json({ user: user });
   }
 };

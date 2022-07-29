@@ -13,8 +13,8 @@ function AddBranchPayment({ setOpenForm, id, getPayment, amount }) {
     studentCount: null,
   };
   const [branch, setBranch] = useState(null);
+
   const [formData, setFormData] = useState(initialState);
-  console.log(formData);
   const [loading, setLoading] = useState(false);
   const { data, error } = useQuery(GET_BRANCHES);
   const branchStudents = useQuery(BRANCH_STUDENTS, {
@@ -66,45 +66,6 @@ function AddBranchPayment({ setOpenForm, id, getPayment, amount }) {
                   className="block  text-sm font-bold mb-2"
                   htmlFor="username"
                 >
-                  Payment Amount
-                </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  id="username"
-                  type="number"
-                  required
-                  value={formData.amount}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Payment Amount"
-                  name="amount"
-                />
-              </div>
-            </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Amount To Pay
-                </label>
-                <span className="text-green-500">
-                  {branchStudents?.data?.branchStudents?.length}* {amount}
-                </span>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  value={branchStudents?.data?.branchStudents?.length * amount}
-                  disabled
-                />
-              </div>
-            </div>
-
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
                   Branch
                 </label>
                 <select
@@ -124,6 +85,49 @@ function AddBranchPayment({ setOpenForm, id, getPayment, amount }) {
                     </option>
                   ))}
                 </select>
+              </div>
+            </div>
+            {branch && (
+              <div className="lg:col-span-1">
+                <div className="px-4 sm:px-0">
+                  <label
+                    className="block  text-sm font-bold mb-2"
+                    htmlFor="username"
+                  >
+                    Amount To Pay
+                  </label>
+                  <span className="text-green-500">
+                    {branchStudents?.data?.branchStudents?.length}* {amount}
+                  </span>
+                  <input
+                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    value={
+                      branchStudents?.data?.branchStudents?.length * amount
+                    }
+                    disabled
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="lg:col-span-1">
+              <div className="px-4 sm:px-0">
+                <label
+                  className="block  text-sm font-bold mb-2"
+                  htmlFor="username"
+                >
+                  Payment Amount
+                </label>
+                <input
+                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  id="username"
+                  type="number"
+                  required
+                  value={formData.amount}
+                  onChange={(e) => onChange(e)}
+                  placeholder="Payment Amount"
+                  name="amount"
+                />
               </div>
             </div>
             <div className="lg:col-span-1">

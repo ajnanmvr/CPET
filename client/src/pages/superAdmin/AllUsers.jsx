@@ -1,15 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 import { GET_USERS } from "../../queries/userQuery";
 function AllUsers() {
-  const [users, setUsers] = useState([]);
   const { data, error, loading, refetch } = useQuery(GET_USERS);
-  console.log(data);
+
   const deleteUser = async (id) => {
     try {
       if (window.confirm("Do you want to delete?")) {
@@ -96,7 +94,7 @@ function AllUsers() {
                       </td>
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Link to={"/edit-user/" + user._id}>
+                        <Link to={"/edit-user/" + user.id}>
                           <FontAwesomeIcon icon={faEdit} />
                         </Link>
                       </td>

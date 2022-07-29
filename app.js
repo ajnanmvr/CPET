@@ -60,6 +60,8 @@ app.use("/api/notification", notificationRoutes);
 app.use("/api/subject", subjectRoutes);
 app.use("/api/parent-subject", parentSubjectRoutes);
 
+app.use(require("./utils/gloablErrors"));
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {

@@ -1,7 +1,6 @@
 import { DISTRICT } from "../../Consts";
 
 function StudentDetails({ onChange, formData, nextPage, formErrors }) {
-
   const forms = [
     {
       labelName: "Student Name",
