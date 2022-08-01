@@ -8,10 +8,10 @@ function ProtectedRoutes({ children, role }) {
   const navigate = useNavigate();
   if (authData?.role === role) {
     return (
-      <>
+      <div className="lg:ml-[250px]">
         <Sidebar />
         {children}
-      </>
+      </div>
     );
   } else {
     navigate("/not-allowed");

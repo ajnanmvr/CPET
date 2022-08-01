@@ -6,7 +6,7 @@ const branchSchema = new mongoose.Schema({
     type: String,
     uppercase: true,
     required: [true, "Branch Name is required"],
-    unique: true,
+    unique: [true, "Branch name is already used "],
     maxLength: [100, "100 characters are allowed"],
   },
   phone: {

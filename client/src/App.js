@@ -19,7 +19,6 @@ export default function App() {
   return (
     <>
       <div className="flex">
-        {authData && <div className="lg:w-[300px]" />}
         <div className="w-full">
           <ToastContainer />
           <Routes>

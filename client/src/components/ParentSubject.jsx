@@ -34,7 +34,7 @@ function ParentSubject({ setOpenBox }) {
 
   return (
     <div className="absolute top-0  w-full h-screen bg-gray-800">
-      <div className="w-1/3 mx-auto">
+      <div className="lg:w-1/3 w-full mx-auto">
         <section className="bg-white p-6 mt-4">
           <div className="max-w-screen-xl mx-auto">
             <h3 className="text-2xl font-bold text-violet-700 uppercase my-4">

@@ -71,7 +71,11 @@ function CreateBranch() {
           <h3 className="text-4xl font-bold text-[#003865] uppercase my-4">
             Create Branch
           </h3>
-
+          {errors.message && (
+            <h1 className="text-red-500 font-sm text-center">
+              {errors.message}
+            </h1>
+          )}
           <form className="lg:grid lg:grid-cols-2 lg:gap-8">
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">

@@ -13,6 +13,6 @@ const handleValidationError = (err, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  if (err.code === 11000) handleDuplicates(err, res);
+  // if (err.code === 11000) handleDuplicates(err, res);
   if (err.name === "ValidationError") handleValidationError(err, res);
 };

@@ -91,4 +91,4 @@ exports.editBranch = async (req, res) => {
 
 exports.getBranch = globalFuctions.getOne(Branch);
 exports.getAllBranches = globalFuctions.getAll(Branch);
-exports.deleteBranch = globalFuctions.deleteStatus(Branch);
+exports.deleteBranch = globalFuctions.deleteOne(Branch);

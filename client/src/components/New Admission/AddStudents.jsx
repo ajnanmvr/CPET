@@ -85,7 +85,6 @@ function AddStudents() {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
   const nextPage = (e) => {
-    console.log(e);
     e.preventDefault();
     setGoNext(true);
     setFormErrors(validate(formData));

@@ -8,7 +8,6 @@ function ViewBranch() {
   const { data, error, loading } = useQuery(GET_BRANCH, {
     variables: { id },
   });
-  console.log(data);
   if (error)
     return (
       <h1 className="text-red-600 font-bold text-3xl text-center">

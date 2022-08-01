@@ -25,7 +25,7 @@ function AllPayments() {
     <>
       <div className="py-10 h-screen px-2">
         <h1 className="text-3xl font-bold text-[#0284c7] my-3 text-center">
-          All Payments{" "}
+          All Payments
         </h1>
         <Link
           to={"/create-payment"}
@@ -39,12 +39,12 @@ function AllPayments() {
               {payments.map((payment, key) => (
                 <div
                   key={key}
-                  className="py-4 h-[200px] m-4  overflow-hidden bg-teal-500 relative rounded-xl  duration-300 shadow-2xl group"
+                  className="py-4 h-[200px] m-4  overflow-hidden bg-teal-500  rounded-xl  duration-300 shadow-2xl group"
                 >
                   <Link to={`/edit-payment/${payment._id}`}>
                     <FontAwesomeIcon
                       icon={faEdit}
-                      className="absolute right-2 text-2xl"
+                      className="float-right mr-3 text-2xl"
                       color="white"
                     ></FontAwesomeIcon>
                   </Link>

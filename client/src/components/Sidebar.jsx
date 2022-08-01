@@ -1,16 +1,13 @@
 import {
   faAdd,
-  faBars,
-  faBell,
-  faBook,
-  faClose,
+  faBars, faClose,
   faHome,
   faPersonChalkboard,
   faPlus,
   faPowerOff,
   faSchool,
   faUser,
-  faUsers,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
@@ -58,7 +55,7 @@ function Sidebar() {
   return (
     <>
       <div onClick={() => setOpenSidebar(!openSidebar)}>
-        <span className="absolute text-white text-4xl top-1 right-1 cursor-pointer">
+        <span className="absolute z-40 text-white text-4xl top-1 right-1 cursor-pointer">
           <button
             className="bi bi-filter-left px-2  rounded-md"
             onClick={() => setOpenSidebar(!openSidebar)}
@@ -67,13 +64,13 @@ function Sidebar() {
               <FontAwesomeIcon
                 icon={faBars}
                 color="black"
-                className="bi bi-x cursor-pointer ml-28 lg:hidden"
+                className=" cursor-pointer ml-28 lg:hidden"
               ></FontAwesomeIcon>
             ) : (
               <FontAwesomeIcon
                 icon={faClose}
-                color="black"
-                className="bi bi-x cursor-pointer ml-28 lg:hidden"
+                color="white"
+                className="cursor-pointer ml-28 lg:hidden"
               ></FontAwesomeIcon>
             )}
           </button>
@@ -82,7 +79,7 @@ function Sidebar() {
         <div
           className={`${
             !openSidebar && "invisible"
-          } lg:visible  fixed top-0 bottom-0 lg:left-0 p-2 w-[250px] overflow-y-auto text-center bg-gray-900`}
+          } lg:visible  fixed top-0 bottom-0 lg:left-0 p-2 lg:w-[250px] w-full overflow-y-auto text-center bg-gray-900`}
         >
           <div className="text-gray-100 text-xl">
             <div className="p-2.5 mt-1 flex items-center">

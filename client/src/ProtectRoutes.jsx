@@ -9,10 +9,10 @@ function ProtectedRoutes({ children }) {
   const navigate = useNavigate();
   if (authData) {
     return (
-      <>
+      <div className="lg:ml-[250px]">
         <Sidebar />
         {children}
-      </>
+      </div>
     );
   } else {
     navigate("/not-logged");

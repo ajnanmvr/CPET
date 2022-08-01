@@ -1,0 +1,529 @@
+[
+    {
+        "_id": {
+            "$oid": "62e3adda72b38bd08ad234rb"
+        },
+        "studentName": "FATHIMA SHERIN",
+        "houseName": "HOUSE",
+        "fatherName": "FATHER",
+        "motherName": "MOTHER",
+        "guardian": "FATHER",
+        "place": "PLACE",
+        "district": "MALAPPURAM",
+        "postOffice": "POST OFFICE",
+        "pinCode": "673636",
+        "state": "KERALA",
+        "dob": "2003-01-24",
+        "aadhar": "54445451",
+        "phone": "5656556",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e366a442715020e892a276"
+        },
+        "verified": true,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0,
+        "admissionNo": "CMS1000"
+    },
+    {
+        "_id": {
+            "$oid": "62e3ae0572b38bd08ad23ed8"
+        },
+        "studentName": "SALIYA ",
+        "houseName": "KFJD",
+        "fatherName": "KJFDKJ",
+        "motherName": "KKFDJKJ",
+        "guardian": "KFDJDK",
+        "place": "DKFJDK",
+        "district": "ALAPPUZHA",
+        "postOffice": "KJDKJ",
+        "pinCode": "jkdjf",
+        "state": "KJKJDKJ",
+        "dob": "2003-05-24",
+        "aadhar": "545545",
+        "phone": "kdfjdljl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3679c42715020e892a296"
+        },
+        "verified": true,
+        "class": "plus-two",
+        "academicYear": "2022-2023",
+        "__v": 0,
+        "admissionNo": "CMS1300"
+    },
+    {
+        "_id": {
+            "$oid": "62e3ae6572b38bd08ad23ee8"
+        },
+        "studentName": "THASNI",
+        "houseName": "FDSKJK",
+        "fatherName": "KFDSK",
+        "motherName": "JKDFK",
+        "guardian": "FDKDSJ",
+        "place": "FDDSKJ",
+        "district": "ERNAMKULAM",
+        "postOffice": "KJKJDFSL",
+        "pinCode": "kdjl",
+        "state": "KDKJ",
+        "dob": "4551-05-04",
+        "aadhar": "77777",
+        "phone": "kdkdjfk",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": true,
+        "class": "mahdiyya-first-year",
+        "academicYear": "2022-2023",
+        "__v": 0,
+        "admissionNo": "CMS1150"
+    },
+    {
+        "_id": {
+            "$oid": "62e3ae9572b38bd58ad23ef1"
+        },
+        "studentName": "MURSHIDA",
+        "houseName": "JFSDKJDKK",
+        "fatherName": "JKDFS",
+        "motherName": "KJKJD",
+        "guardian": "4KDFJD",
+        "place": "LDJFDLK",
+        "district": "KANNUR",
+        "postOffice": "KKDFJ",
+        "pinCode": "kkdjsjk",
+        "state": "KDFLL",
+        "dob": "0005-05-05",
+        "aadhar": "4555",
+        "phone": "kjkjdslj",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e366a442715020e892a276"
+        },
+        "verified": true,
+        "class": "mahdiyya-third-year",
+        "academicYear": "2022-2023",
+        "certificateOne": "https://res.cloudinary.com/mern-chat/image/upload/v1659088527/ynecskjd1so9fj4angai.avif",
+        "certificateTwo": "https://res.cloudinary.com/mern-chat/image/upload/v1659088529/mtwyi3yxp8imqwkft4zu.jpg",
+        "certificateThree": "https://res.cloudinary.com/mern-chat/image/upload/v1659088531/qfxm7csfj4zbxmtpx9mv.jpg",
+        "__v": 0,
+        "admissionNo": "CMS1200"
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353h2b16b9"
+        },
+        "studentName": "HABEEBA",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "345",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    },
+    {
+        "_id": {
+            "$oid": "62e3d4a3facc63353c2b16b9"
+        },
+        "studentName": "FDDSKJ",
+        "houseName": "KDFS",
+        "fatherName": "KKDFJSL",
+        "motherName": "KFDKL",
+        "guardian": "FDJLK",
+        "place": "FDJL",
+        "district": "KANNUR",
+        "postOffice": "LDFSFJ",
+        "pinCode": "kjkdfsl",
+        "state": "KJJDSL",
+        "dob": "0044-04-04",
+        "aadhar": "545",
+        "phone": "kkdfl",
+        "deleted": false,
+        "branch": {
+            "$oid": "62e3ae3972b38bd08ad23edb"
+        },
+        "verified": false,
+        "class": "plus-one",
+        "academicYear": "2022-2023",
+        "__v": 0
+    }
+]

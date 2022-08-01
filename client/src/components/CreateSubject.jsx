@@ -74,7 +74,7 @@ function CreateSubject({ setOpenSubject }) {
           <FontAwesomeIcon className="px-2" icon={faAdd}></FontAwesomeIcon>
         </button>
       )}
-      <div className="w-2/4 mx-auto">
+      <div className="lg:w-2/4 w-full mx-auto">
         <section className="bg-white p-6">
           <div className="max-w-screen-xl mx-auto">
             <h3 className="text-4xl font-bold text-violet-700 uppercase my-4">
@@ -102,27 +102,7 @@ function CreateSubject({ setOpenSubject }) {
                   />
                 </div>
               </div>
-              {/* <div className="lg:col-span-1">
-                <div className="px-4 sm:px-0">
-                  <label
-                    className="block  text-sm font-bold mb-2"
-                    htmlFor="username"
-                  >
-                    Class
-                  </label>
-                  <select
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    required
-                    value={formData.type}
-                    onChange={(e) => onChange(e)}
-                    name="class"
-                  >
-                    <option value="all">All</option>
-                    <option value="students">Students</option>
-                    <option value="admins">Admins</option>
-                  </select>
-                </div>
-              </div> */}
+
               <div className="lg:col-span-1">
                 <div className="px-4 sm:px-0">
                   <label
@@ -164,7 +144,7 @@ function CreateSubject({ setOpenSubject }) {
                 )}
                 <button
                   onClick={(e) => setOpenSubject(false)}
-                  className="w-full lg:w-[200px] ml-4 bg-orange-500 hover:bg-orange-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition"
+                  className="w-full lg:w-[200px] bg-orange-500 hover:bg-orange-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition"
                 >
                   close
                 </button>
