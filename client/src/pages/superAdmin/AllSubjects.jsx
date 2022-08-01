@@ -33,6 +33,16 @@ function AllSubjects() {
   }, []);
   return (
     <>
+      {openSubject && <CreateSubject setOpenSubject={setOpenSubject} />}
+      {!openSubject && (
+        <button
+          onClick={() => setOpenSubject(true)}
+          className="bg-green-500  rounded-full hover:bg-green-600 mt-3 text-white py-2 px-3 focus:outline-none focus:shadow-outline uppercase transition absolute right-2"
+        >
+          add subject
+          <FontAwesomeIcon className="px-2" icon={faAdd}></FontAwesomeIcon>
+        </button>
+      )}
       <div className="flex flex-col">
         <div className="w-full mx-auto">
           <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
@@ -49,20 +59,10 @@ function AllSubjects() {
   function SubjectTable() {
     return (
       <div>
-        {openSubject && <CreateSubject setOpenSubject={setOpenSubject} />}
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <h1 className="text-3xl text-center text-teal-800 font-bold">
             All Subjects
           </h1>
-          {!openSubject && (
-            <button
-              onClick={() => setOpenSubject(true)}
-              className="bg-green-500  rounded-full hover:bg-green-600 mt-3 text-white py-2 px-3 focus:outline-none focus:shadow-outline uppercase transition absolute right-2"
-            >
-              add subject
-              <FontAwesomeIcon className="px-2" icon={faAdd}></FontAwesomeIcon>
-            </button>
-          )}
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
               <table className="min-w-full">
