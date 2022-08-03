@@ -155,7 +155,7 @@ function Dashboard() {
                   }`}
                 >
                   {item.text === "Admission Requests" && (
-                    <div className="absolute right-6 top-3 bg-orange-400 px-3 rounded-lg text-white font-bold">
+                    <div className="absolute right-6 top-3 bg-orange-400 px-3  text-white font-bold">
                       {admissionCount}
                     </div>
                   )}

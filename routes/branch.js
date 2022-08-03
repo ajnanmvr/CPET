@@ -3,10 +3,10 @@ const branchController = require("../controllers/branchController");
 const multer = require("multer");
 const router = require("express").Router();
 
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage({
   destination: (req, file, cb) => {
-    if (req.route.methods.patch && !file) return;
-    cb(null, "./controllers/uploads");
+    // if (req.route.methods.patch && !file) return;
+    cb(null, "./public");
   },
   filename: (req, file, cb) => {
     if (req.route.methods.patch && !file) return;

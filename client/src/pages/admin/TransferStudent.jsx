@@ -97,19 +97,6 @@ function TransferStudent() {
         <div className="lg:col-span-1">
           <div className="px-4 sm:px-0">
             <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Guardian
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.guardian}
-            />
-          </div>
-        </div>
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
               House Name
             </label>
             <input
@@ -146,102 +133,11 @@ function TransferStudent() {
             />
           </div>
         </div>
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Place
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.place}
-            />
-          </div>
-        </div>
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Post Office
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.postOffice}
-            />
-          </div>
-        </div>{" "}
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Pin Code
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.pinCode}
-            />
-          </div>
-        </div>{" "}
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              District
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.district}
-            />
-          </div>
-        </div>{" "}
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              State
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.state}
-            />
-          </div>
-        </div>{" "}
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              DOB
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={moment(student.dob).format("DD-MM-YYYY")}
-            />
-          </div>
-        </div>{" "}
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Branch
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.branch?.branchName}
-            />
-          </div>
-        </div>
       </div>
-      <h3 className="text-xl font-bold text-white capitalize px-4 py-3 my-4 bg-gray-800">
-        Branch preferred by student
-      </h3>
-      <div className="grid grid-cols-2 gap-x-2 my-4">
+      <div className="mx-auto w-1/2">
+        <h3 className="text-xl font-bold text-white capitalize px-4 py-3 my-4 bg-gray-800">
+          Branch preferred by student
+        </h3>
         <div className="lg:col-span-1">
           <div className="px-4 sm:px-0">
             <label className="block  text-sm font-bold mb-2" htmlFor="username">
@@ -267,6 +163,13 @@ function TransferStudent() {
               type="text"
               placeholder="Reason for transfer"
             />
+          </div>
+        </div>
+        <div className="lg:col-span-1 float-right mt-3">
+          <div className="px-4 sm:px-0">
+            <button className="bg-green-400  capitalize px-4 py-2 font-bold hover:text-green-400 hover:bg-white border-2 border-green-400 text-white">
+              submit
+            </button>
           </div>
         </div>
       </div>

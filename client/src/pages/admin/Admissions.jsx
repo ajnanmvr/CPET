@@ -37,7 +37,7 @@ function Admissions() {
   return (
     <>
       <h1 className="text-gray-800 font-bold text-3xl mt-4 text-center">
-        Admission Requests{" "}
+        Admission Requests
       </h1>
 
       <div className="w-full items-center px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-5">

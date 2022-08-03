@@ -1,5 +1,5 @@
 const handleDuplicates = (err, res) => {
-  res.status(400).json({ message: "Duplicate data not allowed" });
+  res.status(400).json({ message: "cannot accept duplicate fields" });
 };
 const handleValidationError = (err, res) => {
   let errors = {};
@@ -13,6 +13,6 @@ const handleValidationError = (err, res) => {
 };
 
 module.exports = (err, req, res, next) => {
-  // if (err.code === 11000) handleDuplicates(err, res);
+  if (err.code === 11000) handleDuplicates(err, res);
   if (err.name === "ValidationError") handleValidationError(err, res);
 };

@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
-import { Link, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import Axios from "../../Axios";
 import { UserAuthContext } from "../../context/user";
 
 function AllStudents() {

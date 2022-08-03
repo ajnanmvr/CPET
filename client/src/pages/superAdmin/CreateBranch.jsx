@@ -23,6 +23,7 @@ function CreateBranch() {
   const [branchImg, setBranchImg] = useState(null);
   const [errors, setErrors] = useState({});
 
+  console.log(errors);
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputData((prevState) => ({ ...prevState, [name]: value }));
@@ -55,12 +56,17 @@ function CreateBranch() {
       }
     } catch (error) {
       setLoading(false);
-      toast.error("Something went wrong", {
-        autoClose: 3000,
-        position: toast.POSITION.TOP_CENTER,
-      });
-      setErrors(error.response.data);
       console.log(error.response.data);
+      toast.error(
+        error.response.data.message
+          ? error.response.data.message
+          : "Something went wrong",
+        {
+          autoClose: 3000,
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
+      setErrors(error.response.data);
     }
   };
 
@@ -71,11 +77,7 @@ function CreateBranch() {
           <h3 className="text-4xl font-bold text-[#003865] uppercase my-4">
             Create Branch
           </h3>
-          {errors.message && (
-            <h1 className="text-red-500 font-sm text-center">
-              {errors.message}
-            </h1>
-          )}
+
           <form className="lg:grid lg:grid-cols-2 lg:gap-8">
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
@@ -332,17 +334,17 @@ function CreateBranch() {
           </form>
           <div className="lg:col-span-1 mt-4">
             <div className="px-4 sm:px-0">
-              {!loading ? (
+              {loading ? (
+                <h1 className="text-white text-center w-full lg:w-1/2 bg-[#003865]  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
+                  Processing..
+                </h1>
+              ) : (
                 <button
                   onClick={(e) => handleSubmit(e)}
                   className="w-full lg:w-1/2 bg-[#003865] hover:bg-[#231955] text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
                 >
                   Submit
                 </button>
-              ) : (
-                <h1 className="text-white text-center w-full lg:w-1/2 bg-[#003865]  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
-                  Processing..
-                </h1>
               )}
             </div>
           </div>

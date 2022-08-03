@@ -13,7 +13,6 @@ exports.createMultiUsers = async (req, res) => {
     res.status(400).json(error);
   }
 };
-
 exports.signUp = async (req, res) => {
   try {
     const { username } = req.body;
@@ -72,13 +71,14 @@ exports.signIn = async (req, res) => {
         });
       } else {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-          expiresIn: "30d",
+          expiresIn: "90d",
         });
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         res
           .cookie("jwt", token, {
             httpOnly: true,
             // max age 30 days
-            maxAge: 3600000 * 24 * 30,
+            maxAge: decoded.exp,
           })
           .status(200);
         // remove password from user object

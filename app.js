@@ -11,6 +11,7 @@ const paymentRoutes = require("./routes/payment");
 const notificationRoutes = require("./routes/notification");
 const subjectRoutes = require("./routes/subject");
 const parentSubjectRoutes = require("./routes/parentSubject");
+const transferRoutes = require("./routes/transfer");
 
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
@@ -59,6 +60,7 @@ app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
 app.use("/api/subject", subjectRoutes);
 app.use("/api/parent-subject", parentSubjectRoutes);
+app.use("/api/transfer", transferRoutes);
 
 app.use(require("./utils/gloablErrors"));
 

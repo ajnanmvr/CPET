@@ -7,6 +7,8 @@ const fs = require("fs");
 const Auth = require("../models/authModel");
 const sharp = require("sharp");
 
+
+
 dotenv.config();
 admin.initializeApp({
   credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SECRET)),
@@ -26,42 +28,40 @@ async function uploadFile(fileName1, fileName2) {
       cacheControl: "public, max-age=31536000",
     };
 
-    // Uploads a local file to the bucket
     let data = await bucket.upload(fileName1, {
-      // Support for HTTP requests made with `Accept-Encoding: gzip`
       gzip: true,
       metadata: metadata,
     });
-    // fs.unlinkSync(fileName1);
-    // fs.unlinkSync(fileName2);
     return data;
   } catch (error) {
     console.log(error);
   }
 }
 
+exports.resizeImage = (file, id, next) => {
+  if (!file) return next();
+
+  sharp(file.buffer)
+    .resize({
+      width: 500,
+      height: 500,
+    })
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/${id}.jpeg`);
+};
 exports.createBranch = async (req, res, next) => {
   try {
-    await sharp(`${__dirname + "/uploads/" + req.file.filename}`)
-      .resize(320, 240)
-      .toFile(`${__dirname + "/sharped/" + req.file.filename}`);
-
-    let uploadData = await uploadFile(
-      `${__dirname + "/sharped/" + req.file.filename}`,
-      `${__dirname + "/uploads/" + req.file.filename}`
-    );
-
-    let data = await Branch.create({
-      ...req.body,
-      image: uploadData[1].mediaLink,
-    });
-    let user = await Auth.create({ ...req.body, branch: data._id });
-    data.admin = user._id;
-    data.save();
-    res.status(200).json({
-      data,
-      user,
-    });
+    if (req.file) {
+      let data = await Branch.create(req.body);
+      let user = await Auth.create({ ...req.body, branch: data._id });
+      await this.resizeImage(req.file, data._id, next);
+      data.admin = user._id;
+      data.save();
+      res.status(200).json(data);
+    } else {
+      res.status(400).json({ message: "Please upload an image" });
+    }
   } catch (error) {
     next(error);
   }
@@ -77,10 +77,7 @@ exports.editBranch = async (req, res) => {
     } else {
       uploadData = req.body.image;
     }
-    let data = await Branch.findByIdAndUpdate(req.params.id, {
-      ...req.body,
-      image: uploadData,
-    });
+    let data = await Branch.findByIdAndUpdate(req.params.id, req.body);
 
     res.status(200).json(data);
   } catch (error) {
