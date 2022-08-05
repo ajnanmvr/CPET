@@ -7,6 +7,8 @@ const GET_BRANCHES = gql`
       id
       branchName
       phone
+      place 
+      district
       admin {
         username
       }

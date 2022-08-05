@@ -11,6 +11,7 @@ import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
 import TransferRequest from "./pages/superAdmin/TransferRequest";
+import TransferVerify from "./pages/superAdmin/TransferVerify";
 
 export const DISTRICT = [
   "MALAPPURAM",
@@ -98,6 +99,11 @@ export const RestrictedRoutes = [
   {
     route: "/transfer-request",
     component: <TransferRequest />,
+    role: "superAdmin",
+  },
+  {
+    route: "/transfer-verify/:id",
+    component: <TransferVerify />,
     role: "superAdmin",
   },
 ];

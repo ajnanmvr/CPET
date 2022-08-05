@@ -42,39 +42,39 @@ function AllUsers() {
   function UsersTable() {
     return (
       <div>
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="overflow-hidden">
-              <table className="min-w-full">
-                <thead className="border-b">
+        <div className="container mx-auto px-4 sm:px-8">
+          <div className="py-2">
+            <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+              <table className="min-w-full leading-normal">
+                <thead>
                   <tr>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       #
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       USERNAME
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       BRANCH
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       EDIT
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       DELETE
                     </th>
@@ -83,25 +83,28 @@ function AllUsers() {
                 <tbody>
                   {data?.users?.map((user, index) => (
                     <tr className="border-b">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-5 py-5 bg-white text-sm">
                         {index + 1}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap uppercase">
+                      <td className="px-5 py-5 bg-white text-sm">
                         {user.username}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="px-5 py-5 bg-white text-sm">
                         {user.branch?.branchName}
                       </td>
 
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="px-5 py-5 bg-white text-sm">
                         <Link to={"/edit-user/" + user.id}>
-                          <FontAwesomeIcon icon={faEdit} />
+                          <FontAwesomeIcon
+                            className="text-blue-500"
+                            icon={faEdit}
+                          />
                         </Link>
                       </td>
 
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                      <td className="px-5 py-5 bg-white text-sm">
                         <div
-                          className="cursor-pointer"
+                          className="cursor-pointer text-red-600"
                           onClick={() => deleteUser(user.id)}
                         >
                           <FontAwesomeIcon icon={faTrash} />

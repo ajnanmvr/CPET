@@ -118,7 +118,7 @@ function CreateSubject({ setOpenSubject }) {
                     onChange={(e) => onChange(e)}
                     name="parentSubject"
                   >
-                    <option>Select Parent</option>
+                    <option hidden>Select Parent</option>
                     {parentSubjects.map((parent) => (
                       <option key={parent._id} value={parent._id}>
                         {parent.subjectName}

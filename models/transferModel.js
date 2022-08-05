@@ -22,6 +22,10 @@ const transferSchema = new Schema(
       required: [true, "Please describe the reason"],
       minLength: [100, "Please describe the reason in 100 words"],
     },
+    accepted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

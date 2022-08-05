@@ -181,7 +181,7 @@ function TransferStudent() {
               onChange={(e) => setToBranch(e.target.value)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-4 "
             >
-              <option>select branch</option>
+              <option hidden>Select branch</option>
               {data?.branches.map((branch) => (
                 <option value={branch.id} key={branch.id}>
                   {branch.branchName}

@@ -251,7 +251,7 @@ function EditStudent() {
                 id=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option>SELECT YOUR DISTRICT </option>
+                <option hidden>Select YOUR DISTRICT </option>
                 {DISTRICT.map((district, index) => (
                   <>
                     <option key={index} value={formData.district}>
@@ -349,7 +349,7 @@ function EditStudent() {
                 id=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
-                <option>SELECT STUDENT'S CLASS </option>
+                <option hidden>Select STUDENT'S CLASS </option>
                 {classes.map((classItem, index) => (
                   <>
                     <option key={index} value={classItem}>

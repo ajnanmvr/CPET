@@ -72,7 +72,7 @@ function CreateUser() {
             onChange={(e) => setMultiUser(e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
           >
-            <option>select </option>
+            <option hidden>Select </option>
             <option value="multiForm">Multi Form </option>
             <option value="singlForm">Single Form </option>
           </select>
@@ -184,7 +184,7 @@ function CreateUser() {
                       onChange={(e) => onChange(e)}
                       className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                     >
-                      <option>select admin college</option>
+                      <option hidden>Select admin college</option>
                       {branches.map((branch, index) => (
                         <option key={index} value={branch._id}>
                           {branch.branchName}

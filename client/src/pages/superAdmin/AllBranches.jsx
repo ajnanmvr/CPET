@@ -41,9 +41,6 @@ function AllBranches() {
   return (
     <>
       <div className="flex flex-col ">
-        <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
-          All BRANCHES
-        </h3>{" "}
         <div className="w-full mx-auto">
           <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -59,94 +56,137 @@ function AllBranches() {
   function BranchTable() {
     return (
       <div>
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="overflow-hidden">
-              <table className="min-w-full">
-                <thead className="border-b">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      #
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      BRANCH
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      ADMIN
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      PHONE
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      VIEW
-                    </th>
+        <div className="container mx-auto px-4 sm:px-8">
+          <div className="py-8">
+            <div>
+              <h2 className="text-2xl font-semibold capitalize leading-tight">
+                All Branches
+              </h2>
+            </div>
+            <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+              <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+                <table className="min-w-full leading-normal">
+                  <thead>
+                    <tr>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        #
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Branch Name / place
+                      </th>
 
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      EDIT
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      Delete
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.branches.map((branch, index) => (
-                    <tr key={index} className="border-b">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {index + 1}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.branchName}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch?.admin?.username}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.phone}
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Link to={"/branch/" + branch.id}>
-                          <button className="bg-green-500 px-4 py-2 rounded-xl text-white">
-                            view
-                          </button>
-                        </Link>
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Link to={"/edit-branch/" + branch.id}>
-                          <FontAwesomeIcon icon={faEdit} />
-                        </Link>
-                      </td>
-                      <td className="text-sm text-red-500 font-light cursor-pointer px-6 py-4 whitespace-nowrap">
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          onClick={() => deleteBranch(branch.id)}
-                        />
-                      </td>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        District
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Phone / Admin
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        View
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Edit
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                        Delete
+                      </th>
+                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100" />
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {data?.branches?.length > 0 &&
+                      data.branches.map((data, key) => (
+                        <tr>
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {key + 1}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <div className="flex">
+                              {/* <div className="flex-shrink-0 w-10 h-10">
+                            <img
+                              className="w-full h-full rounded-full"
+                              src="https://images.unsplash.com/photo-1522609925277-66fea332c575?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&h=160&w=160&q=80"
+                              alt
+                            />
+                          </div> */}
+                              <div className="ml-3">
+                                <p className="text-gray-900 whitespace-no-wrap">
+                                  {data?.branchName}
+                                </p>
+                                <p className="text-gray-600 whitespace-no-wrap">
+                                  {data?.place}
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {data?.district}
+                            </p>
+                          </td>
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <p className="text-gray-900 whitespace-no-wrap">
+                              {data?.phone}
+                            </p>
+                            <p className="text-gray-600 whitespace-no-wrap">
+                              {data.admin?.username}
+                            </p>
+                          </td>
+
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <Link
+                              to={`/branch/${data.id}`}
+                              className={`relative inline-block px-3 py-1 font-semibold text-green-800 leading-tight`}
+                            >
+                              <span
+                                aria-hidden
+                                className={`absolute inset-0 bg-green-400 opacity-50 rounded-full`}
+                              />
+                              <span className="relative">View</span>
+                            </Link>
+                          </td>
+
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <span
+                              className={`relative inline-block px-3 py-1 font-semibold  leading-tight`}
+                            >
+                              <Link to={`/edit-branch/${data.id}`}>
+                                <span
+                                  aria-hidden
+                                  className={`absolute inset-0  opacity-50 rounded-full`}
+                                />
+                                <FontAwesomeIcon
+                                  icon={faEdit}
+                                  className="text-blue-500"
+                                />
+                              </Link>
+                            </span>
+                          </td>
+
+                          <td className="px-5 py-5 bg-white text-sm">
+                            <span
+                              className={`relative inline-block px-3 py-1 font-semibold leading-tight`}
+                            >
+                              <span
+                                aria-hidden
+                                className={`absolute inset-0  opacity-50 rounded-full`}
+                              />
+                              <span className="relative">
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  onClick={() => deleteBranch(data.id)}
+                                  className="text-red-500 cursor-pointer"
+                                />
+                              </span>
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

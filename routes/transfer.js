@@ -1,4 +1,4 @@
-const { protect } = require("../controllers/authController");
+const { protect, restrictTo } = require("../controllers/authController");
 const Transfer = require("../models/transferModel");
 
 const router = require("express").Router();
@@ -19,9 +19,12 @@ router.post("/:id", protect, async (req, res, next) => {
     next(error);
   }
 });
-router.get("/", async (req, res, next) => {
+router.get("/", protect, restrictTo("superAdmin"), async (req, res, next) => {
   try {
-    let data = await Transfer.find();
+    let data = await Transfer.find()
+      .populate("studentId", "studentName admissionNo")
+      .populate("toBranch", "branchName place district")
+      .populate("fromBranch", "branchName place district");
     res.status(200).json(data);
   } catch (error) {
     next(error);

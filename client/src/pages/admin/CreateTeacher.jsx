@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserAuthContext } from "../../context/user";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function CreateTeacher() {
   const navigate = useNavigate();
@@ -185,7 +187,7 @@ function CreateTeacher() {
                   onChange={(e) => onChange(e)}
                   id=""
                 >
-                  <option>Select Gender </option>
+                  <option hidden>Select Gender </option>
                   <option value={"male"}>Male </option>
                   <option value={"female"}>Female </option>
                 </select>
@@ -201,7 +203,7 @@ function CreateTeacher() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
                 >
-                  <option>select subjects </option>
+                  <option hidden>Select subjects </option>
                   {subjects.map((subject, index) => (
                     <option key={index} value={subject._id}>
                       {subject.subjectName}
@@ -210,25 +212,22 @@ function CreateTeacher() {
                 </select>
               </div>
             </div>
+
             <div className="lg:col-span-1 mt-4">
               <div className="px-4 sm:px-0">
                 <label className="block  text-sm font-bold mb-2">
                   Selected Subjects
                 </label>
                 {selectedSubjects.map((item, key) => (
-                  <div className="inline-block mx-2 cursor-pointer bg-gray-600 px-2 my-2 rounded-xl text-white py-1">
-                    <h1 onClick={() => removeSubject(item._id)} key={key}>
-                      {item.subjectName}
-                    </h1>
+                  <div className="flex justify-between mx-2 text-center cursor-pointer bg-gray-600 px-2 my-2  text-white py-1">
+                    <h1 key={key}>{item.subjectName}</h1>
+                    <FontAwesomeIcon
+                      onClick={() => removeSubject(item._id)}
+                      icon={faTrash}
+                      color="white"
+                    />
                   </div>
                 ))}
-                <br />
-                {formData.subjects.length > 0 && (
-                  <span className="text-sm text-red-400 italic">
-                    * If you want to remove a subject, click on the subject to
-                    remove{" "}
-                  </span>
-                )}
               </div>
             </div>
           </form>

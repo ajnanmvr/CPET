@@ -157,7 +157,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
               onChange={(e) => onChange(e)}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-4 "
             >
-              <option>SELECT YOUR DISTRICT </option>
+              <option hidden>Select YOUR DISTRICT </option>
               {DISTRICT.map((district, index) => (
                 <option key={index} value={district}>
                   {district}

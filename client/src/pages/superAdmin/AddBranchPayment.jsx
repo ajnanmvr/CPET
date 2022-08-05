@@ -78,7 +78,7 @@ function AddBranchPayment({ setOpenForm, id, getPayment, amount }) {
                   }}
                   name="branch"
                 >
-                  <option>select branch</option>
+                  <option hidden>Select branch</option>
                   {data?.branches.map((branchItem) => (
                     <option value={branchItem.id} key={branchItem._id}>
                       {branchItem?.branchName}
