@@ -347,17 +347,17 @@ function Profile() {
           </div>
         </section>
         {student.verified && (
-          <>
-            <h3 className="text-4xl font-bold text-red-600 uppercase my-4">
+          <div className="max-w-screen-xl mx-auto">
+            <h3 className="text-4xl font-bold text-gray-800 uppercase my-4">
               TRANSFER STUDENT
             </h3>
             <Link to={`/transfer/${student._id}`}>
-              <button className="bg-red-400 px-4 py-3 font-bold text-white hover:bg-red-600 transition">
+              <button className="bg-gray-800 px-4 py-3 font-bold text-white hover:bg-gray-600 transition">
                 Go To Transfer Page
                 <FontAwesomeIcon className="mx-3" icon={faArrowRight} />
               </button>
             </Link>
-          </>
+          </div>
         )}
       </div>
     </>

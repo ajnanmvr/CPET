@@ -9,6 +9,7 @@ import { UserAuthContext } from "../../context/user";
 function AllTeachers() {
   const [teachers, setTeachers] = useState([]);
   const { authData } = useContext(UserAuthContext);
+  
 
   const getAllTeachers = async () => {
     try {

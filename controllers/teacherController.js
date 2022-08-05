@@ -10,7 +10,7 @@ exports.getMyTeachers = async (req, res) => {
   try {
     let data = await Teacher.find({
       branch: req.user.branch,
-      deleted:false
+      deleted: false,
     }).populate("branch");
     res.status(200).json(data);
   } catch (error) {

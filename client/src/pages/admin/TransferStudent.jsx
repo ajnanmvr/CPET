@@ -1,16 +1,21 @@
 import { useQuery } from "@apollo/client";
-import moment from "moment";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Axios from "../../Axios";
 import { GET_BRANCHES } from "../../queries/branch";
+import { toast } from "react-toastify";
 
 function TransferStudent() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [student, setStudent] = useState({});
   const { data } = useQuery(GET_BRANCHES);
+  const [reason, setReason] = useState("");
+  const [toBranch, setToBranch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
 
   const getStudent = async () => {
     try {
@@ -18,6 +23,32 @@ function TransferStudent() {
       setStudent(data);
     } catch (error) {
       console.log(error.response);
+    }
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      let res = await Axios.post("/transfer/" + id, {
+        toBranch,
+        reason,
+      });
+      if (res.status === 200) {
+        toast.success("Student transfer request sent to Super Admin", {
+          autoClose: 4000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+        setLoading(false);
+        setReason("");
+        navigate("/admin");
+      }
+    } catch (error) {
+      console.log(error.response);
+      setLoading(false);
+      toast.error("Something went wrong", {
+        autoClose: 4000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
   useEffect(() => {
@@ -141,9 +172,15 @@ function TransferStudent() {
         <div className="lg:col-span-1">
           <div className="px-4 sm:px-0">
             <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              To Branch
+              To Branch{" "}
+              <span className="text-sm font-normal text-red-600">
+                (required)
+              </span>{" "}
             </label>
-            <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-4 ">
+            <select
+              onChange={(e) => setToBranch(e.target.value)}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-4 "
+            >
               <option>select branch</option>
               {data?.branches.map((branch) => (
                 <option value={branch.id} key={branch.id}>
@@ -156,21 +193,40 @@ function TransferStudent() {
         <div className="lg:col-span-1">
           <div className="px-4 sm:px-0">
             <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Reason
+              Reason{" "}
+              <span className="text-sm font-normal text-red-600">
+                (required) minimum 100 words
+              </span>
             </label>
-            <input
+            <textarea
               className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
               type="text"
               placeholder="Reason for transfer"
+              onChange={(e) => {
+                setReason(e.target.value);
+                setCount(e.target.value.length);
+              }}
             />
           </div>
         </div>
+        <span className="text-green-500 font-bold">{count} words</span>
         <div className="lg:col-span-1 float-right mt-3">
-          <div className="px-4 sm:px-0">
-            <button className="bg-green-400  capitalize px-4 py-2 font-bold hover:text-green-400 hover:bg-white border-2 border-green-400 text-white">
-              submit
-            </button>
-          </div>
+          {count >= 100 && (
+            <div className="px-4 sm:px-0">
+              {!loading ? (
+                <button
+                  onClick={(e) => handleSubmit(e)}
+                  className="bg-green-400  capitalize px-4 py-2 font-bold hover:text-green-400 hover:bg-white border-2 border-green-400 text-white"
+                >
+                  submit
+                </button>
+              ) : (
+                <button className="bg-blue-400  capitalize px-4 py-2 font-bold hover:text-green-400 hover:bg-white border-2 border-green-400 text-white">
+                  Processing...
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

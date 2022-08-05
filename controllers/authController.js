@@ -47,7 +47,7 @@ exports.signUp = async (req, res) => {
   }
 };
 
-exports.signIn = async (req, res) => {
+exports.signIn = async (req, res, next) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
@@ -87,9 +87,7 @@ exports.signIn = async (req, res) => {
       }
     }
   } catch (err) {
-    res.status(500).json({
-      message: err,
-    });
+    next(err);
   }
 };
 exports.logout = (req, res) => {

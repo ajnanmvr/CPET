@@ -3,16 +3,16 @@ const teacherSchema = new mongoose.Schema({
   teacherName: {
     type: String,
     uppercase: true,
-    required: true,
+    required: [true, "name is required"],
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "email is required"],
     lowercase: true,
   },
   phone: {
     type: String,
-    required: true,
+    required: [true, "phone is required"],
   },
   deleted: {
     type: Boolean,
@@ -20,16 +20,19 @@ const teacherSchema = new mongoose.Schema({
   },
   branch: {
     type: mongoose.Types.ObjectId,
-    required: true,
+    required: [true, "branch is required"],
     ref: "Branch",
   },
-  subjects: {
-    type: Array,
-    required: true,
-  },
+  subjects: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Subject",
+      required: [true, "subjects are required"],
+    },
+  ],
   gender: {
     type: String,
-    required: true,
+    required: [true, "gender is required"],
     emum: ["male", "female"],
   },
 });

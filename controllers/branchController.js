@@ -3,11 +3,9 @@ const globalFuctions = require("../utils/globalFuctions");
 const admin = require("firebase-admin");
 const uuid = require("uuid-v4");
 const dotenv = require("dotenv");
-const fs = require("fs");
 const Auth = require("../models/authModel");
 const sharp = require("sharp");
-
-
+const catchAsync = require("../utils/catchAsync");
 
 dotenv.config();
 admin.initializeApp({
@@ -50,22 +48,19 @@ exports.resizeImage = (file, id, next) => {
     .jpeg({ quality: 90 })
     .toFile(`public/img/${id}.jpeg`);
 };
-exports.createBranch = async (req, res, next) => {
-  try {
-    if (req.file) {
-      let data = await Branch.create(req.body);
-      let user = await Auth.create({ ...req.body, branch: data._id });
-      await this.resizeImage(req.file, data._id, next);
-      data.admin = user._id;
-      data.save();
-      res.status(200).json(data);
-    } else {
-      res.status(400).json({ message: "Please upload an image" });
-    }
-  } catch (error) {
-    next(error);
+
+exports.createBranch = catchAsync(async (req, res, next) => {
+  if (req.file) {
+    let data = await Branch.create(req.body);
+    let user = await Auth.create({ ...req.body, branch: data._id });
+    await this.resizeImage(req.file, data._id, next);
+    data.admin = user._id;
+    data.save();
+    res.status(200).json(data);
+  } else {
+    res.status(400).json({ message: "Please upload an image" });
   }
-};
+});
 exports.editBranch = async (req, res) => {
   try {
     let uploadData = null;

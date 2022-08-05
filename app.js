@@ -20,6 +20,7 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const compression = require("compression");
+const AppError = require("./utils/AppError");
 
 dotenv.config();
 app.use(
@@ -63,6 +64,9 @@ app.use("/api/parent-subject", parentSubjectRoutes);
 app.use("/api/transfer", transferRoutes);
 
 app.use(require("./utils/gloablErrors"));
+// app.all("*", (req, res, next) => {
+//   next(new AppError(`Cant find ${req.originalUrl}  on the server`, 404));
+// });
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));

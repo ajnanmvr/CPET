@@ -12,7 +12,21 @@ const handleValidationError = (err, res) => {
   res.status(400).json(errors);
 };
 
+const handleJwtExpireError = (err, res) => {
+  res
+    .status(401)
+    .json({ message: "Your token expired, please try again later" });
+};
+
+const handleJwtInvalidError = (err, res) => {
+  res
+    .status(401)
+    .json({ message: "Your token expired, please try again later" });
+};
+
 module.exports = (err, req, res, next) => {
   if (err.code === 11000) handleDuplicates(err, res);
   if (err.name === "ValidationError") handleValidationError(err, res);
+  if (err.name === "TokenExpiredError") handleJwtExpireError(err, res);
+  if (err.name === "JsonWebTokenError") handleJwtInvalidError(err, res);
 };

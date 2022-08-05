@@ -1,49 +1,46 @@
-import React from "react";
-import { useState } from "react";
-import Axios from "../../Axios";
-import { toast } from "react-toastify";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Axios from "../../Axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function EditTeacher() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const initialState = {
-    email: "",
-    teacherName: "",
-    branch: "",
-    phone: "",
-    subjects: [],
-  };
-  const [formData, setFormData] = useState(initialState);
+
+  const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [branches, setBranches] = useState([]);
-  const Subjects = [
-    "ENGLISH",
-    "MALAYALAM",
-    "MATHEMATICS",
-    "ARABIC",
-    "SOCIOLOGY",
-    "URDU",
-    "POLITICS",
-    "SCIENCE",
-    "ECONOMICS",
-  ];
+  const [subjects, setSubjects] = useState([]);
+
+
   const handleSubjects = (item) => {
-    let array = formData.subjects;
-    if (!formData.subjects.includes(item)) {
-      array.push(item);
-      setFormData({ ...formData, subjects: array });
+    if (!formData.subjects?.includes(item)) {
+      setFormData((prevState) => ({
+        subjects: [...prevState.subjects, item],
+      }));
     }
   };
+
   function removeSubject(value) {
-    let array = formData.subjects;
-    let index = array.indexOf(value);
-    if (index !== -1) {
-      array.splice(index, 1);
-      setFormData({ ...formData, subjects: array });
+    const array = formData.subjects;
+    var i = formData.subjects?.indexOf(value);
+    if (i !== -1) {
+      array.splice(i, 1);
+      setFormData((prevState) => ({
+        subjects: array,
+      }));
     }
   }
+
+  const getSubjects = async () => {
+    try {
+      let { data } = await Axios.get("/subject");
+      setSubjects(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   const getTeacher = async () => {
     try {
@@ -53,14 +50,7 @@ function EditTeacher() {
       console.log(error);
     }
   };
-  const getBranches = async () => {
-    try {
-      let { data } = await Axios.get("/branch");
-      setBranches(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
@@ -88,9 +78,15 @@ function EditTeacher() {
       console.log(error.response);
     }
   };
+  let SelectedSubjects = subjects.filter((itemA) => {
+    return formData.subjects?.find((itemB) => {
+      return itemA._id === itemB;
+    });
+  });
+
   useEffect(() => {
+    getSubjects();
     getTeacher();
-    getBranches();
   }, []);
   return (
     <div className="w-3/4 ml-6">
@@ -165,59 +161,40 @@ function EditTeacher() {
 
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  BRANCH NAME
-                </label>
-                <select
-                  name="branch"
-                  onChange={(e) => onChange(e)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                >
-                  <option>select branch</option>
-                  {branches.map((branch, index) => (
-                    <option key={index} value={branch._id}>
-                      {branch.branchName}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
                 <label className="block  text-sm font-bold mb-2">
                   Subjects
-                </label>
+                </label>{" "}
+                <span className="text-red-600"></span>
                 <select
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
                 >
-                  <option>select subjects </option>
-                  {Subjects.map((subject, index) => (
-                    <option key={index} value={subject}>
-                      {subject}
+                  <option hidden>select subjects </option>
+                  {subjects.map((subject, index) => (
+                    <option key={index} value={subject._id}>
+                      {subject.subjectName}
                     </option>
                   ))}
                 </select>
               </div>
             </div>
-            <div className="lg:col-span-1">
+
+            <div className="lg:col-span-1 mt-4">
               <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  SUBJECTS
+                <label className="block  text-sm font-bold mb-2">
+                  Selected Subjects
                 </label>
-                {formData.subjects?.map((item, key) => (
-                  <div className="inline-block mx-2 cursor-pointer bg-gray-600 px-2 my-2 rounded-xl text-white py-1">
-                    <h1 onClick={() => removeSubject(item)} key={key}>
-                      {item}
-                    </h1>
+                {SelectedSubjects.map((item, key) => (
+                  <div className="flex justify-between mx-2 text-center cursor-pointer bg-gray-600 px-2 my-2  text-white py-1">
+                    <h1 key={key}>{item.subjectName}</h1>
+                    <FontAwesomeIcon
+                      onClick={() => removeSubject(item._id)}
+                      icon={faTrash}
+                      color="white"
+                    />
                   </div>
                 ))}
+                <br />
               </div>
             </div>
           </form>

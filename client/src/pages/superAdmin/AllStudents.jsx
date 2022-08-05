@@ -114,6 +114,12 @@ function AllStudents() {
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
+                      DISTRICT
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
                       VIEW
                     </th>
 
@@ -141,6 +147,9 @@ function AllStudents() {
                         <Link to={`/profile/${student._id}`}>
                           {student.studentName}
                         </Link>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student.district}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/profile/" + student._id}>

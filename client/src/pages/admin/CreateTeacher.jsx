@@ -5,22 +5,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserAuthContext } from "../../context/user";
+import { useEffect } from "react";
 
 function CreateTeacher() {
   const navigate = useNavigate();
   const { authData } = useContext(UserAuthContext);
-
-  const Subjects = [
-    "ENGLISH",
-    "MALAYALAM",
-    "MATHEMATICS",
-    "ARABIC",
-    "SOCIOLOGY",
-    "URDU",
-    "POLITICS",
-    "SCIENCE",
-    "ECONOMICS",
-  ];
+  const [errors, setErrors] = useState({});
+  const [subjects, setSubjects] = useState([]);
+  const [selectedSubjects, setSelectedSubjects] = useState([]);
 
   const initialState = {
     email: "",
@@ -35,17 +27,28 @@ function CreateTeacher() {
 
   const handleSubjects = (item) => {
     let array = formData.subjects;
+
     if (!formData.subjects.includes(item)) {
       array.push(item);
       setFormData({ ...formData, subjects: array });
+      let result = subjects.filter((o) =>
+        formData.subjects.some((id) => o._id === id)
+      );
+      setSelectedSubjects(result);
     }
   };
   function removeSubject(value) {
-    let array = formData.subjects;
-    let index = array.indexOf(value);
-    if (index !== -1) {
-      array.splice(index, 1);
-      setFormData({ ...formData, subjects: array });
+    var i = formData.subjects.indexOf(value);
+    while (i < formData.subjects.length) {
+      if (formData.subjects[i] === value) {
+        formData.subjects.splice(i, 1);
+        let result = subjects.filter((o) =>
+          formData.subjects.some((id) => o._id === id)
+        );
+        setSelectedSubjects(result);
+      } else {
+        ++i;
+      }
     }
   }
 
@@ -54,6 +57,14 @@ function CreateTeacher() {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
+  const getSubjects = async () => {
+    try {
+      let { data } = await Axios.get("/subject");
+      setSubjects(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -73,15 +84,17 @@ function CreateTeacher() {
       }
       navigate("/all-teachers");
     } catch (error) {
+      setErrors(error.response.data);
       setLoading(false);
       toast.error("Something went wrong", {
         autoClose: 2000,
         position: toast.POSITION.TOP_CENTER,
       });
-      console.log(error.response);
     }
   };
-
+  useEffect(() => {
+    getSubjects();
+  }, []);
   return (
     <div className="w-2/4 mx-auto">
       <section className="bg-white p-6">
@@ -109,6 +122,7 @@ function CreateTeacher() {
                   placeholder="USERNAME"
                   name="teacherName"
                 />
+                <span className="text-red-600">{errors?.teacherName}</span>
               </div>
             </div>
             <div className="lg:col-span-1">
@@ -129,6 +143,7 @@ function CreateTeacher() {
                   placeholder="EMAIL"
                   name="email"
                 />
+                <span className="text-red-600">{errors?.email}</span>
               </div>
             </div>
 
@@ -149,7 +164,8 @@ function CreateTeacher() {
                   onChange={(e) => onChange(e)}
                   placeholder="Phone No:"
                   name="phone"
-                />
+                />{" "}
+                <span className="text-red-600">{errors?.phone}</span>
               </div>
             </div>
 
@@ -161,6 +177,8 @@ function CreateTeacher() {
                 >
                   Gender
                 </label>
+                <span className="text-red-600">{errors?.gender}</span>
+
                 <select
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   name="gender"
@@ -177,15 +195,16 @@ function CreateTeacher() {
               <div className="px-4 sm:px-0">
                 <label className="block  text-sm font-bold mb-2">
                   Subjects
-                </label>
+                </label>{" "}
+                <span className="text-red-600"></span>
                 <select
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
                 >
                   <option>select subjects </option>
-                  {Subjects.map((subject, index) => (
-                    <option key={index} value={subject}>
-                      {subject}
+                  {subjects.map((subject, index) => (
+                    <option key={index} value={subject._id}>
+                      {subject.subjectName}
                     </option>
                   ))}
                 </select>
@@ -196,10 +215,10 @@ function CreateTeacher() {
                 <label className="block  text-sm font-bold mb-2">
                   Selected Subjects
                 </label>
-                {formData.subjects.map((item, key) => (
+                {selectedSubjects.map((item, key) => (
                   <div className="inline-block mx-2 cursor-pointer bg-gray-600 px-2 my-2 rounded-xl text-white py-1">
-                    <h1 onClick={() => removeSubject(item)} key={key}>
-                      {item}
+                    <h1 onClick={() => removeSubject(item._id)} key={key}>
+                      {item.subjectName}
                     </h1>
                   </div>
                 ))}
