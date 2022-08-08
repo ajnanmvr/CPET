@@ -1,4 +1,4 @@
-import { faAdd, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
@@ -30,6 +30,16 @@ function PaymentDetails() {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+  const removeBranch = async (branch) => {
+    try {
+      if (window.confirm("Do you want to remove this branch")) {
+        await Axios.post(`/payment/paid-details/${id}`, { branch });
+        getPayment();
+      }
+    } catch (error) {
+      console.log(error.response);
     }
   };
   useEffect(() => {
@@ -73,9 +83,9 @@ function PaymentDetails() {
         </div>
       </div>
 
-      <div className="w-3/4 mx-auto">
+      <div className="w-full mx-4">
         <div className="flex flex-col">
-          <div className="overflow-x-auto shadow-md sm:rounded-lg">
+          <div className="overflow-x-auto shadow-md">
             <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden ">
                 <table className="min-w-full divide-y divide-gray-200 table-fixed">
@@ -93,6 +103,12 @@ function PaymentDetails() {
                       >
                         Branch Name
                       </th>
+                      <th
+                        scope="col"
+                        className="py-3 px-6 text-xs  tracking-wider text-left text-white font-bold uppercase"
+                      >
+                        Amount To Pay
+                      </th>{" "}
                       <th
                         scope="col"
                         className="py-3 px-6 text-xs  tracking-wider text-left text-white font-bold uppercase"
@@ -117,6 +133,18 @@ function PaymentDetails() {
                       >
                         Paid At
                       </th>
+                      <th
+                        scope="col"
+                        className="py-3 px-6 text-xs  tracking-wider text-left text-white font-bold uppercase"
+                      >
+                        Edit
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3 px-6 text-xs  tracking-wider text-left text-white font-bold uppercase"
+                      >
+                        Delete
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-bg-gray-800 divide-y divide-gray-200 dark:divide-[#66BFBF]">
@@ -129,17 +157,34 @@ function PaymentDetails() {
                           {paid.branch?.branchName}
                         </td>
                         <td className="py-4 px-6 font-semibold text-center  text-green-500 whitespace-nowrap">
-                          {paid.amount}* {paid.studentCount} (₹
-                          {paid.amount * paid.studentCount} )
+                          {payment.amount}* {paid.studentCount} (₹
+                          {payment.amount * paid.studentCount} )
+                        </td>
+                        <td className="py-4 px-6 font-semibold text-center  text-green-500 whitespace-nowrap">
+                          {paid?.amount}
                         </td>
                         <td className="py-4 px-6 font-semibold text-center  text-red-500 whitespace-nowrap">
-                          {payment.amount - paid.amount * paid.studentCount}
+                          {payment.amount * paid.studentCount - paid.amount}
                         </td>
                         <td className="py-4 px-6 text-sm  text-gray-900 whitespace-nowrap">
                           {paid.remarks}
                         </td>
                         <td className="py-4 px-6 text-sm  text-gray-900 whitespace-nowrap">
-                          {moment(paid.time).format("DD MM YYYY | h:mm:ss a")}
+                          <p className="font-bold">
+                            {moment(paid.time).format("DD/ MM/ YYYY")}
+                          </p>
+                          <p>
+                            {moment(paid.time).format("hh:mm a")}
+                          </p>
+                        </td>
+                        <td className="py-4 px-6 text-sm cursor-pointer text-blue-500 whitespace-nowrap">
+                          <FontAwesomeIcon icon={faEdit} />
+                        </td>
+                        <td className="py-4 px-6 text-sm cursor-pointer text-red-500 whitespace-nowrap">
+                          <FontAwesomeIcon
+                            onClick={() => removeBranch(paid?.branch?._id)}
+                            icon={faTrash}
+                          />
                         </td>
                       </tr>
                     ))}

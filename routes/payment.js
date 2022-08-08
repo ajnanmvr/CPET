@@ -9,6 +9,8 @@ const {
   getPaidDetails,
   updatePaidBranch,
   deletePayment,
+  updateBranchPayment,
+  deleteBranchPayment,
 } = require("../controllers/paymentController");
 
 const router = require("express").Router();
@@ -31,5 +33,17 @@ router.get(
   protect,
   restrictTo("superAdmin"),
   getPaidDetails
+);
+router.patch(
+  "/paid-details/:id",
+  protect,
+  restrictTo("superAdmin"),
+  updateBranchPayment
+);
+router.post(
+  "/paid-details/:id",
+  protect,
+  restrictTo("superAdmin"),
+  deleteBranchPayment
 );
 module.exports = router;

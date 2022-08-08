@@ -5,6 +5,8 @@ const globalFuctions = require("../utils/globalFuctions");
 const Payment = require("../models/paymentModel");
 const Order = require("../models/orderModel");
 const crypto = require("crypto");
+const catchAsync = require("../utils/catchAsync");
+const { default: mongoose } = require("mongoose");
 
 const instance = new Razorpay({
   key_id: process.env.RAZOR_PAY_KEY_ID,
@@ -96,3 +98,33 @@ exports.updatePaidBranch = async (req, res) => {
     res.status(400).json(error);
   }
 };
+exports.updateBranchPayment = catchAsync(async (req, res, next) => {
+  let data = await Payment.findByIdAndUpdate(
+    {
+      _id: mongoose.Types.ObjectId(req.params.id),
+      "paidBranches.branch": mongoose.Types.ObjectId(req.body.branch),
+    },
+    {
+      $set: {
+        "paidBranches.$.amount": req.body.amount,
+        "paidBranches.$.remarks": req.body.remarks,
+      },
+    }
+  );
+  res.status(200).json(data);
+});
+exports.deleteBranchPayment = catchAsync(async (req, res, next) => {
+  console.log(req.body);
+  let data = await Payment.findByIdAndUpdate(
+    {
+      _id: mongoose.Types.ObjectId(req.params.id),
+      "paidBranches.branch": mongoose.Types.ObjectId(req.body.branch),
+    },
+    {
+      $pull: {
+        paidBranches: { branch: mongoose.Types.ObjectId(req.body.branch) },
+      },
+    }
+  );
+  res.status(200).json(data);
+});

@@ -9,14 +9,10 @@ import { UserAuthContext } from "../../context/user";
 function AllTeachers() {
   const [teachers, setTeachers] = useState([]);
   const { authData } = useContext(UserAuthContext);
-  
 
   const getAllTeachers = async () => {
     try {
-      let url;
-      url =
-        authData.role === "superAdmin" ? "/teacher" : "/teacher/my-teachers";
-      let { data } = await Axios.get(url);
+      let { data } = await Axios.get("/teacher/my-teachers");
       setTeachers(data);
     } catch (error) {
       console.log(error.response);

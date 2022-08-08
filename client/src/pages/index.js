@@ -20,8 +20,14 @@ import NotLoggedIn from "./NotLoggedIn";
 import AllUsers from "./superAdmin/AllUsers";
 import AllClasses from "./admin/AllClasses";
 import ViewBranch from "./superAdmin/ViewBranch";
+import BranchBasedTeachers from "./superAdmin/BranchBasedTeachers";
 
-export const Teacher = { EditTeacher, AllTeachers, CreateTeacher };
+export const Teacher = {
+  EditTeacher,
+  AllTeachers,
+  CreateTeacher,
+  BranchBasedTeachers,
+};
 export const Auth = {
   Login,
   ProtectedRoutes,

@@ -10,7 +10,10 @@ const { protect, restrictTo } = require("../controllers/authController");
 
 const router = require("express").Router();
 
-router.route("/").post(createTeacher).get(protect, getAllTeachers);
+router
+  .route("/")
+  .post(createTeacher)
+  .get(protect, restrictTo("superAdmin"), getAllTeachers);
 
 router
   .route("/:id")

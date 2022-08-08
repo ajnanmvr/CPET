@@ -76,7 +76,7 @@ function Profile() {
                 </h1>
               )}
             </div>
-          </div>{" "}
+          </div>
           <div className="max-w-screen-xl mx-auto">
             <h3 className="text-4xl font-bold text-blue-900 uppercase my-4">
               STUDENT PROFILE
@@ -194,7 +194,7 @@ function Profile() {
                       value={student.aadhar}
                     />
                   </div>
-                </div>{" "}
+                </div>
                 <div className="lg:col-span-1">
                   <div className="px-4 sm:px-0">
                     <label
@@ -242,7 +242,7 @@ function Profile() {
                       value={student.postOffice}
                     />
                   </div>
-                </div>{" "}
+                </div>
                 <div className="lg:col-span-1">
                   <div className="px-4 sm:px-0">
                     <label
@@ -258,7 +258,7 @@ function Profile() {
                       value={student.pinCode}
                     />
                   </div>
-                </div>{" "}
+                </div>
                 <div className="lg:col-span-1">
                   <div className="px-4 sm:px-0">
                     <label
@@ -274,7 +274,7 @@ function Profile() {
                       value={student.district}
                     />
                   </div>
-                </div>{" "}
+                </div>
                 <div className="lg:col-span-1">
                   <div className="px-4 sm:px-0">
                     <label
@@ -290,7 +290,7 @@ function Profile() {
                       value={student.state}
                     />
                   </div>
-                </div>{" "}
+                </div>
                 <div className="lg:col-span-1">
                   <div className="px-4 sm:px-0">
                     <label
@@ -306,7 +306,7 @@ function Profile() {
                       value={moment(student.dob).format("DD-MM-YYYY")}
                     />
                   </div>
-                </div>{" "}
+                </div>
                 <div className="lg:col-span-1">
                   <div className="px-4 sm:px-0">
                     <label
@@ -326,21 +326,27 @@ function Profile() {
               </div>
               {student.class === "mahdiyya-third-year" && (
                 <div className="grid grid-cols-3 my-6">
-                  <img
-                    className="object-cover h-48 w-96"
-                    src={student?.certificateOne}
-                    alt=""
-                  />
-                  <img
-                    className="object-cover h-48 w-96"
-                    src={student?.certificateTwo}
-                    alt=""
-                  />
-                  <img
-                    className="object-cover h-48 w-96"
-                    src={student?.certificateThree}
-                    alt=""
-                  />
+                  <a href={student?.certificateOne} target={"_blank"}>
+                    <img
+                      className="object-cover h-48 w-96"
+                      src={student?.certificateOne}
+                      alt=""
+                    />
+                  </a>
+                  <a href={student?.certificateTwo} target={"_blank"}>
+                    <img
+                      className="object-cover h-48 w-96"
+                      src={student?.certificateTwo}
+                      alt=""
+                    />
+                  </a>
+                  <a target={"_blank"} href={`${student?.certificateThree}`}>
+                    <img
+                      className="object-cover h-48 w-96"
+                      src={student?.certificateThree}
+                      alt=""
+                    />
+                  </a>
                 </div>
               )}
             </form>

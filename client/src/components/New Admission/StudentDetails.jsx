@@ -139,8 +139,6 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
                   placeholder={form.placeholder}
                   name={form.name}
                   value={form.value}
-                  // min={form.min}
-                  // max={form.max}
                 />
                 <div className="text-red-500 font-sm">{form.error}</div>
               </div>

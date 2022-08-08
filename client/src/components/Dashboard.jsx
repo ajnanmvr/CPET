@@ -7,6 +7,7 @@ import {
   faRightLeft,
   faSchool,
   faUser,
+  faTools,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
@@ -55,7 +56,7 @@ function Dashboard() {
     {
       text: "TEACHERS",
       icon: faChalkboardUser,
-      link: "/all-teachers",
+      link: "/all-branch-teachers",
     },
     {
       text: "STUDENTS",
@@ -76,6 +77,11 @@ function Dashboard() {
       text: "TRANSFER REQUESTS",
       icon: faRightLeft,
       link: "/transfer-request",
+    },
+    {
+      text: "SETTINGS",
+      icon: faTools,
+      link: "/settings",
     },
   ];
   const AdminItems = [

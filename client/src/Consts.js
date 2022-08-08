@@ -8,8 +8,10 @@ import AllPayments from "./pages/superAdmin/AllPayments";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
+import CreateSettings from "./pages/superAdmin/CreateSettings";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
+import Settings from "./pages/superAdmin/Settings";
 import TransferRequest from "./pages/superAdmin/TransferRequest";
 import TransferVerify from "./pages/superAdmin/TransferVerify";
 
@@ -62,8 +64,18 @@ export const RestrictedRoutes = [
     role: "superAdmin",
   },
   {
+    route: "/all-branch-teachers",
+    component: <Branch.AllBranchCard />,
+    role: "superAdmin",
+  },
+  {
     route: "/all-branch-students/:id",
     component: <Branch.BranchBasedDetails />,
+    role: "superAdmin",
+  },
+  {
+    route: "/all-branch-teachers/:id",
+    component: <Teacher.BranchBasedTeachers />,
     role: "superAdmin",
   },
   {
@@ -104,6 +116,16 @@ export const RestrictedRoutes = [
   {
     route: "/transfer-verify/:id",
     component: <TransferVerify />,
+    role: "superAdmin",
+  },
+  {
+    route: "/settings",
+    component: <Settings />,
+    role: "superAdmin",
+  },
+  {
+    route: "/create-settings",
+    component: <CreateSettings />,
     role: "superAdmin",
   },
 ];
