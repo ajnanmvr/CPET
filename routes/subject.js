@@ -39,6 +39,14 @@ router
     } catch (error) {
       res.status(400).json(error);
     }
-  });
+  })
+  .get(async (req, res) => {
+    try {
+    let data=  await Subject.findById(req.params.id);
+      res.status(200).json(data);
+    } catch (error) {
+      res.status(400).json(error);
+    }
+  })
 
 module.exports = router;

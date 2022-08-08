@@ -6,12 +6,12 @@ import AdmissionCreated from "./components/New Admission/AdmissionCreated";
 import { ProtectRoutes, RestrictedRoutes } from "./Consts";
 import { UserAuthContext } from "./context/user";
 import { Auth, Student } from "./pages";
-import Homepage from "./pages/Homepage";
+import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 
 export default function App() {
-  const { authData, checkUserLogin } = useContext(UserAuthContext);
+  const { checkUserLogin } = useContext(UserAuthContext);
 
   useEffect(() => {
     checkUserLogin();

@@ -10,6 +10,7 @@ import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import CreateSettings from "./pages/superAdmin/CreateSettings";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
+import EditSubject from "./pages/superAdmin/EditSubject";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
 import Settings from "./pages/superAdmin/Settings";
 import TransferRequest from "./pages/superAdmin/TransferRequest";
@@ -81,6 +82,11 @@ export const RestrictedRoutes = [
   {
     route: "/all-subjects",
     component: <AllSubjects />,
+    role: "superAdmin",
+  },
+  {
+    route: "/edit-subject/:id",
+    component: <EditSubject />,
     role: "superAdmin",
   },
   {
