@@ -8,7 +8,7 @@ function ViewBranch() {
   const { data, error, loading } = useQuery(GET_BRANCH, {
     variables: { id },
   });
-  console.log(data);
+
   if (error)
     return (
       <h1 className="text-red-600 font-bold text-3xl text-center">
@@ -30,7 +30,7 @@ function ViewBranch() {
             <img
               alt="ecommerce"
               className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-              src={`/img/${data?.branch?.id}.jpeg`}
+              src={`/img/${id}.jpeg`}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h1 className="text-gray-900 text-3xl font-bold title-font  mb-1">

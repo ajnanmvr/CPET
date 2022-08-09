@@ -61,19 +61,10 @@ exports.createBranch = catchAsync(async (req, res, next) => {
     res.status(400).json({ message: "Please upload an image" });
   }
 });
-exports.editBranch = async (req, res) => {
+exports.editBranch = async (req, res,next) => {
   try {
-    let uploadData = null;
-    if (req.file) {
-      let data = await uploadFile(
-        `${__dirname + "/uploads/" + req.file.filename}`
-      );
-      uploadData = data[1].mediaLink;
-    } else {
-      uploadData = req.body.image;
-    }
     let data = await Branch.findByIdAndUpdate(req.params.id, req.body);
-
+    await this.resizeImage(req.file, data._id, next);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
