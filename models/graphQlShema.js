@@ -109,7 +109,7 @@ const RootQuery = new GraphQLObjectType({
         branchId: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
-        let students = Student.find({ branch: args.branchId });
+        let students = Student.find({ branch: args.branchId, verified: true });
         return students;
       },
     },

@@ -1,6 +1,6 @@
 function Counters() {
   return (
-    <section id="about" className="flex justify-around text-center items-center flex-col p-4 my-4">
+    <section id="about" className="flex h-auto my-4 justify-around text-center items-center flex-col p-4 ">
       <h2 className="text-gray-900 font-bold text-5xl">About Us</h2>
       <p className="text-gray-600 text-xl w-2/4">
         ദാറുൽ ഹുദാ ഇസ്ലാമിക യൂണിവേഴ്സിറ്റി പൊതു വിദ്യാഭ്യാസ വിഭാഗം സെന്റർ ഫോർ
@@ -19,13 +19,7 @@ function Counters() {
         ഫോര്‍ പബ്ലിക് എഡ്യൂക്കേഷന്‍ ആന്‍ഡ് ട്രൈനിങ്ങിന് കീഴില്‍ ഹയര്‍സെക്കണ്ടറി,
         ഡിഗ്രി തലത്തില്‍ പഠനം നടത്തുന്ന വിദ്യാര്‍ഥിനികള്‍ക്ക് ഭൗതിക
         പഠനത്തോടൊപ്പം മത പഠനം ഉറപ്പ് വരുത്താന്‍ 2016ല്‍ ആരംഭിച്ച വിദ്യാഭ്യാസ
-        സംരംഭമാണ് Certificate in Moral Studies (CMS). രണ്ടുവര്‍ഷത്തെ CMS കോഴ്‌സ്
-        പൂര്‍ത്തീകരിക്കുന്നവര്‍ക്ക് നിശ്ചിത സ്ഥാപനങ്ങളില്‍ മൂന്ന് വര്‍ഷത്തെ
-        മഹ്ദിയ്യ ബിരുദ കോഴ്‌സും നല്‍കപ്പെടുന്നു. വിദ്യാര്‍ഥിനികള്‍ക്ക് ആവിശ്യമായ
-        വിവിധ ട്രെയിനിങ് ക്ലാസുകള്‍, കലാമത്സരങ്ങള്‍, ക്യാമ്പുകള്‍ എന്നിവ
-        നല്‍കുന്നതോടൊപ്പം ഇസ്‌ലാമികാന്തരീക്ഷമുള്ള കലാലയ ജീവിതവും ഈ കോഴ്‌സിലൂടെ
-        ലഭ്യമാക്കുന്നു. പ്രബോധനം ലക്ഷ്യമാക്കി ഉത്തരവാദിത്വത്തോടെ കോഴ്‌സ്
-        നടത്താന്‍ താല്പര്യമുള്ളവരില്‍ നിന്നുമാണ് അപേക്ഷ ക്ഷണിക്കുന്നത്.
+        സംരംഭമാണ് Certificate in Moral Studies (CMS).
       </p>
       <div className="flex flex-wrap justify-around w-3/4">
         <div className="h-24 w-24 rounded-full border-2 border-red-600">

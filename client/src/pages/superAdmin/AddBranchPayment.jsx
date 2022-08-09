@@ -25,7 +25,7 @@ function AddBranchPayment({ setOpenForm, id, getPayment, amount }) {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-console.log(formData);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

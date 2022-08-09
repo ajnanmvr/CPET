@@ -10,7 +10,64 @@ body {
   font-family: 'Lato', sans-serif;
   color: #000;
 }
-
+.status{
+    height: 100vh;
+    padding:100px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+.status *{
+    text-align: center;
+}
+.status-header{
+    color: #2D2E2E;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.2em;
+}
+.statusDivider{
+    height: 5px;
+    background: black;
+    width: 5%;
+}
+.status .description{
+    max-width: 700px;
+    color: #888888;
+    font-family: "Open Sans", Sans-serif;
+    font-size: 14px;
+}
+.statusContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: space-around;
+}
+.sec{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.secIcon{
+    height: 110px;
+    width: 110px;
+    border-radius: 50%;
+    border:3px solid rgb(226, 219, 219);
+}
+.secInfo{
+    color: #B80924;
+    font-family: "Open Sans", Sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+}
+.secName{
+    color: #2D2E2E;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.7em;
+}
 
 @keyframes spin-anim {
   0% {
