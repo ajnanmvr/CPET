@@ -66,6 +66,9 @@ function AddStudents() {
     if (!values.phone) {
       errors.phone = "Phone Number is required";
     }
+    if (!values.place) {
+      errors.place = "Place is required";
+    }
     if (!values.state) {
       errors.state = "State is required";
     }

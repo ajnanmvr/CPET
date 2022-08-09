@@ -4,11 +4,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
-import { UserAuthContext } from "../../context/user";
 
 function AllTeachers() {
   const [teachers, setTeachers] = useState([]);
-  const { authData } = useContext(UserAuthContext);
 
   const getAllTeachers = async () => {
     try {
@@ -54,38 +52,38 @@ function AllTeachers() {
       <div>
         <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="overflow-hidden">
-              <table className="min-w-full">
+            <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
+              <table className="w-full">
                 <thead className="border-b">
                   <tr>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       #
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       USERNAME
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       BRANCH
                     </th>
 
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       EDIT
                     </th>
                     <th
                       scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                      className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       DELETE
                     </th>

@@ -14,10 +14,7 @@ const storage = multer.diskStorage({
 });
 const uploads = multer({ storage: storage });
 
-router.post(
-  "/register",
-  studentController.registerStudent,
-);
+router.post("/register", studentController.registerStudent);
 router.post(
   "/excel",
   protect,
@@ -25,6 +22,7 @@ router.post(
   studentController.excelUpload
 );
 router.post("/", studentController.getAllStudents);
+router.post("/admission-requests", studentController.getAdmissionRequests);
 router.post(
   "/my-students",
   protect,
@@ -33,7 +31,11 @@ router.post(
 );
 router.get("/details/:branch", studentController.getBranchDetails);
 router.post("/all-details/", studentController.getAllDetails);
-router.post("/update-admission/",protect, studentController.updateAdmissionNumber);
+router.post(
+  "/update-admission/",
+  protect,
+  studentController.updateAdmissionNumber
+);
 
 router.get("/:id", studentController.getStudent);
 router.delete("/:id", studentController.deleteStudent);

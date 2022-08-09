@@ -73,12 +73,12 @@ function BranchTranfers() {
                     >
                       VIEW
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       DELETE
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -103,14 +103,14 @@ function BranchTranfers() {
                         </Link>
                       </td>
 
-                      <td className="px-5 py-5 bg-white text-sm">
+                      {/* <td className="px-5 py-5 bg-white text-sm">
                         <div
                           className="cursor-pointer text-red-600"
                           onClick={() => deleteTransfer(transfer._id)}
                         >
                           <FontAwesomeIcon icon={faTrash} />
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

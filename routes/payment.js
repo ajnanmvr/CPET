@@ -11,6 +11,7 @@ const {
   deletePayment,
   updateBranchPayment,
   deleteBranchPayment,
+  myPayments,
 } = require("../controllers/paymentController");
 
 const router = require("express").Router();
@@ -46,4 +47,5 @@ router.post(
   restrictTo("superAdmin"),
   deleteBranchPayment
 );
+router.post("/my-payments", protect, myPayments);
 module.exports = router;

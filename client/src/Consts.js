@@ -2,8 +2,10 @@ import { Branch, Student, Teacher, Users } from "./pages";
 import AdminPayDetails from "./pages/admin/AdminPayDetails";
 import Admissions from "./pages/admin/Admissions";
 import BranchPayments from "./pages/admin/BranchPayments";
+import MyPayments from "./pages/admin/MyPayments";
 import TransferStudent from "./pages/admin/TransferStudent";
 import AdminHome from "./pages/AdminHome";
+import AdmissionRequests from "./pages/superAdmin/AdmissionRequests";
 import AllPayments from "./pages/superAdmin/AllPayments";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
@@ -130,6 +132,11 @@ export const RestrictedRoutes = [
     component: <CreateSettings />,
     role: "superAdmin",
   },
+  {
+    route: "/admission-requests",
+    component: <AdmissionRequests />,
+    role: "superAdmin",
+  },
 ];
 
 export const ProtectRoutes = [
@@ -188,5 +195,9 @@ export const ProtectRoutes = [
   {
     route: "/transfer-verify/:id",
     component: <TransferVerify />,
+  },
+  {
+    route: "/my-payments",
+    component: <MyPayments />,
   },
 ];

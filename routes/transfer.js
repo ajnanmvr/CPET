@@ -54,15 +54,15 @@ router.patch("/:id", protect, async (req, res, next) => {
     next(error);
   }
 });
-router.delete("/:id", protect, async (req, res, next) => {
-  try {
-    let data = await Transfer.findByIdAndDelete(req.params.id, {
-      fromBranch: req.user.branch,
-    });
-    res.status(200).json(data);
-  } catch (error) {
-    next(error);
-  }
-});
+// router.delete("/:id", protect, async (req, res, next) => {
+//   try {
+//     let data = await Transfer.findByIdAndDelete(req.params.id, {
+//       fromBranch: req.user.branch,
+//     });
+//     res.status(200).json(data);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 module.exports = router;

@@ -80,10 +80,15 @@ function Dashboard() {
       link: "/transfer-request",
     },
     {
-      text: "SETTINGS",
-      icon: faTools,
-      link: "/settings",
+      text: "ADMISSION REQUESTS",
+      icon: faBook,
+      link: "/admission-requests",
     },
+    // {
+    //   text: "SETTINGS",
+    //   icon: faTools,
+    //   link: "/settings",
+    // },
   ];
   const AdminItems = [
     {
@@ -106,6 +111,11 @@ function Dashboard() {
       text: "Transfers",
       icon: faExchange,
       link: "/transfers",
+    },
+    {
+      text: "My Payments",
+      icon: faDonate,
+      link: "/my-payments",
     },
   ];
 

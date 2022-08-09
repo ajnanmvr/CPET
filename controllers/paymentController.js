@@ -128,3 +128,14 @@ exports.deleteBranchPayment = catchAsync(async (req, res, next) => {
   );
   res.status(200).json(data);
 });
+exports.myPayments = catchAsync(async (req, res, next) => {
+  let data = await Payment.find(
+    { "paidBranches.branch": req.user.branch },
+    {
+      amount: 1,
+      paymentName: 1,
+      paidBranches: { $elemMatch: { "paidBranches.branch": req.user.branch } },
+    }
+  );
+  res.status(200).json(data);
+});

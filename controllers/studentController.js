@@ -79,8 +79,16 @@ exports.getAllDetails = async (req, res) => {
         },
         {
           $group: {
-            _id: "$class",
+            _id: "$branch",
             numStudents: { $sum: 1 },
+          },
+        },
+        {
+          $lookup: {
+            from: "branches",
+            localField: "_id",
+            foreignField: "_id",
+            as: "branch",
           },
         },
       ]);
@@ -125,6 +133,16 @@ exports.excelUpload = async (req, res) => {
     });
   }
 };
+
+exports.getAdmissionRequests = async (req, res, next) => {
+  try {
+    let data = await Student.aggregate([{ $match: { verified: false } }]);
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
+
 function importExcelData2MongoDB(filePath) {
   // -> Read Excel File to Json Data
   const excelData = excelToJson({
