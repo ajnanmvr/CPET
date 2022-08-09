@@ -45,7 +45,7 @@ app.use(compression()); //works on texts
 
 app.use(bodyParser.json());
 app.use(express.json());
-app.use(express.static('public'))
+// app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(morgan("dev"));
@@ -70,6 +70,7 @@ app.use(require("./utils/gloablErrors"));
 //   next(new AppError(`Cant find ${req.originalUrl}  on the server`, 404));
 // });
 process.env.PWD = process.cwd();
+app.use(express.static(path.join(process.env.PWD, 'public')));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {
