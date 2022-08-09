@@ -79,16 +79,8 @@ exports.getAllDetails = async (req, res) => {
         },
         {
           $group: {
-            _id: "$branch",
+            _id: "$class",
             numStudents: { $sum: 1 },
-          },
-        },
-        {
-          $lookup: {
-            from: "branches",
-            localField: "_id",
-            foreignField: "_id",
-            as: "branch",
           },
         },
       ]);
@@ -122,7 +114,31 @@ exports.updateAdmissionNumber = async (req, res) => {
     res.status(200).json(error);
   }
 };
+exports.getAdmissionRequests = async (req, res, next) => {
+  try {
+    let data = await Student.aggregate([
+      { $match: { verified: false } },
+      {
+        $group: {
+          _id: "$branch",
+          numStudents: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "branches",
+          localField: "_id",
+          foreignField: "_id",
+          as: "branch",
+        },
+      },
+    ]);
 
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+};
 exports.excelUpload = async (req, res) => {
   try {
     importExcelData2MongoDB(__dirname + "/uploads/" + req.file.filename);
@@ -131,15 +147,6 @@ exports.excelUpload = async (req, res) => {
       message: "Error registering student",
       error: err,
     });
-  }
-};
-
-exports.getAdmissionRequests = async (req, res, next) => {
-  try {
-    let data = await Student.aggregate([{ $match: { verified: false } }]);
-    res.status(200).json(data);
-  } catch (error) {
-    next(error);
   }
 };
 

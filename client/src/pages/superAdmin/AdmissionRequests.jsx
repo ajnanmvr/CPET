@@ -5,9 +5,10 @@ import Axios from "../../Axios";
 
 function AdmissionRequests() {
   const [admissions, setAdmissions] = useState([]);
+
   const getAllRequests = async () => {
     try {
-      let { data } = await Axios.post(`/student/all-details`);
+      let { data } = await Axios.post(`/student/admission-requests`);
         setAdmissions(data);
     } catch (error) {
       console.log(error);
