@@ -69,7 +69,7 @@ app.use(require("./utils/gloablErrors"));
 // app.all("*", (req, res, next) => {
 //   next(new AppError(`Cant find ${req.originalUrl}  on the server`, 404));
 // });
-
+process.env.PWD = process.cwd();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {
