@@ -21,6 +21,7 @@ import AllUsers from "./superAdmin/AllUsers";
 import AllClasses from "./admin/AllClasses";
 import ViewBranch from "./superAdmin/ViewBranch";
 import BranchBasedTeachers from "./superAdmin/BranchBasedTeachers";
+import BranchTranfers from "./admin/BranchTranfers";
 
 export const Teacher = {
   EditTeacher,
@@ -40,7 +41,6 @@ export const Student = {
   AllStudents,
   EditStudent,
   AddStudents,
-  EditStudent,
   Profile,
   AllClasses,
 };
@@ -51,6 +51,7 @@ export const Branch = {
   AllBranchCard,
   BranchBasedDetails,
   ViewBranch,
+  BranchTranfers,
 };
 export const Users = {
   EditUser,

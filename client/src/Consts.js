@@ -119,11 +119,7 @@ export const RestrictedRoutes = [
     component: <TransferRequest />,
     role: "superAdmin",
   },
-  {
-    route: "/transfer-verify/:id",
-    component: <TransferVerify />,
-    role: "superAdmin",
-  },
+
   {
     route: "/settings",
     component: <Settings />,
@@ -184,5 +180,13 @@ export const ProtectRoutes = [
   {
     route: "/transfer/:id",
     component: <TransferStudent />,
+  },
+  {
+    route: "/transfers",
+    component: <Branch.BranchTranfers />,
+  },
+  {
+    route: "/transfer-verify/:id",
+    component: <TransferVerify />,
   },
 ];

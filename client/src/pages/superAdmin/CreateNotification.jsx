@@ -14,7 +14,6 @@ function CreateNotification() {
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
 
-  console.log(formData);
   const onChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));

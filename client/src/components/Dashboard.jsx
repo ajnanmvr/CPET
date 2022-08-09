@@ -8,6 +8,7 @@ import {
   faSchool,
   faUser,
   faTools,
+  faExchange,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
@@ -101,6 +102,11 @@ function Dashboard() {
       icon: faBook,
       link: "/admissions",
     },
+    {
+      text: "Transfers",
+      icon: faExchange,
+      link: "/transfers",
+    },
   ];
 
   useEffect(() => {
@@ -165,7 +171,7 @@ function Dashboard() {
                       {admissionCount}
                     </div>
                   )}
-                  <div className=" py-4 overflow-hidden bg-teal-800 rounded-xl  duration-300 shadow-2xl group">
+                  <div className=" py-4 overflow-hidden bg-sky-900 rounded-xl  duration-300 shadow-2xl group">
                     <div className="flex">
                       <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-2xl">
                         <FontAwesomeIcon

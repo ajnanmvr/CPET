@@ -47,7 +47,7 @@ function PaymentDetails() {
   }, [id]);
   return (
     <div>
-      <h1 className="text-center text-[#0F3D3E] font-bold text-3xl">
+      <h1 className="text-center text-sky-800 font-bold text-3xl">
         Payment Details Page
       </h1>
       {openForm && (
@@ -60,13 +60,13 @@ function PaymentDetails() {
       )}
 
       <div className="flex">
-        <div className="bg-[#66BFBF] w-2/4 text-center text-xl mx-auto uppercase text-white my-4 py-4">
+        <div className="bg-sky-900 w-2/4 text-center text-xl mx-auto uppercase text-white my-4 py-4">
           {payment?.paymentName}
         </div>
-        <div className="bg-[#66BFBF] w-2/4 text-center text-xl mx-auto text-white my-4 py-4">
+        <div className="bg-sky-900 w-2/4 text-center text-xl mx-auto text-white my-4 py-4">
           ₹ {payment?.amount}
         </div>
-        <div className="bg-[#66BFBF] w-2/4 text-center text-xl mx-auto text-white my-4 py-4">
+        <div className="bg-sky-900 w-2/4 text-center text-xl mx-auto text-white my-4 py-4">
           <button
             onClick={() => setOpenForm(true)}
             className="bg-white px-8 py-2 rounded-lg text-green-400 hover:bg-green-200"
@@ -89,7 +89,7 @@ function PaymentDetails() {
             <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden ">
                 <table className="min-w-full divide-y divide-gray-200 table-fixed">
-                  <thead className="bg-gray-100 dark:bg-[#66BFBF]">
+                  <thead className="bg-sky-900">
                     <tr>
                       <th
                         scope="col"
@@ -173,9 +173,7 @@ function PaymentDetails() {
                           <p className="font-bold">
                             {moment(paid.time).format("DD/ MM/ YYYY")}
                           </p>
-                          <p>
-                            {moment(paid.time).format("hh:mm a")}
-                          </p>
+                          <p>{moment(paid.time).format("hh:mm a")}</p>
                         </td>
                         <td className="py-4 px-6 text-sm cursor-pointer text-blue-500 whitespace-nowrap">
                           <FontAwesomeIcon icon={faEdit} />

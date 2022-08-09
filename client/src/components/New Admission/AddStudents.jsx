@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
-import FileDataPage from "./FileDataPage";
 import SelectedBranch from "./SelectedBranch";
 import StudentDetails from "./StudentDetails";
 import VerifyDetails from "./VerifyDetails";

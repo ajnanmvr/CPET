@@ -15,7 +15,7 @@ export const UserAuthProvider = (props) => {
         setAuthData(res.data.user);
       }
     } catch (error) {
-      console.log(error.response);
+      console.log(error.response.data);
     }
   };
   const logout = async () => {

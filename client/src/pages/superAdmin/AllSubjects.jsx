@@ -80,6 +80,12 @@ function AllSubjects() {
                     >
                       SUBJECT NAME
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      PARENT SUBJECT NAME
+                    </th>
 
                     <th
                       scope="col"
@@ -103,6 +109,9 @@ function AllSubjects() {
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                         {subject.subjectName}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {subject?.parentSubject?.subjectName}
                       </td>
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

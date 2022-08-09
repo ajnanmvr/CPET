@@ -15,9 +15,10 @@ router
   })
   .get(async (req, res) => {
     try {
-      let data = await Subject.find();
+      let data = await Subject.find().populate("parentSubject", "subjectName");
       res.status(200).json(data);
     } catch (error) {
+      console.log(error);
       res.status(400).json(error);
     }
   });
@@ -42,11 +43,11 @@ router
   })
   .get(async (req, res) => {
     try {
-    let data=  await Subject.findById(req.params.id);
+      let data = await Subject.findById(req.params.id);
       res.status(200).json(data);
     } catch (error) {
       res.status(400).json(error);
     }
-  })
+  });
 
 module.exports = router;

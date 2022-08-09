@@ -10,7 +10,6 @@ function TransferRequest() {
   const getTransferData = async () => {
     try {
       let { data } = await Axios.get("/transfer");
-      console.log(data);
       setTransferData(data);
     } catch (error) {
       console.log(error.response);

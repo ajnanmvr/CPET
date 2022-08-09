@@ -9,7 +9,7 @@ const subjectSchema = new mongoose.Schema({
   parentSubject: {
     type: mongoose.Types.ObjectId,
     required: true,
-    ref: "Subcategories",
+    ref: "Parentsubject",
   },
   // class: {
   //   type: String,
