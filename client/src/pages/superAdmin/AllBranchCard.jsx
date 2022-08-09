@@ -24,22 +24,18 @@ function AllBranchCard() {
         {branches.length === 0 ? (
           <Loading />
         ) : (
-          branches.map((item, key) => (
+          branches.map((branch, key) => (
             <>
-              <Link
-                to={item._id}
-                key={key}
-                className="m-2 items-center"
-              >
+              <Link to={branch._id} key={key} className="m-2 items-center">
                 <div className="bg-gray-900 rounded-xl   duration-300 shadow-xl group">
                   <img
-                    src={item?.image}
+                    src={`/img/${branch._id}.jpeg`}
                     alt="image"
                     className="w-full rounded-t-xl max-h-40"
                   />
 
                   <h1 className="text-xl text-center font-bold text-white my-4 group-hover:text-gray-50">
-                    {item.branchName}
+                    {branch.branchName}
                   </h1>
                 </div>
               </Link>

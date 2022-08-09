@@ -130,7 +130,7 @@ function Dashboard() {
           {authData?.role === "admin" && (
             <div className="lg:flex">
               <img
-                src={branch.image}
+                src={`/img/${branch?._id}.jpeg`}
                 alt="branch image"
                 className="lg:w-1/4 w-full h-56"
               />
