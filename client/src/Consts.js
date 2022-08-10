@@ -10,11 +10,11 @@ import AllPayments from "./pages/superAdmin/AllPayments";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
-import CreateSettings from "./pages/superAdmin/CreateSettings";
+import CreateSchedule from "./pages/superAdmin/CreateSchedule";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import EditSubject from "./pages/superAdmin/EditSubject";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
-import Settings from "./pages/superAdmin/Settings";
+import Schedule from "./pages/superAdmin/Schedules";
 import TransferRequest from "./pages/superAdmin/TransferRequest";
 import TransferVerify from "./pages/superAdmin/TransferVerify";
 
@@ -123,13 +123,13 @@ export const RestrictedRoutes = [
   },
 
   {
-    route: "/settings",
-    component: <Settings />,
+    route: "/schedule",
+    component: <Schedule />,
     role: "superAdmin",
   },
   {
-    route: "/create-settings",
-    component: <CreateSettings />,
+    route: "/create-schedule",
+    component: <CreateSchedule />,
     role: "superAdmin",
   },
   {

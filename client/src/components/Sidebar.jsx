@@ -1,12 +1,13 @@
 import {
   faAdd,
-  faBars, faClose,
+  faBars,
+  faClock,
+  faClose,
   faHome,
   faPersonChalkboard,
   faPlus,
   faPowerOff,
-  faSchool,
-  faUser,
+  faSchool, faUser,
   faUsers
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,6 +51,11 @@ function Sidebar() {
       name: "All Users",
       route: "/all-users",
       icon: faUsers,
+    },
+    {
+      name: "Create Schedule",
+      route: "/schedule",
+      icon: faClock,
     },
   ];
   return (

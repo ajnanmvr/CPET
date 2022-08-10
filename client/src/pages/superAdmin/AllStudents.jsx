@@ -1,15 +1,19 @@
 import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "../../Axios";
+import { ScheduleContext } from "../../context/schedule";
 import { UserAuthContext } from "../../context/user";
 
 function AllStudents() {
   const [students, setStudents] = useState([]);
   const { authData } = useContext(UserAuthContext);
+  const { schedule, getSchedule } = useContext(ScheduleContext);
   const [start, setStart] = useState(0);
 
+  
   const { classId } = useParams();
 
   const generateAdmissionNumber = async () => {
@@ -40,23 +44,43 @@ function AllStudents() {
   };
 
   useEffect(() => {
+    getSchedule("new admission");
     getAllStudents();
   }, []);
   return (
     <>
       <div className="flex flex-col ml-6">
         <div className="px-4 sm:px-0 max-w-sm ml-auto mt-4 mr-4">
-          <label className="block  text-sm font-bold mb-2" htmlFor="username">
-            ADMISSION NUMBER STARTING:
-          </label>
-          <input
-            className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-            id="username"
-            type="number"
-            required
-            value={start}
-            onChange={(e) => setStart(e.target.value)}
-          />
+          {moment(schedule?.deadline).format("DD-MM-YYYY") < moment(Date.now()).format("DD-MM-YYYY") ? (
+            <>
+              <label
+                className="block  text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                ADMISSION NUMBER STARTING:
+              </label>
+              <input
+                className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                id="username"
+                type="number"
+                required
+                value={start}
+                onChange={(e) => setStart(e.target.value)}
+              />
+            </>
+          ) : (
+            <>
+              {" "}
+              <label
+                className="block  capitalize text-sm font-bold mb-2"
+                htmlFor="username"
+              >
+                Admission Last date:
+                {moment(schedule?.deadline).format("DD-MM-YYYY")}
+              </label>
+            </>
+          )}
+
           {students.length > 0 && start > 0 && (
             <button
               onClick={generateAdmissionNumber}

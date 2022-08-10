@@ -2,11 +2,14 @@ import React, { useContext, useState } from "react";
 import Axios from "../Axios";
 import { toast } from "react-toastify";
 import { UserAuthContext } from "../context/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { setAuthData, authData } = useContext(UserAuthContext);
+  const [show, setShow] = useState(false);
 
   if (authData) {
     window.location.href = "/admin";
@@ -75,11 +78,28 @@ function Login() {
                   />
                 </div>
                 <div>
-                  <label className="block mt-4 text-sm">Password</label>
+                  <label className="flex items-center mt-4 text-sm">
+                    <p className="mr-5">Password</p>
+                    {!show && (
+                      <FontAwesomeIcon
+                        onClick={() => setShow(true)}
+                        icon={faEye}
+                        className="cursor-pointer"
+                      />
+                    )}
+                    {show && (
+                      <FontAwesomeIcon
+                        onClick={() => setShow(false)}
+                        icon={faEyeSlash}
+                        className="cursor-pointer"
+                      />
+                    )}
+                  </label>
+
                   <input
                     className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
                     placeholder
-                    type="password"
+                    type={show ? "text" : "password"}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>

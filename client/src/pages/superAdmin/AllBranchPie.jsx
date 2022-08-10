@@ -15,7 +15,7 @@ function AllBranchPie() {
     }
   };
   const chartData = {
-    labels: details?.map((x) => x.branch[0].branchName),
+    labels: details?.map((x) => x.branch[0]?.branchName),
     datasets: [
       {
         label: `${details?.length} Sections`,

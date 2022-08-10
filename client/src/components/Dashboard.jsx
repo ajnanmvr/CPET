@@ -85,9 +85,9 @@ function Dashboard() {
       link: "/admission-requests",
     },
     // {
-    //   text: "SETTINGS",
+    //   text: "Schedule",
     //   icon: faTools,
-    //   link: "/settings",
+    //   link: "/schedule",
     // },
   ];
   const AdminItems = [
