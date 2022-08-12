@@ -11,16 +11,7 @@ function EditSubject() {
   const { id } = useParams();
 
   const [formData, setFormData] = useState({});
-  const [parents, setParents] = useState([]);
-
-  const getParentSubjects = async () => {
-    try {
-      let { data } = await Axios.get("/parent-subject");
-      setParents(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+ 
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -57,7 +48,6 @@ function EditSubject() {
     }
   };
   useEffect(() => {
-    getParentSubjects();
     getSubject();
   }, [id]);
   return (
@@ -107,24 +97,23 @@ function EditSubject() {
                       <div className="mt-2">
                         <label
                           className="block  text-sm font-bold mb-2"
-                          htmlFor="username"
+                          htmlFor="name"
                         >
-                          Parent Subject
+                          Subject Code
                         </label>
-                        <select
-                          value={formData?.parentSubject}
-                          name="parentSubject"
+                        <input
+                          className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                          id="name"
+                          type="text"
+                          required
+                          value={formData?.subjectCode}
                           onChange={(e) => handleChange(e)}
-                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-4 "
-                        >
-                          <option hidden>select </option>
-                          {parents.map((parent, key) => (
-                            <option value={parent._id}>
-                              {parent?.subjectName}
-                            </option>
-                          ))}
-                        </select>
+                          placeholder="subject code"
+                          defaultValue={formData?.subjectCode}
+                          name="subjectCode"
+                        />
                       </div>
+                      
                     </form>
                   </div>
                 </div>
@@ -138,7 +127,7 @@ function EditSubject() {
                   save
                 </button>
                 <button
-                  onClick={() => navigate("/schedule")}
+                  onClick={() => navigate("/all-subjects")}
                   type="button"
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                 >

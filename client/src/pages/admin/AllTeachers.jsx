@@ -1,4 +1,4 @@
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -16,16 +16,16 @@ function AllTeachers() {
       console.log(error.response);
     }
   };
-  const deleteTeacher = async (teacherId) => {
-    try {
-      if (window.confirm("Do you want to delete teacher")) {
-        await Axios.delete(`/teacher/${teacherId}`);
-        getAllTeachers();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deleteTeacher = async (teacherId) => {
+  //   try {
+  //     if (window.confirm("Do you want to delete teacher")) {
+  //       await Axios.delete(`/teacher/${teacherId}`);
+  //       getAllTeachers();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   useEffect(() => {
     getAllTeachers();
   }, []);
@@ -85,8 +85,9 @@ function AllTeachers() {
                       scope="col"
                       className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
-                      DELETE
+                      VIEW
                     </th>
+                  
                   </tr>
                 </thead>
                 <tbody>
@@ -110,7 +111,15 @@ function AllTeachers() {
                           <FontAwesomeIcon icon={faEdit} />
                         </Link>
                       </td>
-                      <td
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <Link
+                          to={"/teacher/" + teacher._id}
+                          className={" cursor-pointer"}
+                        >
+                          <FontAwesomeIcon icon={faEye} />
+                        </Link>
+                      </td>
+                      {/* <td
                         onClick={() => deleteTeacher(teacher._id)}
                         className="text-sm text-red-600 font-light px-6 py-4 whitespace-nowrap "
                       >
@@ -118,7 +127,7 @@ function AllTeachers() {
                           icon={faTrash}
                           className={"cursor-pointer"}
                         />
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

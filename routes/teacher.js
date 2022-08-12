@@ -19,7 +19,6 @@ router
   .route("/:id")
   .patch(protect, updateTeacher)
   .get(protect, getMyTeachers)
-  .delete(protect, deleteTeacher)
   .post(protect, getOneTeacher);
 
 module.exports = router;

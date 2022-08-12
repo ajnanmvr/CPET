@@ -1,4 +1,4 @@
-import { DISTRICT } from "../../Consts";
+import { DATES, DISTRICT, MONTHS, YEARS } from "../../Consts";
 
 function StudentDetails({ onChange, formData, nextPage, formErrors }) {
   const forms = [
@@ -29,33 +29,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
       value: formData.fatherName,
       error: formErrors.fatherName,
     },
-    {
-      labelName: "Mother Name",
-      type: "text",
-      name: "motherName",
-      placeholder: "Enter Mother's Name",
-      required: true,
-      value: formData.motherName,
-      error: formErrors.motherName,
-    },
-    {
-      labelName: "Aadhar Number",
-      type: "number",
-      name: "aadhar",
-      placeholder: "Enter Aadhar Number",
-      required: true,
-      value: formData.aadhar,
-      error: formErrors.aadhar,
-    },
-    {
-      labelName: "Guardian",
-      type: "text",
-      name: "guardian",
-      placeholder: "Enter Guardian ",
-      required: true,
-      value: formData.guardian,
-      error: formErrors.guardian,
-    },
+
     {
       labelName: "Phone Number",
       type: "tel",
@@ -65,17 +39,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
       value: formData.phone,
       error: formErrors.phone,
     },
-    {
-      labelName: "DOB",
-      type: "date",
-      name: "dob",
-      placeholder: "Enter DOB",
-      required: true,
-      value: formData.dob,
-      error: formErrors.dob,
-      min: "1997-01-01",
-      max: "2030-12-31",
-    },
+
     {
       labelName: "Place",
       type: "text",
@@ -145,11 +109,50 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
             </div>
           ))}
 
+          <div className="px-4 sm:px-0">
+            <label className="block  text-sm font-bold mb-2" htmlFor="username">
+              Date Of Birth
+            </label>
+            <div className="flex">
+              <select
+                name="dobYear"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 py-4 "
+                id=""
+                onChange={(e) => onChange(e)}
+              >
+                <option hidden>year </option>
+                {YEARS.map((year) => (
+                  <option value={year}>{year}</option>
+                ))}
+              </select>
+              <select
+                name="dobMonth"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 py-4 "
+                id=""
+                onChange={(e) => onChange(e)}
+              >
+                <option hidden>month </option>
+                {MONTHS.map((month) => (
+                  <option value={month}>{month}</option>
+                ))}
+              </select>
+              <select
+                name="dobDate"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 py-4 "
+                id=""
+                onChange={(e) => onChange(e)}
+              >
+                <option hidden>date </option>
+                {DATES.map((date) => (
+                  <option value={date}>{date}</option>
+                ))}
+              </select>
+            </div>
+          </div>
           <div className="lg:col-span-1">
             <label className="block  text-sm font-bold mb-2" htmlFor="username">
               District
             </label>
-
             <select
               name="district"
               onChange={(e) => onChange(e)}

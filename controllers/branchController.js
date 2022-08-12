@@ -50,18 +50,14 @@ exports.resizeImage = (file, id, next) => {
 };
 
 exports.createBranch = catchAsync(async (req, res, next) => {
-  if (req.file) {
-    let data = await Branch.create(req.body);
-    let user = await Auth.create({ ...req.body, branch: data._id });
-    await this.resizeImage(req.file, data._id, next);
-    data.admin = user._id;
-    data.save();
-    res.status(200).json(data);
-  } else {
-    res.status(400).json({ message: "Please upload an image" });
-  }
+  let data = await Branch.create(req.body);
+  let user = await Auth.create({ ...req.body, branch: data._id });
+  // await this.resizeImage(req.file, data._id, next);
+  data.admin = user._id;
+  data.save();
+  res.status(200).json(data);
 });
-exports.editBranch = async (req, res,next) => {
+exports.editBranch = async (req, res, next) => {
   try {
     let data = await Branch.findByIdAndUpdate(req.params.id, req.body);
     await this.resizeImage(req.file, data._id, next);

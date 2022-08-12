@@ -20,18 +20,6 @@ const studentSchema = new mongoose.Schema({
     required: [true, "father name is required"],
     maxLength: [100, "100 characters are allowed"],
   },
-  motherName: {
-    type: String,
-    uppercase: true,
-    required: [true, "mother name is required"],
-    maxLength: [100, "100 characters are allowed"],
-  },
-  guardian: {
-    type: String,
-    uppercase: true,
-    required: [true, "guardian is required"],
-    maxLength: [100, "100 characters are allowed"],
-  },
   place: {
     type: String,
     uppercase: true,
@@ -61,29 +49,30 @@ const studentSchema = new mongoose.Schema({
     required: [true, "state is required"],
     maxLength: [30, "30 characters are allowed"],
   },
-  dob: {
+ 
+  dobDate: {
     type: String,
-    required: [true, "DOB is required"],
+    required: [true, "DOB Date is required"],
+    maxLength: [15, "15 characters are allowed"],
+  },
+  dobMonth: {
+    type: String,
+    required: [true, "DOB Month is required"],
+    maxLength: [15, "15 characters are allowed"],
+  },
+  dobYear: {
+    type: String,
+    required: [true, "DOB year is required"],
     maxLength: [15, "15 characters are allowed"],
   },
   admissionNo: {
     type: String,
     // unique: true,
   },
-  aadhar: {
-    type: String,
-    required: [true, "Aadhar Number is required"],
-    maxLength: [20, "20 characters are allowed"],
-    unique: true,
-  },
   phone: {
     type: String,
     required: [true, "Phone is required"],
     maxLength: [15, "15 characters are allowed"],
-  },
-  deleted: {
-    type: Boolean,
-    default: false,
   },
   branch: {
     type: mongoose.Types.ObjectId,
@@ -96,21 +85,14 @@ const studentSchema = new mongoose.Schema({
     default: false,
   },
   class: {
-    type: String,
-    enum: [
-      "plus-one",
-      "plus-two",
-      "mahdiyya-first-year",
-      "mahdiyya-second-year",
-      "mahdiyya-third-year",
-    ],
+    type: mongoose.Types.ObjectId,
     required: [true, "Please select a class"],
-    maxLength: [25, "25 characters are allowed"],
-  },
-  classTeacher: {
-    type: String,
+    ref: "Class",
   },
   academicYear: {
+    type: String,
+  },
+  branchAdm: {
     type: String,
   },
   certificateOne: String,

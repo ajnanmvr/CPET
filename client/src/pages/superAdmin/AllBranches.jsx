@@ -12,16 +12,16 @@ function AllBranches() {
   const { data, error, loading, refetch } = useQuery(GET_BRANCHES);
   const { pathname } = useLocation();
 
-  const deleteBranch = async (id) => {
-    try {
-      if (window.confirm("Do you want to delete this branch")) {
-        await Axios.delete("/branch/" + id);
-        refetch();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deleteBranch = async (id) => {
+  //   try {
+  //     if (window.confirm("Do you want to delete this branch")) {
+  //       await Axios.delete("/branch/" + id);
+  //       refetch();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     refetch();
@@ -87,9 +87,9 @@ function AllBranches() {
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Edit
                       </th>
-                      <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                      {/* <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Delete
-                      </th>
+                      </th> */}
                       <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100" />
                     </tr>
                   </thead>
@@ -144,7 +144,7 @@ function AllBranches() {
                                 aria-hidden
                                 className={`absolute inset-0 bg-green-400 opacity-50 rounded-full`}
                               />
-                              <span className="relative">View</span>
+                              <span className="relative text-white">View</span>
                             </Link>
                           </td>
 
@@ -165,7 +165,7 @@ function AllBranches() {
                             </span>
                           </td>
 
-                          <td className="px-5 py-5 bg-white text-sm">
+                          {/* <td className="px-5 py-5 bg-white text-sm">
                             <span
                               className={`relative inline-block px-3 py-1 font-semibold leading-tight`}
                             >
@@ -181,7 +181,7 @@ function AllBranches() {
                                 />
                               </span>
                             </span>
-                          </td>
+                          </td> */}
                         </tr>
                       ))}
                   </tbody>

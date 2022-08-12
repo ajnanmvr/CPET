@@ -22,7 +22,7 @@ router.post(
   branchController.createBranch
 );
 router.get("/", branchController.getAllBranches);
-router.delete("/:id", protect, branchController.deleteBranch);
+// router.delete("/:id", protect, branchController.deleteBranch);
 router.get("/:id", protect, branchController.getBranch);
 router.patch(
   "/:id",

@@ -12,7 +12,9 @@ function AddStudents() {
     fatherName: "",
     motherName: "",
     houseName: "",
-    dob: "",
+    dobDate: "",
+    dobMonth: "",
+    dobYear: "",
     place: "",
     postOffice: "",
     guardian: "",
@@ -32,12 +34,13 @@ function AddStudents() {
   const [formErrors, setFormErrors] = useState({});
   const [goNext, setGoNext] = useState(false);
   const [errors, setErrors] = useState({});
-
+console.log(formErrors);
   const navigate = useNavigate();
   let currentYear = new Date().getFullYear().toString();
   let nextYear = (new Date().getFullYear() + 1).toString();
 
   const validate = (values) => {
+    console.log(values);
     let errors = {};
     if (!values.studentName) {
       errors.studentName = "Student Name is required";
@@ -45,18 +48,19 @@ function AddStudents() {
     if (!values.fatherName) {
       errors.fatherName = "Father Name is required";
     }
-    if (!values.motherName) {
-      errors.motherName = "Mother Name is required";
+
+    if (!values.dobDate) {
+      errors.dobDate = "DOB is required";
     }
-    if (!values.guardian) {
-      errors.guardian = "Guardian is required";
+
+    if (!values.dobMonth) {
+      errors.dobMonth = "DOB month is required";
     }
-    if (!values.dob) {
-      errors.dob = "DOB is required";
+
+    if (!values.dobYear) {
+      errors.dobYear = "DOB year is required";
     }
-    if (!values.aadhar) {
-      errors.aadhar = "Aadhar Number is required";
-    }
+
     if (!values.district) {
       errors.district = "District is required";
     }
@@ -84,6 +88,7 @@ function AddStudents() {
   const onChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
+    console.log(name,value);
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
   const nextPage = (e) => {

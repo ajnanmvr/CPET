@@ -1,0 +1,235 @@
+import { faBuilding, faPen, faSchool } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import Axios from "../../Axios";
+
+function AdminProfile() {
+  const [profile, setProfile] = useState({});
+  const [branch, setBranch] = useState({});
+  const [password, setPassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [disabled, setDisabled] = useState(true);
+
+  const getMyProfile = async () => {
+    try {
+      let { data } = await Axios.get("/auth/profile");
+      setProfile(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const updatePassword = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await Axios.patch("/auth/password/" + profile._id, {
+        password,
+        currentPassword,
+      });
+      if (res.status === 200) {
+        setPassword("");
+        setCurrentPassword("");
+        setDisabled(true);
+        toast.success("Password edited Successfully", {
+          autoClose: 2000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } catch (error) {
+      toast.error(error.response.data?.message, {
+        autoClose: 2000,
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
+  const getMyBranch = async () => {
+    try {
+      let { data } = await Axios.get("/branch/" + profile?.branch);
+      setBranch(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getMyProfile();
+  }, []);
+
+  useEffect(() => {
+    profile?.branch && getMyBranch();
+  }, [profile.branch]);
+  return (
+    <div className="bg-gray-100">
+      {/* End of Navbar */}
+      <div className="container mx-auto my-5 p-5">
+        <div className="md:flex no-wrap md:-mx-2 ">
+          {/* Left Side */}
+          <div className="w-full md:w-3/12 md:mx-2">
+            {/* Profile Card */}
+            <div className="bg-white p-3 border-t-4 border-green-400">
+              <div className="image overflow-hidden">
+                <img
+                  className="h-auto w-full mx-auto"
+                  src="https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80"
+                  alt
+                />
+              </div>
+              <h1 className="text-gray-900 font-bold text-xl uppercase leading-8 my-1">
+                {profile.username}
+              </h1>
+
+              <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                <li className="flex items-center py-3">
+                  <span>Status</span>
+                  <span className="ml-auto">
+                    <span className="bg-green-500 py-1 px-2 rounded text-white text-sm">
+                      Active
+                    </span>
+                  </span>
+                </li>
+                <li className="flex items-center py-3">
+                  <span>Member since</span>
+                  <span className="ml-auto">Nov 07, 2016</span>
+                </li>
+              </ul>
+            </div>
+            {/* End of profile card */}
+            <div className="my-4" />
+          </div>
+          {/* Right Side */}
+          <div className="w-full md:w-9/12 mx-2 h-64">
+            {/* Profile tab */}
+            {/* About Section */}
+            <div className="bg-white p-3 shadow-sm rounded-sm">
+              <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                <FontAwesomeIcon icon={faBuilding} />
+                <span className="tracking-wide">Study Center Details</span>
+              </div>
+              <div className="text-gray-700">
+                <div className="grid md:grid-cols-2 text-sm">
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">
+                      Study Center Name
+                    </div>
+                    <div className="px-4 py-2">{branch.branchName}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">
+                      Study Center Code
+                    </div>
+                    <div className="px-4 py-2">{branch.branchCode}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Contact No.</div>
+                    <div className="px-4 py-2"> {branch.phone}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Location</div>
+                    <div className="px-4 py-2">{branch.place}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Post Office</div>
+                    <div className="px-4 py-2">{branch.postOffice}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Pincode</div>
+                    <div className="px-4 py-2">{branch.pinCode}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">District</div>
+                    <div className="px-4 py-2">{branch.district}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">State</div>
+                    <div className="px-4 py-2">{branch.state}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white p-3 shadow-sm rounded-sm">
+              <div className="text-gray-700">
+                <div className="px-4 sm:px-0">
+                  <label
+                    className="block  text-sm font-bold mb-2"
+                    htmlFor="username"
+                  >
+                    Update Password
+                    <button>
+                      <FontAwesomeIcon
+                        className="ml-4 text-xl"
+                        onClick={() => {
+                          setDisabled(false);
+                          setPassword("");
+                        }}
+                        icon={faPen}
+                      />
+                    </button>
+                  </label>
+
+                  {!disabled && (
+                    <>
+                      <label className="block  text-sm font-bold text-green-400 mb-2">
+                        Current Password
+                      </label>
+                      <input
+                        className={`focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline ${
+                          disabled && "cursor-not-allowed"
+                        }`}
+                        type="password"
+                        required
+                        value={currentPassword}
+                        disabled={disabled}
+                        placeholder="current password"
+                        onChange={(e) => setCurrentPassword(e.target.value)}
+                      />{" "}
+                      <label className="block  text-sm font-bold text-green-400 mb-2">
+                        New Password
+                      </label>
+                      <input
+                        className={`focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline ${
+                          disabled && "cursor-not-allowed"
+                        }`}
+                        type="password"
+                        required
+                        value={password}
+                        disabled={disabled}
+                        placeholder="new password"
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                      <div className="text-red-500 text-sm italic mt-2">
+                        Keep your password anywere securely
+                      </div>
+                      <button
+                        onClick={() => {
+                          setDisabled(true);
+                          setPassword("");
+                        }}
+                        className="bg-yellow-500 py-1 px-5 rounded-lg text-white mt-2 border border-yellow-500 hover:bg-white hover:text-yellow-500 transition font-bold mr-3"
+                      >
+                        cancel
+                      </button>
+                      <button
+                        onClick={(e) => updatePassword(e)}
+                        className="bg-green-500 py-1 px-5 rounded-lg text-white mt-2 border border-green-500 hover:bg-white hover:text-green-500 transition font-bold"
+                      >
+                        save
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* End of about section */}
+            <div className="my-4" />
+
+            {/* End of profile tab */}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AdminProfile;

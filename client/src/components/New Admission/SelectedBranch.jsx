@@ -13,13 +13,7 @@ function SelectedBranch({
   setImageUploaded,
   imageUploaded,
 }) {
-  const classes = [
-    "plus-one",
-    "plus-two",
-    "mahdiyya-first-year",
-    "mahdiyya-second-year",
-    "mahdiyya-third-year",
-  ];
+  const [classes, setClasses] = useState([]);
   const [branches, setBranches] = useState([]);
   const [selectedBranch, setSelectedBranch] = useState("");
   const [image1, setImage1] = useState(null);
@@ -80,9 +74,18 @@ function SelectedBranch({
       console.log(error.response);
     }
   };
+  const getAllClasses = async () => {
+    try {
+      let { data } = await Axios.get(`class`);
+      setClasses(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
 
   useEffect(() => {
     getAllBranches();
+    getAllClasses();
   }, [selectedBranch]);
 
   return (
@@ -156,16 +159,16 @@ function SelectedBranch({
               {classes.map((studentClass, index) => (
                 <div
                   className={`px-2  py-2 rounded-lg m-2 text-white cursor-pointer ${
-                    formData.class === studentClass
+                    formData.class === studentClass._id
                       ? "bg-green-600"
                       : "bg-gray-800"
                   }`}
                   key={index}
                   onClick={(e) =>
-                    setFormData({ ...formData, class: studentClass })
+                    setFormData({ ...formData, class: studentClass._id })
                   }
                 >
-                  {studentClass}
+                  {studentClass.className}
                 </div>
               ))}
             </div>

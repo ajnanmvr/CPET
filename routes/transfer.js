@@ -1,5 +1,6 @@
 const { protect, restrictTo } = require("../controllers/authController");
 const Transfer = require("../models/transferModel");
+const Student = require("../models/studentModel");
 
 const router = require("express").Router();
 
@@ -48,6 +49,9 @@ router.patch("/:id", protect, async (req, res, next) => {
   try {
     let data = await Transfer.findByIdAndUpdate(req.params.id, {
       accepted: req.body.accepted,
+    });
+    let studentData = await Student.findByIdAndUpdate(data.studentId, {
+      branch: data.toBranch,
     });
     res.status(200).json(data);
   } catch (error) {

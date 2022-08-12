@@ -18,22 +18,13 @@ function AllSubjects() {
       console.log(error.response);
     }
   };
-  const deleteSubject = async (subjectId) => {
-    try {
-      if (window.confirm("Do you want to delete subject")) {
-        await Axios.delete(`/subject/${subjectId}`);
-        getSubjects();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   useEffect(() => {
     getSubjects();
   }, []);
   return (
     <>
-      {openSubject && <CreateSubject setOpenSubject={setOpenSubject} />}
+      {openSubject && <CreateSubject setShowModel={setOpenSubject} getSubjects={getSubjects}/>}
       {!openSubject && (
         <button
           onClick={() => setOpenSubject(true)}
@@ -84,7 +75,7 @@ function AllSubjects() {
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
-                      PARENT SUBJECT NAME
+                       SUBJECT CODE
                     </th>
 
                     <th
@@ -92,12 +83,6 @@ function AllSubjects() {
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
                       EDIT
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      DELETE
                     </th>
                   </tr>
                 </thead>
@@ -111,7 +96,7 @@ function AllSubjects() {
                         {subject.subjectName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {subject?.parentSubject?.subjectName}
+                        {subject?.subjectCode}
                       </td>
 
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -121,15 +106,6 @@ function AllSubjects() {
                         >
                           <FontAwesomeIcon icon={faEdit} />
                         </Link>
-                      </td>
-                      <td
-                        onClick={() => deleteSubject(subject._id)}
-                        className="text-sm text-red-600 font-light px-6 py-4 whitespace-nowrap "
-                      >
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          className={"cursor-pointer"}
-                        />
                       </td>
                     </tr>
                   ))}

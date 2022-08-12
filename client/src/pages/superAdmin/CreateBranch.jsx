@@ -17,6 +17,7 @@ function CreateBranch() {
     branchImg: "",
     password: "",
     username: "",
+    branchCode: "",
   };
   const [inputData, setInputData] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -40,6 +41,7 @@ function CreateBranch() {
   formData.append("phone", inputData.phone);
   formData.append("username", inputData.username);
   formData.append("password", inputData.password);
+  formData.append("branchCode", inputData.branchCode);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -75,7 +77,7 @@ function CreateBranch() {
       <section className="bg-white p-6">
         <div className="max-w-screen-xl mx-auto">
           <h3 className="text-4xl font-bold text-[#003865] uppercase my-4">
-            Create Branch
+            Create Study Center
           </h3>
 
           <form className="lg:grid lg:grid-cols-2 lg:gap-8">
@@ -85,7 +87,7 @@ function CreateBranch() {
                   className="block  text-sm font-bold mb-2"
                   htmlFor="username"
                 >
-                  Branch Name
+                  Study Center Name
                   {errors.branchName && (
                     <h1 className="text-red-500 font-sm text-center">
                       {errors.branchName}
@@ -98,13 +100,38 @@ function CreateBranch() {
                   type="text"
                   onChange={(e) => onChange(e)}
                   required
-                  placeholder="Branch Name"
+                  placeholder="Study Center Name"
                   name="branchName"
                   value={inputData.branchName}
                 />
               </div>
             </div>
             <div className="lg:col-span-1">
+              <div className="px-4 sm:px-0">
+                <label
+                  className="block  text-sm font-bold mb-2"
+                  htmlFor="username"
+                >
+                  Study Center Code
+                  {errors.branchCode && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.branchCode}
+                    </h1>
+                  )}
+                </label>
+
+                <input
+                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  type="text"
+                  onChange={(e) => onChange(e)}
+                  required
+                  placeholder="Study Center Code"
+                  name="branchCode"
+                  value={inputData.branchCode}
+                />
+              </div>
+            </div>
+            {/* <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
                   className="block  text-sm font-bold mb-2"
@@ -137,7 +164,7 @@ function CreateBranch() {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">

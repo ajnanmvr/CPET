@@ -34,11 +34,13 @@ router.post("/all-details/", studentController.getAllDetails);
 router.post(
   "/update-admission/",
   protect,
+  restrictTo("superAdmin"),
   studentController.updateAdmissionNumber
 );
 
 router.get("/:id", studentController.getStudent);
 router.delete("/:id", studentController.deleteStudent);
 router.patch("/:id", studentController.updateStudent);
+router.post("/verify/:id",protect, studentController.verifyStudent);
 
 module.exports = router;

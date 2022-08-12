@@ -10,9 +10,9 @@ const teacherRoutes = require("./routes/teacher");
 const paymentRoutes = require("./routes/payment");
 const notificationRoutes = require("./routes/notification");
 const subjectRoutes = require("./routes/subject");
-const parentSubjectRoutes = require("./routes/parentSubject");
 const transferRoutes = require("./routes/transfer");
 const scheduleSchemaRoute = require("./routes/schedule");
+const classRoute = require("./routes/class");
 
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
@@ -61,16 +61,12 @@ app.use("/api/teacher", teacherRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
 app.use("/api/subject", subjectRoutes);
-app.use("/api/parent-subject", parentSubjectRoutes);
 app.use("/api/transfer", transferRoutes);
 app.use("/api/schedule", scheduleSchemaRoute);
+app.use("/api/class", classRoute);
 
-app.use(require("./utils/gloablErrors"));
-// app.all("*", (req, res, next) => {
-//   next(new AppError(`Cant find ${req.originalUrl}  on the server`, 404));
-// });
 process.env.PWD = process.cwd();
-app.use(express.static(path.join(process.env.PWD, 'public')));
+app.use(express.static(path.join(process.env.PWD, "public")));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", function (req, res) {

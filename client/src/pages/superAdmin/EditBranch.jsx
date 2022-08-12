@@ -76,7 +76,7 @@ function EditBranch() {
     <div className="w-3/4 ml-6">
       <section className="bg-white p-6">
         <div className="max-w-screen-xl mx-auto">
-          <h3 className="text-4xl font-bold text-green-600 uppercase my-4">
+          <h3 className="text-4xl font-bold text-sky-900 uppercase my-4">
             Edit Branch
           </h3>
 
@@ -245,12 +245,12 @@ function EditBranch() {
               {!loading ? (
                 <button
                   onClick={(e) => handleSubmit(e)}
-                  className="w-full lg:w-1/2 bg-green-500 hover:bg-green-500 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                  className="w-full lg:w-1/2 bg-sky-900 hover:bg-sky-900 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
                 >
                   Edit
                 </button>
               ) : (
-                <h1 className="text-white text-center w-full lg:w-1/2 bg-green-500 hover:bg-green-500  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
+                <h1 className="text-white text-center w-full lg:w-1/2 bg-sky-900 hover:bg-sky-900  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
                   Processing..
                 </h1>
               )}

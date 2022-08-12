@@ -3,7 +3,7 @@ const globalFunction = require("../utils/globalFuctions");
 
 exports.createTeacher = globalFunction.createOne(Teacher);
 exports.getAllTeachers = globalFunction.getAll(Teacher, "branch");
-exports.getOneTeacher = globalFunction.getOne(Teacher);
+exports.getOneTeacher = globalFunction.getOne(Teacher, "branch", "subjects");
 exports.deleteTeacher = globalFunction.deleteStatus(Teacher);
 exports.updateTeacher = globalFunction.updateOne(Teacher);
 exports.getMyTeachers = async (req, res) => {

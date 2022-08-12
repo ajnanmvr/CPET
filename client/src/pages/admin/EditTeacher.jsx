@@ -13,7 +13,6 @@ function EditTeacher() {
   const [loading, setLoading] = useState(false);
   const [subjects, setSubjects] = useState([]);
 
-
   const handleSubjects = (item) => {
     if (!formData.subjects?.includes(item)) {
       setFormData((prevState) => ({
@@ -92,7 +91,7 @@ function EditTeacher() {
     <div className="w-3/4 ml-6">
       <section className="bg-white p-6">
         <div className="max-w-screen-xl mx-auto">
-          <h3 className="text-4xl font-bold text-[#F24C4C] uppercase my-4">
+          <h3 className="text-4xl font-bold text-sky-900 uppercase my-4">
             Edit Teacher
           </h3>
 
@@ -164,7 +163,7 @@ function EditTeacher() {
                 <label className="block  text-sm font-bold mb-2">
                   Subjects
                 </label>{" "}
-                <span className="text-red-600"></span>
+
                 <select
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
@@ -173,6 +172,7 @@ function EditTeacher() {
                   {subjects.map((subject, index) => (
                     <option key={index} value={subject._id}>
                       {subject.subjectName}
+                      {subject.subjectCode}
                     </option>
                   ))}
                 </select>
@@ -185,8 +185,10 @@ function EditTeacher() {
                   Selected Subjects
                 </label>
                 {SelectedSubjects.map((item, key) => (
-                  <div className="flex justify-between mx-2 text-center cursor-pointer bg-gray-600 px-2 my-2  text-white py-1">
-                    <h1 key={key}>{item.subjectName}</h1>
+                  <div className="flex justify-between mx-2 text-center cursor-pointer bg-sky-900 px-2 my-2  text-white py-1">
+                    <h1 key={key}>
+                      {item.subjectName} {item.subjectCode}
+                    </h1>
                     <FontAwesomeIcon
                       onClick={() => removeSubject(item._id)}
                       icon={faTrash}
@@ -203,12 +205,12 @@ function EditTeacher() {
               {!loading ? (
                 <button
                   onClick={(e) => handleSubmit(e)}
-                  className="w-full lg:w-1/2 bg-[#F24C4C] hover:bg-[#FF5D5D] text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                  className="w-full lg:w-1/2 bg-sky-500 hover:bg-sky-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
                 >
                   Submit
                 </button>
               ) : (
-                <h1 className="text-white text-center w-full lg:w-1/2 bg-[#F24C4C] hover:bg-[#FF5D5D]  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
+                <h1 className="text-white text-center w-full lg:w-1/2 bg-sky-600 hover:bg-sky-700  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
                   Processing..
                 </h1>
               )}

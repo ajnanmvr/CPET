@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
+import AllBranchPie from "./AllBranchPie";
+import AllClassPie from "./AllClassPie";
 
 function AllBranchCard() {
   const [branches, setBranches] = useState([]);
+  const [start, setStart] = useState(0);
 
   const getAllBranches = async () => {
     try {
@@ -14,7 +17,18 @@ function AllBranchCard() {
       console.log(error);
     }
   };
-
+  const generateAdmissionNumber = async () => {
+    try {
+      let res = await Axios.post("/student/update-admission", {
+        start,
+      });
+      if (res.status === 200) {
+        setStart(0);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     getAllBranches();
   }, []);
@@ -42,6 +56,27 @@ function AllBranchCard() {
             </>
           ))
         )}
+      </div>
+      <AllBranchPie />
+      <AllClassPie />
+      <div className="w-1/4 ml-auto mr-4 my-4">
+        <label className="block  text-sm font-bold mb-2" htmlFor="username">
+          ADMISSION NUMBER STARTING:
+        </label>
+        <input
+          className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+          id="username"
+          type="number"
+          required
+          value={start}
+          onChange={(e) => setStart(e.target.value)}
+        />
+        <button
+          onClick={generateAdmissionNumber}
+          className="bg-blue-800 px-4 w-full py-3 font-bold text-white"
+        >
+          Generate Admission Numbers{" "}
+        </button>
       </div>
     </>
   );

@@ -1,39 +1,27 @@
 import { faSchoolCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "../../Axios";
 import AdmissionCard from "./AdmissionCard";
 
 function Admissions() {
-  const AdminItems = [
-    {
-      class: "Plus One",
-      link: "/admissions/plus-one",
-      id: "plus-one",
-    },
-    {
-      class: "Plus Two",
-      link: "/admissions/plus-two",
-      id: "plus-two",
-    },
+  const [classes, setClasses] = useState([]);
 
-    {
-      class: "Mahdiyya First Year",
-      link: "/admissions/mahdiyya-first-year",
-      id: "mahdiyya-first-year",
-    },
-    {
-      class: "Mahdiyya Second Year",
-      link: "/admissions/mahdiyya-second-year",
-      id: "mahdiyya-second-year",
-    },
-    {
-      class: "Mahdiyya Third Year",
-      link: "/admissions/mahdiyya-third-year",
-      id: "mahdiyya-third-year",
-    },
-  ];
+  const getClasses = async () => {
+    try {
+      let { data } = await Axios.get("/class");
+      setClasses(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
+    getClasses();
+  }, []);
   return (
     <>
       <h1 className="text-gray-800 font-bold text-3xl mt-4 text-center">
@@ -41,8 +29,8 @@ function Admissions() {
       </h1>
 
       <div className="w-full items-center px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-5">
-        {AdminItems.map((item, key) => (
-          <AdmissionCard admClass={item.class} key={key} id={item.id} />
+        {classes.map((item, key) => (
+          <AdmissionCard admClass={item.className} key={key} id={item._id} />
         ))}
       </div>
     </>

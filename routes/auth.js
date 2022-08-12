@@ -8,9 +8,9 @@ const {
   protect,
   getAllUsers,
   getUser,
-  updateUser,
   createMultiUsers,
-  deleteUser,
+  getMyProfile,
+  updatePassword,
 } = require("../controllers/authController");
 
 const router = require("express").Router();
@@ -20,11 +20,11 @@ router.post("/create-user", protect, restrictTo("superAdmin"), createUser);
 router.post("/multi-user", protect, restrictTo("superAdmin"), createMultiUsers);
 router.get("/users", protect, restrictTo("superAdmin"), getAllUsers);
 router.get("/user/:id", protect, restrictTo("superAdmin"), getUser);
-router.patch("/user/:id", protect, restrictTo("superAdmin"), updateUser);
-router.delete("/user/:id", protect, restrictTo("superAdmin"), deleteUser);
+router.patch("/password/:id", protect, updatePassword);
 
 router.post("/login", signIn);
 router.post("/logout", logout);
 router.post("/checkLogin", checkUserLoggedIn);
+router.get("/profile", protect, getMyProfile);
 
 module.exports = router;

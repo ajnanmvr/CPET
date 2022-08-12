@@ -7,8 +7,9 @@ import {
   faPersonChalkboard,
   faPlus,
   faPowerOff,
-  faSchool, faUser,
-  faUsers
+  faSchool,
+  faUser,
+  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
@@ -38,19 +39,14 @@ function Sidebar() {
       icon: faHome,
     },
     {
-      name: "Create Branch",
+      name: "Create Study Center",
       route: "/create-branch",
       icon: faPlus,
     },
     {
-      name: "All Branches",
+      name: "Study Centers",
       route: "/all-branches",
       icon: faSchool,
-    },
-    {
-      name: "All Users",
-      route: "/all-users",
-      icon: faUsers,
     },
     {
       name: "Create Schedule",
@@ -154,9 +150,12 @@ function Sidebar() {
             <div className="absolute bottom-2">
               <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 text-white">
                 <FontAwesomeIcon icon={faUser} />
-                <span className="text-[15px] ml-4 text-teal-700 font-bold uppercase">
+                <Link
+                  to={"/profile"}
+                  className="text-[15px] ml-4 text-teal-700 font-bold uppercase"
+                >
                   {authData.username}
-                </span>
+                </Link>
               </div>
               <div
                 onClick={() => logout()}

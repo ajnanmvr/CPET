@@ -4,10 +4,13 @@ const fs = require("fs");
 const globalFunctions = require("../utils/globalFuctions");
 const mongoose = require("mongoose");
 const Email = require("../utils/email");
+const Branch = require("../models/branchModel");
+const catchAsync = require("../utils/catchAsync");
 
-exports.getAllStudents = globalFunctions.getAll(Student, "branch");
-exports.getStudent = globalFunctions.getOne(Student, "branch");
+exports.getAllStudents = globalFunctions.getAll(Student, "branch", "class");
+exports.getStudent = globalFunctions.getOne(Student, "branch", "class");
 exports.deleteStudent = globalFunctions.deleteStatus(Student);
+
 exports.registerStudent = async (req, res, next) => {
   try {
     let data = await Student.create(req.body);
@@ -18,12 +21,29 @@ exports.registerStudent = async (req, res, next) => {
 };
 exports.updateStudent = globalFunctions.updateOne(Student);
 
-exports.getMyStudents = async (req, res) => {
+exports.verifyStudent = async (req, res, next) => {
   try {
-    let data = await Student.find({ branch: req.user.branch });
+    let branch = await Branch.findById(req.user.branch);
+    console.log(branch);
+    let data = await Student.findByIdAndUpdate(req.params.id, {
+      verified: true,
+    });
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).json(error);
+    console.log(error);
+    next(error);
+  }
+};
+
+exports.getMyStudents = async (req, res, next) => {
+  try {
+    let data = await Student.find({ branch: req.user.branch }).populate(
+      "class",
+      "className"
+    );
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
   }
 };
 
@@ -93,27 +113,21 @@ exports.getAllDetails = async (req, res) => {
   }
 };
 
-exports.updateAdmissionNumber = async (req, res) => {
-  try {
-    if (!req.body.start) {
-      res.status(400).json({ error: "please add a starting number" });
-    } else {
-      let students = await Student.find({
-        verified: true,
-        branch: req.user.branch,
-        class: req.body.class,
-      });
+exports.updateAdmissionNumber = catchAsync(async (req, res, next) => {
+  if (!req.body.start) {
+    res.status(400).json({ error: "please add a starting number" });
+  } else {
+    let students = await Student.find({
+      verified: true,
+    });
 
-      students.forEach((student, key) => {
-        students[key].admissionNo = "CMS" + (parseInt(req.body.start) + key);
-        student.save();
-      });
-      res.status(200).json(students);
-    }
-  } catch (error) {
-    res.status(200).json(error);
+    students.forEach((student, key) => {
+      students[key].admissionNo = "CMS" + (parseInt(req.body.start) + key);
+      student.save();
+    });
+    res.status(200).json(students);
   }
-};
+});
 exports.getAdmissionRequests = async (req, res, next) => {
   try {
     let data = await Student.aggregate([

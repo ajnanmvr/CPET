@@ -3,18 +3,16 @@ const mongoose = require("mongoose");
 const subjectSchema = new mongoose.Schema({
   subjectName: {
     type: String,
-    required: true,
+    required: [true, "Subject Name is required"],
+    uppercase: true,
+    maxLength: [30, "30 characters are allowed"],
+  },
+  subjectCode: {
+    type: String,
+    required: [true, "Subject Code is required"],
+    maxLength: [30, "30 characters are allowed"],
     uppercase:true
   },
-  parentSubject: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    ref: "Parentsubject",
-  },
-  // class: {
-  //   type: String,
-  //   required: true,
-  // },
 });
 
 const Subject = mongoose.model("Subject", subjectSchema);

@@ -2,13 +2,9 @@ import {
   faBook,
   faBookOpenReader,
   faChalkboardUser,
-  faDonate,
-  faGraduationCap,
+  faDonate, faExchange, faGraduationCap,
   faRightLeft,
-  faSchool,
-  faUser,
-  faTools,
-  faExchange,
+  faSchool, faToolbox
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
@@ -45,14 +41,9 @@ function Dashboard() {
 
   const SuperAdminItems = [
     {
-      text: "BRANCHES",
+      text: "STUDY CENTERS",
       icon: faSchool,
       link: "/all-branches",
-    },
-    {
-      text: "USERS",
-      icon: faUser,
-      link: "/all-users",
     },
     {
       text: "TEACHERS",
@@ -83,6 +74,11 @@ function Dashboard() {
       text: "ADMISSION REQUESTS",
       icon: faBook,
       link: "/admission-requests",
+    },
+    {
+      text: "SETTINGS ",
+      icon: faToolbox,
+      link: "/settings",
     },
     // {
     //   text: "Schedule",
@@ -163,8 +159,7 @@ function Dashboard() {
                   </Link>
                 ))}
               </div>
-              <AllBranchPie />
-              <AllClassPie />
+         
             </>
           ) : (
             <div className="w-full items-center px-4 py-8 mt-5 grid grid-cols-1 lg:grid-cols-3">

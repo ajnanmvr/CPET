@@ -8,18 +8,18 @@ import { GET_USERS } from "../../queries/userQuery";
 function AllUsers() {
   const { data, error, loading, refetch } = useQuery(GET_USERS);
 
-  const deleteUser = async (id) => {
-    try {
-      if (window.confirm("Do you want to delete?")) {
-        let data = await Axios.delete("/auth/user/" + id);
-        if (data.status === 200) {
-          refetch();
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const deleteUser = async (id) => {
+  //   try {
+  //     if (window.confirm("Do you want to delete?")) {
+  //       let data = await Axios.delete("/auth/user/" + id);
+  //       if (data.status === 200) {
+  //         refetch();
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -72,12 +72,12 @@ function AllUsers() {
                     >
                       EDIT
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                     >
                       DELETE
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -101,7 +101,7 @@ function AllUsers() {
                           />
                         </Link>
                       </td>
-
+{/* 
                       <td className="px-5 py-5 bg-white text-sm">
                         <div
                           className="cursor-pointer text-red-600"
@@ -109,7 +109,7 @@ function AllUsers() {
                         >
                           <FontAwesomeIcon icon={faTrash} />
                         </div>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

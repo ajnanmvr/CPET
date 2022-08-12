@@ -9,6 +9,7 @@ import { Auth, Student } from "./pages";
 import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
+import ViewTeacher from "./pages/ViewTeacher";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);

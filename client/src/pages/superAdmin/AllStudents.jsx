@@ -1,6 +1,5 @@
-import { faEdit, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "../../Axios";
@@ -10,22 +9,14 @@ import { UserAuthContext } from "../../context/user";
 function AllStudents() {
   const [students, setStudents] = useState([]);
   const { authData } = useContext(UserAuthContext);
-  const { schedule, getSchedule } = useContext(ScheduleContext);
-  const [start, setStart] = useState(0);
+  const [className, setClassName] = useState(null);
 
-  
   const { classId } = useParams();
 
-  const generateAdmissionNumber = async () => {
+  const getClass = async () => {
     try {
-      let res = await Axios.post("/student/update-admission", {
-        class: classId,
-        start,
-      });
-      if (res.status === 200) {
-        getAllStudents();
-        setStart(0);
-      }
+      let { data } = await Axios.get(`/class/${classId}`);
+      setClassName(data);
     } catch (error) {
       console.log(error);
     }
@@ -44,54 +35,14 @@ function AllStudents() {
   };
 
   useEffect(() => {
-    getSchedule("new admission");
     getAllStudents();
-  }, []);
+    getClass();
+  }, [classId]);
   return (
     <>
       <div className="flex flex-col ml-6">
-        <div className="px-4 sm:px-0 max-w-sm ml-auto mt-4 mr-4">
-          {moment(schedule?.deadline).format("DD-MM-YYYY") < moment(Date.now()).format("DD-MM-YYYY") ? (
-            <>
-              <label
-                className="block  text-sm font-bold mb-2"
-                htmlFor="username"
-              >
-                ADMISSION NUMBER STARTING:
-              </label>
-              <input
-                className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                id="username"
-                type="number"
-                required
-                value={start}
-                onChange={(e) => setStart(e.target.value)}
-              />
-            </>
-          ) : (
-            <>
-              {" "}
-              <label
-                className="block  capitalize text-sm font-bold mb-2"
-                htmlFor="username"
-              >
-                Admission Last date:
-                {moment(schedule?.deadline).format("DD-MM-YYYY")}
-              </label>
-            </>
-          )}
-
-          {students.length > 0 && start > 0 && (
-            <button
-              onClick={generateAdmissionNumber}
-              className="bg-blue-800 px-4 py-3 font-bold text-white"
-            >
-              Generate Admission Numbers{" "}
-            </button>
-          )}
-        </div>
         <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
-          {classId} ({students.length})
+          {className?.className} ({students.length})
         </h3>
         <div className="mx-auto ">
           <div className="flex"></div>
@@ -146,13 +97,6 @@ function AllStudents() {
                     >
                       VIEW
                     </th>
-
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      EDIT
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -180,12 +124,6 @@ function AllStudents() {
                           <FontAwesomeIcon icon={faEye} />
                         </Link>
                       </td>
-
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
-                        <Link to={"/edit-student/" + student._id}>
-                          <FontAwesomeIcon icon={faEdit} />
-                        </Link>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -196,6 +134,5 @@ function AllStudents() {
       </div>
     );
   }
-  const SuperAdminDashboard = () => {};
 }
 export default AllStudents;

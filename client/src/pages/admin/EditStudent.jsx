@@ -25,13 +25,7 @@ function EditStudent() {
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
 
-  const classes = [
-    "plus-one",
-    "plus-two",
-    "mahdiyya-first-year",
-    "mahdiyya-second-year",
-    "mahdiyya-third-year",
-  ];
+  const [classes, setClasses] = useState([]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +35,14 @@ function EditStudent() {
     try {
       let { data } = await Axios.get("/student/" + id);
       setFormData(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  const getClasses = async () => {
+    try {
+      let { data } = await Axios.get("/class/");
+      setClasses(data);
     } catch (error) {
       console.log(error.response);
     }
@@ -70,6 +72,7 @@ function EditStudent() {
   };
   useEffect(() => {
     getStudent();
+    getClasses();
   }, []);
 
   return (
@@ -340,7 +343,8 @@ function EditStudent() {
               <label
                 className="block  text-sm font-bold mb-2"
                 htmlFor="username"
-              >Class
+              >
+                Class
               </label>
 
               <select
@@ -352,8 +356,8 @@ function EditStudent() {
                 <option hidden>Select STUDENT'S CLASS </option>
                 {classes.map((classItem, index) => (
                   <>
-                    <option key={index} value={classItem}>
-                      {classItem}
+                    <option key={index} value={classItem._id}>
+                      {classItem.className}
                     </option>
                   </>
                 ))}

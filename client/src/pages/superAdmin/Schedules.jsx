@@ -187,7 +187,6 @@ function Schedule() {
   );
 }
 function CreateSchedule({ id, setConfig, config, setOpen, getConfig }) {
-  console.log(config);
   const navigate = useNavigate();
   const handleChange = (e) => {
     e.preventDefault();
@@ -205,6 +204,7 @@ function CreateSchedule({ id, setConfig, config, setOpen, getConfig }) {
           position: toast.POSITION.TOP_CENTER,
         });
         setOpen(false);
+        getConfig();
         navigate("/schedule");
       }
     } catch (error) {
