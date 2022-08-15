@@ -9,7 +9,7 @@ import { Auth, Student } from "./pages";
 import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
-import ViewTeacher from "./pages/ViewTeacher";
+import ViewBranch from "./pages/superAdmin/ViewBranch";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
@@ -27,6 +27,7 @@ export default function App() {
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Auth.Login />} />
             <Route path="/admission-created" element={<AdmissionCreated />} />
+            <Route path="/branch/:id" element={<ViewBranch />} />
             <Route path="/profile/:id" element={<Student.Profile />} />
             <Route path="/add-student" element={<Student.AddStudents />} />
             <Route path="/not-logged" element={<Auth.NotLoggedIn />} />

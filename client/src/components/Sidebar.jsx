@@ -50,7 +50,7 @@ function Sidebar() {
     },
     {
       name: "Create Schedule",
-      route: "/schedule",
+      route: "/create-schedule",
       icon: faClock,
     },
   ];
@@ -150,12 +150,19 @@ function Sidebar() {
             <div className="absolute bottom-2">
               <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 text-white">
                 <FontAwesomeIcon icon={faUser} />
-                <Link
-                  to={"/profile"}
-                  className="text-[15px] ml-4 text-teal-700 font-bold uppercase"
-                >
-                  {authData.username}
-                </Link>
+                {authData.role === "admin" ? (
+                  <Link
+                    to={"/profile"}
+                    className="text-[15px] ml-4 text-teal-700 font-bold uppercase"
+                  >
+                    {authData.username}
+                  </Link>
+                ) : (
+                  <div className="text-[15px] ml-4 text-teal-700 font-bold uppercase">
+                    {" "}
+                    {authData.username}
+                  </div>
+                )}
               </div>
               <div
                 onClick={() => logout()}

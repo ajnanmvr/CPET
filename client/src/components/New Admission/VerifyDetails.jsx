@@ -3,6 +3,7 @@ import Axios from "../../Axios";
 
 function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
   const [branch, setBranch] = useState("");
+
   const forms = [
     {
       lableName: "Student Name",
@@ -15,20 +16,12 @@ function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
       error: errors.fatherName,
     },
     {
-      lableName: "Mother Name",
-      value: formData.motherName,
-      error: errors.motherName,
-    },
-    {
       lableName: "House Name",
       value: formData.houseName,
       error: errors.houseName,
     },
     { lableName: "Place", value: formData.place, error: errors.place },
-    { lableName: "Guardian", value: formData.guardian, error: errors.guardian },
-    { lableName: "Aadhar", value: formData.aadhar, error: errors.aadhar },
     { lableName: "Phone Number", value: formData.phone, error: errors.phone },
-    { lableName: "DOB", value: formData.dob, error: errors.dob },
     {
       lableName: "Post Office",
       value: formData.postOffice,
@@ -37,7 +30,18 @@ function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
     { lableName: "Pin Code", value: formData.pinCode, error: errors.pinCode },
     { lableName: "District", value: formData.district, error: errors.district },
     { lableName: "State", value: formData.state, error: errors.state },
-    { lableName: "Selected Class", value: formData.class, error: errors.class },
+    { lableName: "DOB Date", value: formData.dobDate, error: errors.dobDate },
+    {
+      lableName: "DOB Month",
+      value: formData.dobMonth,
+      error: errors.dobMonth,
+    },
+    { lableName: "DOB Year", value: formData.dobYear, error: errors.dobYear },
+    {
+      lableName: "Selected Class",
+      value: formData.class,
+      error: errors.class,
+    },
   ];
   const getBranch = async () => {
     let { data } = await Axios.get("/branch/" + formData.branch);
@@ -87,7 +91,7 @@ function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
                     Selected Branch
                     {errors.branch && (
                       <div className="text-red-500 text-sm text-center">
-                        {errors.branch}
+                        {"Please select a branch"}
                       </div>
                     )}
                   </label>

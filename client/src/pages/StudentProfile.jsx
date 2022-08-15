@@ -95,10 +95,6 @@ function StudentProfile() {
                           )}
                         </span>
                       </li>
-                      <li className="flex items-center py-3">
-                        <span>Member since</span>
-                        <span className="ml-auto">Nov 07, 2016</span>
-                      </li>
                     </ul>
                   </div>
                   {/* End of profile card */}
@@ -175,12 +171,7 @@ function StudentProfile() {
                             {moment(student.dob).format("DD-MM-YYYY")}
                           </div>
                         </div>
-                        <div className="grid grid-cols-2">
-                          <div className="px-4 py-2 font-semibold">
-                            Aadhar Number
-                          </div>
-                          <div className="px-4 py-2">{student.aadhar}</div>
-                        </div>
+                        
                         <div className="grid grid-cols-2">
                           <div className="px-4 py-2 font-semibold">Place</div>
                           <div className="px-4 py-2">{student.place}</div>

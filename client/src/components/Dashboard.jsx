@@ -2,6 +2,7 @@ import {
   faBook,
   faBookOpenReader,
   faChalkboardUser,
+  faClockFour,
   faDonate, faExchange, faGraduationCap,
   faRightLeft,
   faSchool, faToolbox
@@ -66,9 +67,9 @@ function Dashboard() {
       link: "/all-payments",
     },
     {
-      text: "TRANSFER REQUESTS",
-      icon: faRightLeft,
-      link: "/transfer-request",
+      text: "SCHEDULES",
+      icon: faClockFour,
+      link: "/schedule",
     },
     {
       text: "ADMISSION REQUESTS",
@@ -76,9 +77,9 @@ function Dashboard() {
       link: "/admission-requests",
     },
     {
-      text: "SETTINGS ",
+      text: "CLASS MANAGEMENT ",
       icon: faToolbox,
-      link: "/settings",
+      link: "/class-management",
     },
     // {
     //   text: "Schedule",

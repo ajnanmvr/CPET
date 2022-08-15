@@ -56,7 +56,7 @@ function Schedule() {
 
   const getConfig = async () => {
     try {
-      let { data } = await Axios.get(`/schedule/${id}`);
+      let { data } = await Axios.post(`/schedule/${id}`);
       setConfig(data);
     } catch (error) {
       console.log(error);
@@ -163,7 +163,7 @@ function Schedule() {
                           setOpen(true);
                           setId(setting?._id);
                         }}
-                        className="bg-blue-400 py-2 px-4 text-white font-bold rounded-xl hover:bg-white hover:text-blue-400 border border-blue-400"
+                        className="bg-sky-900 py-2 px-4 text-white font-bold rounded-xl hover:bg-white hover:text-sky-600 border border-sky-900"
                       >
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
@@ -204,8 +204,7 @@ function CreateSchedule({ id, setConfig, config, setOpen, getConfig }) {
           position: toast.POSITION.TOP_CENTER,
         });
         setOpen(false);
-        getConfig();
-        navigate("/schedule");
+        window.location.href = "/schedule";
       }
     } catch (error) {
       console.log(error.response);

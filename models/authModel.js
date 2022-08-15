@@ -13,7 +13,7 @@ const authSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
-      lowercase: true,
+      uppercase: true,
     },
     role: {
       default: "admin",
@@ -23,10 +23,6 @@ const authSchema = new mongoose.Schema(
     branch: {
       type: mongoose.Types.ObjectId,
       ref: "Branch",
-    },
-    deleted: {
-      type: Boolean,
-      default: false,
     },
   },
   {

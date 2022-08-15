@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
 import { DISTRICT } from "../../Consts";
+import { UserAuthContext } from "../../context/user";
 
 function EditBranch() {
-  const { id } = useParams();
-
   const initialState = {
     branchName: "",
     place: "",
@@ -17,28 +16,18 @@ function EditBranch() {
     phone: "",
     username: "",
     password: "",
-    image: "",
   };
 
   const [inputData, setInputData] = useState(initialState);
   const [oldName, setOldName] = useState("");
-  const [branchImg, setBranchImg] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  const formData = new FormData();
-  formData.append("branchImg", branchImg);
-  formData.append("branchName", inputData.branchName);
-  formData.append("place", inputData.place);
-  formData.append("postOffice", inputData.postOffice);
-  formData.append("district", inputData.district);
-  formData.append("state", inputData.state);
-  formData.append("pinCode", inputData.pinCode);
-  formData.append("phone", inputData.phone);
+  const { authData } = useContext(UserAuthContext);
+  const navigate = useNavigate();
 
   const getBranch = async () => {
-    let { data } = await Axios.get("/branch/" + id);
+    let { data } = await Axios.get("/branch/" + authData?.branch?._id);
     setInputData(data);
-    setOldName(data.username);
+    setOldName(data?.username);
   };
 
   const onChange = (e) => {
@@ -50,7 +39,7 @@ function EditBranch() {
     e.preventDefault();
     setLoading(true);
     try {
-      let res = await Axios.patch("/branch/" + id, formData);
+      let res = await Axios.patch("/branch/" + authData?.branch._id, inputData);
       if (res.status === 200) {
         setLoading(false);
         setInputData(initialState);
@@ -58,7 +47,7 @@ function EditBranch() {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
-        window.location.href = "/all-branches";
+        navigate("/admin");
       }
     } catch (error) {
       setLoading(false);
@@ -97,22 +86,6 @@ function EditBranch() {
                   placeholder="Branch Name"
                   name="branchName"
                   value={inputData.branchName}
-                />
-              </div>
-            </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Branch Image
-                </label>
-                <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  type="file"
-                  onChange={(e) => setBranchImg(e.target.files[0])}
-                  value={inputData.branchImg}
                 />
               </div>
             </div>

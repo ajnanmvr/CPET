@@ -6,7 +6,7 @@ const GET_BRANCHES = gql`
     branches {
       id
       branchName
-      phone
+      phone1
       place 
       district
       admin {
@@ -19,8 +19,7 @@ const GET_BRANCH = gql`
   query GetBranches($id: ID!) {
     branch(id: $id) {
       branchName
-      image
-      phone
+      phone1
       district
       place
       pinCode

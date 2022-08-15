@@ -138,19 +138,7 @@ function TransferStudent() {
             />
           </div>
         </div>
-        <div className="lg:col-span-1">
-          <div className="px-4 sm:px-0">
-            <label className="block  text-sm font-bold mb-2" htmlFor="username">
-              Aadhar Number
-            </label>
-            <input
-              className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-              type="text"
-              disabled
-              value={student.aadhar}
-            />
-          </div>
-        </div>{" "}
+        
         <div className="lg:col-span-1">
           <div className="px-4 sm:px-0">
             <label className="block  text-sm font-bold mb-2" htmlFor="username">

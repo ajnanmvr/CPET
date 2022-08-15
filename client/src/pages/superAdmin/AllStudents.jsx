@@ -1,4 +1,4 @@
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -97,6 +97,12 @@ function AllStudents() {
                     >
                       VIEW
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      EDIT
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -122,6 +128,11 @@ function AllStudents() {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/profile/" + student._id}>
                           <FontAwesomeIcon icon={faEye} />
+                        </Link>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
+                        <Link to={"/edit-student/" + student._id}>
+                          <FontAwesomeIcon icon={faUserEdit} />
                         </Link>
                       </td>
                     </tr>

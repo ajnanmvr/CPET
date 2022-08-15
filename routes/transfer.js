@@ -36,7 +36,7 @@ router.get("/", protect, async (req, res, next) => {
 router.get("/:id", protect, async (req, res, next) => {
   try {
     let data = await Transfer.findById(req.params.id)
-      .populate("studentId", "studentName admissionNo aadhar phone")
+      .populate("studentId", "studentName admissionNo  phone")
       .populate("toBranch", "branchName place district ")
       .populate("fromBranch", "branchName place district")
       .sort("-createdAt");

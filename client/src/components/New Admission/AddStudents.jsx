@@ -10,18 +10,15 @@ function AddStudents() {
   const initialState = {
     studentName: "",
     fatherName: "",
-    motherName: "",
     houseName: "",
     dobDate: "",
     dobMonth: "",
     dobYear: "",
     place: "",
     postOffice: "",
-    guardian: "",
     district: "",
     state: "",
     pinCode: "",
-    aadhar: "",
     phone: "",
     branch: "",
     class: "",
@@ -34,7 +31,7 @@ function AddStudents() {
   const [formErrors, setFormErrors] = useState({});
   const [goNext, setGoNext] = useState(false);
   const [errors, setErrors] = useState({});
-console.log(formErrors);
+
   const navigate = useNavigate();
   let currentYear = new Date().getFullYear().toString();
   let nextYear = (new Date().getFullYear() + 1).toString();
@@ -88,7 +85,6 @@ console.log(formErrors);
   const onChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    console.log(name,value);
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
   const nextPage = (e) => {

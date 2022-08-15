@@ -8,8 +8,8 @@ export const ScheduleProvider = (props) => {
 
   const getSchedule = async (name) => {
     try {
-      let { data } = await Axios.get(`/schedule?name=${name}`);
-      setSchedule(data[0]);
+      let { data } = await Axios.get(`/schedule/${name}`);
+      setSchedule(data);
     } catch (error) {
       console.log(error);
     }

@@ -5,30 +5,22 @@ const router = require("express").Router();
 
 const storage = multer.memoryStorage({
   destination: (req, file, cb) => {
-    // if (req.route.methods.patch && !file) return;
-    cb(null, "./public");
+    cb(null, "./uploads");
   },
   filename: (req, file, cb) => {
-    if (req.route.methods.patch && !file) return;
     cb(null, file.originalname);
   },
 });
 const uploads = multer({ storage: storage });
 
-router.post(
-  "/",
-  protect,
-  uploads.single("branchImg"),
-  branchController.createBranch
-);
+router.post("/", protect, branchController.createBranch);
 router.get("/", branchController.getAllBranches);
-// router.delete("/:id", protect, branchController.deleteBranch);
 router.get("/:id", protect, branchController.getBranch);
-router.patch(
-  "/:id",
+router.patch("/:id", protect, branchController.editBranch);
+router.post(
+  "/upload-cover",
   protect,
-  uploads.single("branchImg"),
-  branchController.editBranch
+  uploads.single("imageCover"),
+  branchController.updateCoverImage
 );
-
 module.exports = router;

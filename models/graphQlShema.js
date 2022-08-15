@@ -16,7 +16,6 @@ const StudentType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     studentName: { type: GraphQLString },
-    aadhar: { type: GraphQLString },
     admissionNo: { type: GraphQLString },
     class: { type: GraphQLString },
     verified: { type: GraphQLBoolean },
@@ -35,8 +34,7 @@ const BranchType = new GraphQLObjectType({
     branchName: { type: GraphQLString },
     place: { type: GraphQLString },
     district: { type: GraphQLString },
-    image: { type: GraphQLString },
-    phone: { type: GraphQLString },
+    phone1: { type: GraphQLString },
     postOffice: { type: GraphQLString },
     pinCode: { type: GraphQLString },
     admin: {

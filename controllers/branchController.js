@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const Auth = require("../models/authModel");
 const sharp = require("sharp");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
 
 dotenv.config();
 admin.initializeApp({
@@ -52,7 +53,6 @@ exports.resizeImage = (file, id, next) => {
 exports.createBranch = catchAsync(async (req, res, next) => {
   let data = await Branch.create(req.body);
   let user = await Auth.create({ ...req.body, branch: data._id });
-  // await this.resizeImage(req.file, data._id, next);
   data.admin = user._id;
   data.save();
   res.status(200).json(data);
@@ -60,7 +60,6 @@ exports.createBranch = catchAsync(async (req, res, next) => {
 exports.editBranch = async (req, res, next) => {
   try {
     let data = await Branch.findByIdAndUpdate(req.params.id, req.body);
-    await this.resizeImage(req.file, data._id, next);
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
@@ -71,3 +70,18 @@ exports.editBranch = async (req, res, next) => {
 exports.getBranch = globalFuctions.getOne(Branch);
 exports.getAllBranches = globalFuctions.getAll(Branch);
 exports.deleteBranch = globalFuctions.deleteOne(Branch);
+
+exports.updateCoverImage = catchAsync(async (req, res, next) => {
+  console.log(req.file);
+  let uploaded = await sharp(req.file.buffer)
+    .resize(2000, 1333)
+    .toFormat("jpeg")
+    .jpeg({ quality: 90 })
+    .toFile(`public/img/branch-cover/${req.file.originalname}.jpeg`);
+
+  let data = await Branch.findByIdAndUpdate(req.user.branch, {
+    imageCover: req.file.originalname,
+  });
+  res.status(200).json(data);
+});
+

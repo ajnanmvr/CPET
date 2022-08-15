@@ -140,9 +140,9 @@ export const RestrictedRoutes = [
     role: "superAdmin",
   },
   {
-    route: "/edit-branch/:id",
+    route: "/edit-branch",
     component: <Branch.EditBranch />,
-    role: "superAdmin",
+    role: "admin",
   },
 
   {
@@ -282,10 +282,6 @@ export const ProtectRoutes = [
   {
     route: "/admissions",
     component: <Admissions />,
-  },
-  {
-    route: "/branch/:id",
-    component: <Branch.ViewBranch />,
   },
   {
     route: "/transfer/:id",

@@ -21,7 +21,6 @@ router.get(
 router.patch(
   "/:id",
   catchAsync(async (req, res) => {
-    console.log(req.body);
     let data = await Schedule.findByIdAndUpdate(req.params.id, req.body);
     res.status(200).json(data);
   })
@@ -29,7 +28,14 @@ router.patch(
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
-    let data = await Schedule.findByIdAndUpdate(req.params.id);
+    let data = await Schedule.findOne({ name: req.params.id });
+    res.status(200).json(data);
+  })
+);
+router.post(
+  "/:id",
+  catchAsync(async (req, res) => {
+    let data = await Schedule.findById(req.params.id);
     res.status(200).json(data);
   })
 );

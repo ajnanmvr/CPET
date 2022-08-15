@@ -16,6 +16,7 @@ exports.registerStudent = async (req, res, next) => {
     let data = await Student.create(req.body);
     res.status(200).json(data);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
