@@ -13,7 +13,8 @@ function CreateBranch() {
     district: "",
     state: "",
     pinCode: "",
-    phone: "",
+    phone1: "",
+    phone2: "",
     branchImg: "",
     password: "",
     username: "",
@@ -21,33 +22,20 @@ function CreateBranch() {
   };
   const [inputData, setInputData] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const [branchImg, setBranchImg] = useState(null);
   const [errors, setErrors] = useState({});
 
-  console.log(errors);
+
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputData((prevState) => ({ ...prevState, [name]: value }));
-  };
-
-  const formData = new FormData();
-  formData.append("branchImg", branchImg);
-  formData.append("branchName", inputData.branchName);
-  formData.append("place", inputData.place);
-  formData.append("postOffice", inputData.postOffice);
-  formData.append("district", inputData.district);
-  formData.append("state", inputData.state);
-  formData.append("pinCode", inputData.pinCode);
-  formData.append("phone", inputData.phone);
-  formData.append("username", inputData.username);
-  formData.append("password", inputData.password);
-  formData.append("branchCode", inputData.branchCode);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      let res = await Axios.post("/branch", formData);
+      let res = await Axios.post("/branch", inputData);
       if (res.data) {
         setLoading(false);
         setInputData(initialState);
@@ -172,10 +160,10 @@ function CreateBranch() {
                   className="block  text-sm font-bold mb-2"
                   htmlFor="username"
                 >
-                  Phone Number
-                  {errors.phone && (
+                  Phone Number 1
+                  {errors.phone1 && (
                     <h1 className="text-red-500 font-sm text-center">
-                      {errors.phone}
+                      {errors.phone1}
                     </h1>
                   )}
                 </label>
@@ -184,10 +172,35 @@ function CreateBranch() {
                   id="username"
                   type="text"
                   required
-                  value={inputData.phone}
+                  value={inputData.phone1}
                   onChange={(e) => onChange(e)}
-                  placeholder="Phone No:"
-                  name="phone"
+                  placeholder="Phone No 1:"
+                  name="phone1"
+                />
+              </div>
+            </div>
+            <div className="lg:col-span-1">
+              <div className="px-4 sm:px-0">
+                <label
+                  className="block  text-sm font-bold mb-2"
+                  htmlFor="username"
+                >
+                  Phone Number 2
+                  {errors.phone2 && (
+                    <h1 className="text-red-500 font-sm text-center">
+                      {errors.phone2}
+                    </h1>
+                  )}
+                </label>
+                <input
+                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  id="username"
+                  type="text"
+                  required
+                  value={inputData.phone2}
+                  onChange={(e) => onChange(e)}
+                  placeholder="Phone No 2:"
+                  name="phone2"
                 />
               </div>
             </div>

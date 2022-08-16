@@ -43,7 +43,7 @@ function EditTeacher() {
 
   const getTeacher = async () => {
     try {
-      let { data } = await Axios.post("/teacher/" + id);
+      let { data } = await Axios.get("/teacher/" + id);
       setFormData(data);
     } catch (error) {
       console.log(error);
@@ -163,7 +163,6 @@ function EditTeacher() {
                 <label className="block  text-sm font-bold mb-2">
                   Subjects
                 </label>{" "}
-
                 <select
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
@@ -201,14 +200,22 @@ function EditTeacher() {
             </div>
           </form>
           <div className="lg:col-span-1 mt-4">
-            <div className="px-4 sm:px-0">
+            <div className="px-4 sm:px-0  grid lg:grid-cols-2 gap-2">
               {!loading ? (
-                <button
-                  onClick={(e) => handleSubmit(e)}
-                  className="w-full lg:w-1/2 bg-sky-500 hover:bg-sky-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
-                >
-                  Submit
-                </button>
+                <>
+                  <button
+                    onClick={(e) => handleSubmit(e)}
+                    className="w-full  bg-sky-900 hover:bg-sky-900 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    onClick={(e) => navigate(-1)}
+                    className="w-full  bg-sky-500 hover:bg-sky-700 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                  >
+                    Cancel
+                  </button>
+                </>
               ) : (
                 <h1 className="text-white text-center w-full lg:w-1/2 bg-sky-600 hover:bg-sky-700  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
                   Processing..

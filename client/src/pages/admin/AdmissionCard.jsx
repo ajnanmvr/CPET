@@ -11,7 +11,7 @@ function AdmissionCard({ id, admClass }) {
       let { data } = await Axios.post(
         `/student?branch=${authData?.branch?._id}&class=${id}&verified=false`
       );
-      setStudents(data);
+      setStudents(data.docs);
     } catch (error) {
       console.log(error.response);
     }

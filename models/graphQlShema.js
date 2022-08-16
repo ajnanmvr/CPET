@@ -19,6 +19,7 @@ const StudentType = new GraphQLObjectType({
     admissionNo: { type: GraphQLString },
     class: { type: GraphQLString },
     verified: { type: GraphQLBoolean },
+    district: { type: GraphQLString },
     branch: {
       type: BranchType,
       resolve(parent, args) {
@@ -71,6 +72,21 @@ const RootQuery = new GraphQLObjectType({
         return Student.find();
       },
     },
+    myVerifiedStudents: {
+      type: new GraphQLList(StudentType),
+      args: {
+        adminId: { type: new GraphQLNonNull(GraphQLID) },
+        classId: { type: new GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Student.find({
+          verified: true,
+          branch: args.adminId,
+          class: args.classId,
+        });
+      },
+    },
+
     branches: {
       type: new GraphQLList(BranchType),
       resolve(parent, args) {

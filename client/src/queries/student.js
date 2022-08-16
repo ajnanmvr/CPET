@@ -11,10 +11,19 @@ const GET_STUDENTS = gql`
     }
   }
 `;
+const MY_VERIFIED_STUDENTS = gql`
+  query myVerifiedStudents($adminId: ID!, $classId: ID!) {
+    myVerifiedStudents(adminId: $adminId, classId: $classId) {
+      id
+      studentName
+      district
+    }
+  }
+`;
 
 const BRANCH_STUDENTS = gql`
-  query getBranchStudents($branchId: ID!) {
-    branchStudents(branchId: $branchId) {
+  query getBranchStudents($branchId: ID!, $class: ID) {
+    branchStudents(branchId: $branchId, class: $class) {
       studentName
       class
       verified
@@ -23,4 +32,4 @@ const BRANCH_STUDENTS = gql`
   }
 `;
 
-export { GET_STUDENTS, BRANCH_STUDENTS };
+export { GET_STUDENTS, BRANCH_STUDENTS, MY_VERIFIED_STUDENTS };

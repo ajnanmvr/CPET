@@ -13,7 +13,6 @@ const authSchema = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
-      uppercase: true,
     },
     role: {
       default: "admin",

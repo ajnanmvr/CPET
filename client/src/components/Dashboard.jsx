@@ -3,17 +3,13 @@ import {
   faBookOpenReader,
   faChalkboardUser,
   faClockFour,
-  faDonate, faExchange, faGraduationCap,
-  faRightLeft,
-  faSchool, faToolbox
+  faDonate, faExchange, faGraduationCap, faSchool, faToolbox
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../Axios";
 import { UserAuthContext } from "../context/user";
-import AllBranchPie from "../pages/superAdmin/AllBranchPie";
-import AllClassPie from "../pages/superAdmin/AllClassPie";
 
 function Dashboard() {
   const { authData } = useContext(UserAuthContext);
@@ -45,11 +41,6 @@ function Dashboard() {
       text: "STUDY CENTERS",
       icon: faSchool,
       link: "/all-branches",
-    },
-    {
-      text: "TEACHERS",
-      icon: faChalkboardUser,
-      link: "/all-branch-teachers",
     },
     {
       text: "STUDENTS",

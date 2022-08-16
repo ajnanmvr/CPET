@@ -31,7 +31,7 @@ function AddStudents() {
   const [formErrors, setFormErrors] = useState({});
   const [goNext, setGoNext] = useState(false);
   const [errors, setErrors] = useState({});
-
+  const [selectedClass, setSelectedClass] = useState("");
   const navigate = useNavigate();
   let currentYear = new Date().getFullYear().toString();
   let nextYear = (new Date().getFullYear() + 1).toString();
@@ -151,6 +151,7 @@ function AddStudents() {
           setFormData={setFormData}
           setImageUploaded={setImageUploaded}
           imageUploaded={imageUploaded}
+          setSelectedClass={setSelectedClass}
         />
       );
     case 3:
@@ -160,6 +161,7 @@ function AddStudents() {
           prevPage={prevPage}
           handleSubmit={handleSubmit}
           errors={errors}
+          selectedClass={selectedClass}
         />
       );
   }

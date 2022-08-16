@@ -28,10 +28,11 @@ function Admissions() {
         Admission Requests
       </h1>
 
-      <div className="w-full items-center px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-5">
-        {classes.map((item, key) => (
-          <AdmissionCard admClass={item.className} key={key} id={item._id} />
-        ))}
+      <div className="w-full items-start px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-5">
+        {classes.length > 0 &&
+          classes.map((item, key) => (
+            <AdmissionCard admClass={item.className} key={key} id={item._id} />
+          ))}
       </div>
     </>
   );

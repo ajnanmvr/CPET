@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import Axios from "../../Axios";
 
-function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
+function VerifyDetails({
+  formData,
+  handleSubmit,
+  prevPage,
+  errors,
+  selectedClass,
+}) {
   const [branch, setBranch] = useState("");
 
   const forms = [
@@ -39,7 +45,7 @@ function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
     { lableName: "DOB Year", value: formData.dobYear, error: errors.dobYear },
     {
       lableName: "Selected Class",
-      value: formData.class,
+      value: selectedClass,
       error: errors.class,
     },
   ];
@@ -47,6 +53,7 @@ function VerifyDetails({ formData, handleSubmit, prevPage, errors }) {
     let { data } = await Axios.get("/branch/" + formData.branch);
     setBranch(data.branchName);
   };
+
   useEffect(() => {
     getBranch();
   }, []);

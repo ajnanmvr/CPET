@@ -211,7 +211,10 @@ exports.checkUserLoggedIn = async (req, res, next) => {
     res.status(200).json({ error: "user not logged in" });
   } else {
     let decoded = jwt.verify(token, process.env.JWT_SECRET);
-    let user = await Auth.findById(decoded.userId).populate("branch");
+    let user = await Auth.findById(decoded.userId).populate(
+      "branch",
+      "branchName _id role username"
+    );
     res.status(200).json({ user: user });
   }
 };

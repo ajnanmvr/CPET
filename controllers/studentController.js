@@ -3,7 +3,6 @@ const excelToJson = require("convert-excel-to-json");
 const fs = require("fs");
 const globalFunctions = require("../utils/globalFuctions");
 const mongoose = require("mongoose");
-const Email = require("../utils/email");
 const Branch = require("../models/branchModel");
 const catchAsync = require("../utils/catchAsync");
 
@@ -52,7 +51,7 @@ exports.getBranchDetails = async (req, res) => {
   try {
     let data = await Student.aggregate([
       {
-        $match: { branch: mongoose.Types.ObjectId(req.params.branch) },
+        $match: { branch: mongoose.Types.ObjectId(req.params.id) },
       },
       {
         $group: {

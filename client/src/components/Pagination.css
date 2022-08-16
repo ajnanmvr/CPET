@@ -1,0 +1,17 @@
+.pagination {
+    padding-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pagination button {
+    margin-right: 0.5rem;
+    cursor: pointer;
+    padding: 7px 15px;
+  }
+  
+  .pagination button:disabled {
+    background-color: #333;
+    color: #fff;
+    cursor: not-allowed;
+  }

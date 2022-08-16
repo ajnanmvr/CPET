@@ -72,7 +72,6 @@ exports.getAllBranches = globalFuctions.getAll(Branch);
 exports.deleteBranch = globalFuctions.deleteOne(Branch);
 
 exports.updateCoverImage = catchAsync(async (req, res, next) => {
-  console.log(req.file);
   let uploaded = await sharp(req.file.buffer)
     .resize(2000, 1333)
     .toFormat("jpeg")

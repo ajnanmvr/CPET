@@ -1,17 +1,21 @@
+import { useQuery } from "@apollo/client";
 import { faEye, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Axios from "../../Axios";
-import { ScheduleContext } from "../../context/schedule";
+import Loading from "../../components/Loading";
 import { UserAuthContext } from "../../context/user";
+import { MY_VERIFIED_STUDENTS } from "../../queries/student";
 
 function AllStudents() {
-  const [students, setStudents] = useState([]);
+  const { classId } = useParams();
+  // const [students, setStudents] = useState([]);
   const { authData } = useContext(UserAuthContext);
   const [className, setClassName] = useState(null);
-
-  const { classId } = useParams();
+  const { data, error, loading } = useQuery(MY_VERIFIED_STUDENTS, {
+    variables: { adminId: authData?.branch?._id, classId: classId },
+  });
 
   const getClass = async () => {
     try {
@@ -21,42 +25,55 @@ function AllStudents() {
       console.log(error);
     }
   };
-  const getAllStudents = async () => {
-    try {
-      let { data } = await Axios.post(
-        `/student?branch=${
-          authData ? authData.branch._id : authData.branch
-        }&class=${classId}&verified=true`
-      );
-      setStudents(data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
+
+  // const getAllStudents = async () => {
+  //   try {
+  //     let { data } = await Axios.post(
+  //       `/student?branch=${
+  //         authData ? authData.branch._id : authData.branch
+  //       }&class=${classId}&verified=true`
+  //     );
+  //     setStudents(data.docs);
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   useEffect(() => {
-    getAllStudents();
+    // authData && getAllStudents();
     getClass();
   }, [classId]);
-  return (
-    <>
-      <div className="flex flex-col ml-6">
-        <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
-          {className?.className} ({students.length})
-        </h3>
-        <div className="mx-auto ">
-          <div className="flex"></div>
-          <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
-            <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              {students.length > 0 && <StudentsTable />}
-              <div className="lg:col-span-1"></div>
-              <div className="overflow-hidden h-screen"></div>
+
+  if (error) {
+    return (
+      <h1 className="text-3xl font-bold text-red-500">Something Went Wrong</h1>
+    );
+  }
+  if (loading) {
+    return <Loading />;
+  }
+  if (!error && !loading) {
+    return (
+      <>
+        <div className="flex flex-col ml-6">
+          <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
+            {className?.className} ({data?.myVerifiedStudents?.length})
+          </h3>
+          <div className="mx-auto ">
+            <div className="flex"></div>
+            <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
+              <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <StudentsTable />
+
+                <div className="lg:col-span-1"></div>
+                <div className="overflow-hidden h-screen"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 
   function StudentsTable() {
     return (
@@ -106,7 +123,7 @@ function AllStudents() {
                   </tr>
                 </thead>
                 <tbody>
-                  {students.map((student, index) => (
+                  {data?.myVerifiedStudents?.map((student, index) => (
                     <tr
                       key={index}
                       className="border-b hover:bg-blue-900 hover:cursor-pointer group"
@@ -118,7 +135,7 @@ function AllStudents() {
                         {student?.admissionNo}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
-                        <Link to={`/profile/${student._id}`}>
+                        <Link to={`/profile/${student.id}`}>
                           {student.studentName}
                         </Link>
                       </td>
@@ -126,12 +143,12 @@ function AllStudents() {
                         {student.district}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
-                        <Link to={"/profile/" + student._id}>
+                        <Link to={"/profile/" + student.id}>
                           <FontAwesomeIcon icon={faEye} />
                         </Link>
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
-                        <Link to={"/edit-student/" + student._id}>
+                        <Link to={"/edit-student/" + student.id}>
                           <FontAwesomeIcon icon={faUserEdit} />
                         </Link>
                       </td>

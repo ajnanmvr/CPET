@@ -166,11 +166,6 @@ export const RestrictedRoutes = [
     role: "superAdmin",
   },
   {
-    route: "/all-branch-teachers/:id",
-    component: <Teacher.BranchBasedTeachers />,
-    role: "superAdmin",
-  },
-  {
     route: "/all-subjects",
     component: <AllSubjects />,
     role: "superAdmin",

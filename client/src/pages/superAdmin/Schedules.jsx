@@ -81,7 +81,7 @@ function Schedule() {
           getConfig={getConfig}
         />
       )}
-      <h1 className="text-center text-3xl my-4 font-bold text-red-500 uppercase">
+      <h1 className="text-center text-3xl my-4 font-bold text-sky-800 uppercase">
         schedule page
       </h1>
       <Link

@@ -8,14 +8,12 @@ function ViewTeacher() {
   const [teacher, setTeacher] = useState({});
   const getTeacher = async () => {
     try {
-      let { data } = await Axios.post(`/teacher/${id}`);
+      let { data } = await Axios.get(`/teacher/${id}`);
       setTeacher(data);
     } catch (error) {
       console.log(error.response);
     }
   };
-
-  console.log(teacher);
 
   useEffect(() => {
     getTeacher();

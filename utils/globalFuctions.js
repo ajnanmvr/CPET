@@ -12,7 +12,7 @@ exports.getAll =
   (Model, populateOption1, populateOption2) => async (req, res) => {
     try {
       //EXECUTE THE QUERY
-
+      const page = parseInt(req.query.page) || 1;
       const features = new APIFeatures(
         Model.find().populate(populateOption1).populate(populateOption2),
         req.query
@@ -21,9 +21,10 @@ exports.getAll =
         .sort()
         .limitFields()
         .paginate();
-      const doc = await features.query;
+      const docs = await features.query;
+      const pages = Math.ceil(Model.length / 9);
       //SEND RESPONSE
-      res.status(200).json(doc);
+      res.status(200).json({ docs, pages, page });
     } catch (error) {
       res.status(400).json(error);
     }
@@ -41,7 +42,6 @@ exports.getOne =
     }
   };
 exports.updateOne = (Model) => async (req, res) => {
-  console.log(req.body);
   try {
     const item = await Model.findById(req.params.id);
     if (item) {

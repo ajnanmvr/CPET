@@ -198,7 +198,6 @@ function CreateTeacher() {
                 <label className="block  text-sm font-bold mb-2">
                   Subjects
                 </label>{" "}
-
                 <select
                   className="bg-gray-50 border text-bold border-gray-300 text-sky-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   onChange={(e) => handleSubjects(e.target.value)}
@@ -206,7 +205,7 @@ function CreateTeacher() {
                   <option hidden>Select subjects </option>
                   {subjects.map((subject, index) => (
                     <option key={index} value={subject._id}>
-                      {subject.subjectName} {"  "}
+                      {subject.subjectName}
                       {subject.subjectCode}
                     </option>
                   ))}
@@ -222,7 +221,7 @@ function CreateTeacher() {
                 {selectedSubjects.map((item, key) => (
                   <div className="flex justify-between mx-2 text-center cursor-pointer bg-sky-900 px-2 my-2  text-white py-1">
                     <h1 key={key}>
-                      {item.subjectName} {"  "} {item.subjectCode}
+                      {item.subjectName} {item.subjectCode}
                     </h1>
                     <FontAwesomeIcon
                       onClick={() => removeSubject(item._id)}

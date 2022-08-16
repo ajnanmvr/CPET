@@ -146,18 +146,7 @@ function StudentProfile() {
                           </div>
                           <div className="px-4 py-2">{student.fatherName}</div>
                         </div>
-                        <div className="grid grid-cols-2">
-                          <div className="px-4 py-2 font-semibold">
-                            Mother Name
-                          </div>
-                          <div className="px-4 py-2">{student.motherName}</div>
-                        </div>
-                        <div className="grid grid-cols-2">
-                          <div className="px-4 py-2 font-semibold">
-                            Guardian
-                          </div>
-                          <div className="px-4 py-2">{student.guardian}</div>
-                        </div>
+
                         <div className="grid grid-cols-2">
                           <div className="px-4 py-2 font-semibold">Phone</div>
                           <div className="px-4 py-2">+91 {student.phone}</div>
@@ -171,7 +160,7 @@ function StudentProfile() {
                             {moment(student.dob).format("DD-MM-YYYY")}
                           </div>
                         </div>
-                        
+
                         <div className="grid grid-cols-2">
                           <div className="px-4 py-2 font-semibold">Place</div>
                           <div className="px-4 py-2">{student.place}</div>

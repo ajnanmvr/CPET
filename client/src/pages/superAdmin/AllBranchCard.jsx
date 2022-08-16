@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
-import AllBranchPie from "./AllBranchPie";
-import AllClassPie from "./AllClassPie";
+import Pagination from "../../components/Pagination";
 
 function AllBranchCard() {
   const [branches, setBranches] = useState([]);
   const [start, setStart] = useState(0);
+  const { pathname } = useLocation();
+  const [postsPerPage, setPostsPerPage] = useState(9);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentBranches = branches.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
   const getAllBranches = async () => {
     try {
-      let { data } = await Axios.get("/branch");
-      setBranches(data);
+      let { data } = await Axios.get("/branch?sort=branchName");
+      setBranches(data.docs);
     } catch (error) {
       console.log(error);
     }
@@ -31,20 +46,29 @@ function AllBranchCard() {
   };
   useEffect(() => {
     getAllBranches();
-  }, []);
+  }, [pathname]);
   return (
     <>
-      <div className="w-full items-center px-4 py-8 m-auto mt-5 grid grid-cols-1 lg:grid-cols-4">
+      <Pagination
+        paginate={paginate}
+        postsPerPage={postsPerPage}
+        totalPosts={branches.length}
+        currentPage={currentPage}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
+      <div className="grid lg:grid-cols-3 gap-2 grid-cols-1">
         {branches.length === 0 ? (
           <Loading />
         ) : (
-          branches.map((branch, key) => (
+          currentBranches.map((branch, key) => (
             <>
               <Link to={branch._id} key={key} className="m-2 items-center">
-                <div className="bg-gray-900 rounded-xl   duration-300 shadow-xl group">
+                <div className="bg-gray-900 rounded-xl pb-4  duration-300 shadow-xl group">
                   <img
-                    src={`/img/${branch._id}.jpeg`}
+                    // src={`/img/${branch._id}.jpeg`}
                     alt="image"
+                    src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg"
                     className="w-full rounded-t-xl max-h-40"
                   />
 
@@ -57,9 +81,8 @@ function AllBranchCard() {
           ))
         )}
       </div>
-      <AllBranchPie />
-      <AllClassPie />
-      <div className="w-1/4 ml-auto mr-4 my-4">
+
+      <div className="lg:w-1/4 ml-auto mr-4 my-4">
         <label className="block  text-sm font-bold mb-2" htmlFor="username">
           ADMISSION NUMBER STARTING:
         </label>

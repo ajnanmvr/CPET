@@ -4,28 +4,22 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
+import { UserAuthContext } from "../../context/user";
 
 function AllTeachers() {
   const [teachers, setTeachers] = useState([]);
+  const { authData } = useContext(UserAuthContext);
 
   const getAllTeachers = async () => {
     try {
-      let { data } = await Axios.get("/teacher/my-teachers");
-      setTeachers(data);
+      let { data } = await Axios.get(`/teacher?branch=${authData.branch._id}`);
+      console.log(data);
+      setTeachers(data.docs);
     } catch (error) {
       console.log(error.response);
     }
   };
-  // const deleteTeacher = async (teacherId) => {
-  //   try {
-  //     if (window.confirm("Do you want to delete teacher")) {
-  //       await Axios.delete(`/teacher/${teacherId}`);
-  //       getAllTeachers();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
   useEffect(() => {
     getAllTeachers();
   }, []);
@@ -34,7 +28,7 @@ function AllTeachers() {
       <div className="flex flex-col">
         <h3 className="text-4xl text-center font-bold text-blue-900 uppercase my-4">
           All Teachers
-        </h3>{" "}
+        </h3>
         <div className="w-full mx-auto">
           <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -87,11 +81,10 @@ function AllTeachers() {
                     >
                       VIEW
                     </th>
-                  
                   </tr>
                 </thead>
                 <tbody>
-                  {teachers.map((teacher, index) => (
+                  {teachers?.map((teacher, index) => (
                     <tr key={index} className="border-b">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {index + 1}

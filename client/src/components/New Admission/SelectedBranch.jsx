@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
 import { DISTRICT } from "../../Consts";
-import FileDataPage from "./FileDataPage";
 
 function SelectedBranch({
   formData,
@@ -12,6 +11,7 @@ function SelectedBranch({
   setFormData,
   setImageUploaded,
   imageUploaded,
+  setSelectedClass,
 }) {
   const [classes, setClasses] = useState([]);
   const [branches, setBranches] = useState([]);
@@ -69,7 +69,7 @@ function SelectedBranch({
   const getAllBranches = async () => {
     try {
       let { data } = await Axios.get(`/branch?district=${selectedBranch}`);
-      setBranches(data);
+      setBranches(data.docs);
     } catch (error) {
       console.log(error.response);
     }
@@ -164,9 +164,10 @@ function SelectedBranch({
                       : "bg-gray-800"
                   }`}
                   key={index}
-                  onClick={(e) =>
-                    setFormData({ ...formData, class: studentClass._id })
-                  }
+                  onClick={(e) => {
+                    setSelectedClass(studentClass.className);
+                    setFormData({ ...formData, class: studentClass._id });
+                  }}
                 >
                   {studentClass.className}
                 </div>

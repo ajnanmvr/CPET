@@ -155,12 +155,11 @@ function Sidebar() {
                     to={"/profile"}
                     className="text-[15px] ml-4 text-teal-700 font-bold uppercase"
                   >
-                    {authData.username}
+                   My Account
                   </Link>
                 ) : (
                   <div className="text-[15px] ml-4 text-teal-700 font-bold uppercase">
-                    {" "}
-                    {authData.username}
+                   My Account
                   </div>
                 )}
               </div>

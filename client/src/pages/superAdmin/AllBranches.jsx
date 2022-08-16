@@ -1,40 +1,63 @@
-import { useQuery } from "@apollo/client";
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import Loading from "../../components/Loading";
-import { GET_BRANCHES } from "../../queries/branch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLocation,
   faLocationPinLock,
-  faPhone,
+  faPhone
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Axios from "../../Axios";
+import Loading from "../../components/Loading";
+import Pagination from "../../components/Pagination";
+
 function AllBranches() {
-  const { data, error, loading, refetch } = useQuery(GET_BRANCHES);
+  const [branches, setBranches] = useState([]);
   const { pathname } = useLocation();
+  const [postsPerPage, setPostsPerPage] = useState(9);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = branches.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+  const prevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const getAllBranches = async () => {
+    try {
+      let { data } = await Axios.get(`/branch?sort=branchName`);
+      setBranches(data.docs);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    refetch();
-  }, [pathname]);
-
-  if (error) {
-    return (
-      <h1 className="text-red-500 text-center font-bold">
-        Something Went Wrong{" "}
-      </h1>
-    );
-  }
-  if (loading) {
-    return <h1 className="text-blue-500 text-center font-bold">Loading ...</h1>;
-  }
+    getAllBranches();
+  }, [currentPage, pathname]);
 
   return (
     <>
-      <div className="flex flex-col ">
+      <Pagination
+        paginate={paginate}
+        postsPerPage={postsPerPage}
+        totalPosts={branches.length}
+        currentPage={currentPage}
+        nextPage={nextPage}
+        prevPage={prevPage}
+      />
+      <div className="flex flex-col h-auto">
         <div className="w-full mx-auto">
           <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
             <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              {data?.branches.length > 0 ? <BranchTable /> : <Loading />}
+              {branches.length > 0 ? <BranchTable /> : <Loading />}
               <div className="overflow-hidden h-screen"></div>
             </div>
           </div>
@@ -45,39 +68,52 @@ function AllBranches() {
 
   function BranchTable() {
     return (
-      <div>
-        <div className="grid grid-cols-3">
-          {data.branches.map((branch, index) => (
-            <Link
-              to={`/branch/${branch.id}`}
-              className="rounded overflow-hidden m-3 shadow-lg group"
-            >
-              <img
-                className="w-full"
-                src={`https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg`}
-                // src={`/img/${branch._id}.jpeg`}
-                alt="Sunset in the mountains"
-              />
-              <div className="px-6 py-4">
-                <div className="font-bold text-sky-800 text-xl mb-2 group-hover:text-blue-500">
-                  {branch.branchName}
-                </div>
-                <p className="text-gray-700 text-base">
-                  <FontAwesomeIcon icon={faLocation} /> {branch.place}
-                </p>
+      <>
+        <div>
+          <div className="grid lg:grid-cols-3 gap-2 grid-cols-1">
+            {currentPosts.map((branch, index) => (
+              <div className="relative" key={index}>
+                <Link
+                  to={`/branch/${branch._id}`}
+                  className="rounded overflow-hidden m-3 shadow-lg group"
+                >
+                  <img
+                    className="w-full "
+                    src={`https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg`}
+                    // src={`/img/${branch._id}.jpeg`}
+                    alt="Sunset in the mountains"
+                  />
+
+                  <div className="px-6 py-4">
+                    <div className="font-bold text-sky-800  mb-2 group-hover:text-blue-500">
+                      {branch.branchName}
+                    </div>
+                    <div className="flex">
+                      {" "}
+                      <p className="text-gray-700 text-base mr-3">
+                        <FontAwesomeIcon icon={faLocation} /> {branch.place}
+                      </p>
+                      <p className="text-gray-700 text-base">
+                        <FontAwesomeIcon icon={faLocation} />{" "}
+                        {branch.branchCode}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="px-6 pt-4 pb-2">
+                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                      <FontAwesomeIcon icon={faLocationPinLock} />{" "}
+                      {branch.district}
+                    </span>
+                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                      <FontAwesomeIcon icon={faPhone} /> {branch.phone1}
+                    </span>
+                  </div>
+                </Link>
               </div>
-              <div className="px-6 pt-4 pb-2">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  <FontAwesomeIcon icon={faLocationPinLock} /> {branch.district}
-                </span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  <FontAwesomeIcon icon={faPhone} /> {branch.phone1}
-                </span>
-              </div>
-            </Link>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 }

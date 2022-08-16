@@ -29,7 +29,7 @@ router.post(
   restrictTo("admin"),
   studentController.getMyStudents
 );
-router.get("/details/:branch", studentController.getBranchDetails);
+router.get("/details/:id", studentController.getBranchDetails);
 router.post("/all-details/", studentController.getAllDetails);
 router.post(
   "/update-admission/",

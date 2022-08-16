@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import AboutUs from "./About";
 import Contact from "./Contact";
 import SlideShow from "./Slideshow";
 
@@ -18,28 +17,7 @@ function Homepage() {
             big ideas and sharing what we learn, we make the world a better
             place. For more than 135 years, we haven’t strayed from that vision.
           </p>
-          <div className="statusContainer">
-            <div className="sec">
-              <div className="secIcon" />
-              <p className="secInfo">85+</p>
-              <p className="secName">Graduates</p>
-            </div>
-            <div className="sec">
-              <div className="secIcon" />
-              <p className="secInfo">85+</p>
-              <p className="secName">Graduates</p>
-            </div>
-            <div className="sec">
-              <div className="secIcon" />
-              <p className="secInfo">85+</p>
-              <p className="secName">Graduates</p>
-            </div>
-            <div className="sec">
-              <div className="secIcon" />
-              <p className="secInfo">85+</p>
-              <p className="secName">Graduates</p>
-            </div>
-          </div>
+          
         </section>
         <Contact />
 

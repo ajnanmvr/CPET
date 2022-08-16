@@ -49,7 +49,11 @@ const studentSchema = new mongoose.Schema({
     required: [true, "state is required"],
     maxLength: [30, "30 characters are allowed"],
   },
- 
+  registerNo: {
+    type: String,
+    uppercase: true,
+    maxLength: [50, "50 characters are allowed"],
+  },
   dobDate: {
     type: String,
     required: [true, "DOB Date is required"],
@@ -71,7 +75,7 @@ const studentSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    required: [true, "Phone is required"],
+    // required: [true, "Phone is required"],
     maxLength: [15, "15 characters are allowed"],
   },
   branch: {
@@ -90,9 +94,6 @@ const studentSchema = new mongoose.Schema({
     ref: "Class",
   },
   academicYear: {
-    type: String,
-  },
-  branchAdm: {
     type: String,
   },
   certificateOne: String,
