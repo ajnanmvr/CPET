@@ -1,4 +1,6 @@
 import React from "react";
+import '../../base.css'
+import '../../style.css'
 
 function Homepage() {
   return (
@@ -9,7 +11,7 @@ function Homepage() {
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
               <a className="navbar-brand" href="#">
-                <img src="./src/logo.png" alt />
+                <img src="/logo.png" alt />
               </a>
               <a href="#" className="mobile-nav-toggle">
                 <span />
@@ -859,7 +861,7 @@ function Homepage() {
                 <div className="col-lg-4 col-md-6">
                   <div className="footer-widget text-widget">
                     <a href="#CPET/index.html" className="footer-logo">
-                      <img src="./src/logo-light.png" alt />
+                      <img src="/logo-light.png" alt />
                     </a>
                     <p>
                       Centre for Public Education and Training is an extension
