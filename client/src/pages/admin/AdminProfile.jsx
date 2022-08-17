@@ -1,9 +1,10 @@
 import { faBuilding, faEdit, faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
+import { UserAuthContext } from "../../context/user";
 
 function AdminProfile() {
   const [openModal, setOpenModel] = useState(false);
@@ -13,7 +14,16 @@ function AdminProfile() {
   const [currentPassword, setCurrentPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
   const [image, setImage] = useState(null);
+  const { authData } = useContext(UserAuthContext);
 
+
+  const editCoverImage=async()=>{
+    try {
+      let res=await Axios.post()
+    } catch (error) {
+      
+    }
+  }
   const getMyProfile = async () => {
     try {
       let { data } = await Axios.get("/auth/profile");
@@ -47,7 +57,8 @@ function AdminProfile() {
   };
   const getMyBranch = async () => {
     try {
-      let { data } = await Axios.get("/branch/" + profile?.branch);
+      let { data } = await Axios.get("/branch/" + authData.branch._id);
+      console.log(data);
       setBranch(data);
     } catch (error) {
       console.log(error);
@@ -69,11 +80,9 @@ function AdminProfile() {
   };
   useEffect(() => {
     getMyProfile();
+    getMyBranch();
   }, []);
 
-  useEffect(() => {
-    profile?.branch && getMyBranch();
-  }, [profile.branch]);
   return (
     <div className="bg-gray-100">
       {/* End of Navbar */}
@@ -106,8 +115,6 @@ function AdminProfile() {
               <h1 className="text-gray-900 font-bold text-xl uppercase leading-8 my-1">
                 {profile.username}
               </h1>
-
-             
             </div>
             {/* End of profile card */}
             <div className="my-4" />
@@ -134,37 +141,41 @@ function AdminProfile() {
                     <div className="px-4 py-2 font-semibold">
                       Study Center Name
                     </div>
-                    <div className="px-4 py-2">{branch.branchName}</div>
+                    <div className="px-4 py-2">{branch?.branchName}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">
                       Study Center Code
                     </div>
-                    <div className="px-4 py-2">{branch.branchCode}</div>
+                    <div className="px-4 py-2">{branch?.branchCode}</div>
                   </div>
                   <div className="grid grid-cols-2">
-                    <div className="px-4 py-2 font-semibold">Contact No.</div>
-                    <div className="px-4 py-2"> {branch.phone}</div>
+                    <div className="px-4 py-2 font-semibold">Contact No 1</div>
+                    <div className="px-4 py-2"> {branch?.phone1}</div>
+                  </div>
+                  <div className="grid grid-cols-2">
+                    <div className="px-4 py-2 font-semibold">Contact No 2</div>
+                    <div className="px-4 py-2"> {branch?.phone2}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Location</div>
-                    <div className="px-4 py-2">{branch.place}</div>
+                    <div className="px-4 py-2">{branch?.place}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Post Office</div>
-                    <div className="px-4 py-2">{branch.postOffice}</div>
+                    <div className="px-4 py-2">{branch?.postOffice}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">Pincode</div>
-                    <div className="px-4 py-2">{branch.pinCode}</div>
+                    <div className="px-4 py-2">{branch?.pinCode}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">District</div>
-                    <div className="px-4 py-2">{branch.district}</div>
+                    <div className="px-4 py-2">{branch?.district}</div>
                   </div>
                   <div className="grid grid-cols-2">
                     <div className="px-4 py-2 font-semibold">State</div>
-                    <div className="px-4 py-2">{branch.state}</div>
+                    <div className="px-4 py-2">{branch?.state}</div>
                   </div>
                 </div>
               </div>
@@ -252,7 +263,7 @@ function AdminProfile() {
     </div>
   );
 }
-const EditProfile = ({ setOpenModel, handleUpload,setImage }) => {
+const EditProfile = ({ setOpenModel, handleUpload, setImage }) => {
   return (
     <div>
       <div
@@ -288,7 +299,7 @@ const EditProfile = ({ setOpenModel, handleUpload,setImage }) => {
                           type="file"
                           required
                           name="name"
-                          onChange={(e)=>setImage(e.target.files[0])}
+                          onChange={(e) => setImage(e.target.files[0])}
                         />
                       </div>
                     </form>

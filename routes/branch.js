@@ -1,24 +1,15 @@
 const { protect } = require("../controllers/authController");
 const branchController = require("../controllers/branchController");
-const multer = require("multer");
 const router = require("express").Router();
+const dotenv = require("dotenv");
 
-const storage = multer.memoryStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const uploads = multer({ storage: storage });
+dotenv.config();
+
 
 router.post("/", protect, branchController.createBranch);
 router.get("/", branchController.getAllBranches);
 router.get("/:id", protect, branchController.getBranch);
 router.patch("/:id", protect, branchController.editBranch);
-router.post(
-  "/upload-cover",
-  branchController.updateCoverImage
-);
+
+router.post("/upload-cover/", branchController.updateCoverImage);
 module.exports = router;

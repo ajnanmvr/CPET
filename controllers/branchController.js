@@ -3,48 +3,32 @@ const globalFuctions = require("../utils/globalFuctions");
 const Auth = require("../models/authModel");
 const sharp = require("sharp");
 const catchAsync = require("../utils/catchAsync");
-const AppError = require("../utils/AppError");
-const S3 = require("aws-sdk/clients/s3");
+const multerS3 = require("multer-s3");
+const multer = require("multer-s3");
+const aws = require("aws-sdk");
 const dotenv = require("dotenv");
-const multer = require("multer");
-const fs = require("fs");
-const AWS = require("aws-sdk");
 
 dotenv.config();
 
-//configuring the AWS environment
-AWS.config.update({
-  region: process.env.AWS_REGION,
+const s3 = new aws.S3({
+  region: "ap-southeast-1",
   accessKeyId: process.env.S3_ACCESS_KEY,
   secretAccessKey: process.env.S3_SECRET_KEY,
-  s3ForcePathStyle:true,
-  s3BucketEndpoint:true
 });
 
-// const s3 = new S3({
-//   region: process.env.AWS_REGION,
-//   accessKeyId: process.env.S3_ACCESS_KEY,
-//   secretAccessKey: process.env.S3_SECRET_KEY,
-// });
-// upload file to s3
-const upload = (fileName) => {
-  const fileContent = fs.readFileSync(fileName);
-
-  new AWS.S3().upload(
-    {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Body: fileContent,
-      Key: "image.png",
-    },
-    (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("file uploaded successfully", data.Location);
-      }
-    }
-  );
-};
+const upload = () =>
+  multer({
+    storage: multerS3({
+      s3: s3,
+      bucket: process.env.AWS_BUCKET_NAME,
+      metadata: function (req, file, cb) {
+        cb(null, { fieldName: file.fieldname });
+      },
+      key: function (req, file, cb) {
+        cb(null, `image-${Date.now()}.jpeg`);
+      },
+    }),
+  });
 
 exports.resizeImage = (file, id, next) => {
   if (!file) return next();
@@ -81,5 +65,6 @@ exports.getAllBranches = globalFuctions.getAll(Branch);
 exports.deleteBranch = globalFuctions.deleteOne(Branch);
 
 exports.updateCoverImage = catchAsync(async (req, res, next) => {
-  upload(__dirname + "/uploads/image.png");
+  await upload().single("cover-image");
+  res.status(200).json({ message: "image uploaded" });
 });
