@@ -1,7 +1,7 @@
 import {
   faLocation,
   faLocationPinLock,
-  faPhone
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
@@ -13,7 +13,7 @@ import Pagination from "../../components/Pagination";
 function AllBranches() {
   const [branches, setBranches] = useState([]);
   const { pathname } = useLocation();
-  const [postsPerPage, setPostsPerPage] = useState(9);
+  const postsPerPage = 9;
 
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastPost = currentPage * postsPerPage;
@@ -41,7 +41,7 @@ function AllBranches() {
 
   useEffect(() => {
     getAllBranches();
-  }, [currentPage, pathname]);
+  }, [pathname]);
 
   return (
     <>

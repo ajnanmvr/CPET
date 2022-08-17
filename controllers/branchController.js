@@ -1,41 +1,50 @@
 const Branch = require("../models/branchModel");
 const globalFuctions = require("../utils/globalFuctions");
-const admin = require("firebase-admin");
-const uuid = require("uuid-v4");
-const dotenv = require("dotenv");
 const Auth = require("../models/authModel");
 const sharp = require("sharp");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
+const S3 = require("aws-sdk/clients/s3");
+const dotenv = require("dotenv");
+const multer = require("multer");
+const fs = require("fs");
+const AWS = require("aws-sdk");
 
 dotenv.config();
-admin.initializeApp({
-  credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SECRET)),
-  storageBucket: "gs://cpet-2093a.appspot.com",
+
+//configuring the AWS environment
+AWS.config.update({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.S3_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_KEY,
+  s3ForcePathStyle:true,
+  s3BucketEndpoint:true
 });
 
-const bucket = admin.storage().bucket();
+// const s3 = new S3({
+//   region: process.env.AWS_REGION,
+//   accessKeyId: process.env.S3_ACCESS_KEY,
+//   secretAccessKey: process.env.S3_SECRET_KEY,
+// });
+// upload file to s3
+const upload = (fileName) => {
+  const fileContent = fs.readFileSync(fileName);
 
-async function uploadFile(fileName1, fileName2) {
-  try {
-    const metadata = {
-      metadata: {
-        // This line is very important. It's to create a download token.
-        firebaseStorageDownloadTokens: uuid(),
-      },
-      contentType: "image/png",
-      cacheControl: "public, max-age=31536000",
-    };
-
-    let data = await bucket.upload(fileName1, {
-      gzip: true,
-      metadata: metadata,
-    });
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-}
+  new AWS.S3().upload(
+    {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Body: fileContent,
+      Key: "image.png",
+    },
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("file uploaded successfully", data.Location);
+      }
+    }
+  );
+};
 
 exports.resizeImage = (file, id, next) => {
   if (!file) return next();
@@ -72,15 +81,5 @@ exports.getAllBranches = globalFuctions.getAll(Branch);
 exports.deleteBranch = globalFuctions.deleteOne(Branch);
 
 exports.updateCoverImage = catchAsync(async (req, res, next) => {
-  let uploaded = await sharp(req.file.buffer)
-    .resize(2000, 1333)
-    .toFormat("jpeg")
-    .jpeg({ quality: 90 })
-    .toFile(`public/img/branch-cover/${req.file.originalname}.jpeg`);
-
-  let data = await Branch.findByIdAndUpdate(req.user.branch, {
-    imageCover: req.file.originalname,
-  });
-  res.status(200).json(data);
+  upload(__dirname + "/uploads/image.png");
 });
-

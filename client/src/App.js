@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdmissionCreated from "./components/New Admission/AdmissionCreated";
+import FileDataPage from "./components/New Admission/FileDataPage";
 import { ProtectRoutes, RestrictedRoutes } from "./Consts";
 import { UserAuthContext } from "./context/user";
 import { Auth, Student } from "./pages";
@@ -10,6 +11,7 @@ import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
+import StudentLogin from "./pages/student/StudentLogin";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
@@ -26,7 +28,9 @@ export default function App() {
             <Route path="*" element={<Auth.NotFound />} />
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Auth.Login />} />
+            <Route path="/student-login" element={<StudentLogin />} />
             <Route path="/admission-created" element={<AdmissionCreated />} />
+            <Route path="/mahdiyya-third-year" element={<FileDataPage />} />
             <Route path="/branch/:id" element={<ViewBranch />} />
             <Route path="/profile/:id" element={<Student.Profile />} />
             <Route path="/add-student" element={<Student.AddStudents />} />

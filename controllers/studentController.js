@@ -5,6 +5,8 @@ const globalFunctions = require("../utils/globalFuctions");
 const mongoose = require("mongoose");
 const Branch = require("../models/branchModel");
 const catchAsync = require("../utils/catchAsync");
+const AppError = require("../utils/AppError");
+const jwt = require("jsonwebtoken");
 
 exports.getAllStudents = globalFunctions.getAll(Student, "branch", "class");
 exports.getStudent = globalFunctions.getOne(Student, "branch", "class");
@@ -19,6 +21,37 @@ exports.registerStudent = async (req, res, next) => {
     next(error);
   }
 };
+exports.studentLogin = catchAsync(async (req, res, next) => {
+  let { registerNo, password } = req.body;
+  if (!registerNo || !password) {
+    next(new AppError("Please enter your register number and password", 400));
+  } else {
+    let user = await Student.findOne({registerNo});
+    if (!user) {
+      next(new AppError("No user found in this register number", 404));
+    } else {
+      let match = password === user.password;
+      if (!match) {
+        next(new AppError("incorrect password", 401));
+      } else {
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "90d",
+        });
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        res
+          .cookie("jwt", token, {
+            httpOnly: true,
+            // max age 30 days
+            maxAge: decoded.exp,
+          })
+          .status(200);
+        // remove password from user object
+        user.password = undefined;
+        res.status(200).json(user);
+      }
+    }
+  }
+});
 exports.updateStudent = globalFunctions.updateOne(Student);
 
 exports.verifyStudent = async (req, res, next) => {

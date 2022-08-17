@@ -37,7 +37,6 @@ function AddStudents() {
   let nextYear = (new Date().getFullYear() + 1).toString();
 
   const validate = (values) => {
-    console.log(values);
     let errors = {};
     if (!values.studentName) {
       errors.studentName = "Student Name is required";
@@ -110,7 +109,8 @@ function AddStudents() {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
-        if (formData.class === "mahdiyya-third-year") {
+        if (selectedClass === "MAHDIYYA THIRD YEAR") {
+          navigate("/mahdiyya-third-year");
         } else {
           navigate("/admission-created");
         }

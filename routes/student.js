@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 const uploads = multer({ storage: storage });
 
 router.post("/register", studentController.registerStudent);
+router.post("/login", studentController.studentLogin);
 router.post(
   "/excel",
   protect,

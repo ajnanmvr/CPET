@@ -53,65 +53,69 @@ function FileDataPage({ setFormData, formData, setImageUploaded }) {
   };
 
   return (
-    <div className="rounded-lg shadow-xl bg-gray-50">
-      <div className="m-4 ">
-        <label
-          htmlFor="formFile"
-          className="form-label inline-block mb-2 font-bold text-gray-900 "
-        >
-          Default file input example
-        </label>
-        <input
-          className="w-full focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded  py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-          type="file"
-          id="formFile"
-          onChange={(e) => setImage1(e.target.files[0])}
-        />
-      </div>
-      <div className="m-4">
-        <label
-          htmlFor="formFile"
-          className="form-label inline-block mb-2 font-bold text-gray-900 "
-        >
-          Default file input example
-        </label>
-        <input
-          className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-          type="file"
-          id="formFile"
-          onChange={(e) => setImage2(e.target.files[0])}
-        />
-      </div>
-      <div className="m-4">
-        <label
-          htmlFor="formFile"
-          className="form-label inline-block mb-2 font-bold text-gray-900"
-        >
-          Default file input example
-        </label>
-        <input
-          className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-          type="file"
-          id="formFile"
-          onChange={(e) => setImage3(e.target.files[0])}
-        />
+    <div className="rounded-lg bg-gray-50">
+      <div className="flex justify-center">
+        <div className="mb-3 w-96">
+          <label
+            htmlFor="formFile"
+            className="form-label inline-block mb-2 text-gray-700"
+          >
+            Default file input example
+          </label>{" "}
+          <input
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            type="file"
+            id="formFile"
+          />{" "}
+        </div>{" "}
       </div>
 
-      <div className="m-4">
-        <div className="my-4">
-          {loading ? (
-            <button className="bg-green-800 w-full py-4 text-white font-bold">
-              Processing....
-            </button>
-          ) : (
-            <button
-              onClick={(e) => handleUpload(e)}
-              className="bg-green-400  py-4 text-white font-bold"
-            >
-              Upload Image
-            </button>
-          )}
-        </div>
+      <div className="flex justify-center">
+        <div className="mb-3 w-96">
+          <label
+            htmlFor="formFile"
+            className="form-label inline-block mb-2 text-gray-700"
+          >
+            Default file input example
+          </label>{" "}
+          <input
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            type="file"
+            id="formFile"
+          />{" "}
+        </div>{" "}
+      </div>
+
+      <div className="flex justify-center">
+        <div className="mb-3 w-96">
+          <label
+            htmlFor="formFile"
+            className="form-label inline-block mb-2 text-gray-700"
+          >
+            Default file input example
+          </label>{" "}
+          <input
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            type="file"
+            id="formFile"
+          />{" "}
+        </div>{" "}
+      </div>
+
+      <div className="flex justify-center">
+        <div className="mb-3 w-96">
+          <label
+            htmlFor="formFile"
+            className="form-label inline-block mb-2 text-gray-700"
+          >
+            Default file input example
+          </label>{" "}
+          <input
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            type="file"
+            id="formFile"
+          />{" "}
+        </div>{" "}
       </div>
     </div>
   );

@@ -96,6 +96,9 @@ const studentSchema = new mongoose.Schema({
   academicYear: {
     type: String,
   },
+  password: {
+    type: String,
+  },
   certificateOne: String,
   certificateTwo: String,
   certificateThree: String,

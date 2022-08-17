@@ -123,30 +123,6 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
-// exports.updateUser = async (req, res) => {
-//   try {
-//     const user = await Auth.findById(req.params.id);
-//     if (!user) {
-//       return res.status(400).json({
-//         message: "User does not exist",
-//       });
-//     }
-//     let password;
-//     if (req.body.password) {
-//       password = await bcrypt.hash(req.body.password, 12);
-//     }
-//     const updatedUser = await Auth.findByIdAndUpdate(req.params.id, {
-//       ...req.body,
-//       password,
-//     });
-//     res.status(200).json(updatedUser);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(400).json({
-//       message: "Error updating user",
-//     });
-//   }
-// };
 exports.updatePassword = catchAsync(async (req, res, next) => {
   if (!req.body.currentPassword) {
     next(new AppError("Please add your current password", 400));

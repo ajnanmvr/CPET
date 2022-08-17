@@ -19,8 +19,6 @@ router.get("/:id", protect, branchController.getBranch);
 router.patch("/:id", protect, branchController.editBranch);
 router.post(
   "/upload-cover",
-  protect,
-  uploads.single("imageCover"),
   branchController.updateCoverImage
 );
 module.exports = router;
