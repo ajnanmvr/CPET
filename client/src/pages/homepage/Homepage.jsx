@@ -1,6 +1,10 @@
 import React from "react";
-import '../../base.css'
-import '../../style.css'
+import "../../base.css";
+import "../../style.css";
+import Courses from "./Courses";
+import Footer from "./Footer";
+import LatestNews from "./LatestNews";
+import ProgrameGallery from "./ProgrameGallery";
 
 function Homepage() {
   return (
@@ -37,25 +41,7 @@ function Homepage() {
                       <li>
                         <a href="#">Director's Message</a>
                       </li>
-                      {/* <li class="drop-link">
-										<a href="#"></a>
-										<ul class="dropdown level2">
-											<li><a href="#">Submenu
-													Level 1</a></li>
-											<li class="drop-link">
-												<a href="#">Submenu
-													Level 2</a>
-												<ul class="dropdown level2">
-													<li><a href="#">Submenu
-															Level 2</a></li>
-													<li><a href="#">Submenu
-															Level 2</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Submenu
-													Level 1</a></li>
-										</ul>
-									</li> */}
+
                       <li>
                         <a href="#">Vision &amp; Mission</a>
                       </li>
@@ -305,288 +291,66 @@ function Homepage() {
         </div>
         {/* End imporant Links Links */}
         {/* feature-section*/}
-        <section className="Directors-Message"></section>
-        {/* End feature section */}
-        {/* news-section 
+        <section className="director-news">
+          {/* feature-section*/}
+          <section className="news-section director">
+            <div className="container">
+              <div className="blog-post list-style">
+                <div
+                  style={{
+                    backgroundImage:
+                      "url(https://scontent.fccj5-1.fna.fbcdn.net/v/t39.30808-6/227837216_355447062821067_396891195136929639_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=OsyxagtrbYMAX_Z0y3g&_nc_ht=scontent.fccj5-1.fna&oh=00_AT8CfdIzPDyFHvSVN87NWH6SXRgW4OyuQSSazgeFo4dxOg&oe=6301F7A5)",
+                    backgroundSize: "cover",
+                    width: "300px",
+                    height: "400px",
+                    margin: "0 10px",
+                    borderRadius: "5px",
+                  }}
+                ></div>
+                <div className="post-content">
+                  <h1>to Developing a Quality Discussion</h1>
+                  <p>
+                    CSS. It’s a web designer’s playpen. With so many
+                    colors,signer’s playpen. With so many colors,signer’s
+                    playpen. signer’s playpen. With so many colors,signer’s
+                    playpen. With so many colors,signer’s playpen. With so many
+                    colors,signer’s playpen. With so many colors,signer’s many
+                    colors,signer’s playpensigner’s playpen. With so many
+                    colors,signer’s many colors,signer’s playpensigner’s
+                    playpen. With so many colors,signer’s many colors,signer’s
+                    playpensigner’s playpen. With so many colors,signer’s many
+                    colors,signer’s playpensigner’s playpen. With so many
+                    colors,signer’s playpen. With many colors, type settings,
+                    layout options, and responsive…
+                  </p>
+                  <h2>Rasheed Ali Shihab Thangal</h2>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/* End feature section */}
+          {/* news-section 
 			================================================== */}
-        <section className="news-section">
-          <div className="container">
-            <div className="title-section">
-              <div className="left-part">
-                <span>Blog</span>
-                <h1>Latest News</h1>
+          <section className="news-section news">
+            <div className="container">
+              <div className="title-section">
+                <div className="left-part">
+                  <h1>Latest News</h1>
+                </div>
+                <div className="right-part">
+                  <a className="button-one" href="#">
+                    View All News
+                  </a>
+                </div>
               </div>
-              <div className="right-part">
-                <a className="button-one" href="#">
-                  View All Posts
-                </a>
-              </div>
+              <LatestNews />
             </div>
-            <div className="news-box">
-              <div className="row">
-                <div className="col-lg-3 col-md-6">
-                  <div className="blog-post">
-                    <a href="#">
-                      <img src="./src/blog-image-1.jpg" alt />
-                    </a>
-                    <div className="post-content">
-                      <a className="category" href="#">
-                        Academics
-                      </a>
-                      <h2>
-                        <a href="#">CPET Conference Held</a>
-                      </h2>
-                      <div className="post-meta date">
-                        <i className="material-icons">access_time</i> June 13,
-                        2018
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="blog-post">
-                    <a href="#">
-                      <img src="./src/blog-image-1.jpg" alt />
-                    </a>
-                    <div className="post-content">
-                      <a className="category" href="#">
-                        Academics
-                      </a>
-                      <h2>
-                        <a href="#">CPET Conference Held</a>
-                      </h2>
-                      <div className="post-meta date">
-                        <i className="material-icons">access_time</i> June 13,
-                        2018
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="blog-post">
-                    <a href="#">
-                      <img src="./src/blog-image-1.jpg" alt />
-                    </a>
-                    <div className="post-content">
-                      <a className="category" href="#">
-                        Academics
-                      </a>
-                      <h2>
-                        <a href="#">CPET Conference Held</a>
-                      </h2>
-                      <div className="post-meta date">
-                        <i className="material-icons">access_time</i> June 13,
-                        2018
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="blog-post">
-                    <a href="#">
-                      <img src="./src/blog-image-1.jpg" alt />
-                    </a>
-                    <div className="post-content">
-                      <a className="category" href="#">
-                        Academics
-                      </a>
-                      <h2>
-                        <a href="#">CPET Conference Held</a>
-                      </h2>
-                      <div className="post-meta date">
-                        <i className="material-icons">access_time</i> June 13,
-                        2018
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </section>
+          {/* End news section */}
         </section>
-        {/* End news section */}
-        {/* popular-courses-section 
-				================================================== */}
-        <section className="popular-courses-section">
-          <div className="container">
-            <div className="title-section">
-              <div className="left-part">
-                <span>Academic Programs</span>
-                <h1>Diplomas/ Courses</h1>
-              </div>
-              <div className="right-part">
-                <a className="button-one" href="#">
-                  View All Courses
-                </a>
-              </div>
-            </div>
-            <div className="popular-courses-box">
-              <div className="row">
-                <div className="col-lg-3 col-md-6">
-                  <div className="course-post">
-                    <div className="course-thumbnail-holder">
-                      <a href="#">
-                        <img src="./src/2.jpg" alt />
-                      </a>
-                    </div>
-                    <div className="course-content-holder">
-                      <div className="course-content-main">
-                        <h2 className="course-title">
-                          <a href="#">CMS Online</a>
-                        </h2>
-                        <div className="course-rating-teacher">
-                          <div
-                            className="star-rating has-ratings"
-                            title="Apply Now For New Admissions"
-                          >
-                            <span style={{ width: "100%" }}>
-                              <span className="rating">Admission Open</span>
-                              <span className="votes-number" />
-                            </span>
-                          </div>
-                          <a href="#" className="course-loop-teacher">
-                            Apply Now
-                          </a>
-                        </div>
-                      </div>
-                      <div className="course-content-bottom">
-                        <div className="course-students">
-                          <i className="material-icons">Duration :</i>
-                          <span>2 years</span>
-                        </div>
-                        <div className="course-price">
-                          <span> INR 5000.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="course-post">
-                    <div className="course-thumbnail-holder">
-                      <a href="#">
-                        <img src="./src/3.jpg" alt />
-                      </a>
-                    </div>
-                    <div className="course-content-holder">
-                      <div className="course-content-main">
-                        <h2 className="course-title">
-                          <a href="#">
-                            Diplomas in Transformational Leadership for Imams
-                          </a>
-                        </h2>
-                        <div className="course-rating-teacher">
-                          <div
-                            className="star-rating has-ratings"
-                            title="Apply Now For New Admissions"
-                          >
-                            <span style={{ width: "100%" }}>
-                              <span className="rating">Admission Open</span>
-                              <span className="votes-number" />
-                            </span>
-                          </div>
-                          <a href="#" className="course-loop-teacher">
-                            Apply Now
-                          </a>
-                        </div>
-                      </div>
-                      <div className="course-content-bottom">
-                        <div className="course-students">
-                          <i className="material-icons">Duration :</i>
-                          <span>1 year</span>
-                        </div>
-                        <div className="course-price">
-                          <span> INR 2500.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="course-post">
-                    <div className="course-thumbnail-holder">
-                      <a href="#">
-                        <img src="./src/1.jpg" alt />
-                      </a>
-                    </div>
-                    <div className="course-content-holder">
-                      <div className="course-content-main">
-                        <h2 className="course-title">
-                          <a href="#">
-                            Certificate Course in Islamic Concept and Practice
-                            (CCICP)
-                          </a>
-                        </h2>
-                        <div className="course-rating-teacher">
-                          <div
-                            className="star-rating has-ratings"
-                            title="Rated 5.00 out of 5"
-                          >
-                            <span style={{ width: "100%" }}>
-                              <span className="rating">Admission Open</span>
-                              <span className="votes-number" />
-                            </span>
-                          </div>
-                          <a href="#" className="course-loop-teacher">
-                            Apply Now
-                          </a>
-                        </div>
-                      </div>
-                      <div className="course-content-bottom">
-                        <div className="course-students">
-                          <i className="material-icons">Duration :</i>
-                          <span>8 Months</span>
-                        </div>
-                        <div className="course-price">
-                          <span> INR 1500.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="course-post">
-                    <div className="course-thumbnail-holder">
-                      <a href="#">
-                        <img src="./src/1.jpg" alt />
-                      </a>
-                    </div>
-                    <div className="course-content-holder">
-                      <div className="course-content-main">
-                        <h2 className="course-title">
-                          <a href="#">Happy Family</a>
-                        </h2>
-                        <div className="course-rating-teacher">
-                          <div
-                            className="star-rating has-ratings"
-                            title="Apply Now For New Admissions"
-                          >
-                            <span style={{ width: "100%" }}>
-                              <span className="rating">Admission Open</span>
-                              <span className="votes-number" />
-                            </span>
-                          </div>
-                          <a href="#" className="course-loop-teacher">
-                            Apply Now
-                          </a>
-                        </div>
-                      </div>
-                      <div className="course-content-bottom">
-                        <div className="course-students">
-                          <i className="material-icons">Duration :</i>
-                          <span>10 Hours</span>
-                        </div>
-                        <div className="course-price">
-                          <span> INR 150.</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+
+        <Courses />
+
         {/* End popular-courses section */}
         {/* countdown-section 
 			================================================== */}
@@ -606,7 +370,8 @@ function Homepage() {
             </p>
             <a
               className="button-two"
-              href="https://www.dhiu.in/notification_mahdiyya-course.html"
+              href="http://cpet.dhiu.in/add-student"
+              target={"_blank"}
             >
               Apply Now
             </a>
@@ -614,76 +379,7 @@ function Homepage() {
         </section>
         {/* End countdown section */}
         {/* collection-section  */}
-        <section className="collection-section">
-          <div className="container">
-            <div className="title-section">
-              <div className="left-part">
-                <span>Collections</span>
-                <h1>Programme Gallery</h1>
-              </div>
-              <div className="right-part">
-                <a className="button-one" href="#">
-                  All Images
-                </a>
-              </div>
-            </div>
-            <div className="collection-box">
-              <div className="row">
-                <div className="col-lg-6 col-md-12">
-                  <div className="collection-post">
-                    <div className="inner-collection">
-                      <img src="./src/web-development.jpg" alt />
-                      <a href="#" className="hover-post">
-                        <span className="title">Recent Programmes</span>
-                        <span className="numb-courses">3 Programmes</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="collection-post">
-                    <div className="inner-collection">
-                      <img src="./src/web-design.jpg" alt />
-                      <a href="#" className="hover-post">
-                        <span className="title">Camps</span>
-                        <span className="numb-courses">2 Sessions</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="collection-post">
-                    <div className="inner-collection">
-                      <img src="./src/technology.jpg" alt />
-                      <a href="#" className="hover-post">
-                        <span className="title">Conferences</span>
-                        <span className="numb-courses">3 Courses</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-3 col-md-6">
-                  <div className="collection-post">
-                    <div className="inner-collection">
-                      <img src="./src/photography.jpg" alt />
-                      <a href="#" className="hover-post">
-                        <span className="title">News</span>
-                        <span className="numb-courses">3 Courses</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="collection-post">
-                    <div className="inner-collection">
-                      <img src="./src/design.jpg" alt />
-                      <a href="#" className="hover-post">
-                        <span className="title">Poster Archive</span>
-                        <span className="numb-courses">3 Courses</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <ProgrameGallery />
         {/* End collection section */}
         {/* events-section 
 			================================================== */}
@@ -792,13 +488,13 @@ function Homepage() {
               <div className="col-lg-6">
                 <div className="title-section">
                   <div className="left-part">
-                    <span>Watch Video</span>
+                    {/* <span>Watch Video</span> */}
                     <h1>Learn Anywhere</h1>
                   </div>
                 </div>
                 <div className="video-box">
                   <div className="video-post">
-                    <img src="./src/video-poster-1.jpg" alt />
+                    <img src="/images/9.jpeg" alt />
                     <div className="hover-post">
                       <h2>Marketing, Media and Advertising</h2>
                       <p>About Studioare</p>
@@ -815,7 +511,7 @@ function Homepage() {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="video-post small-post">
-                        <img src="./src/video-poster-2.jpg" alt />
+                        <img src="/images/10.jpg" alt />
                         <div className="hover-post">
                           <h2>Limitless learning</h2>
                         </div>
@@ -831,7 +527,7 @@ function Homepage() {
                     </div>
                     <div className="col-md-6">
                       <div className="video-post small-post">
-                        <img src="./src/video-poster-3.jpg" alt />
+                        <img src="/images/12.jpg" alt />
                         <div className="hover-post">
                           <h2>Learn by Doing</h2>
                         </div>
@@ -854,126 +550,7 @@ function Homepage() {
         {/* End events section */}
         {/* footer 
 			================================================== */}
-        <footer>
-          <div className="container">
-            <div className="up-footer">
-              <div className="row">
-                <div className="col-lg-4 col-md-6">
-                  <div className="footer-widget text-widget">
-                    <a href="#CPET/index.html" className="footer-logo">
-                      <img src="/logo-light.png" alt />
-                    </a>
-                    <p>
-                      Centre for Public Education and Training is an extension
-                      of the University devised for providing socio-educational
-                      empowerment programs for the public. CPET plans, designs
-                      and implements awareness programs aimed at different age
-                      groups of the public.
-                    </p>
-                    <ul>
-                      <li>
-                        <div className="contact-info-icon">
-                          <i className="material-icons">location_on</i>
-                        </div>
-                        <div className="contact-info-value">
-                          Darul Huda Islamic University
-                        </div>
-                      </li>
-                      <li>
-                        <div className="contact-info-icon">
-                          <i className="material-icons">phone_android</i>
-                        </div>
-                        <div className="contact-info-value">+91 9746229547</div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-6">
-                  <div className="footer-widget quick-widget">
-                    <h2>Quick Links</h2>
-                    <ul className="quick-list">
-                      <li>
-                        <a href="#">Contact</a>
-                      </li>
-                      <li>
-                        <a href="#">Pricing Packages</a>
-                      </li>
-                      <li>
-                        <a href="#">About Us</a>
-                      </li>
-                      <li>
-                        <a href="#">Courses</a>
-                      </li>
-                      <li>
-                        <a href="#">News</a>
-                      </li>
-                      <li>
-                        <a href="#">Home</a>
-                      </li>
-                      <li>
-                        <a href="#">Sample Page</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="col-lg-4 col-md-6">
-                  <div className="footer-widget subscribe-widget">
-                    <h2>Subscribe Us</h2>
-                    <p>
-                      Don't miss anything, Subscribe and keep informed about our
-                      updates.
-                    </p>
-                    <div className="newsletter-form">
-                      <input
-                        className="form-control"
-                        type="email"
-                        name="EMAIL"
-                        placeholder="Enter Your E-mail"
-                        required
-                      />
-                      <input type="submit" defaultValue="Subscribe" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="footer-copyright copyrights-layout-default">
-            <div className="container">
-              <div className="copyright-inner">
-                <div className="copyright-cell">
-                  {" "}
-                  © 2022 <span className="highlight">CPET</span> (Center for
-                  Public Education and Training)
-                </div>
-                <div className="copyright-cell">
-                  <ul className="CPET-social-links">
-                    <li>
-                      <a href="#" className="facebook">
-                        <i className="fa fa-facebook-f" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="twitter">
-                        <i className="fa fa-twitter" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="google">
-                        <i className="fa fa-google-plus" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="linkedin">
-                        <i className="fa fa-linkedin" />
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
         {/* End footer */}
       </div>
     </div>

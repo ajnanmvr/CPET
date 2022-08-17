@@ -96,7 +96,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
                   {form.labelName}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="focus:ring-indigo-500 focus:border-indigo-500 appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none  uppercase"
                   type={form.type}
                   onChange={(e) => onChange(e)}
                   required={form.required}
@@ -172,7 +172,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
             <div className="px-4 sm:px-0">
               <button
                 onClick={(e) => nextPage(e)}
-                className="w-full mt-3 lg:mt-7 bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                className="w-full mt-3 lg:mt-7 bg-indigo-900 hover:bg-indigo-800 text-white font-bold py-4 px-4 rounded focus:outline-none  uppercase"
               >
                 CONTINUE
               </button>

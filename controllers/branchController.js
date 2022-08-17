@@ -4,22 +4,23 @@ const Auth = require("../models/authModel");
 const sharp = require("sharp");
 const catchAsync = require("../utils/catchAsync");
 const multerS3 = require("multer-s3");
-const multer = require("multer-s3");
+const multer = require("multer");
 const aws = require("aws-sdk");
 const dotenv = require("dotenv");
 
 dotenv.config();
 
-const s3 = new aws.S3({
+aws.config.update({
   region: "ap-southeast-1",
   accessKeyId: process.env.S3_ACCESS_KEY,
   secretAccessKey: process.env.S3_SECRET_KEY,
 });
+const s3 = new aws.S3();
 
 const upload = () =>
   multer({
     storage: multerS3({
-      s3: s3,
+      s3,
       bucket: process.env.AWS_BUCKET_NAME,
       metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname });
@@ -65,6 +66,25 @@ exports.getAllBranches = globalFuctions.getAll(Branch);
 exports.deleteBranch = globalFuctions.deleteOne(Branch);
 
 exports.updateCoverImage = catchAsync(async (req, res, next) => {
-  await upload().single("cover-image");
-  res.status(200).json({ message: "image uploaded" });
+  const uploadSingle = upload().single("image-cover");
+  uploadSingle(req, res, async (err) => {
+    if (err) {
+      return res.status(400).json({ success: false, message: err.message });
+    } else {
+      let data = await Branch.findByIdAndUpdate(
+        req.user.branch._id,
+        {
+          imageCover: req.file.location,
+        },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+      res.status(200).json({
+        message: "image uploaded successfully",
+        data,
+      });
+    }
+  });
 });

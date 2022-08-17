@@ -104,12 +104,12 @@ function ClassManagment() {
         <tbody>
           {classes.map((classItem, index) => (
             <tr className="border-b">
-              <td className="px-5 py-5 bg-white text-sm">{index + 1}</td>
-              <td className="px-5 py-5 bg-white text-sm">
+              <td className="px-5 py-3 bg-white text-sm">{index + 1}</td>
+              <td className="px-5 py-3 bg-white text-sm">
                 {classItem.className}
               </td>
 
-              <td className="px-5 py-5 bg-white text-sm">
+              <td className="px-5 py-3 bg-white text-sm">
                 <FontAwesomeIcon
                 
                   onClick={() => {

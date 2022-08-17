@@ -1,25 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 import { GET_USERS } from "../../queries/userQuery";
 function AllUsers() {
   const { data, error, loading, refetch } = useQuery(GET_USERS);
-
-  // const deleteUser = async (id) => {
-  //   try {
-  //     if (window.confirm("Do you want to delete?")) {
-  //       let data = await Axios.delete("/auth/user/" + id);
-  //       if (data.status === 200) {
-  //         refetch();
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <>
@@ -101,15 +87,6 @@ function AllUsers() {
                           />
                         </Link>
                       </td>
-{/* 
-                      <td className="px-5 py-5 bg-white text-sm">
-                        <div
-                          className="cursor-pointer text-red-600"
-                          onClick={() => deleteUser(user.id)}
-                        >
-                          <FontAwesomeIcon icon={faTrash} />
-                        </div>
-                      </td> */}
                     </tr>
                   ))}
                 </tbody>

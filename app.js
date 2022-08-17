@@ -13,6 +13,8 @@ const subjectRoutes = require("./routes/subject");
 const transferRoutes = require("./routes/transfer");
 const scheduleSchemaRoute = require("./routes/schedule");
 const classRoute = require("./routes/class");
+const newsRoute = require("./routes/news");
+const courseRoute = require("./routes/course");
 
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
@@ -64,6 +66,8 @@ app.use("/api/subject", subjectRoutes);
 app.use("/api/transfer", transferRoutes);
 app.use("/api/schedule", scheduleSchemaRoute);
 app.use("/api/class", classRoute);
+app.use("/api/news", newsRoute);
+app.use("/api/course", courseRoute);
 
 process.env.PWD = process.cwd();
 app.use(express.static(path.join(process.env.PWD, "public")));

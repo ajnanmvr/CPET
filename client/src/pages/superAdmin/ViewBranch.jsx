@@ -1,24 +1,21 @@
-import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_BRANCH } from "../../queries/branch";
-import { Link, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEdit,
   faLocation,
   faLocationDot,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { UserAuthContext } from "../../context/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { GET_BRANCH } from "../../queries/branch";
 
 function ViewBranch() {
-  const { authData } = useContext(UserAuthContext);
   const { id } = useParams();
   const { data, error, loading } = useQuery(GET_BRANCH, {
     variables: { id },
   });
 
+  console.log(data);
   if (error)
     return (
       <h1 className="text-red-600 font-bold text-3xl text-center">
@@ -33,6 +30,20 @@ function ViewBranch() {
     );
   return (
     <div>
+      <div
+        className="mx-auto"
+        style={{
+          backgroundImage: data?.branch?.imageCover
+            ? "url(" + data?.branch?.imageCover + ")"
+            : "url(" +
+              "https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg" +
+              ")",
+          width: "50%",
+          height: "500px",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
+      ></div>
       {/* This example requires Tailwind CSS v2.0+ */}
       <div className="relative bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
@@ -90,13 +101,6 @@ function ViewBranch() {
               </div>
             </main>
           </div>
-        </div>
-        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-          <img
-            className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg"
-            alt
-          />
         </div>
       </div>
     </div>

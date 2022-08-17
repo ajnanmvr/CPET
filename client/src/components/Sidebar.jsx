@@ -4,12 +4,12 @@ import {
   faClock,
   faClose,
   faHome,
+  faPager,
   faPersonChalkboard,
   faPlus,
   faPowerOff,
   faSchool,
   faUser,
-  faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
@@ -49,8 +49,18 @@ function Sidebar() {
       icon: faSchool,
     },
     {
+      name: "Create News",
+      route: "/create-news",
+      icon: faPager,
+    },
+    {
       name: "Create Schedule",
       route: "/create-schedule",
+      icon: faClock,
+    },
+    {
+      name: "Create Course",
+      route: "/create-course",
       icon: faClock,
     },
   ];
@@ -79,9 +89,10 @@ function Sidebar() {
         </span>
 
         <div
-          className={`${
-            !openSidebar && "invisible"
-          } lg:visible  fixed top-0 bottom-0 lg:left-0 p-2 lg:w-[250px] w-full overflow-y-auto text-center bg-gray-900`}
+          className={`fixed 
+            lg:block ${
+              !openSidebar && "hidden"
+            } top-0 bottom-0 lg:left-0 p-2 lg:w-[250px] w-full overflow-y-auto text-center bg-gray-900`}
         >
           <div className="text-gray-100 text-xl">
             <div className="p-2.5 mt-1 flex items-center">
@@ -155,11 +166,11 @@ function Sidebar() {
                     to={"/profile"}
                     className="text-[15px] ml-4 text-teal-700 font-bold uppercase"
                   >
-                   My Account
+                    My Account
                   </Link>
                 ) : (
                   <div className="text-[15px] ml-4 text-teal-700 font-bold uppercase">
-                   My Account
+                    My Account
                   </div>
                 )}
               </div>

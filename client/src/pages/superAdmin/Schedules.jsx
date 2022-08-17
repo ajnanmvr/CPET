@@ -2,12 +2,12 @@ import {
   faAdd,
   faEdit,
   faTools,
-  faTrash,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
 
@@ -86,7 +86,7 @@ function Schedule() {
       </h1>
       <Link
         to={"/create-schedule"}
-        className="bg-sky-800 ml-8  w-[140px] px-8 py-4 text-center text-white font-bold rounded-full cursor-pointer hover:bg-sky-900 transition"
+        className="bg-sky-800 ml-8  px-8 py-4 text-center text-white font-bold rounded-full cursor-pointer hover:bg-sky-900 transition"
       >
         <FontAwesomeIcon icon={faAdd} /> Create New
       </Link>
@@ -137,17 +137,17 @@ function Schedule() {
               <tbody>
                 {schedule.map((setting, key) => (
                   <tr className="border-b" key={key}>
-                    <td className="px-5 py-5 bg-white text-sm">{key + 1}</td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5  bg-white text-sm">{key + 1}</td>
+                    <td className="px-5  bg-white text-sm">
                       {setting?.name}
                     </td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5  bg-white text-sm">
                       <p className="font-bold">
                         {moment(setting?.deadline).format("DD-MM-yyyy A")}
                       </p>
                       <p>{moment(setting?.deadline).format("hh:mm A")}</p>
                     </td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5  bg-white text-sm">
                       <button
                         className={`py-2 px-4  font-bold cursor-not-allowed ${
                           setting?.closed ? "text-red-500" : "text-green-500"
@@ -156,7 +156,7 @@ function Schedule() {
                         {setting?.closed ? "closed" : "open"}
                       </button>
                     </td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5  bg-white text-sm">
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -168,7 +168,7 @@ function Schedule() {
                         <FontAwesomeIcon icon={faEdit} />
                       </button>
                     </td>
-                    <td className="px-5 py-5 bg-white text-sm">
+                    <td className="px-5  bg-white text-sm">
                       <button
                         onClick={(e) => handleDelete(e, setting._id)}
                         className="bg-red-400 py-2 px-4 text-white font-bold rounded-xl hover:bg-white hover:text-red-400 border border-red-400"
@@ -187,7 +187,6 @@ function Schedule() {
   );
 }
 function CreateSchedule({ id, setConfig, config, setOpen, getConfig }) {
-  const navigate = useNavigate();
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -325,7 +324,7 @@ function CreateSchedule({ id, setConfig, config, setOpen, getConfig }) {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Cancel
                 </button>

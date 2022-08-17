@@ -41,6 +41,7 @@ function AllBranches() {
 
   useEffect(() => {
     getAllBranches();
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return (
@@ -77,11 +78,19 @@ function AllBranches() {
                   to={`/branch/${branch._id}`}
                   className="rounded overflow-hidden m-3 shadow-lg group"
                 >
-                  <img
+                  <div
                     className="w-full "
-                    src={`https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg`}
-                    // src={`/img/${branch._id}.jpeg`}
-                    alt="Sunset in the mountains"
+                    style={{
+                      backgroundImage: branch?.imageCover
+                        ? "url(" + branch?.imageCover + ")"
+                        : "url(" +
+                          "https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg" +
+                          ")",
+                      width: "350px",
+                      height: "150px",
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "cover",
+                    }}
                   />
 
                   <div className="px-6 py-4">

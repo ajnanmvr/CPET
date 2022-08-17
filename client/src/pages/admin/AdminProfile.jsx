@@ -15,15 +15,8 @@ function AdminProfile() {
   const [disabled, setDisabled] = useState(true);
   const [image, setImage] = useState(null);
   const { authData } = useContext(UserAuthContext);
+  const [loading, setLoading] = useState(false);
 
-
-  const editCoverImage=async()=>{
-    try {
-      let res=await Axios.post()
-    } catch (error) {
-      
-    }
-  }
   const getMyProfile = async () => {
     try {
       let { data } = await Axios.get("/auth/profile");
@@ -58,7 +51,6 @@ function AdminProfile() {
   const getMyBranch = async () => {
     try {
       let { data } = await Axios.get("/branch/" + authData.branch._id);
-      console.log(data);
       setBranch(data);
     } catch (error) {
       console.log(error);
@@ -67,7 +59,8 @@ function AdminProfile() {
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("imageCover", image);
+    formData.append("image-cover", image);
+    setLoading(true);
     try {
       let res = await Axios.post("/branch/upload-cover", formData);
       if (res.status === 200) {
@@ -75,8 +68,17 @@ function AdminProfile() {
           autoClose: 3000,
           position: toast.POSITION.TOP_CENTER,
         });
+        setLoading(false);
+        setOpenModel(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+      console.log(error.response);
+      toast.error("image uploading failed", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+    }
   };
   useEffect(() => {
     getMyProfile();
@@ -101,7 +103,11 @@ function AdminProfile() {
                 </button>
                 <img
                   className="h-auto w-full mx-auto"
-                  src="https://images.unsplash.com/20/cambridge.JPG?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1147&q=80"
+                  src={`${
+                    branch?.imageCover
+                      ? branch.imageCover
+                      : "https://upload.wikimedia.org/wikipedia/commons/b/b2/Darul_Huda_Islamic_University_Chemmad.jpg"
+                  }`}
                   alt
                 />
               </div>
@@ -110,6 +116,7 @@ function AdminProfile() {
                   setOpenModel={setOpenModel}
                   handleUpload={handleUpload}
                   setImage={setImage}
+                  loading={loading}
                 />
               )}
               <h1 className="text-gray-900 font-bold text-xl uppercase leading-8 my-1">
@@ -263,7 +270,7 @@ function AdminProfile() {
     </div>
   );
 }
-const EditProfile = ({ setOpenModel, handleUpload, setImage }) => {
+const EditProfile = ({ setOpenModel, handleUpload, setImage, loading }) => {
   return (
     <div>
       <div
@@ -307,13 +314,22 @@ const EditProfile = ({ setOpenModel, handleUpload, setImage }) => {
                 </div>
               </div>
               <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  type="button"
-                  onClick={(e) => handleUpload(e)}
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  Save
-                </button>
+                {!loading ? (
+                  <button
+                    type="button"
+                    onClick={(e) => handleUpload(e)}
+                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  >
+                    Save
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  >
+                    Loading...
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => setOpenModel(false)}

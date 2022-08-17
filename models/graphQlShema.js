@@ -37,6 +37,7 @@ const BranchType = new GraphQLObjectType({
     district: { type: GraphQLString },
     phone1: { type: GraphQLString },
     postOffice: { type: GraphQLString },
+    imageCover: { type: GraphQLString },
     pinCode: { type: GraphQLString },
     admin: {
       type: UserType,

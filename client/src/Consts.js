@@ -6,13 +6,16 @@ import BranchPayments from "./pages/admin/BranchPayments";
 import MyPayments from "./pages/admin/MyPayments";
 import TransferStudent from "./pages/admin/TransferStudent";
 import AdminHome from "./pages/AdminHome";
+import CreateNews from "./pages/CreateNews";
 import AdmissionRequests from "./pages/superAdmin/AdmissionRequests";
 import AllPayments from "./pages/superAdmin/AllPayments";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import ClassManagment from "./pages/superAdmin/ClassManagment";
+import CreateCourse from "./pages/superAdmin/CreateCourse";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import CreateSchedule from "./pages/superAdmin/CreateSchedule";
+import EditNews from "./pages/superAdmin/EditNews";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import EditSubject from "./pages/superAdmin/EditSubject";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
@@ -229,6 +232,26 @@ export const RestrictedRoutes = [
   {
     route: "/class-management",
     component: <ClassManagment />,
+    role: "superAdmin",
+  },
+  {
+    route: "/create-news",
+    component: <CreateNews />,
+    role: "superAdmin",
+  },
+  {
+    route: "/edit-news/:id",
+    component: <EditNews />,
+    role: "superAdmin",
+  },
+  {
+    route: "/create-course",
+    component: <CreateCourse />,
+    role: "superAdmin",
+  },
+  {
+    route: "/all-courses",
+    component: <CreateCourse />,
     role: "superAdmin",
   },
 ];

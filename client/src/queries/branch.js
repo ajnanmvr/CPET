@@ -24,6 +24,7 @@ const GET_BRANCH = gql`
       place
       pinCode
       postOffice
+      imageCover
     }
   }
 `;

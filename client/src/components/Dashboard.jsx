@@ -68,6 +68,11 @@ function Dashboard() {
       link: "/admission-requests",
     },
     {
+      text: "CPET COURSES",
+      icon: faBook,
+      link: "/all-courses",
+    },
+    {
       text: "CLASS MANAGEMENT ",
       icon: faToolbox,
       link: "/class-management",

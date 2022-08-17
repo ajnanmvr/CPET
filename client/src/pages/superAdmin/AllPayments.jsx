@@ -29,7 +29,7 @@ function AllPayments() {
         </h1>
         <Link
           to={"/create-payment"}
-          className="bg-sky-800 ml-8 w-[140px] px-8 py-4 text-center text-white font-bold rounded-full cursor-pointer hover:bg-sky-900 transition"
+          className="bg-sky-800 ml-8  px-8 py-4 text-center text-white font-bold rounded-full cursor-pointer hover:bg-sky-900 transition"
         >
           <FontAwesomeIcon icon={faAdd} /> Create New
         </Link>
