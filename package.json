@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "To run this project, you will need to add the following environment variables to your .env file",
   "main": "app.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
