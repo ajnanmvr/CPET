@@ -43,8 +43,8 @@ function Courses() {
                   </div>
                   <div className="course-content-holder">
                     <div className="course-content-main">
-                      <h2 className="course-title">
-                        <a href="#">{course.courseTitle}</a>
+                      <h2 className="course-title capitalize">
+                        <a href="#">{course.courseTitle.toLowerCase()}</a>
                       </h2>
                       <div className="course-rating-teacher">
                         <div

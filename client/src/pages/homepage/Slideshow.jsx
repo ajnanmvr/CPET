@@ -11,7 +11,7 @@ function Slideshow() {
         }}
       >
         <div className="slideContent">
-          <h2>Centre For Public Education And Training</h2>
+          <h2 className="font-bold">Centre For Public Education And Training</h2>
           <p>
             CPET is an unprecedented attempt by DHIU to plan, design and
             implement various educational and training programs aimed at

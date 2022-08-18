@@ -1,3 +1,5 @@
+import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 function Footer() {
@@ -21,7 +23,7 @@ function Footer() {
                 <ul>
                   <li>
                     <div className="contact-info-icon">
-                      <i className="material-icons">location_on</i>
+                      <FontAwesomeIcon icon={faLocationDot} />
                     </div>
                     <div className="contact-info-value">
                       Darul Huda Islamic University
@@ -29,7 +31,7 @@ function Footer() {
                   </li>
                   <li>
                     <div className="contact-info-icon">
-                      <i className="material-icons">phone_android</i>
+                      <FontAwesomeIcon icon={faPhone} />
                     </div>
                     <div className="contact-info-value">+91 9746229547</div>
                   </li>
@@ -95,9 +97,9 @@ function Footer() {
               Education and Training)
             </div>
             <div className="copyright-cell">
-              developed by {'   '}
+              developed by {"   "}
               <a href="https://digitio-stack-portfolio-25lbq91wi-janishnehyan03.vercel.app/">
-                <span className="highlight">Ditio Stack</span>
+                <span className="highlight">Digitio Stack</span>
               </a>
             </div>
             <div className="copyright-cell">
