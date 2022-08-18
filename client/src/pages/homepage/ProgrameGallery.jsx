@@ -31,7 +31,7 @@ function ProgrameGallery() {
                 <div className="col-lg-3 col-md-6">
                   <div className="collection-post">
                     <div className="inner-collection">
-                      <img src="/images/2.jpeg" alt />
+                      <img src="/images/6.jpeg" alt />
                       {/* <a href="#" className="hover-post">
                         <span className="title">Camps</span>
                         <span className="numb-courses">2 Sessions</span>
@@ -51,7 +51,7 @@ function ProgrameGallery() {
                 <div className="col-lg-3 col-md-6">
                   <div className="collection-post">
                     <div className="inner-collection">
-                      <img src="/images/4.jpeg" alt />
+                      <img src="/images/14.jpeg" alt />
                       {/* <a href="#" className="hover-post">
                         <span className="title">News</span>
                         <span className="numb-courses">3 Courses</span>
@@ -60,7 +60,7 @@ function ProgrameGallery() {
                   </div>
                   <div className="collection-post">
                     <div className="inner-collection">
-                      <img src="/images/5.jpeg" alt />
+                      <img src="/images/13.jpg" alt />
                       {/* <a href="#" className="hover-post">
                         <span className="title">Poster Archive</span>
                         <span className="numb-courses">3 Courses</span>

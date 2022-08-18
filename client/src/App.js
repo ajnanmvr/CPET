@@ -12,6 +12,7 @@ import NotificationView from "./pages/NotificationView";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
 import StudentLogin from "./pages/student/StudentLogin";
+import LaunchBtn from "./components/LaunchBtn";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
@@ -38,6 +39,7 @@ export default function App() {
             <Route path="/not-allowed" element={<Auth.NotAllowed />} />
             <Route path="/all-notifications" element={<AllNotifications />} />
             <Route path="/notification/:id" element={<NotificationView />} />
+            <Route path="/launch" element={<LaunchBtn />} />
             {ProtectRoutes.map((route, index) => (
               <Route
                 key={index}
