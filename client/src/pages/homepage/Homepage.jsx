@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import "../../base.css";
 import "../../style.css";
 import Courses from "./Courses";
@@ -10,10 +11,11 @@ import ProgrameGallery from "./ProgrameGallery";
 import Slideshow from "./Slideshow";
 
 function Homepage() {
+  const [navOpened, setNavOpened] = useState(false);
   return (
     <div>
-      <div id="container" className="active">
-        <Navbar />
+      <div id="container" className={`${navOpened ? "active move" : "active"}`}>
+        <Navbar navOpened={navOpened} setNavOpened={setNavOpened} />
         <Slideshow />
         {/* <div className="importantLinks"></div> */}
         <DirectorNews />
