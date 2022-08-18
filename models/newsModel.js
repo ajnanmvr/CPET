@@ -7,16 +7,16 @@ const newsSchema = new mongoose.Schema({
   },
   newsDate: {
     type: Date,
-    required: [true, "Please add a time"],
   },
   category: {
     type: mongoose.Types.ObjectId,
-    required: [true, "Please select a category"],
-    ref:"NewsCategory"
+    ref: "NewsCategory",
   },
   image: {
     type: String,
-    required: [true, "Please add a image"],
+  },
+  link: {
+    type: String,
   },
 });
 

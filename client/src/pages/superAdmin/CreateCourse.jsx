@@ -210,6 +210,7 @@ function CreateCourse() {
                     <option hidden>select </option>
                     <option value="boys">boys</option>
                     <option value="girls">girls</option>
+                    <option value="both">both</option>
                   </select>
                 </div>
               </div>
@@ -272,12 +273,7 @@ function CreateCourse() {
                 >
                   Amount
                 </th>
-                <th
-                  scope="col"
-                  className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
-                >
-                  Open / Close
-                </th>
+
                 <th
                   scope="col"
                   className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
@@ -313,15 +309,7 @@ function CreateCourse() {
                   <td className="px-5 py-3 bg-white text-sm">
                     {course.amount}
                   </td>
-                  <td className="px-5 py-3 bg-white text-sm">
-                    <span
-                      className={`px-2 py-2 text-white ${
-                        course.open ? "bg-green-500" : "bg-red-500"
-                      }`}
-                    >
-                      {course.open ? "open" : "closed"}
-                    </span>
-                  </td>
+
                   <td className="px-5 py-3 bg-white text-sm">
                     <Link to={`/edit-news/${course._id}`}>
                       <FontAwesomeIcon

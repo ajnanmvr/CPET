@@ -51,7 +51,7 @@ function ProgrameGallery() {
                 <div className="col-lg-3 col-md-6">
                   <div className="collection-post">
                     <div className="inner-collection">
-                      <img src="/images/14.jpeg" alt />
+                      <img src="/images/15.jpeg" alt />
                       {/* <a href="#" className="hover-post">
                         <span className="title">News</span>
                         <span className="numb-courses">3 Courses</span>

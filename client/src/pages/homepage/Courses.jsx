@@ -34,11 +34,11 @@ function Courses() {
         <div className="popular-courses-box">
           <div className="row">
             {courses.map((course) => (
-              <div key={course._id} className="col-lg-3 col-md-6">
+              <div key={course._id} className="col-lg-3 col-md-6 ">
                 <div className="course-post">
                   <div className="course-thumbnail-holder">
                     <a href="#">
-                      <img src={course.image} alt />
+                      <img className="object-cover h-48 w-96" src={course.image} alt={course.courseTitle} />
                     </a>
                   </div>
                   <div className="course-content-holder">

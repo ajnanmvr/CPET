@@ -1151,10 +1151,7 @@ section.courses-section .courses-top-bar form button {
   -moz-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
   -o-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
 }
-.course-post .course-thumbnail-holder img {
-  width: 100%;
-  height: auto;
-}
+
 .course-post .course-content-main {
   padding: 20px;
   overflow: hidden;
@@ -1232,9 +1229,7 @@ section.courses-section .courses-top-bar form button {
 .course-post.list-style {
   display: flex;
 }
-.course-post.list-style .course-thumbnail-holder {
-  width: 43%;
-}
+
 .course-post.list-style .course-content-holder {
   width: 57%;
 }
