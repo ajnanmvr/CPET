@@ -6,6 +6,7 @@ import Axios from "../../Axios";
 function Courses() {
   const [courses, setCourses] = useState([]);
 
+
   const getAllCourses = async () => {
     try {
       let { data } = await Axios.get("/course");
@@ -34,47 +35,25 @@ function Courses() {
         <div className="popular-courses-box">
           <div className="row">
             {courses.map((course) => (
-              <div key={course._id} className="col-lg-3 col-md-6 ">
-                <div className="course-post">
-                  <div className="course-thumbnail-holder">
-                    <a href="#">
-                      <img className="object-cover h-72 w-96" src={course.image} alt={course.courseTitle} />
-                    </a>
+              <div className="max-w-sm rounded overflow-hidden shadow-sm m-2">
+                <img
+                  className="w-full"
+                  src={course.image}
+                  alt="Sunset in the mountains"
+                />
+                <div className="px-6 py-4">
+                  <div className="font-bold text-xl mb-2">
+                    {course.courseTitle}
                   </div>
-                  <div className="course-content-holder">
-                    <div className="course-content-main">
-                      <h2 className="course-title capitalize">
-                        <a href="#">{course.courseTitle.toLowerCase()}</a>
-                      </h2>
-                      <div className="course-rating-teacher">
-                        <div
-                          className="star-rating has-ratings"
-                          title="Apply Now For New Admissions"
-                        >
-                          <span style={{ width: "100%" }}>
-                            <span className="rating">Admission Open</span>
-                            <span className="votes-number" />
-                          </span>
-                        </div>
-                        <a
-                          href={course.url}
-                          target={"_blank"}
-                          className="course-loop-teacher"
-                        >
-                          Apply Now
-                        </a>
-                      </div>
-                    </div>
-                    <div className="course-content-bottom">
-                      <div className="course-students">
-                        <i className="material-icons">Duration :</i>
-                        <span>{course.duration}</span>
-                      </div>
-                      <div className="course-price">
-                        <span> INR {course.amount}.</span>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+                <div className="flex justify-between">
+                  <p className="text-gray-700 text-base ml-3">
+                    Duration
+                    <span className="text-green-500"> {course.duration}</span>
+                  </p>
+                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    ₹ {course.amount}
+                  </span>
                 </div>
               </div>
             ))}
