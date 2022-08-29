@@ -8,17 +8,14 @@ function DirectorNews() {
       <section className="news-section director">
         <div className="container">
           <div className="blog-post list-style">
-            <div
+            <img
+              src="/images/thangal.jpg"
               style={{
-                backgroundImage:
-                  "url(https://scontent.fccj5-1.fna.fbcdn.net/v/t39.30808-6/227837216_355447062821067_396891195136929639_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=OsyxagtrbYMAX_Z0y3g&_nc_ht=scontent.fccj5-1.fna&oh=00_AT8CfdIzPDyFHvSVN87NWH6SXRgW4OyuQSSazgeFo4dxOg&oe=6301F7A5)",
                 backgroundSize: "cover",
                 width: "300px",
-                height: "400px",
-                margin: "0 10px",
-                borderRadius: "5px",
+                height: "300px",
               }}
-            ></div>
+            />
             <div className="post-content">
               <h1>CENTRE FOR PUBLIC EDUCATION AND TRAINING (CPET)</h1>
               <p>
