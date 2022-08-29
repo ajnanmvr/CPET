@@ -11,7 +11,7 @@ export default function EditNews() {
   const [category, setCategory] = useState("");
   const [image, setImage] = useState("");
   const [categories, setCategories] = useState([]);
-  
+  const [link, setLink] = useState("");
 
   const getCategories = async () => {
     try {
@@ -28,6 +28,7 @@ export default function EditNews() {
     formData.append("category", category);
     formData.append("newsName", newsName);
     formData.append("image", image);
+    formData.append("link", link);
     try {
       let res = await Axios.patch(`/news/${id}`, formData);
       if (res.status === 200) {
@@ -117,6 +118,23 @@ export default function EditNews() {
                           required
                           className="appearance-none my-2 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                           placeholder="News Title"
+                        />
+                      </div>
+                    </div>
+                    <div className="rounded-md shadow-sm -space-y-px">
+                      <div>
+                        <label
+                          htmlFor="email-address"
+                          className="text-sm font-bold"
+                        >
+                          News Url
+                        </label>
+                        <input
+                          type="text"
+                          onChange={(e) => setLink(e.target.value)}
+                          required
+                          className="appearance-none my-2 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                          placeholder="News URL"
                         />
                       </div>
                     </div>

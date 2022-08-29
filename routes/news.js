@@ -62,7 +62,7 @@ router.post(
 router.get(
   "/",
   catchAsync(async (req, res, next) => {
-    let data = await News.find().populate("category");
+    let data = await News.find().populate("category").sort("-createdAt");
     res.status(200).json(data);
   })
 );
@@ -76,6 +76,7 @@ router.get(
 router.patch(
   "/:id",
   catchAsync(async (req, res, next) => {
+    console.log(req.body);
     const uploadSingle = upload().single("image");
     uploadSingle(req, res, async (err) => {
       if (!err) {

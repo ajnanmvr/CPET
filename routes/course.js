@@ -53,7 +53,7 @@ router.post(
 router.get(
   "/",
   catchAsync(async (req, res, next) => {
-    let data = await Course.find();
+    let data = await Course.find().sort("-createdAt");
     res.status(200).json(data);
   })
 );

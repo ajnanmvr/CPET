@@ -2,6 +2,7 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 
 function LatestNews() {
@@ -27,13 +28,20 @@ function LatestNews() {
               <img src={item.image} alt={item.newsName} />
             </a>
             <div className="post-content">
-              <a className="category">{item.category.categoryName}</a>
+              {/* <a className="category">{item.category.categoryName}</a> */}
               <h2>
                 <a>{item.newsName}</a>
               </h2>
-              <div className="post-meta date">
+              {/* <div className="post-meta date">
                 <FontAwesomeIcon icon={faClock}/> {moment(item.newsDate).format('DD-MM-YYYY')}
-              </div>
+              </div> */}
+              <a
+                href={item.link}
+                target={'_blank'}
+                className="bg-teal-600 py-3 px-4 text-white font-bold rounded-xl hover:bg-teal-400"
+              >
+                VIEW DETAILS
+              </a>
             </div>
           </div>
         </div>

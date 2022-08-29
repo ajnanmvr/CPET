@@ -38,7 +38,7 @@ function Courses() {
                 <div className="course-post">
                   <div className="course-thumbnail-holder">
                     <a href="#">
-                      <img className="object-cover h-48 w-96" src={course.image} alt={course.courseTitle} />
+                      <img className="object-cover h-72 w-96" src={course.image} alt={course.courseTitle} />
                     </a>
                   </div>
                   <div className="course-content-holder">
