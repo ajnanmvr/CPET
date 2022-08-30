@@ -22,7 +22,7 @@ function LatestNews() {
   return (
     <div className="container scroll">
       {newses.map((item) => (
-        <div className="news-box">
+        <a className="news-box" href={item.link} target={"_blank"}>
           <div className="blog-post">
             <a>
               <img src={item.image} alt={item.newsName} />
@@ -35,16 +35,9 @@ function LatestNews() {
               {/* <div className="post-meta date">
                 <FontAwesomeIcon icon={faClock}/> {moment(item.newsDate).format('DD-MM-YYYY')}
               </div> */}
-              <a
-                href={item.link}
-                target={'_blank'}
-                className="bg-teal-600 py-3 px-4 text-white font-bold rounded-xl hover:bg-teal-400"
-              >
-                VIEW DETAILS
-              </a>
             </div>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   );

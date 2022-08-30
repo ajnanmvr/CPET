@@ -23,7 +23,6 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const compression = require("compression");
-const AppError = require("./utils/AppError");
 
 dotenv.config();
 app.use(
