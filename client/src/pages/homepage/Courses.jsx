@@ -6,7 +6,6 @@ import Axios from "../../Axios";
 function Courses() {
   const [courses, setCourses] = useState([]);
 
-
   const getAllCourses = async () => {
     try {
       let { data } = await Axios.get("/course");
@@ -54,6 +53,9 @@ function Courses() {
                   <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                     ₹ {course.amount}
                   </span>
+                  <a  href={course?.url} target={'_blank'} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                   Apply Now
+                  </a >
                 </div>
               </div>
             ))}
