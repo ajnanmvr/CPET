@@ -9,10 +9,10 @@ function DirectorNews() {
         <div className="container">
           <div className="blog-post list-style">
             <img
-              src="/images/thangal.jpg"
+              src="/images/logo.png"
               style={{
                 backgroundSize: "cover",
-                width: "300px",
+                width: "250px",
                 height: "300px",
               }}
             />

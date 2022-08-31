@@ -35,11 +35,11 @@ function LatestNews() {
 
               <div className="grid gap-8 items-start justify-center">
                 <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
-                  <button className="relative px-7 py-4 bg-black rounded-lg leading-none flex items-center divide-x divide-gray-600">
-                    <span className="pl-6 text-indigo-400 group-hover:text-gray-100 transition duration-200">
-                      Apply Now
-                    </span>
+                  <button
+                    className="text-[#4783f3] border-[1px] border-[#4783f3] py-[10px] px-[20px] hover:bg-[#4783f3] hover:text-white transition rounded-[24px]"
+                    href="#"
+                  >
+                    Apply Now
                   </button>
                 </div>
               </div>
