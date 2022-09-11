@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
+import CreateHtml from "../../components/CreateHtml";
 
 function CreateCourse() {
   const [courses, setCourses] = useState([]);
@@ -21,6 +22,7 @@ function CreateCourse() {
   const [inputData, setinputData] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState(null);
+  const [html, setHtml] = useState("");
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -49,6 +51,7 @@ function CreateCourse() {
     formData.append("duration", inputData.duration);
     formData.append("url", inputData.url);
     formData.append("image", image);
+    formData.append("details", html);
 
     e.preventDefault();
     setLoading(true);
@@ -75,7 +78,6 @@ function CreateCourse() {
   const getAllCourses = async () => {
     try {
       let { data } = await Axios.get("/course");
-      console.log(data);
       setCourses(data);
     } catch (error) {
       console.log(error.response);
@@ -215,6 +217,18 @@ function CreateCourse() {
                 </div>
               </div>
             </form>
+            <div className="lg:col-span-1">
+              <div className="px-4 sm:px-0">
+                <label
+                  className="block capitalize text-sm font-bold mb-2"
+                  htmlFor="username"
+                >
+                  Course Details
+                </label>
+
+                <CreateHtml html={html} setHtml={setHtml} />
+              </div>
+            </div>
             <div className="lg:col-span-1 mt-4">
               <div className="px-4 sm:px-0">
                 {!loading ? (

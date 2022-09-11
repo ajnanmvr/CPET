@@ -30,6 +30,10 @@ const courseSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please upload an image "],
     },
+    details: {
+      type: String,
+      required: [true, "Please add course details"],
+    },
   },
   {
     timestamps: true,

@@ -10,27 +10,73 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-aws.config.update({
-  region: "ap-southeast-1",
+// aws.config.update({
+//   region: "ap-southeast-1",
+//   accessKeyId: process.env.S3_ACCESS_KEY,
+//   secretAccessKey: process.env.S3_SECRET_KEY,
+// });
+// const s3 = new aws.S3();
+
+// const upload = () =>
+//   multer({
+//     storage: multerS3({
+//       s3,
+//       bucket: process.env.AWS_BUCKET_NAME,
+//       metadata: function (req, file, cb) {
+//         cb(null, { fieldName: file.fieldname });
+//       },
+//       key: function (req, file, cb) {
+//         cb(null, `image-${Date.now()}.jpeg`);
+//       },
+//     }),
+//   });
+const s3 = new aws.S3({
+  endpoint: process.env.S3_END_POINT,
   accessKeyId: process.env.S3_ACCESS_KEY,
   secretAccessKey: process.env.S3_SECRET_KEY,
+  region: "us-east-1",
+  s3ForcePathStyle: true,
 });
-const s3 = new aws.S3();
 
-const upload = () =>
-  multer({
-    storage: multerS3({
-      s3,
-      bucket: process.env.AWS_BUCKET_NAME,
-      metadata: function (req, file, cb) {
-        cb(null, { fieldName: file.fieldname });
+const upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: "test-test-com",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    acl: "public-read",
+    shouldTransform: function (req, file, cb) {
+      cb(null, /^image/i.test(file.mimetype));
+    },
+    key: function (req, file, cb) {
+      var filename =
+        file.originalname.replace(path.extname(file.originalname), "@") +
+        Date.now() +
+        path.extname(file.originalname);
+      file.originalname = filename;
+      cb(null, filename);
+    },
+    transforms: [
+      {
+        id: "original",
+        key: function (req, file, cb) {
+          cb(null, file.originalname);
+        },
+        transform: function (req, file, cb) {
+          cb(null, new stream.PassThrough());
+        },
       },
-      key: function (req, file, cb) {
-        cb(null, `image-${Date.now()}.jpeg`);
+      {
+        id: "thumbnail",
+        key: function (req, file, cb) {
+          cb(null, "thumb-" + file.originalname);
+        },
+        transform: function (req, file, cb) {
+          cb(null, sharp().resize({ width: 50, sigma: 0.3 }).png());
+        },
       },
-    }),
-  });
-
+    ],
+  }),
+});
 exports.resizeImage = (file, id, next) => {
   if (!file) return next();
 

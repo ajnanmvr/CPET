@@ -19,6 +19,7 @@ const handleJwtExpireError = (err, res) => {
 };
 
 const handleJwtInvalidError = (err, res) => {
+  console.log('error occured');
   res
     .status(401)
     .json({ message: "Your token expired, please try again later" });

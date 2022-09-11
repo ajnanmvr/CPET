@@ -50,12 +50,14 @@ function Courses() {
                     Duration
                     <span className="text-green-500"> {course.duration}</span>
                   </p>
-                  <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                    ₹ {course.amount}
-                  </span>
-                  <a  href={course?.url} target={'_blank'} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                   Apply Now
-                  </a >
+
+                  <a
+                    href={`/course/${course._id}`}
+                    target={"_blank"}
+                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                  >
+                    Apply Now
+                  </a>
                 </div>
               </div>
             ))}

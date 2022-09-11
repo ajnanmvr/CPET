@@ -64,5 +64,12 @@ router.delete(
     res.status(200).json({ deleted: true });
   })
 );
+router.get(
+  "/:id",
+  catchAsync(async (req, res, next) => {
+    let data = await Course.findById(req.params.id);
+    res.status(200).json(data);
+  })
+);
 
 module.exports = router;
