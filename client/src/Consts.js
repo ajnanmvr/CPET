@@ -12,6 +12,7 @@ import AllPayments from "./pages/superAdmin/AllPayments";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import ClassManagment from "./pages/superAdmin/ClassManagment";
 import CreateCourse from "./pages/superAdmin/CreateCourse";
+import CreateExam from "./pages/superAdmin/CreateExam";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import CreateSchedule from "./pages/superAdmin/CreateSchedule";
@@ -252,6 +253,11 @@ export const RestrictedRoutes = [
   {
     route: "/all-courses",
     component: <CreateCourse />,
+    role: "superAdmin",
+  },
+  {
+    route: "/create-exam",
+    component: <CreateExam />,
     role: "superAdmin",
   },
 ];

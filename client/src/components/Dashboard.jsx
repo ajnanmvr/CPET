@@ -2,6 +2,7 @@ import {
   faBook,
   faBookOpenReader,
   faChalkboardUser,
+  faCheckToSlot,
   faClockFour,
   faDonate, faExchange, faGraduationCap, faSchool, faToolbox
 } from "@fortawesome/free-solid-svg-icons";
@@ -77,11 +78,11 @@ function Dashboard() {
       icon: faToolbox,
       link: "/class-management",
     },
-    // {
-    //   text: "Schedule",
-    //   icon: faTools,
-    //   link: "/schedule",
-    // },
+    {
+      text: "EXAMS",
+      icon: faCheckToSlot,
+      link: "/create-exam",
+    },
   ];
   const AdminItems = [
     {

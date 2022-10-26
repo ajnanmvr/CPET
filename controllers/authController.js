@@ -75,6 +75,7 @@ exports.signIn = async (req, res, next) => {
           expiresIn: "90d",
         });
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
         res
           .cookie("jwt", token, {
             httpOnly: true,

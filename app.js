@@ -7,7 +7,7 @@ const authRoutes = require("./routes/auth");
 const studentRoutes = require("./routes/student");
 const branchRoutes = require("./routes/branch");
 const teacherRoutes = require("./routes/teacher");
-const paymentRoutes = require("./routes/payment");
+// const paymentRoutes = require("./routes/payment");
 const notificationRoutes = require("./routes/notification");
 const subjectRoutes = require("./routes/subject");
 const transferRoutes = require("./routes/transfer");
@@ -15,6 +15,7 @@ const scheduleSchemaRoute = require("./routes/schedule");
 const classRoute = require("./routes/class");
 const newsRoute = require("./routes/news");
 const courseRoute = require("./routes/course");
+
 
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
@@ -59,7 +60,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);
 app.use("/api/branch", branchRoutes);
 app.use("/api/teacher", teacherRoutes);
-app.use("/api/payment", paymentRoutes);
+// app.use("/api/payment", paymentRoutes);
 app.use("/api/notification", notificationRoutes);
 app.use("/api/subject", subjectRoutes);
 app.use("/api/transfer", transferRoutes);

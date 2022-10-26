@@ -51,7 +51,7 @@ export default function App() {
                 }
               />
             ))}
-            {RestrictedRoutes.map((route, index) => (
+          {RestrictedRoutes.map((route, index) => (
               <Route
                 path={route.route}
                 key={index}
