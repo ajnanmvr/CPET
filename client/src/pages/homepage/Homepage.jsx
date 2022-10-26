@@ -2,13 +2,14 @@ import React from "react";
 import { useState } from "react";
 import "../../base.css";
 import "../../style.css";
-import Courses from "./Courses";
+// import Courses from "./Courses";
 import DirectorNews from "./DirectorNews";
 import Events from "./Events";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import ProgrameGallery from "./ProgrameGallery";
 import Slideshow from "./Slideshow";
+import Courses from "../../components/Courses";
 
 function Homepage() {
   const [navOpened, setNavOpened] = useState(false);
@@ -19,6 +20,7 @@ function Homepage() {
         <Slideshow />
         {/* <div className="importantLinks"></div> */}
         <DirectorNews />
+        {/* <Courses /> */}
         <Courses />
         <section className="countdown-section">
           <div className="container">
