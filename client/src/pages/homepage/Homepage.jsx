@@ -1,15 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "../../base.css";
 import "../../style.css";
 // import Courses from "./Courses";
-import DirectorNews from "./DirectorNews";
+import Courses from "../../components/Courses";
 import Events from "./Events";
 import Footer from "./Footer";
+import HeroSection from "./HeroSection";
 import Navbar from "./Navbar";
 import ProgrameGallery from "./ProgrameGallery";
-import Slideshow from "./Slideshow";
-import Courses from "../../components/Courses";
+import Overview from "./Overview";
 
 function Homepage() {
   const [navOpened, setNavOpened] = useState(false);
@@ -17,9 +16,9 @@ function Homepage() {
     <div>
       <div id="container" className={`${navOpened ? "active move" : "active"}`}>
         <Navbar navOpened={navOpened} setNavOpened={setNavOpened} />
-        <Slideshow />
+        <HeroSection />
         {/* <div className="importantLinks"></div> */}
-        <DirectorNews />
+        <Overview />
         {/* <Courses /> */}
         <Courses />
         <section className="countdown-section">

@@ -8,7 +8,7 @@ function Courses() {
           <h1>Our Latest Packages</h1>
         </div>
         <div class="package-content">
-          {[1, 1, 1, 1, 1].map((course, index) => (
+          {[1, 1, 1, 1].map((course, index) => (
             <div class="box">
               <div class="thumbnail">
                 <img src="/images/img-1.jpg" alt="" />

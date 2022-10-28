@@ -15,6 +15,9 @@ const scheduleSchemaRoute = require("./routes/schedule");
 const classRoute = require("./routes/class");
 const newsRoute = require("./routes/news");
 const courseRoute = require("./routes/course");
+const examRoute = require("./routes/exam");
+const downloadRoute = require("./routes/downloads");
+
 
 
 const cookieParser = require("cookie-parser");
@@ -68,6 +71,8 @@ app.use("/api/schedule", scheduleSchemaRoute);
 app.use("/api/class", classRoute);
 app.use("/api/news", newsRoute);
 app.use("/api/course", courseRoute);
+app.use("/api/exam", examRoute);
+app.use("/api/downloads", downloadRoute);
 
 process.env.PWD = process.cwd();
 app.use(express.static(path.join(process.env.PWD, "public")));

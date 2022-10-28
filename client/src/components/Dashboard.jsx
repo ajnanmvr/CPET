@@ -4,7 +4,7 @@ import {
   faChalkboardUser,
   faCheckToSlot,
   faClockFour,
-  faDonate, faExchange, faGraduationCap, faSchool, faToolbox
+  faDonate, faDownload, faExchange, faGraduationCap, faSchool, faToolbox
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
@@ -83,6 +83,11 @@ function Dashboard() {
       icon: faCheckToSlot,
       link: "/create-exam",
     },
+    {
+      text: "DOWNLOADS",
+      icon: faDownload,
+      link: "/downloads",
+    },
   ];
   const AdminItems = [
     {
@@ -107,9 +112,9 @@ function Dashboard() {
       link: "/transfers",
     },
     {
-      text: "My Payments",
-      icon: faDonate,
-      link: "/my-payments",
+      text: "Downloads",
+      icon: faDownload,
+      link: "/downloads",
     },
   ];
 
@@ -174,7 +179,7 @@ function Dashboard() {
                       {admissionCount}
                     </div>
                   )}
-                  <div className=" py-4 overflow-hidden bg-sky-900 rounded-xl  duration-300 shadow-2xl group">
+                  <div className=" py-4 overflow-hidden bg-[#061c30] rounded-xl  duration-300 shadow-2xl group">
                     <div className="flex">
                       <div className="px-4 py-4 bg-gray-300  rounded-xl bg-opacity-30 mx-auto text-2xl">
                         <FontAwesomeIcon

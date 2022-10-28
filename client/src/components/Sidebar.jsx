@@ -100,7 +100,9 @@ function Sidebar() {
                 to={"/"}
                 className="font-bold text-[#76BA99] text-[25px] ml-3"
               >
-                MAHDIYYA
+                <div className="bg-white">
+                  <img src="/logo.png" alt="" />
+                </div>
               </Link>
             </div>
             <div className="my-2 bg-gray-600 h-[1px]" />

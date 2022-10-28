@@ -14,6 +14,7 @@ import ViewBranch from "./pages/superAdmin/ViewBranch";
 import StudentLogin from "./pages/student/StudentLogin";
 import LaunchBtn from "./components/LaunchBtn";
 import SingleCourse from "./pages/SingleCourse";
+import Downloads from "./pages/Downloads";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
@@ -41,7 +42,8 @@ export default function App() {
             <Route path="/all-notifications" element={<AllNotifications />} />
             <Route path="/notification/:id" element={<NotificationView />} />
             <Route path="/course/:id" element={<SingleCourse />} />
-            <Route path="/launch" element={<LaunchBtn />} />
+            {/* <Route path="/launch" element={<LaunchBtn />} /> */}
+            <Route path="/downloads" element={<Downloads />} />
             {ProtectRoutes.map((route, index) => (
               <Route
                 key={index}
