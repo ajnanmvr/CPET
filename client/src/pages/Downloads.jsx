@@ -98,7 +98,7 @@ function Downloads() {
                 <td className="py-4 px-6">
                   <a
                     target={"_blank"}
-                    href={`http://localhost:5000/${download.fileName}`}
+                    href={`/${download.fileName}`}
                     className="bg-[#333] px-3 py-2 font-bold text-white  hover:bg-gray-500"
                   >
                     Download
