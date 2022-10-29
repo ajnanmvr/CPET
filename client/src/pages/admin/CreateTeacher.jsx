@@ -219,14 +219,15 @@ function CreateTeacher() {
                   Selected Subjects
                 </label>
                 {selectedSubjects.map((item, key) => (
-                  <div className="flex justify-between mx-2 text-center cursor-pointer bg-sky-900 px-2 my-2  text-white py-1">
-                    <h1 key={key}>
+                  <div className="flex justify-between mx-2 text-center font-bold cursor-pointer  items-center bg-[#296d8a] px-2 my-2  text-white py-3">
+                    <h6 key={key} className="text-white font-bold text-center">
                       {item.subjectName} {item.subjectCode}
-                    </h1>
+                    </h6>
                     <FontAwesomeIcon
                       onClick={() => removeSubject(item._id)}
                       icon={faTrash}
                       color="white"
+                      className="hover:text-red-400"
                     />
                   </div>
                 ))}

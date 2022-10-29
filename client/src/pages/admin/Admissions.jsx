@@ -1,9 +1,4 @@
-import { faSchoolCircleCheck } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import Axios from "../../Axios";
 import AdmissionCard from "./AdmissionCard";
 

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import "../../base.css";
-import "../../style.css";
-// import Courses from "./Courses";
 import Courses from "../../components/Courses";
-import Events from "./Events";
+import "../../style.css";
 import Footer from "./Footer";
 import HeroSection from "./HeroSection";
 import Navbar from "./Navbar";
-import ProgrameGallery from "./ProgrameGallery";
 import Overview from "./Overview";
+import ProgrameGallery from "./ProgrameGallery";
 
 function Homepage() {
   const [navOpened, setNavOpened] = useState(false);
@@ -17,9 +15,7 @@ function Homepage() {
       <div id="container" className={`${navOpened ? "active move" : "active"}`}>
         <Navbar navOpened={navOpened} setNavOpened={setNavOpened} />
         <HeroSection />
-        {/* <div className="importantLinks"></div> */}
         <Overview />
-        {/* <Courses /> */}
         <Courses />
         <section className="countdown-section">
           <div className="container">
@@ -45,7 +41,6 @@ function Homepage() {
           </div>
         </section>
         <ProgrameGallery />
-        <Events />
         <Footer />
       </div>
     </div>

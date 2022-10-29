@@ -3,12 +3,13 @@ import AdminPayDetails from "./pages/admin/AdminPayDetails";
 import AdminProfile from "./pages/admin/AdminProfile";
 import Admissions from "./pages/admin/Admissions";
 import BranchPayments from "./pages/admin/BranchPayments";
+import FileUpload from "./pages/admin/FileUpload";
 import MyPayments from "./pages/admin/MyPayments";
+import MyUploads from "./pages/admin/MyUploads";
 import TransferStudent from "./pages/admin/TransferStudent";
 import AdminHome from "./pages/AdminHome";
 import CreateNews from "./pages/CreateNews";
 import AdmissionRequests from "./pages/superAdmin/AdmissionRequests";
-import AllPayments from "./pages/superAdmin/AllPayments";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import ClassManagment from "./pages/superAdmin/ClassManagment";
 import CreateCourse from "./pages/superAdmin/CreateCourse";
@@ -20,7 +21,6 @@ import EditNews from "./pages/superAdmin/EditNews";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import EditSubject from "./pages/superAdmin/EditSubject";
 import PaymentDetails from "./pages/superAdmin/PaymentDetails";
-import Schedule from "./pages/superAdmin/Schedules";
 import Settings from "./pages/superAdmin/Settings";
 import TransferRequest from "./pages/superAdmin/TransferRequest";
 import TransferVerify from "./pages/superAdmin/TransferVerify";
@@ -180,11 +180,6 @@ export const RestrictedRoutes = [
     role: "superAdmin",
   },
   {
-    route: "/all-payments",
-    component: <AllPayments />,
-    role: "superAdmin",
-  },
-  {
     route: "/create-payment",
     component: <CreatePaymentData />,
     role: "superAdmin",
@@ -207,12 +202,6 @@ export const RestrictedRoutes = [
   {
     route: "/transfer-request",
     component: <TransferRequest />,
-    role: "superAdmin",
-  },
-
-  {
-    route: "/schedule",
-    component: <Schedule />,
     role: "superAdmin",
   },
   {
@@ -326,5 +315,13 @@ export const ProtectRoutes = [
   {
     route: "/profile",
     component: <AdminProfile />,
+  },
+  {
+    route: "/my-uploads",
+    component: <MyUploads />,
+  },
+  {
+    route: "/file-upload/:referenceId",
+    component: <FileUpload />,
   },
 ];

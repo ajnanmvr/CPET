@@ -17,6 +17,7 @@ const newsRoute = require("./routes/news");
 const courseRoute = require("./routes/course");
 const examRoute = require("./routes/exam");
 const downloadRoute = require("./routes/downloads");
+const uploadRoute = require("./routes/uploads");
 
 
 
@@ -73,6 +74,7 @@ app.use("/api/news", newsRoute);
 app.use("/api/course", courseRoute);
 app.use("/api/exam", examRoute);
 app.use("/api/downloads", downloadRoute);
+app.use("/api/uploads", uploadRoute);
 
 process.env.PWD = process.cwd();
 app.use(express.static(path.join(process.env.PWD, "public")));

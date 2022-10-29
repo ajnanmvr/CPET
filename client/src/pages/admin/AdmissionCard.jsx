@@ -23,7 +23,7 @@ function AdmissionCard({ id, admClass }) {
   return (
     <div>
       <div className="shadow-2xl">
-        <h1 className="text-center bg-[#495C83] py-4 border-white border-r-2 overflow-hidden  text-white">
+        <h1 className="text-center bg-[#495C83] py-4 border-white border-r-2 overflow-hidden text-sm  text-white">
           {admClass} ({students.length})
         </h1>
         {students.map((student) => (

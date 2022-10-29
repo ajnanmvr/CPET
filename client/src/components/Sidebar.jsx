@@ -54,11 +54,6 @@ function Sidebar() {
       icon: faPager,
     },
     {
-      name: "Create Schedule",
-      route: "/create-schedule",
-      icon: faClock,
-    },
-    {
       name: "Create Course",
       route: "/create-course",
       icon: faClock,

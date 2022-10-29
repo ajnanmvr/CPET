@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 
 const studentSchema = new mongoose.Schema({
   studentName: {
@@ -69,13 +68,8 @@ const studentSchema = new mongoose.Schema({
     required: [true, "DOB year is required"],
     maxLength: [15, "15 characters are allowed"],
   },
-  admissionNo: {
-    type: String,
-    // unique: true,
-  },
   phone: {
     type: String,
-    // required: [true, "Phone is required"],
     maxLength: [15, "15 characters are allowed"],
   },
   branch: {
@@ -103,7 +97,6 @@ const studentSchema = new mongoose.Schema({
   certificateTwo: String,
   certificateThree: String,
   certificateFour: String,
-  image: String,
 });
 
 const Student = mongoose.model("Student", studentSchema);

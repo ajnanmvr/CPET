@@ -2,9 +2,7 @@ import {
   faBook,
   faBookOpenReader,
   faChalkboardUser,
-  faCheckToSlot,
-  faClockFour,
-  faDonate, faDownload, faExchange, faGraduationCap, faSchool, faToolbox
+  faCheckToSlot, faDownload, faExchange, faGraduationCap, faSchool, faToolbox, faUpload
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
@@ -53,16 +51,7 @@ function Dashboard() {
       icon: faBookOpenReader,
       link: "/all-subjects",
     },
-    {
-      text: "PAYMENTS",
-      icon: faDonate,
-      link: "/all-payments",
-    },
-    {
-      text: "SCHEDULES",
-      icon: faClockFour,
-      link: "/schedule",
-    },
+  
     {
       text: "ADMISSION REQUESTS",
       icon: faBook,
@@ -115,6 +104,11 @@ function Dashboard() {
       text: "Downloads",
       icon: faDownload,
       link: "/downloads",
+    },
+    {
+      text: "Uploads",
+      icon: faUpload,
+      link: "/my-uploads",
     },
   ];
 
