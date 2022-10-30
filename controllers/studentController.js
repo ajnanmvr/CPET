@@ -1,12 +1,12 @@
 const Student = require("../models/studentModel");
-const excelToJson = require("convert-excel-to-json");
-const fs = require("fs");
 const globalFunctions = require("../utils/globalFuctions");
 const mongoose = require("mongoose");
 const Branch = require("../models/branchModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/AppError");
 const jwt = require("jsonwebtoken");
+const excelToJson = require("convert-excel-to-json");
+const fs = require("fs");
 
 exports.getAllStudents = globalFunctions.getAll(Student, "branch", "class");
 exports.getStudent = globalFunctions.getOne(Student, "branch", "class");
@@ -26,7 +26,7 @@ exports.studentLogin = catchAsync(async (req, res, next) => {
   if (!registerNo || !password) {
     next(new AppError("Please enter your register number and password", 400));
   } else {
-    let user = await Student.findOne({registerNo});
+    let user = await Student.findOne({ registerNo });
     if (!user) {
       next(new AppError("No user found in this register number", 404));
     } else {
@@ -186,9 +186,10 @@ exports.getAdmissionRequests = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.excelUpload = async (req, res) => {
   try {
-    importExcelData2MongoDB(__dirname + "/uploads/" + req.file.filename);
+    importExcelData2MongoDB("./uploads/" + req.file.filename, req, res);
   } catch (err) {
     res.status(500).json({
       message: "Error registering student",
@@ -197,35 +198,47 @@ exports.excelUpload = async (req, res) => {
   }
 };
 
-function importExcelData2MongoDB(filePath) {
+async function importExcelData2MongoDB(filePath, req, res) {
   // -> Read Excel File to Json Data
   const excelData = excelToJson({
     sourceFile: filePath,
     sheets: [
       {
         // Excel Sheet Name
-        name: "Customers",
+        name: "Sheet1",
         // Header Row -> be skipped and will not be present at our result object.
         header: {
           rows: 1,
         },
         // Mapping columns to keys
         columnToKey: {
-          B: "name",
-          C: "address",
-          D: "age",
+          A: "studentName",
+          B: "fatherName",
+          C: "place",
+          D: "district",
+          E: "motherName",
+          F: "postOffice",
+          G: "pinCode",
+          H: "state",
+          I: "dobDate",
+          J: "dobMonth",
+          K: "dobYear",
+          L: "registerNo",
+          M: "phone",
+          N: "houseName",
         },
       },
     ],
   });
 
-  // Insert Json-Object to MongoDB
-  Student.insertMany(excelData.Customers, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Successfully Excel FIle read");
-    }
+  excelData?.Sheet1.forEach((element) => {
+    Student.create({
+      ...element,
+      branch: req.user.branch,
+      class: req.body.class,
+      verified: true,
+    });
   });
+  res.status(200).json({ success: true });
   fs.unlinkSync(filePath);
 }

@@ -27,10 +27,10 @@ function AdmissionCard({ id, admClass }) {
           {admClass} ({students.length})
         </h1>
         {students.map((student) => (
-          <Link to={`/profile/${student._id}`}>
-            <h1 className="text-center border-b-2 border-gray-400 font-bold cursor-pointer hover:text-orange-600 py-3">
+          <Link to={`/profile/${student._id}`} className="flex flex-col justify-center text-center mx-auto">
+            <h6 className="text-center border-b-2 border-gray-400 font-bold cursor-pointer hover:text-orange-600 py-3">
               {student.studentName}
-            </h1>
+            </h6>
           </Link>
         ))}
       </div>

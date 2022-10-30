@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
 import { DATES, DISTRICT, MONTHS, YEARS } from "../../Consts";
-import { ScheduleContext } from "../../context/schedule";
 
 function EditStudent() {
   const { id } = useParams();
@@ -27,7 +25,6 @@ function EditStudent() {
   const [loading, setLoading] = useState(false);
 
   const [classes, setClasses] = useState([]);
-  const { getSchedule, schedule } = useContext(ScheduleContext);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -73,7 +70,6 @@ function EditStudent() {
     }
   };
   useEffect(() => {
-    getSchedule("student data editing");
     getStudent();
     getClasses();
   }, []);
@@ -82,15 +78,7 @@ function EditStudent() {
     <div className="w-3/4 ml-6">
       <section className="bg-white p-6">
         <div className="max-w-screen-xl mx-auto">
-          {schedule.closed ? (
-            <h3 className="text-4xl font-bold text-red-500 uppercase my-4">
-              Editing Time Expired
-            </h3>
-          ) : (
-            <h3 className="text-4xl font-bold text-blue-900 uppercase my-4">
-              Edit Student
-            </h3>
-          )}
+         
           <form className="lg:grid  lg:grid-cols-2 lg:gap-8">
             <div className="lg:col-span-1 ">
               <div className="px-4 sm:px-0">
@@ -103,7 +91,6 @@ function EditStudent() {
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   onChange={(e) => onChange(e)}
                   required
                   placeholder="Student Name"
@@ -121,7 +108,6 @@ function EditStudent() {
               </label>
               <div className="flex">
                 <select
-                  disabled={schedule.closed ? true : false}
                   name="dobYear"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 py-4 "
                   id=""
@@ -133,7 +119,6 @@ function EditStudent() {
                   ))}
                 </select>
                 <select
-                  disabled={schedule.closed ? true : false}
                   name="dobMonth"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 py-4 "
                   id=""
@@ -145,7 +130,6 @@ function EditStudent() {
                   ))}
                 </select>
                 <select
-                  disabled={schedule.closed ? true : false}
                   name="dobDate"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 py-4 "
                   id=""
@@ -170,7 +154,6 @@ function EditStudent() {
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   id="username"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   required
                   onChange={(e) => onChange(e)}
                   placeholder="House Name"
@@ -190,7 +173,6 @@ function EditStudent() {
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   required
                   onChange={(e) => onChange(e)}
                   value={formData.fatherName}
@@ -212,7 +194,6 @@ function EditStudent() {
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   id="username"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   required
                   value={formData.phone}
                   onChange={(e) => onChange(e)}
@@ -233,7 +214,6 @@ function EditStudent() {
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   required
                   value={formData.place}
                   onChange={(e) => onChange(e)}
@@ -254,7 +234,7 @@ function EditStudent() {
                 name="district"
                 onChange={(e) => onChange(e)}
                 id=""
-                disabled={schedule.closed ? true : false}
+
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               >
                 <option hidden>Select YOUR DISTRICT </option>
@@ -278,7 +258,6 @@ function EditStudent() {
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   required
                   value={formData.postOffice}
                   onChange={(e) => onChange(e)}
@@ -298,7 +277,6 @@ function EditStudent() {
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   value={formData.pinCode}
                   required
                   onChange={(e) => onChange(e)}
@@ -318,7 +296,6 @@ function EditStudent() {
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   type="text"
-                  disabled={schedule.closed ? true : false}
                   value={formData.state}
                   required
                   onChange={(e) => onChange(e)}
@@ -337,7 +314,6 @@ function EditStudent() {
               </label>
 
               <select
-                disabled={schedule.closed ? true : false}
                 name="class"
                 onChange={(e) => onChange(e)}
                 id=""
@@ -355,7 +331,6 @@ function EditStudent() {
             </div>
           </form>
           <div
-            hidden={schedule.closed ? true : false}
             className="lg:col-span-1 mt-4"
           >
             <div className="px-4 sm:px-0">

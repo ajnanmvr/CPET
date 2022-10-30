@@ -10,12 +10,14 @@ import { MY_VERIFIED_STUDENTS } from "../../queries/student";
 
 function AllStudents() {
   const { classId } = useParams();
-  // const [students, setStudents] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const { authData } = useContext(UserAuthContext);
   const [className, setClassName] = useState(null);
   const { data, error, loading } = useQuery(MY_VERIFIED_STUDENTS, {
     variables: { adminId: authData?.branch?._id, classId: classId },
   });
+
+  const [file, setFile] = useState(null);
 
   const getClass = async () => {
     try {
@@ -25,22 +27,24 @@ function AllStudents() {
       console.log(error);
     }
   };
-
-  // const getAllStudents = async () => {
-  //   try {
-  //     let { data } = await Axios.post(
-  //       `/student?branch=${
-  //         authData ? authData.branch._id : authData.branch
-  //       }&class=${classId}&verified=true`
-  //     );
-  //     setStudents(data.docs);
-  //   } catch (error) {
-  //     console.log(error.response);
-  //   }
-  // };
+  const handleExcelUpload = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("class", classId);
+    try {
+      let res = await Axios.post("/student/excel",formData);
+      if (res.status === 200) {
+        alert("File uploaded successfully");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error.response);
+      alert("something went wrong");
+    }
+  };
 
   useEffect(() => {
-    // authData && getAllStudents();
     getClass();
   }, [classId]);
 
@@ -60,10 +64,41 @@ function AllStudents() {
             {className?.className} ({data?.myVerifiedStudents?.length})
           </h3>
           <div className="mx-auto ">
+            {!showModal && (
+              <button
+                onClick={(e) => setShowModal(true)}
+                className="bg-green-500 px-3 py-2 font-bold text-white hover:bg-green-400 ml-[60%]"
+              >
+                Add Students
+              </button>
+            )}
             <div className="flex"></div>
             <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
               <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <StudentsTable />
+                {!showModal ? (
+                  <StudentsTable />
+                ) : (
+                  <>
+                    {" "}
+                    <div className="p-6 space-y-6">
+                      <div>
+                        <label
+                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                          htmlFor="file_input"
+                        >
+                          upload excel file here..
+                        </label>
+                        <input
+                          className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                          id="file_input"
+                          type="file"
+                          onChange={(e) => setFile(e.target.files[0])}
+                        />
+                        <button onClick={(e)=>handleExcelUpload(e)} className="bg-green-400 text-white float-right font-bold px-3 py-2 mt-3">Upload </button>
+                      </div>
+                    </div>
+                  </>
+                )}
 
                 <div className="lg:col-span-1"></div>
                 <div className="overflow-hidden h-screen"></div>

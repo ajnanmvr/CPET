@@ -21,12 +21,9 @@ function ClassManagment() {
   const createClass = async (e) => {
     e.preventDefault();
     try {
-      let { data } = await Axios.post(
-        `/${paramsId ? "/class/" + paramsId : "/class"}`,
-        {
-          className,
-        }
-      );
+      let { data } = await Axios.post(`/class`, {
+        className,
+      });
       setClassName("");
       setShowModel(false);
       getAllClasses();
@@ -111,7 +108,6 @@ function ClassManagment() {
 
               <td className="px-5 py-3 bg-white text-sm">
                 <FontAwesomeIcon
-                
                   onClick={() => {
                     setShowModel(true);
                     setParamsId(classItem._id);

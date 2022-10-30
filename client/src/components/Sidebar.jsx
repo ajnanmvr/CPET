@@ -96,7 +96,7 @@ function Sidebar() {
                 className="font-bold text-[#76BA99] text-[25px] ml-3"
               >
                 <div className="bg-white">
-                  <img src="/logo.png" alt="" />
+                  <img src="/logo.png" className="max-w-[200px]" alt="" />
                 </div>
               </Link>
             </div>

@@ -16,12 +16,7 @@ const uploads = multer({ storage: storage });
 
 router.post("/register", studentController.registerStudent);
 router.post("/login", studentController.studentLogin);
-router.post(
-  "/excel",
-  protect,
-  uploads.single("excelFile"),
-  studentController.excelUpload
-);
+
 router.post("/", studentController.getAllStudents);
 router.post("/admission-requests", studentController.getAdmissionRequests);
 router.post(
@@ -42,6 +37,11 @@ router.post(
 router.get("/:id", studentController.getStudent);
 router.delete("/:id", studentController.deleteStudent);
 router.patch("/:id", studentController.updateStudent);
-router.post("/verify/:id",protect, studentController.verifyStudent);
-
+router.post("/verify/:id", protect, studentController.verifyStudent);
+router.post(
+  "/excel",
+  protect,
+  uploads.single("file"),
+  studentController.excelUpload
+);
 module.exports = router;

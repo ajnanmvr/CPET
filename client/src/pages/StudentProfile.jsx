@@ -228,7 +228,7 @@ function StudentProfile() {
     return (
       <div className="bg-gray-200 w-1/4 h-32  top-2 right-1/4 fixed">
         <div
-          className="modal fade  outline-none overflow-x-hidden overflow-y-auto"
+          className="outline-none overflow-x-hidden overflow-y-auto"
           id="staticBackdrop"
           data-bs-backdrop="static"
           data-bs-keyboard="false"
