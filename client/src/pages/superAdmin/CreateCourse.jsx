@@ -95,7 +95,7 @@ function CreateCourse() {
               Create New Course
             </h3>
 
-            <form className="lg:grid lg:grid-cols-2 lg:gap-8">
+            <form className="mx-[20%] space-y-4">
               <div className="lg:col-span-1">
                 <div className="px-4 sm:px-0">
                   <label
@@ -105,7 +105,7 @@ function CreateCourse() {
                     course title
                   </label>
                   <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     id="username"
                     type="text"
                     required
@@ -125,7 +125,7 @@ function CreateCourse() {
                     duration
                   </label>
                   <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     id="username"
                     type="text"
                     required
@@ -145,7 +145,7 @@ function CreateCourse() {
                     course url
                   </label>
                   <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     id="username"
                     type="text"
                     required
@@ -165,7 +165,7 @@ function CreateCourse() {
                     amount
                   </label>
                   <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     id="username"
                     type="text"
                     required
@@ -185,7 +185,7 @@ function CreateCourse() {
                     image
                   </label>
                   <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                    className="block p-4 pl-10 w-full text-sm  bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     id="username"
                     type="file"
                     required
@@ -204,7 +204,7 @@ function CreateCourse() {
                     type of students
                   </label>
                   <select
-                    className="appearance-none my-2 rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                    className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="courseFor"
                     id=""
                     onChange={(e) => onChange(e)}
@@ -216,35 +216,37 @@ function CreateCourse() {
                   </select>
                 </div>
               </div>
-            </form>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block capitalize text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Course Details
-                </label>
-
-                <CreateHtml html={html} setHtml={setHtml} />
-              </div>
-            </div>
-            <div className="lg:col-span-1 mt-4">
-              <div className="px-4 sm:px-0">
-                {!loading ? (
-                  <button
-                    onClick={(e) => handleSubmit(e)}
-                    className="w-full lg:w-1/2 bg-violet-500 hover:bg-violet-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+              <div className="lg:col-span-1">
+                <div className="px-4 sm:px-0">
+                  <label
+                    className="block capitalize text-sm font-bold mb-2"
+                    htmlFor="username"
                   >
-                    Submit
-                  </button>
-                ) : (
-                  <h1 className="text-white text-center w-full lg:w-1/2 bg-violet-500 hover:bg-violet-500  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
-                    Processing..
-                  </h1>
-                )}
+                    Course Details
+                  </label>
+
+                  <CreateHtml html={html} setHtml={setHtml} />
+                </div>
               </div>
-            </div>
+              <div className="lg:col-span-1 mt-4">
+                <div className="px-4 sm:px-0">
+                  {!loading ? (
+                    <button
+                      onClick={(e) => handleSubmit(e)}
+                      className="w-full bg-violet-500 hover:bg-violet-800 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                    >
+                      Submit
+                    </button>
+                  ) : (
+                    <button
+                      className="w-full bg-violet-500 hover:bg-violet-800 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
+                    >
+                      Processing..
+                    </button>
+                  )}
+                </div>
+              </div>
+            </form>
           </div>
         </section>
         <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">

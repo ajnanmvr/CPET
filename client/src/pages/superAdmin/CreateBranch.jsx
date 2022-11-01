@@ -24,12 +24,10 @@ function CreateBranch() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-
-
   const onChange = (e) => {
     const { name, value } = e.target;
     setInputData((prevState) => ({ ...prevState, [name]: value }));
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +82,7 @@ function CreateBranch() {
                 </label>
 
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   onChange={(e) => onChange(e)}
                   required
@@ -109,7 +107,7 @@ function CreateBranch() {
                 </label>
 
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   onChange={(e) => onChange(e)}
                   required
@@ -119,40 +117,6 @@ function CreateBranch() {
                 />
               </div>
             </div>
-            {/* <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Branch Image
-                </label>
-                <div className="flex">
-                  <input
-                    className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                    type="file"
-                    onChange={(e) => setBranchImg(e.target.files[0])}
-                    required
-                    placeholder="Branch Name"
-                    name="branchImg"
-                    value={inputData.branchImg}
-                  />
-                  {branchImg ? (
-                    <FontAwesomeIcon
-                      icon={faFileCircleCheck}
-                      color={"green"}
-                      className="text-3xl ml-3"
-                    />
-                  ) : (
-                    <FontAwesomeIcon
-                      icon={faFileCircleCheck}
-                      color={"red"}
-                      className="text-3xl ml-3"
-                    />
-                  )}
-                </div>
-              </div>
-            </div> */}
 
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
@@ -168,7 +132,7 @@ function CreateBranch() {
                   )}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   id="username"
                   type="text"
                   required
@@ -193,7 +157,7 @@ function CreateBranch() {
                   )}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   id="username"
                   type="text"
                   required
@@ -219,7 +183,7 @@ function CreateBranch() {
                   )}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   required
                   value={inputData.place}
@@ -273,7 +237,7 @@ function CreateBranch() {
                   )}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   required
                   value={inputData.postOffice}
@@ -297,7 +261,7 @@ function CreateBranch() {
                   )}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   value={inputData.pinCode}
                   required
@@ -321,7 +285,7 @@ function CreateBranch() {
                   )}
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   value={inputData.state}
                   required
@@ -341,7 +305,7 @@ function CreateBranch() {
                   Admin Username
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   value={inputData.username}
                   required
@@ -361,7 +325,7 @@ function CreateBranch() {
                   Admin Password
                 </label>
                 <input
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
+                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   type="text"
                   value={inputData.password}
                   required
