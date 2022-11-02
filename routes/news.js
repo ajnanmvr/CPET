@@ -50,7 +50,7 @@ router.post(
       if (!err) {
         let data = await News.create({
           ...req.body,
-          image: req?.file?.location,
+          image: req.file.location,
         });
         res.status(200).json(data);
       } else {
