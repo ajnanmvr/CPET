@@ -231,7 +231,7 @@ async function importExcelData2MongoDB(filePath, req, res) {
     ],
   });
 
-  excelData?.Sheet1.forEach((element) => {
+  excelData.Sheet1.forEach((element) => {
     Student.create({
       ...element,
       branch: req.user.branch,
