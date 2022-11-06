@@ -4,22 +4,27 @@ const { protect } = require("../controllers/authController");
 const multer = require("multer");
 const fs = require("fs");
 
-const uploadSchema = new mongoose.Schema({
-  fileName: {
-    type: String,
-    required: true,
+const uploadSchema = new mongoose.Schema(
+  {
+    fileName: {
+      type: String,
+      required: true,
+    },
+    uploadedBy: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Branch",
+    },
+    referenceId: {
+      type: mongoose.Types.ObjectId,
+      required: true,
+      ref: "Download",
+    },
   },
-  uploadedBy: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    ref: "Auth",
-  },
-  referenceId: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-    ref: "Download",
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 const Upload = mongoose.model("Upload", uploadSchema);
 
 const storage = multer.diskStorage({
@@ -36,7 +41,7 @@ router.post("/", protect, uploads.single("file"), async (req, res, next) => {
   try {
     let data = await Upload.create({
       fileName: req.file.filename,
-      uploadedBy: req.user._id,
+      uploadedBy: req.user.branch,
       referenceId: req.body.referenceId,
     });
     res.status(200).json(data);
@@ -48,7 +53,9 @@ router.post("/", protect, uploads.single("file"), async (req, res, next) => {
 
 router.get("/:referenceId", protect, async (req, res, next) => {
   try {
-    let data = await Upload.find({ referenceId: req.params.referenceId });
+    let data = await Upload.find({
+      referenceId: req.params.referenceId,
+    }).populate("uploadedBy", "branchName branchCode").populate('referenceId')
     res.status(200).json(data);
   } catch (error) {
     next(error);
@@ -57,7 +64,7 @@ router.get("/:referenceId", protect, async (req, res, next) => {
 
 router.get("/", protect, async (req, res, next) => {
   try {
-    let data = await Upload.find({ uploadedBy: req.user._id }).populate(
+    let data = await Upload.find({ uploadedBy: req.user.branch }).populate(
       "referenceId",
       "title"
     );

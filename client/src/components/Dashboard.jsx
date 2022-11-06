@@ -77,6 +77,7 @@ function Dashboard() {
       icon: faDownload,
       link: "/downloads",
     },
+    
   ];
   const AdminItems = [
     {
@@ -122,11 +123,7 @@ function Dashboard() {
         <>
           {authData?.role === "admin" && (
             <div className="lg:flex">
-              <img
-                src={`/img/${branch?._id}.jpeg`}
-                alt="branch image"
-                className="lg:w-1/4 w-full h-56"
-              />
+          
               <div className="bg-gray-900 w-full items-center">
                 <h1 className="text-white lg:my-[80px]  text-center font-bold text-3xl">
                   {branch?.branchName}

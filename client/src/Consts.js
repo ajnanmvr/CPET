@@ -24,6 +24,7 @@ import PaymentDetails from "./pages/superAdmin/PaymentDetails";
 import Settings from "./pages/superAdmin/Settings";
 import TransferRequest from "./pages/superAdmin/TransferRequest";
 import TransferVerify from "./pages/superAdmin/TransferVerify";
+import UploadedFiles from "./pages/superAdmin/UploadedFiles";
 import ViewTeacher from "./pages/ViewTeacher";
 
 export const DISTRICT = [
@@ -247,6 +248,11 @@ export const RestrictedRoutes = [
   {
     route: "/create-exam",
     component: <CreateExam />,
+    role: "superAdmin",
+  },
+  {
+    route: "/uploaded-files/:id",
+    component: <UploadedFiles />,
     role: "superAdmin",
   },
 ];
