@@ -38,7 +38,7 @@ jobs:
             KEY: ${{secrets.KEY}}     
             script: |
                 whoami
-                cd  ./cpet-test
+                cd  ./CPET
                 git pull origin master
                 npm install
                 sudo rm -rf /var/www/cpet.dhiu.in/html/*
