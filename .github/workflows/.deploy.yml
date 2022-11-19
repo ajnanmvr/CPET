@@ -1,0 +1,63 @@
+name: 'CICD FOR CPET'
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs: 
+  build:
+    strategy:
+      matrix:
+        node-version: [14.x]
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: use nodejs
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{matrix.node-version}}
+      - name: build site
+        run: |
+          docker build -t cpet .
+        env: 
+          CI: true
+
+  deploy:
+    timeout-minutes: 10
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: connect to SSH
+        uses: appleboy/ssh-action@master
+        with:
+            host: ${{secrets.HOST}}     
+            username: ${{secrets.USER}}  
+            PORT: ${{secrets.PORT}}  
+            KEY: ${{secrets.KEY}}     
+            script: |
+                whoami
+                cd  ./cpet-test
+                git pull origin master
+                npm install
+                sudo rm -rf /var/www/cpet.dhiu.in/html/*
+                sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html
+                pm2 reload server.js
+                sudo nginx -t
+                sudo systemctl restart nginx
+                sudo systemctl reload nginx
+      - name: Send some mail
+        uses: wadeww/send-email-action@master
+        with:
+          server_address: smtp.gmail.com
+          port: 465
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
+          subject: Workflow finished
+          body: Job completed ${{job.status}}
+          to: muhammedfayiscc@gmail.com
+          from: Me
+      - name: exit
+        run: |
+          echo 'deployment completed.' 
