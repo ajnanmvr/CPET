@@ -47,17 +47,4 @@ jobs:
                 sudo nginx -t
                 sudo systemctl restart nginx
                 sudo systemctl reload nginx
-      - name: Send some mail
-        uses: wadeww/send-email-action@master
-        with:
-          server_address: smtp.gmail.com
-          port: 465
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
-          subject: Workflow finished
-          body: Job completed ${{job.status}}
-          to: muhammedfayiscc@gmail.com
-          from: Me
-      - name: exit
-        run: |
-          echo 'deployment completed.' 
+
