@@ -26,7 +26,7 @@ jobs:
 
   deploy:
     timeout-minutes: 10
-    needs: [build]
+    needs: [test]
     runs-on: ubuntu-latest
 
     steps: 
