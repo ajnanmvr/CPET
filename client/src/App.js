@@ -7,14 +7,13 @@ import FileDataPage from "./components/New Admission/FileDataPage";
 import { ProtectRoutes, RestrictedRoutes } from "./Consts";
 import { UserAuthContext } from "./context/user";
 import { Auth, Student } from "./pages";
+import Downloads from "./pages/Downloads";
 import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
+import SingleCourse from "./pages/SingleCourse";
+import StudentLogin from "./pages/student/StudentLogin";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
-import StudentLogin from "./pages/student/StudentLogin";
-import LaunchBtn from "./components/LaunchBtn";
-import SingleCourse from "./pages/SingleCourse";
-import Downloads from "./pages/Downloads";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);

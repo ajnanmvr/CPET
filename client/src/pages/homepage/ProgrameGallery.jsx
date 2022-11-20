@@ -6,14 +6,10 @@ function ProgrameGallery() {
           <div className="container">
             <div className="title-section">
               <div className="left-part">
-                <span>Collections</span>
+                <h1 className='font-bold'>Collections</h1>
                 <h1>Programme Gallery</h1>
               </div>
-              <div className="right-part">
-                <a className="button-one" href="#">
-                  All Images
-                </a>
-              </div>
+      
             </div>
             <div className="collection-box">
               <div className="row">

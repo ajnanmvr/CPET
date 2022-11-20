@@ -86,12 +86,12 @@ function Navbar({ navOpened, setNavOpened }) {
           </a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav">
-              <li className="drop-link">
-                <a className="active" href="#">
+              <li className="drop-link uppercase">
+                <a  href="#">
                   Home
                 </a>
               </li>
-              {dropdownItems.map((item, key) => (
+              {/* {dropdownItems.map((item, key) => (
                 <li key={key} className="drop-link">
                   <a href="#">
                     {item.title} <FontAwesomeIcon icon={faArrowCircleDown} />
@@ -104,8 +104,8 @@ function Navbar({ navOpened, setNavOpened }) {
                     ))}
                   </ul>
                 </li>
-              ))}
-              <li className="drop-link">
+              ))} */}
+              {/* <li className="drop-link">
                 <a href="#">Academics</a>
                 <FontAwesomeIcon icon={faArrowCircleDown} />
                 <ul className="dropdown">
@@ -127,9 +127,18 @@ function Navbar({ navOpened, setNavOpened }) {
                     </ul>
                   </li>
                 </ul>
-              </li>
+              </li> */}
 
-              <li>
+              <li className="uppercase">
+                <a href="#">Contact</a>
+              </li>
+              <li className="uppercase">
+                <a href="#">Contact</a>
+              </li>
+              <li className="uppercase">
+                <a href="#">Contact</a>
+              </li>
+              <li className="uppercase">
                 <a href="#">Contact</a>
               </li>
             </ul>
@@ -143,7 +152,7 @@ function Navbar({ navOpened, setNavOpened }) {
             <li>
               <a href="/">Home</a>
             </li>
-            {dropdownItems.map((item, key) => (
+            {/* {dropdownItems.map((item, key) => (
               <li>
                 <a href={"#"}>{item.title}</a>
                 {item.subItems.map((sub, key) => (
@@ -154,7 +163,7 @@ function Navbar({ navOpened, setNavOpened }) {
                   </ul>
                 ))}
               </li>
-            ))}
+            ))} */}
 
             <li className="drop-link">
               <a href="#">Academics</a>
