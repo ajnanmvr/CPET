@@ -77,11 +77,13 @@ function Downloads() {
               <th scope="col" className="py-3 px-6">
                 Title
               </th>
+              {authData?.role === "superAdmin" && (
+                <th scope="col" className="py-3 px-6">
+                  View Files
+                </th>
+              )}
               <th scope="col" className="py-3 px-6">
-                View Files
-              </th>
-              <th scope="col" className="py-3 px-6">
-               Download
+                Download
               </th>
               {authData?.role === "superAdmin" && (
                 <th scope="col" className="py-3 px-6">
@@ -99,14 +101,16 @@ function Downloads() {
                 >
                   {download.title}
                 </th>
-                <td className="py-4 px-6">
-                  <Link
-                    to={`/uploaded-files/${download._id}`}
-                    className="bg-[#1e7472] px-3 py-2 font-bold text-white  hover:bg-[#31ae6d]"
-                  >
-                    View Files
-                  </Link>
-                </td>
+                {authData?.role === "superAdmin" && (
+                  <td className="py-4 px-6">
+                    <Link
+                      to={`/uploaded-files/${download._id}`}
+                      className="bg-[#1e7472] px-3 py-2 font-bold text-white  hover:bg-[#31ae6d]"
+                    >
+                      View Files
+                    </Link>
+                  </td>
+                )}
                 <td className="py-4 px-6">
                   <a
                     target={"_blank"}
