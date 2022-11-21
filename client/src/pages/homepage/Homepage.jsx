@@ -13,7 +13,7 @@ function Homepage() {
   const [navOpened, setNavOpened] = useState(false);
   return (
     <div>
-      <div id="container" className={`${navOpened ? "active move" : "active"}`}>
+      <div id="container" className={"active"}>
         <Navbar navOpened={navOpened} setNavOpened={setNavOpened} />
         <HeroSection />
         <Counter />
