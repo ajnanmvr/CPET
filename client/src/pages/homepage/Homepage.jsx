@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Courses from "./Features";
+import Features from "./Features";
 import "../../style.css";
 import About from "./About";
-import Features from "./Courses";
+import Courses from "./Courses";
 import Footer from "./Footer";
 import HeroSection from "./HeroSection";
 import Navbar from "./Navbar";
@@ -16,11 +16,11 @@ function Homepage() {
       <div id="container" className={`${navOpened ? "active move" : "active"}`}>
         <Navbar navOpened={navOpened} setNavOpened={setNavOpened} />
         <HeroSection />
+        <Counter />
         <Courses />
-        <Features />
         <About />
         <ProgrameGallery />
-        <Counter />
+        <Features />
         <Footer />
       </div>
     </div>

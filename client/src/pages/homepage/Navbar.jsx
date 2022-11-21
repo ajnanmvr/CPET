@@ -1,75 +1,7 @@
-import { faArrowCircleDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 function Navbar({ navOpened, setNavOpened }) {
-  const dropdownItems = [
-    {
-      title: "About",
-      subItems: [
-        {
-          text: "Who we are",
-          link: "#",
-        },
-        {
-          text: "Director's Message",
-          link: "#",
-        },
-        {
-          text: "Vision Mission",
-          link: "#",
-        },
-        {
-          text: "Leadership",
-          link: "#",
-        },
-        {
-          text: "Office Bearers",
-          link: "#",
-        },
-      ],
-    },
-    {
-      title: "Admissions",
-      subItems: [
-        {
-          text: "Admission Aid",
-          link: "#",
-        },
-        {
-          text: "Diplomas/ Courses",
-          link: "#",
-        },
-
-        {
-          text: "Mahdiyya",
-          link: "#",
-        },
-      ],
-    },
-    {
-      title: "Gallery",
-      subItems: [
-        {
-          text: "Mahdiyya",
-          link: "#",
-        },
-        {
-          text: "Camps",
-          link: "#",
-        },
-
-        {
-          text: "Volunteering",
-          link: "#",
-        },
-        {
-          text: "Others",
-          link: "#",
-        },
-      ],
-    },
-  ];
+  
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">

@@ -7,7 +7,6 @@ function Courses() {
   const getAllCourses = async () => {
     try {
       let { data } = await Axios.get("/course");
-      console.log(data);
       setCourses(data);
     } catch (error) {
       console.log(error.response);

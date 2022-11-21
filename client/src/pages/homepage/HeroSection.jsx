@@ -7,7 +7,7 @@ function HeroSection() {
         className="slide"
       >
         <h2 className="font-bold text-3xl lg:text-7xl text-white">
-          Center For Public Education
+          Centre For Public Education
         </h2>
         <p className="lg:ml-[10px] text-white">
           Centre for Public Education and Training is an extension of the

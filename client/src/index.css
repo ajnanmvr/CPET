@@ -196,11 +196,10 @@ section {
 }
 
 .about {
-  display: flex;
+  /* display: flex; */
 }
 
 .aboutContent {
-  flex: 3;
   padding-right: 20px;
 }
 
@@ -222,31 +221,11 @@ section {
   background-color: var(--gamma);
 }
 
-.about .video {
-  background-size: cover !important;
-  background-position: center !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 2;
-  border-radius: 5px;
-}
 
-.about .video i {
-  color: white;
-  background-color: var(--alpha);
-  font-size: 4rem;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 /* Counters */
 .counter {
   margin: 150px auto;
-  display: flex;
-  justify-content: space-around;
   text-align: center;
 }
 

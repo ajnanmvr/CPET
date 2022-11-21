@@ -2,27 +2,22 @@ import React from "react";
 
 function About() {
   return (
-    <section className="about">
-      <div className="aboutContent">
+    <section className="lg:flex justify-between">
+      <div className="lg:w-[500px] lg:mt-[4rem]">
         <h2 className="font-bold">About Us</h2>
         <p>
-          The academy aims to become a lead virtual resource institute imparting
-          Islamic knowledge for people of all ages around the world, thereby
-          molding morally conscious and socially committed Ummah who have
-          profound scholarship in Islamic disciplines and are well equipped for
-          constantly changing socio - cultural contexts. The academy aims to
-          become a lead virtual resource institute imparting Islamic knowledge
-          for people of all ages around the world, thereby molding morally
-          conscious and socially committed Ummah who have profound scholarship
-          in Islamic disciplines and are well equipped for constantly changing
-          socio - cultural contexts.
+          Centre for Public Education and Training is an extension of the
+          University devised for providing socio-educational empowerment
+          programs for the public. CPET plans, designs and implements awareness
+          programs aimed at different age groups of the public.
         </p>
-        <button>Read More</button>
       </div>
-      <div
-        className="video"
-        style={{ backgroundImage: "url(/images/dh.jpg)" }}
-      >
+      <div className="video">
+        <img
+          src="/images/dh.jpg"
+          className="w-[500px] rounded-xl mt-4"
+          alt=""
+        />
         <i className="fa-sharp fa-solid fa-circle-play" />
       </div>
     </section>
