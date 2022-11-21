@@ -2,7 +2,7 @@ import React from "react";
 
 function HeroSection() {
   return (
-    <section className="slider">
+    <section className="slider" id="home">
       <div
         className="slide"
       >

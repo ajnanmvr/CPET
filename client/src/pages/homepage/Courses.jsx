@@ -16,7 +16,7 @@ function Courses() {
     getAllCourses();
   }, []);
   return (
-    <section className="featured">
+    <section className="featured" id="courses" >
       <div>
         <h2 className="font-bold">Featured Programmes</h2>
         <p>Explore the world of knowledge from your home.</p>

@@ -2,7 +2,7 @@ import React from 'react'
 
 function ProgrameGallery() {
   return (
-    <section className="collection-section">
+    <section className="collection-section" id='gallery' >
           <div className="container">
             <div className="title-section">
               <div className="left-part">
