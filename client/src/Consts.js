@@ -11,6 +11,7 @@ import AdminHome from "./pages/AdminHome";
 import CreateNews from "./pages/CreateNews";
 import AdmissionRequests from "./pages/superAdmin/AdmissionRequests";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
+import BranchStudents from "./pages/superAdmin/BranchStudents";
 import ClassManagment from "./pages/superAdmin/ClassManagment";
 import CreateCourse from "./pages/superAdmin/CreateCourse";
 import CreateExam from "./pages/superAdmin/CreateExam";
@@ -248,6 +249,16 @@ export const RestrictedRoutes = [
   {
     route: "/create-exam",
     component: <CreateExam />,
+    role: "superAdmin",
+  },
+  {
+    route: "/uploaded-files/:id",
+    component: <UploadedFiles />,
+    role: "superAdmin",
+  },
+  {
+    route: "/all-students/:branchId/:classId",
+    component: <BranchStudents />,
     role: "superAdmin",
   },
   {

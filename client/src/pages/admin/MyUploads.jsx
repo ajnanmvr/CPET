@@ -1,3 +1,10 @@
+import {
+  faDownload,
+  faEye,
+  faFile,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
@@ -5,6 +12,9 @@ import Axios from "../../Axios";
 function MyUploads() {
   const [downloads, setDownloads] = useState([]);
   const [uploads, setUploads] = useState([]);
+
+  console.log("uploads", uploads);
+  console.log("downlaods", downloads);
 
   const deleteFile = async (e, id) => {
     e.preventDefault();
@@ -47,9 +57,7 @@ function MyUploads() {
   }, []);
   return (
     <div className="overflow-x-auto relative">
-      <h1 className="text-center font-bold my-4 text-teal-600">
-        Uploaded Files{" "}
-      </h1>
+      <h1 className="text-center font-bold my-4 uppercase">Uploaded Files </h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -86,24 +94,24 @@ function MyUploads() {
                 <a
                   href={`/${upload?.fileName}`}
                   target={"_blank"}
-                  className="bg-green-400 px-3 py-2 text-white"
+                  className="text-green-500 text-xl"
                 >
-                  View File
+                  <FontAwesomeIcon icon={faDownload} />
                 </a>
               </td>
               <td className="py-4 px-6">
                 <button
                   onClick={(e) => deleteFile(e, upload._id)}
-                  className="bg-[#cf4949] px-3 py-2 font-bold text-white  hover:bg-gray-500"
+                  className="text-[#cf4949] text-xl hover:text-red-300 "
                 >
-                  Delete
+                  <FontAwesomeIcon icon={faTrash} />
                 </button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <h1 className="text-center font-bold my-4 text-orange-500">
+      <h1 className="text-center font-bold my-4 uppercase text-[#333]">
         Pending Files{" "}
       </h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -122,7 +130,9 @@ function MyUploads() {
         </thead>
         <tbody>
           {downloads
-            .filter((item, index) => item._id !== uploads[index]?.referenceId?._id)
+            .filter(
+              (item, index) => item._id !== uploads[index]?.referenceId?._id
+            )
             .map((download, key) => (
               <tr
                 key={key}
@@ -143,8 +153,7 @@ function MyUploads() {
                 <td className="py-4 px-6">
                   <a
                     href={`/file-upload/${download._id}`}
-                    target={"_blank"}
-                    className="bg-green-400 px-4 py-2 text-white"
+                    className="bg-[#333] px-4 py-2 text-white"
                   >
                     Upload Now
                   </a>

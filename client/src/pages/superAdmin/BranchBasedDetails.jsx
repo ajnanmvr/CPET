@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Axios from "../../Axios";
 import { GET_BRANCH } from "../../queries/branch";
 import "./BranchBasedDetails.css";
@@ -50,16 +50,24 @@ function BranchBasedDetails() {
 
       <div className="ml-2 items-center px-4 py-8 mt-5 grid grid-cols-1 gap-2 lg:grid-cols-3">
         {branchStudentData.map((item, key) => (
-          <div key={key} className="bg-gray-900 w-full mx-5 py-4 px-4">
+          <Link
+            to={"/all-students/" + id + `/${item._id}`}
+            key={key}
+            className="bg-gray-900 w-full mx-5 py-4 px-4"
+          >
             <>
               {classes
                 .filter((classItem) => classItem._id === item._id)
                 .map((item) => (
-                  <h1 className="font-2xl font-bold text-blue-300">{item.className}</h1>
+                  <h1 className="font-2xl font-bold text-blue-300">
+                    {item.className}
+                  </h1>
                 ))}
-              <h1 className="font-2xl font-bold text-white">{item.numStudents} Students </h1>
+              <h1 className="font-2xl font-bold text-white">
+                {item.numStudents} Students{" "}
+              </h1>
             </>
-          </div>
+          </Link>
         ))}
       </div>
     </>

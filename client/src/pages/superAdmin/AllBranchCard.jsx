@@ -4,10 +4,9 @@ import Axios from "../../Axios";
 
 function AllBranchCard() {
   const [branches, setBranches] = useState([]);
+  const [branchDetails, setBranchDetails] = useState([]);
   const [start, setStart] = useState(0);
-  const { pathname } = useLocation();
 
-  
   const getAllBranches = async () => {
     try {
       let { data } = await Axios.get("/branch?sort=branchName");
@@ -16,6 +15,17 @@ function AllBranchCard() {
       console.log(error);
     }
   };
+
+  const getAllDetails = async () => {
+    try {
+      let { data } = await Axios.post("/student/all-details?branch=true");
+      console.log(data);
+      setBranchDetails(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const generateAdmissionNumber = async () => {
     try {
       let res = await Axios.post("/student/update-admission", {
@@ -30,7 +40,8 @@ function AllBranchCard() {
   };
   useEffect(() => {
     getAllBranches();
-  }, [pathname]);
+    getAllDetails();
+  }, []);
   return (
     <>
       <div className="flex flex-col">
@@ -65,7 +76,19 @@ function AllBranchCard() {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
+                      Students
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
                       Place
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      District
                     </th>
 
                     <th
@@ -77,27 +100,28 @@ function AllBranchCard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {branches.map((branch, i) => (
+                  {branchDetails.map((details, i) => (
                     <tr className="border-b">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {i + 1}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.branchName}
+                        {details?.branch[0]?.branchName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.branchCode}
+                        {details?.branch[0]?.branchCode}
+                      </td>
+                      <td className=" font-bold text-gray-900 px-6 py-4 whitespace-nowrap">
+                        {details?.numStudents}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {branch.place}
+                        {details?.branch[0]?.place}
                       </td>
-
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Link
-                          className="py-2 px-4 rounded-lg hover:bg-gray-700 bg-[#000] text-white font-bold text-center"
-                          to={branch._id}
-                          key={i}
-                        >
+                        {details?.branch[0]?.district}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        <Link className="px-4 py-2 bg-gray-800 text-white font-bold rounded-[20px]" to={`/all-branch-students/${details._id}`}>
                           view
                         </Link>
                       </td>
@@ -110,7 +134,7 @@ function AllBranchCard() {
         </div>
       </div>
 
-      <div className="lg:w-1/4 ml-auto mr-4 my-4">
+      {/* <div className="lg:w-1/4 ml-auto mr-4 my-4">
         <label className="block  text-sm font-bold mb-2" htmlFor="username">
           ADMISSION NUMBER STARTING:
         </label>
@@ -128,7 +152,7 @@ function AllBranchCard() {
         >
           Generate Admission Numbers{" "}
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -91,21 +91,21 @@ function Dashboard() {
       link: "/all-teachers",
     },
 
-    {
-      text: "Admission Requests",
-      icon: faBook,
-      link: "/admissions",
-    },
-    {
-      text: "Transfers",
-      icon: faExchange,
-      link: "/transfers",
-    },
-    {
-      text: "Downloads",
-      icon: faDownload,
-      link: "/downloads",
-    },
+    // {
+    //   text: "Admission Requests",
+    //   icon: faBook,
+    //   link: "/admissions",
+    // },
+    // {
+    //   text: "Transfers",
+    //   icon: faExchange,
+    //   link: "/transfers",
+    // },
+    // {
+    //   text: "Downloads",
+    //   icon: faDownload,
+    //   link: "/downloads",
+    // },
     {
       text: "Uploads",
       icon: faUpload,

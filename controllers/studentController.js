@@ -8,10 +8,22 @@ const jwt = require("jsonwebtoken");
 const excelToJson = require("convert-excel-to-json");
 const fs = require("fs");
 
-exports.getAllStudents = globalFunctions.getAll(Student, "branch", "class");
 exports.getStudent = globalFunctions.getOne(Student, "branch", "class");
 exports.deleteStudent = globalFunctions.deleteStatus(Student);
 
+exports.getAllStudents = async (req, res, next) => {
+  try {
+    let data = await Student.find({
+      branch: req.params.branchId,
+      class: req.params.classId,
+    }).populate("class");
+    res.status(200).json(data);
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+exports.getAdmissions = globalFunctions.getAll(Student, "branch", "class");
 exports.registerStudent = async (req, res, next) => {
   try {
     let data = await Student.create(req.body);
@@ -122,7 +134,13 @@ exports.getAllDetails = async (req, res) => {
           },
         },
         {
-          $project: { "branch.branchName": 1, numStudents: 1 },
+          $project: {
+            "branch.branchName": 1,
+            numStudents: 1,
+            "branch.branchCode": 1,
+            "branch.place": 1,
+            "branch.district": 1,
+          },
         },
       ]);
     } else {
@@ -223,9 +241,8 @@ async function importExcelData2MongoDB(filePath, req, res) {
           I: "dobDate",
           J: "dobMonth",
           K: "dobYear",
-          L: "registerNo",
-          M: "phone",
-          N: "houseName",
+          L: "phone",
+          M: "houseName",
         },
       },
     ],

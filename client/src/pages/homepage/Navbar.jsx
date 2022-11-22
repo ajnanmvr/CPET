@@ -52,10 +52,10 @@ function Navbar({ navOpened, setNavOpened }) {
                   Courses
                 </a>
                 <a
-                  href="#gallery"
-                  className=" px-3 py-2 rounded-md text-sm font-medium"
+                  href="/admin"
+                  className=" block px-3 py-2 rounded-md text-base font-medium"
                 >
-                  Gallery
+                  Dashboard
                 </a>
               </div>
             </div>
@@ -93,6 +93,12 @@ function Navbar({ navOpened, setNavOpened }) {
               className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               Gallery
+            </a>
+            <a
+              href="/admin"
+              className=" block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Dashboard
             </a>
           </div>
         </div>

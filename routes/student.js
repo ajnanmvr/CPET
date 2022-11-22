@@ -17,7 +17,8 @@ const uploads = multer({ storage: storage });
 router.post("/register", studentController.registerStudent);
 router.post("/login", studentController.studentLogin);
 
-router.post("/", studentController.getAllStudents);
+router.post("/:branchId/:classId", studentController.getAllStudents);
+router.post("/", studentController.getAdmissions);
 router.post("/admission-requests", studentController.getAdmissionRequests);
 router.post(
   "/my-students",

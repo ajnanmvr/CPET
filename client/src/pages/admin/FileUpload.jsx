@@ -25,7 +25,7 @@ function FileUpload() {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
-        window.location.href("/my-uploads");
+        window.location.href = "/my-uploads";
       }
     } catch (error) {
       setLoading(false);
