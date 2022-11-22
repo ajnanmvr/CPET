@@ -103,6 +103,15 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+                <span className="flex justify-between lg:text-md text-sm items-center mt-3">
+                  don't have an account?
+                  <a
+                    href="/signup"
+                    className="lg:ml-2 text-blue-600 font-semibold"
+                  >
+                    create account
+                  </a>
+                </span>
 
                 <button
                   onClick={(e) => handleLogin(e)}

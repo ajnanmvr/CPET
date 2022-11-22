@@ -1,7 +1,11 @@
 import React from "react";
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faClose, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useContext } from "react";
+import { UserAuthContext } from "../../context/user";
 function Navbar({ navOpened, setNavOpened }) {
+  const { authData,logout } = useContext(UserAuthContext);
+
   return (
     <nav className="bg-gray-200">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -30,7 +34,7 @@ function Navbar({ navOpened, setNavOpened }) {
               />
             </div>
             <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 items-center">
                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                 <a
                   href="#home"
@@ -57,6 +61,22 @@ function Navbar({ navOpened, setNavOpened }) {
                 >
                   Dashboard
                 </a>
+
+                {authData ? (
+                  <>
+                    <p className=" block px-3 py-2 text-green-400 rounded-md text-base font-medium">
+                      hi, {authData.username}
+                    </p>
+
+                    <button onClick={()=>logout()} className="  text-red-600 rounded-md text-md font-bold">
+                      <FontAwesomeIcon icon={faPowerOff} />
+                    </button>
+                  </>
+                ) : (
+                  <a href="/login" className="bg-green-400 block px-3 py-2 text-white rounded-md text-base font-medium">
+                    login
+                  </a>
+                )}
               </div>
             </div>
           </div>
@@ -100,6 +120,22 @@ function Navbar({ navOpened, setNavOpened }) {
             >
               Dashboard
             </a>
+
+            {authData ? (
+                  <>
+                    <p className=" block px-3 py-2 text-green-400 rounded-md text-base font-medium">
+                      hi, {authData.username}
+                    </p>
+
+                    <button onClick={()=>logout()} className="outline-none text-red-600 rounded-md text-md font-bold">
+                     logout <FontAwesomeIcon icon={faPowerOff} />
+                    </button>
+                  </>
+                ) : (
+                  <a href="/login" className="bg-green-400 block px-3 py-2 text-white rounded-md text-base font-medium">
+                    login
+                  </a>
+                )}
           </div>
         </div>
       )}

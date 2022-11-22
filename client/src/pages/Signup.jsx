@@ -1,121 +1,132 @@
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import Axios from "../Axios";
+import { toast } from "react-toastify";
+import { UserAuthContext } from "../context/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-function Signup() {
+function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
+  const { setAuthData, authData } = useContext(UserAuthContext);
+  const [show, setShow] = useState(false);
 
-
-  const handleSubmit = async (e) => {
+  if (authData) {
+    window.location.href = "/admin";
+  }
+  const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      if (password !== confirmPassword) {
-        setError("Password and Confirm Password must be same");
-        return;
-      }
-      let res = await Axios.post("/auth/register", {
-        username,
-        password,
-        email,
-      });
+      let res = await Axios.post("/auth/login", { username, password });
       if (res.status === 200) {
-        window.location.href = "/";
+        setUsername("");
+        setPassword("");
+        setAuthData(res.data);
+        window.location.href = "/admin";
       }
     } catch (error) {
-      setError(error.response);
       console.log(error.response);
+      toast.error(error.response.data.message, {
+        autoClose: 3000,
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   };
   return (
-    <section className="h-screen">
-      <div className="px-6 h-full text-gray-800">
-        {error && <p className="text-red-500">{error}</p>}
-        <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-          <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-            <img
-              src="https://img.freepik.com/free-vector/online-registration-sign-up-with-man-sitting-near-smartphone_268404-95.jpg?w=1060"
-              className="w-full"
-              alt="Sample image"
-            />
-          </div>
-          <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <form>
-              {/* username input */}
-              <div className="mb-6">
-                <input
-                  type="text"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              {/* Email input */}
-              <div className="mb-6">
-                <input
-                  type="text"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              {/* Password input */}
-              <div className="mb-6">
-                <input
-                  type="password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              {/*Confirm Password input */}
-              <div className="mb-6">
-                <input
-                  type="password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
-              {/* <label className="inline-flex items-center cursor-pointer">
-                  <input
-                    type="file"
-                    className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  />
-                </label> */}
-
-              <div className="text-center lg:text-left">
-                <button
-                  type="button"
-                  onClick={(e) => handleSubmit(e)}
-                  className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+    <div className="flex items-center min-h-screen bg-gray-50">
+      <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
+        <div className="flex flex-col md:flex-row">
+          <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+            <div className="w-full">
+              <div className="flex justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-20 h-20 text-[#333]"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Sign up
-                </button>
-                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
-                  Already have an account?
-                  <Link
-                    to={"/login"}
-                    className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out"
-                  >
-                    Login
-                  </Link>
-                </p>
+                  <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                  <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
+                  />
+                </svg>
               </div>
-            </form>
+              <form>
+                <h1 className="mb-4 text-2xl font-bold text-center text-gray-700">
+                  Create Your Account
+                </h1>
+                <div>
+                  <label className="block text-sm">Username</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-[#333]"
+                    placeholder
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
+                  />
+                </div>
+                <div>
+                  <label className="flex items-center mt-4 text-sm">
+                    <p className="mr-5">Password</p>
+                    {!show && (
+                      <FontAwesomeIcon
+                        onClick={() => setShow(true)}
+                        icon={faEye}
+                        className="cursor-pointer"
+                      />
+                    )}
+                    {show && (
+                      <FontAwesomeIcon
+                        onClick={() => setShow(false)}
+                        icon={faEyeSlash}
+                        className="cursor-pointer"
+                      />
+                    )}
+                  </label>
+
+                  <input
+                    className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-[#333]"
+                    placeholder
+                    type={show ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <span className="flex justify-between lg:text-md text-sm items-center mt-3">
+                  Already have an account?
+                  <a
+                    href="/login"
+                    className="lg:ml-2 text-[#333] font-semibold"
+                  >
+                    sign in now
+                  </a>
+                </span>
+
+                <button
+                  onClick={(e) => handleLogin(e)}
+                  className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-[#333] border border-transparent rounded-lg active:bg-[#333] hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                  type="submit"
+                >
+                  Log in
+                </button>
+              </form>
+            </div>
+          </div>
+          <div className="h-32 md:h-auto md:w-1/2">
+            <img
+              className="object-cover w-full h-full"
+              src="/loginImage.jpg"
+              alt="img"
+            />
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
-export default Signup;
+export default SignUp;

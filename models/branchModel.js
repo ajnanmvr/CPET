@@ -10,7 +10,7 @@ const branchSchema = new mongoose.Schema({
   },
   phone1: {
     type: String,
-    required: [true, "Phone number is required"],
+    // required: [true, "Phone number is required"],
     maxLength: [15, "15 characters are allowed"],
   },
   phone2: {
@@ -26,30 +26,30 @@ const branchSchema = new mongoose.Schema({
   district: {
     type: String,
     uppercase: true,
-    required: [true, "District is required"],
+    // required: [true, "District is required"],
     maxLength: [30, "30 characters are allowed"],
   },
   state: {
     type: String,
     uppercase: true,
-    required: [true, "State is required"],
+    // required: [true, "State is required"],
     maxLength: [30, "30 characters are allowed"],
   },
   postOffice: {
     type: String,
     uppercase: true,
-    required: [true, "Post office is required"],
+    // required: [true, "Post office is required"],
     maxLength: [30, "30 characters are allowed"],
   },
   pinCode: {
     type: String,
-    required: [true, "pincode is required"],
+    // required: [true, "pincode is required"],
     maxLength: [10, "10 characters are allowed"],
   },
   place: {
     type: String,
     uppercase: true,
-    required: [true, "place is required"],
+    // required: [true, "place is required"],
     maxLength: [100, "100 characters are allowed"],
   },
   deleted: {

@@ -17,7 +17,7 @@ const authSchema = new mongoose.Schema(
     role: {
       default: "admin",
       type: String,
-      enum: ["admin", "superAdmin"],
+      enum: ["admin", "superAdmin", "user"],
     },
     branch: {
       type: mongoose.Types.ObjectId,

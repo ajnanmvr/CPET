@@ -10,6 +10,7 @@ import { Auth, Student } from "./pages";
 import Downloads from "./pages/Downloads";
 import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
+import Signup from "./pages/Signup";
 import SingleCourse from "./pages/SingleCourse";
 import StudentLogin from "./pages/student/StudentLogin";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="*" element={<Auth.NotFound />} />
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Auth.Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/student-login" element={<StudentLogin />} />
             <Route path="/admission-created" element={<AdmissionCreated />} />
             <Route path="/mahdiyya-third-year" element={<FileDataPage />} />

@@ -134,3 +134,4 @@ exports.updateCoverImage = catchAsync(async (req, res, next) => {
     }
   });
 });
+

@@ -199,3 +199,13 @@ exports.getMyProfile = catchAsync(async (req, res, next) => {
   let data = await Auth.findById(req.user._id);
   res.status(200).json(data);
 });
+
+// const deleteall=async()=>{
+//   try {
+//     await Auth.deleteMany({role:"admin"})
+//     console.log('deleted');
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
