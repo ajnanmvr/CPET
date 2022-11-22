@@ -2,45 +2,29 @@ const router = require("express").Router();
 const catchAsync = require("../utils/catchAsync");
 const { protect, restrictTo } = require("../controllers/authController");
 const Course = require("../models/courseModel");
-const dotenv = require("dotenv");
-const multerS3 = require("multer-s3");
 const multer = require("multer");
-const aws = require("aws-sdk");
 const AppError = require("../utils/AppError");
 
-dotenv.config();
-aws.config.update({
-  region: "ap-southeast-1",
-  accessKeyId: process.env.S3_ACCESS_KEY,
-  secretAccessKey: process.env.S3_SECRET_KEY,
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
 });
-const s3 = new aws.S3();
-
-const upload = () =>
-  multer({
-    storage: multerS3({
-      s3,
-      bucket: process.env.AWS_BUCKET_NAME,
-      metadata: function (req, file, cb) {
-        cb(null, { fieldName: file.fieldname });
-      },
-      key: function (req, file, cb) {
-        cb(null, `image-${Date.now()}.jpeg`);
-      },
-    }),
-  });
-
+const uploads = multer({ storage: storage });
 router.post(
   "/",
   protect,
   restrictTo("superAdmin"),
   catchAsync(async (req, res, next) => {
-    const uploadSingle = upload().single("image");
+    const uploadSingle = uploads.single("image");
     uploadSingle(req, res, async (err) => {
       if (!err) {
         let data = await Course.create({
           ...req.body,
-          image: req.file.location,
+          image: req.file.filename,
         });
         res.status(200).json(data);
       } else {

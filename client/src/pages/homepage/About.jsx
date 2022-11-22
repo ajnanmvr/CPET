@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <section id="about" className="lg:flex justify-between">
+    <section id="about" className="lg:flex justify-between ">
       <div className="lg:w-[500px] lg:mt-[4rem]">
         <h2 className="font-bold">About Us</h2>
         <p>

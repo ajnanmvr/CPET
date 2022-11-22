@@ -16,33 +16,25 @@ function Courses() {
     getAllCourses();
   }, []);
   return (
-    <section className="featured" id="courses" >
-      <div>
-        <h2 className="font-bold">Featured Programmes</h2>
-        <p>Explore the world of knowledge from your home.</p>
-      </div>
-      <div className="featuredContent">
-        {courses.map((course, i) => (
-          <div className="card">
-            <div
-              className="img"
-              style={{
-                backgroundImage: ` url(${course?.image})`,
-                opacity: "0.6",
-              }}
-            />
-            <div className="desc">
-              <h3>{course.courseTitle}</h3>
-              <div className="applyContainer">
-                <span>
-                  <i className="fa-solid fa-clock" />{course.duration}
-                </span>
-                <button>Apply</button>
-              </div>
-            </div>
+    <section className="grid bg-gray-200 lg:mx-auto w-full lg:p-[10rem] grid-cols-1 lg:grid-cols-3 gap-x-3">
+      {courses.map((course, i) => (
+        <div className="bg-white p-[1rem] rounded-t-[20px] rounded-b-[20px] mt-2 mb-2 lg:mb-0">
+          <img
+            src={"/images/dh.jpg"}
+            className="rounded-t-[20px] w-full "
+            alt={course.courseTitle}
+          />
+
+          <div className="mt-3">
+            <h1 className="font-bold text-[14px] text-teal-700 leading-4 text-center">
+              {course.courseTitle}
+            </h1>
+            <button className="w-full bg-[#22a65d] text-white font-bold uppercase py-2 rounded-[20px] hover:bg-[#0f604b] ">
+              apply now
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </section>
   );
 }

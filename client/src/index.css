@@ -281,3 +281,25 @@ section {
   margin: 7px 0 20px 0;
 }
 
+.courses {
+  background-color: #f1f1f1;
+  margin: 0;
+  padding: 4rem 10rem;
+  margin-top: 3rem;
+}
+
+
+.courses img {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+.courses .card .container {
+  padding: 2rem;
+  color: var(--secondary-color);
+  width: 100%;
+}
+.courses .card button {
+  width: 100%;
+  margin-top: 1rem;
+  height: 3rem;
+}

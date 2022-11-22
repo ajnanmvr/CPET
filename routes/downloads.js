@@ -42,7 +42,6 @@ router.get("/", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     let data = await Download.findByIdAndDelete(req.params.id);
-    console.log(data);
     fs.unlinkSync(`./uploads/${data.fileName}`);
     res.status(200).json({ deleted: true });
   } catch (error) {

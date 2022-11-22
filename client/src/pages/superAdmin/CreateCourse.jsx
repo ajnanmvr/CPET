@@ -88,14 +88,14 @@ function CreateCourse() {
   }, []);
   return (
     <>
-      <div className="w-3/4 ml-6">
+      <div className="w-full ml-6">
         <section className="bg-white p-6">
-          <div className="max-w-screen-xl mx-auto">
-            <h3 className="text-4xl font-bold text-violet-600 uppercase my-4">
+          <div>
+            <h3 className="text-4xl font-bold text-center text-violet-600 uppercase my-4">
               Create New Course
             </h3>
 
-            <form className="mx-[20%] space-y-4">
+            <form className="space-y-4">
               <div className="lg:col-span-1">
                 <div className="px-4 sm:px-0">
                   <label
