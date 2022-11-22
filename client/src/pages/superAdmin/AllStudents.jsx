@@ -64,14 +64,14 @@ function AllStudents() {
             {className?.className} ({data?.myVerifiedStudents?.length})
           </h3>
           <div className="mx-auto ">
-            {!showModal && (
+            {/* {!showModal && (
               <button
                 onClick={(e) => setShowModal(true)}
                 className="bg-green-500 px-3 py-2 font-bold text-white hover:bg-green-400 ml-[60%]"
               >
                 Add Students
               </button>
-            )}
+            )} */}
             <div className="flex"></div>
             <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
               <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -149,12 +149,12 @@ function AllStudents() {
                     >
                       VIEW
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
                       EDIT
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -182,11 +182,11 @@ function AllStudents() {
                           <FontAwesomeIcon icon={faEye} />
                         </Link>
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
+                      {/* <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/edit-student/" + student.id}>
                           <FontAwesomeIcon icon={faUserEdit} />
                         </Link>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>
