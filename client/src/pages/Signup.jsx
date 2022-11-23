@@ -13,7 +13,6 @@ function Signup() {
   const CreateAccount = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     if (password !== confirm) {
       setError("confirm password doesn't match");
       return;
@@ -142,7 +141,7 @@ function Signup() {
                   >
                     Create Account
                   </button>
-                  
+
                 )}
               </form>
             </div>

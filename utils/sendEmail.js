@@ -3,7 +3,7 @@ const pug = require("pug");
 const htmlToText = require("html-to-text");
 
 module.exports = class Email {
-  constructor({email, url, registrationId, name}) {
+  constructor({email, url, registrationId, name,res}) {
     this.email = email;
     this.url = url;
     this.from = `CPET Darul Huda`;
@@ -38,6 +38,7 @@ module.exports = class Email {
       // 3) create a trasport and send
       this.transporter.sendMail(mailOptions); //sendMail is build in function
     } catch (error) {
+      res.status(400).json(error)
       console.log(error);
     }
   }
