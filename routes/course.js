@@ -81,7 +81,9 @@ router.post("/signup", async (req, res, next) => {
 
     const newUser = await CourseAccount.create({
       ...req.body,
-      registrationId: data[0].registrationId + 1,
+      registrationId: data[0]
+        ? data[0].registrationId + 1
+        : 298377,
     });
     await new Email({
       email: newUser.email,
