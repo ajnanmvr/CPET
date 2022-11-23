@@ -17,6 +17,8 @@ module.exports = class Email {
       user: "nehyanjanish@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
     },
+    port:465,
+    secure:true
   });
 
   async send(template, subject) {
