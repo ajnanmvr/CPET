@@ -1,15 +1,14 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 import { UserAuthProvider } from "./context/user";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { ScheduleProvider } from "./context/schedule";
+import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const client = new ApolloClient({
-  uri: `http://localhost:5000/graphql`,
+  uri: `/graphql`,
   cache: new InMemoryCache(),
 });
 root.render(
@@ -17,9 +16,7 @@ root.render(
     <BrowserRouter>
       <ApolloProvider client={client}>
         <UserAuthProvider>
-          <ScheduleProvider>
             <App />
-          </ScheduleProvider>
         </UserAuthProvider>
       </ApolloProvider>
     </BrowserRouter>
