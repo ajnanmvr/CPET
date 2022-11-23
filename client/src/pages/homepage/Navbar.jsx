@@ -73,7 +73,7 @@ function Navbar({ navOpened, setNavOpened }) {
                     </button>
                   </>
                 ) : (
-                  <a href="/login" className="bg-green-400 block px-3 py-2 text-white rounded-md text-base font-medium">
+                  <a href="/student-login" className="bg-green-400 block px-3 py-2 text-white rounded-md text-base font-medium">
                     login
                   </a>
                 )}
@@ -132,7 +132,7 @@ function Navbar({ navOpened, setNavOpened }) {
                     </button>
                   </>
                 ) : (
-                  <a href="/login" className="bg-green-400 block px-3 py-2 text-white rounded-md text-base font-medium">
+                  <a href="/student-login" className="bg-green-400 block px-3 py-2 text-white rounded-md text-base font-medium">
                     login
                   </a>
                 )}

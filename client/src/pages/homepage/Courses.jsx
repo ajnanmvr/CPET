@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Axios from "../../Axios";
 
 function Courses() {
+  const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const getAllCourses = async () => {
     try {
@@ -11,6 +13,10 @@ function Courses() {
     } catch (error) {
       console.log(error.response);
     }
+  };
+  const moveToCourse = (e,id) => {
+    e.preventDefault()
+    window.location.href = `/course-details/${id}`;
   };
   useEffect(() => {
     getAllCourses();
@@ -29,7 +35,10 @@ function Courses() {
             <h1 className="font-bold text-[14px] text-teal-700 leading-4 text-center">
               {course.courseTitle}
             </h1>
-            <button className="w-full bg-[#22a65d] text-white font-bold uppercase py-2 rounded-[20px] hover:bg-[#0f604b] ">
+            <button
+              onClick={(e) => moveToCourse(e,course._id)}
+              className="w-full bg-[#22a65d] text-white font-bold uppercase py-2 rounded-[20px] hover:bg-[#0f604b] "
+            >
               apply now
             </button>
           </div>

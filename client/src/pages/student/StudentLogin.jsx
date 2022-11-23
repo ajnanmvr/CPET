@@ -53,10 +53,18 @@ function StudentLogin() {
                     required
                   />
                 </div>
-
+                <span className="flex justify-between lg:text-md text-sm items-center mt-3">
+                  Don't have an account?
+                  <a
+                    href="/signup"
+                    className="lg:ml-2 text-[#1d3e5b] font-semibold"
+                  >
+                   create an account
+                  </a>
+                </span>
                 <button
                   type="submit"
-                  className="w-full bg-gray-400 text-gray-900 font-bold bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  className="w-full text-white font-bold hover:bg-green-400 bg-green-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
                 >
                   Sign in
                 </button>
