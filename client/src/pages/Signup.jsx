@@ -8,23 +8,31 @@ function Signup() {
   const [email, setEmail] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
 
   const CreateAccount = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     if (password !== confirm) {
       setError("confirm password doesn't match");
       return;
     }
     try {
-      let { data } = await Axios.post("/course/signup", {
+      let res = await Axios.post("/course/signup", {
         password,
         name,
         phone,
         email,
       });
-      console.log(data);
+      if (res.status === 200) {
+        setLoading(false);
+        window.location.href = `/email-sent/${email}`;
+      }
     } catch (error) {
       console.log(error.response);
+      setLoading(false);
     }
   };
   return (

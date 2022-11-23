@@ -19,8 +19,6 @@ const examRoute = require("./routes/exam");
 const downloadRoute = require("./routes/downloads");
 const uploadRoute = require("./routes/uploads");
 
-
-
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const path = require("path");
@@ -58,7 +56,11 @@ app.use(morgan("dev"));
 app.use(express.static("uploads"));
 
 app.set("views", path.join(__dirname + "/views"));
-app.set("view engine", "hbs");
+app.set("view engine", "pug");
+
+// app.get('/test',(req,res)=>{
+//   res.render('OTP.pug')
+// })
 
 app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);

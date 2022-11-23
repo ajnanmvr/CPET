@@ -1,3 +1,5 @@
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -105,9 +107,9 @@ function Downloads() {
                   <td className="py-4 px-6">
                     <Link
                       to={`/uploaded-files/${download._id}`}
-                      className="bg-[#1e7472] px-3 py-2 font-bold text-white  hover:bg-[#31ae6d]"
+                      className="bg-[#1e4a74] px-3 py-2 font-bold text-white  hover:bg-[#314eae]"
                     >
-                      View Files
+                      Go to details <FontAwesomeIcon icon={faArrowRight} />
                     </Link>
                   </td>
                 )}

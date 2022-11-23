@@ -9,6 +9,7 @@ import { CourseAccountProvider } from "./context/couseAccount";
 import { UserAuthContext } from "./context/user";
 import { Auth, Student } from "./pages";
 import CourseDetails from "./pages/courses/CourseDetails";
+import EmailSent from "./pages/courses/EmailSent";
 import Downloads from "./pages/Downloads";
 import Homepage from "./pages/homepage/Homepage";
 import NotificationView from "./pages/NotificationView";
@@ -37,6 +38,7 @@ export default function App() {
               <Route path="/student-login" element={<StudentLogin />} />
               <Route path="/admission-created" element={<AdmissionCreated />} />
               <Route path="/course-details/:id" element={<CourseDetails />} />
+              <Route path="/email-sent/:email" element={<EmailSent />} />
               <Route path="/mahdiyya-third-year" element={<FileDataPage />} />
               <Route path="/branch/:id" element={<ViewBranch />} />
               <Route path="/profile/:id" element={<Student.Profile />} />

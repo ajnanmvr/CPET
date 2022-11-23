@@ -7,7 +7,7 @@ const AppError = require("../utils/AppError");
 const CourseAccount = require("../models/courseAccountModel");
 const jwt = require("jsonwebtoken");
 const cron = require("node-cron");
-const nodemailer = require("nodemailer");
+const Email = require("../utils/sendEmail");
 
 cron.schedule("0 1 * * *", async () => {
   let data = await CourseAccount.find({ verified: false });
@@ -16,32 +16,6 @@ cron.schedule("0 1 * * *", async () => {
   });
   console.log("deleted");
 });
-
-async function sendEmail() {
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
-  let testAccount = await nodemailer.createTestAccount();
-
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "nehyanjanish@gmail.com",
-      pass: process.env.EMAIL_PASSWORD,
-      // clientId: process.env.GOOGLE_CLIENT_ID,
-      // clientSecret: process.env.GOOGLE_SECRET,
-    },
-  });
-
-  // send mail with defined transport object
-   await transporter.sendMail({
-    from: 'nehyanjanish@gmail.com', // sender address
-    to: "janishnehyan03@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-  });
-}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -104,25 +78,17 @@ router.post("/signup", async (req, res, next) => {
       });
     }
     let data = await CourseAccount.find().sort({ registrationId: -1 }).limit(1);
-    console.log(data);
+
     const newUser = await CourseAccount.create({
       ...req.body,
       registrationId: data[0].registrationId + 1,
     });
-    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
-    });
-    res
-      .cookie("jwt", token, {
-        httpOnly: true,
-        // max age 30 days
-        maxAge: 3600000 * 24 * 30,
-      })
-      .status(200);
-    newUser.password = undefined;
-    res.status(200).json({
-      user: newUser,
-    });
+    await new Email({
+      email: newUser.email,
+      registrationId: newUser.registrationId,
+      name: newUser.name,
+    }).send("OTP", "Email from CPET Dhiu");
+    res.status(200).json(newUser);
   } catch (err) {
     console.log(err);
     next(err);
@@ -131,13 +97,16 @@ router.post("/signup", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
+    const { registrationId, password } = req.body;
+    if (!registrationId || !password) {
       return res.status(400).json({
-        message: "Please provide email and password",
+        message: "Please provide registration ID and password",
       });
     }
-    const user = await CourseAccount.findOne({ email }).select("+password");
+    const user = await CourseAccount.findOne({ registrationId }).select(
+      "+password"
+    );
+
     if (!user) {
       return res.status(400).json({
         message: "User does not exist",
@@ -156,9 +125,11 @@ router.post("/login", async (req, res, next) => {
           expiresIn: "90d",
         });
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        user.verified = true;
+        await user.save();
 
         res
-          .cookie("jwt", token, {
+          .cookie("course_token", token, {
             httpOnly: true,
             // max age 30 days
             maxAge: decoded.exp,
