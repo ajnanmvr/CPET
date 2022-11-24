@@ -73,12 +73,11 @@ function StudentLogin() {
                   </a>
                 </span>
                 {loading ? (
-                  <button
-                    type="submit"
+                  <div
                     className="w-full text-white font-bold hover:bg-blue-400 bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
                   >
                   processing...
-                  </button>
+                  </div>
                 ) : (
                   <button
                     type="submit"

@@ -29,7 +29,7 @@ function Signup() {
         window.location.href = `/email-sent/${email}`;
       }
     } catch (error) {
-      console.log(error.response);
+      console.error(error.response);
       // setLoading(false);
     }
   };
@@ -127,12 +127,9 @@ function Signup() {
                   </a>
                 </span>
                 {loading ? (
-                  <button
-                    type="submit"
-                    className="w-full text-white font-bold hover:bg-green-400 bg-green-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
-                  >
-                   Processing...
-                  </button>
+                  <div className="w-full text-white font-bold hover:bg-green-400 bg-green-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center ">
+                    Processing...
+                  </div>
                 ) : (
                   <button
                     type="submit"
@@ -141,7 +138,6 @@ function Signup() {
                   >
                     Create Account
                   </button>
-
                 )}
               </form>
             </div>
