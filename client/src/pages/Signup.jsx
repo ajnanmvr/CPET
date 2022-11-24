@@ -133,7 +133,7 @@ function Signup() {
                 ) : (
                   <button
                     type="submit"
-                    className="w-full text-white font-bold hover:bg-blue-400 bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
+                    className="w-full text-white font-bold hover:bg-teal-400 bg-teal-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
                     onClick={(e) => CreateAccount(e)}
                   >
                     Create Account
