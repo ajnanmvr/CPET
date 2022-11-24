@@ -20,7 +20,7 @@ function Homepage() {
         <Courses />
         <About />
         <ProgrameGallery />
-        <Features />
+        {/* <Features /> */}
         <Footer />
       </div>
     </div>
