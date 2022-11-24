@@ -25,12 +25,12 @@ function Signup() {
         email,
       });
       if (res.status === 200) {
-        setLoading(false);
+        // setLoading(false);
         window.location.href = `/email-sent/${email}`;
       }
     } catch (error) {
       console.log(error.response);
-      setLoading(false);
+      // setLoading(false);
     }
   };
   return (
