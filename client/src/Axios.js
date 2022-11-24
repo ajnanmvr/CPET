@@ -9,6 +9,7 @@ baseURL: "/api",
     "Access-Control-Allow-Methods": "*",
   },
   withCredentials: true,
+  
 });
 
 export default Axios;

@@ -27,6 +27,7 @@ function Signup() {
       if (res.status === 200) {
         setLoading(false);
         window.location.href = `/email-sent/${email}`;
+        
       }
     } catch (error) {
       console.error(error.response);
