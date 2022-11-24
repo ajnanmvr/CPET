@@ -3,22 +3,22 @@ const pug = require("pug");
 const htmlToText = require("html-to-text");
 
 module.exports = class Email {
-  constructor({email, url, registrationId, name,res}) {
+  constructor({ email, url, registrationId, name, res }) {
     this.email = email;
     this.url = url;
     this.from = `CPET Darul Huda`;
     this.registrationId = registrationId;
     this.name = name;
   }
-  
+
   transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
       user: "nehyanjanish@gmail.com",
       pass: process.env.EMAIL_PASSWORD,
     },
-    port:465,
-    secure:true
+    port: 465,
+    secure: true,
   });
 
   async send(template, subject) {
@@ -38,9 +38,10 @@ module.exports = class Email {
         text: htmlToText.fromString(html),
       };
       // 3) create a trasport and send
-      this.transporter.sendMail(mailOptions); //sendMail is build in function
+      let data = await this.transporter.sendMail(mailOptions); //sendMail is build in function
+      return data
     } catch (error) {
-      res.status(400).json(error)
+      res.status(400).json(error);
       console.log(error);
     }
   }

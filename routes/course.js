@@ -83,13 +83,13 @@ router.post("/signup", async (req, res, next) => {
       ...req.body,
       registrationId: data[0] ? data[0].registrationId + 1 : 298377,
     });
-    await new Email({
+    let emailResponse = await new Email({
       email: newUser.email,
       registrationId: newUser.registrationId,
       name: newUser.name,
       res: res,
     }).send("OTP", "Email from CPET Dhiu");
-    res.status(200).json(newUser);
+    res.status(200).json({ newUser, emailResponse: emailResponse.response });
   } catch (err) {
     console.log(err);
     next(err);
