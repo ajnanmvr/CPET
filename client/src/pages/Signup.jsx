@@ -15,6 +15,7 @@ function Signup() {
     setLoading(true);
     if (password !== confirm) {
       setError("confirm password doesn't match");
+      setLoading(false)
       return;
     }
     try {
@@ -24,16 +25,18 @@ function Signup() {
         phone,
         email,
       });
+      setError(null)
       if (res.status === 200) {
         setLoading(false);
         window.location.href = `/email-sent/${email}`;
-        
+
       }
     } catch (error) {
-      console.error(error.response);
       setLoading(false);
+      console.error(error.response);
+      setError(error.response?.data?.message || 'something went wrong')
     }
-  };
+  };  
   return (
     <div>
       <h1 className="text-center text-blue-500 font-bold uppercase my-4">
@@ -89,7 +92,6 @@ function Signup() {
                     required
                   />
                 </div>
-                <p className="text-center text-red-500">{error}</p>
 
                 <div>
                   <label className="block mb-2 lg:text-sm text-[12px]  font-medium text-gray-900 dark:text-white">
@@ -117,6 +119,7 @@ function Signup() {
                     onChange={(e) => setConfirm(e.target.value)}
                   />
                 </div>
+                <p className="text-center text-red-500">{error}</p>
 
                 <span className="flex justify-between lg:text-sm text-[12px] items-center mt-3">
                   Already have an account?

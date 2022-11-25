@@ -1,12 +1,16 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "../../Axios";
+import { CourseAccountContext } from "../../context/courseAccount";
 
 function StudentLogin() {
   const [registrationId, setRegistrationId] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { setCourseAccount } = useContext(CourseAccountContext);
 
   const login = async (e) => {
     e.preventDefault();
@@ -18,11 +22,11 @@ function StudentLogin() {
       });
       if (res.status === 200) {
         setLoading(false);
+        setCourseAccount(res.data);
         window.location.href = "/";
       }
     } catch (error) {
-      console.log(error.response);
-      setLoading(false)
+      setLoading(false);
       setError(error.response?.data?.message);
     }
   };
@@ -65,18 +69,22 @@ function StudentLogin() {
                 </div>
                 <span className="flex justify-between lg:text-md text-sm items-center mt-3">
                   Don't have an account?
-                  <a
-                    href="/signup"
+                  <Link
+                    to="/signup"
                     className="lg:ml-2 text-[#1d3e5b] font-semibold"
                   >
                     create an account
-                  </a>
+                  </Link>
                 </span>
+                <Link
+                  to={"/forgot-registerNo"}
+                  className="lg:ml-2 text-[#3241b4] hover:text-green-400"
+                >
+                  forgot register number?
+                </Link>
                 {loading ? (
-                  <div
-                    className="w-full text-white font-bold hover:bg-blue-400 bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
-                  >
-                  processing...
+                  <div className="w-full text-white font-bold hover:bg-blue-400 bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center ">
+                    processing...
                   </div>
                 ) : (
                   <button

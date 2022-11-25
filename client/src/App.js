@@ -1,25 +1,29 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdmissionCreated from "./components/New Admission/AdmissionCreated";
 import FileDataPage from "./components/New Admission/FileDataPage";
 import { ProtectRoutes, RestrictedRoutes } from "./Consts";
-import { CourseAccountProvider } from "./context/couseAccount";
+import { CourseAccountProvider } from "./context/courseAccount";
 import { UserAuthContext } from "./context/user";
 import { Auth, Student } from "./pages";
+import AllCourses from "./pages/courses/AllCourses";
 import CourseDetails from "./pages/courses/CourseDetails";
 import EmailSent from "./pages/courses/EmailSent";
 import Downloads from "./pages/Downloads";
 import Homepage from "./pages/homepage/Homepage";
+import Navbar from "./pages/homepage/Navbar";
 import NotificationView from "./pages/NotificationView";
 import Signup from "./pages/Signup";
+import ForgetRegisterNumber from "./pages/student/ForgetRegister";
 import StudentLogin from "./pages/student/StudentLogin";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
+  const [navOpened, setNavOpened] = useState(false);
 
   useEffect(() => {
     checkUserLogin();
@@ -30,6 +34,7 @@ export default function App() {
         <CourseAccountProvider>
           <div className="w-full">
             <ToastContainer />
+            <Navbar setNavOpened={setNavOpened} navOpened={navOpened} />
             <Routes>
               <Route path="*" element={<Auth.NotFound />} />
               <Route path="/" element={<Homepage />} />
@@ -38,6 +43,7 @@ export default function App() {
               <Route path="/student-login" element={<StudentLogin />} />
               <Route path="/admission-created" element={<AdmissionCreated />} />
               <Route path="/course-details/:id" element={<CourseDetails />} />
+              <Route path="/all-courses" element={<AllCourses />} />
               <Route path="/email-sent/:email" element={<EmailSent />} />
               <Route path="/mahdiyya-third-year" element={<FileDataPage />} />
               <Route path="/branch/:id" element={<ViewBranch />} />
@@ -47,6 +53,7 @@ export default function App() {
               <Route path="/not-allowed" element={<Auth.NotAllowed />} />
               <Route path="/all-notifications" element={<AllNotifications />} />
               <Route path="/notification/:id" element={<NotificationView />} />
+              <Route path="/forgot-registerNo" element={<ForgetRegisterNumber />} />
               {/* <Route path="/launch" element={<LaunchBtn />} /> */}
               <Route path="/downloads" element={<Downloads />} />
               {ProtectRoutes.map((route, index) => (
@@ -72,6 +79,7 @@ export default function App() {
                 />
               ))}
             </Routes>
+            <Routes></Routes>
           </div>
         </CourseAccountProvider>
       </div>

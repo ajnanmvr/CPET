@@ -3,12 +3,14 @@ const pug = require("pug");
 const htmlToText = require("html-to-text");
 
 module.exports = class Email {
-  constructor({ email, url, registrationId, name, res }) {
+  constructor({ email, url, registrationId, name, res, subject }) {
     this.email = email;
     this.url = url;
     this.from = `CPET Darul Huda`;
     this.registrationId = registrationId;
-    this.name = name;
+    this.subject = subject;
+    this.res = res;
+    this.name=name
   }
 
   transporter = nodemailer.createTransport({
@@ -21,27 +23,27 @@ module.exports = class Email {
     secure: true,
   });
 
-  async send(template, subject) {
+  async send(template) {
     //1) render HTML based on pug
     try {
       const html = pug.renderFile(`${__dirname}/../views/${template}.pug`, {
         name: this.name,
-        subject,
+        subject:this.subject,
         registrationId: this.registrationId,
       });
       // 2) define Email options
       const mailOptions = {
-        from: this.name,
+        from: "cpet.dhiu.in",
         to: this.email,
-        subject: subject,
+        subject: this.subject,
         html,
         text: htmlToText.fromString(html),
       };
       // 3) create a trasport and send
       let data = await this.transporter.sendMail(mailOptions); //sendMail is build in function
-      return data
+      return data;
     } catch (error) {
-      res.status(400).json(error);
+      this.res.status(400).json(error);
       console.log(error);
     }
   }
@@ -49,7 +51,7 @@ module.exports = class Email {
     await this.send("welcome", "welcome to natours family");
   }
 
-  async sendPasswordReset() {
+  async sendText() {
     await this.send(
       "passwordReset",
       "Your password reset token (valid for 10 minutes)"

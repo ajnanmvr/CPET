@@ -26,6 +26,110 @@ const storage = multer.diskStorage({
   },
 });
 const uploads = multer({ storage: storage });
+
+router.post("/signup", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({
+        message: "Please enter all fields",
+      });
+    }
+    const user = await CourseAccount.findOne({ email });
+    if (user && user.verified) {
+      return res.status(400).json({
+        message: "User already exists",
+      });
+    }
+    let data = await CourseAccount.find().sort({ registrationId: -1 }).limit(1);
+
+    const newUser = await CourseAccount.create({
+      ...req.body,
+      registrationId: data[0] ? data[0].registrationId + 1 : 298377,
+    });
+    let emailResponse = await new Email({
+      email: newUser.email,
+      registrationId: newUser.registrationId,
+      name: newUser.name,
+      res: res,
+      subject: "Email from CPET Dhiu",
+    }).send("OTP");
+    res.status(200).json({ newUser, emailResponse: emailResponse.response });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+});
+
+router.post("/login", async (req, res, next) => {
+  try {
+    const { registrationId, password } = req.body;
+    if (!registrationId || !password) {
+      res.status(400).json({
+        message: "Please provide registration ID and password",
+      });
+    } else {
+      const user = await CourseAccount.findOne({ registrationId }).select(
+        "+password"
+      );
+
+      if (!user) {
+        res.status(400).json({
+          message: "User does not exist",
+        });
+      } else {
+        const isValidPassword = await user.correctPassword(
+          password,
+          user.password
+        );
+        if (!isValidPassword) {
+          return res.status(400).json({
+            message: "Invalid password",
+          });
+        } else {
+          const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "90d",
+          });
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
+          user.verified = true;
+          await user.save();
+
+          res
+            .cookie("course_token", token, {
+              httpOnly: true,
+              // max age 30 days
+              maxAge: decoded.exp,
+            })
+            .status(200);
+          // remove password from user object
+          user.password = undefined;
+          res.json(user);
+        }
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/checkLogin", async (req, res, next) => {
+  let token = req.cookies.course_token;
+  if (!token) {
+    res.status(200).json({ error: "user not logged in" });
+  } else {
+    let decoded = jwt.verify(token, process.env.JWT_SECRET);
+    let user = await CourseAccount.findById(decoded.userId);
+    res.status(200).json({ user: user });
+  }
+});
+router.post("/logout", (req, res) => {
+  res.clearCookie("course_token");
+  res.status(200).json({
+    message: "Logged out",
+    success: true,
+  });
+});
+
 router.post(
   "/",
   protect,
@@ -36,7 +140,6 @@ router.post(
       if (!err) {
         let data = await Course.create({
           ...req.body,
-          image: req.file.filename,
         });
         res.status(200).json(data);
       } else {
@@ -55,7 +158,7 @@ router.get(
 );
 router.delete(
   "/:id",
-  catchAsync(async (req, res, next) => {
+  catchAsync(protect, restrictTo("superAdmin"), async (req, res, next) => {
     await Course.findByIdAndDelete(req.params.id);
     res.status(200).json({ deleted: true });
   })
@@ -67,82 +170,77 @@ router.get(
     res.status(200).json(data);
   })
 );
-
-router.post("/signup", async (req, res, next) => {
+const courseProtect = async (req, res, next) => {
   try {
-    const { email } = req.body;
-    const user = await CourseAccount.findOne({ email });
-    if (user && user.verified) {
-      return res.status(400).json({
-        message: "User already exists",
-      });
-    }
-    let data = await CourseAccount.find().sort({ registrationId: -1 }).limit(1);
-
-    const newUser = await CourseAccount.create({
-      ...req.body,
-      registrationId: data[0] ? data[0].registrationId + 1 : 298377,
+    const token = req.cookies.course_token
+      ? req.cookies.course_token
+      : req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await CourseAccount.findById(decoded.userId);
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(401).json({
+      message: "Not authorized",
     });
-    let emailResponse = await new Email({
-      email: newUser.email,
-      registrationId: newUser.registrationId,
-      name: newUser.name,
-      res: res,
-    }).send("OTP", "Email from CPET Dhiu");
-    res.status(200).json({ newUser, emailResponse: emailResponse.response });
-  } catch (err) {
-    console.log(err);
-    next(err);
   }
-});
-
-router.post("/login", async (req, res, next) => {
-  try {
-    const { registrationId, password } = req.body;
-    if (!registrationId || !password) {
-      return res.status(400).json({
-        message: "Please provide registration ID and password",
-      });
-    }
-    const user = await CourseAccount.findOne({ registrationId }).select(
-      "+password"
-    );
-
-    if (!user) {
-      return res.status(400).json({
-        message: "User does not exist",
-      });
+};
+router.patch(
+  "/apply/:id",
+  catchAsync(async (req, res, next) => {
+    if (!req.body.student) {
+      res.status(400).json({ message: "please type learner ID" });
     } else {
-      const isValidPassword = await user.correctPassword(
-        password,
-        user.password
-      );
-      if (!isValidPassword) {
-        return res.status(400).json({
-          message: "Invalid password",
-        });
-      } else {
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-          expiresIn: "90d",
-        });
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        user.verified = true;
-        await user.save();
-
-        res
-          .cookie("course_token", token, {
-            httpOnly: true,
-            // max age 30 days
-            maxAge: decoded.exp,
-          })
-          .status(200);
-        // remove password from user object
-        user.password = undefined;
-        res.json(user);
-      }
+      let course = await Course.findByIdAndUpdate(req.params.id, {
+        $push: {
+          learners: {
+            student: req.body.student,
+          },
+        },
+      });
+      res.status(200).json(course);
     }
-  } catch (err) {
-    next(err);
-  }
-});
+  })
+);
+router.get(
+  "/my-courses",
+  catchAsync(courseProtect, async (req, res, next) => {
+    let data = await Course.find({ "learners.student": req.user._id });
+    res.status(200).json(data);
+  })
+);
+router.post(
+  "/resent-registerNo",
+  catchAsync(async (req, res, next) => {
+    let data = await CourseAccount.findOne({ email: req.body.email });
+    await new Email({
+      email: req.body.email,
+      registrationId: data.registrationId,
+      subject: "email from CPET dhiu",
+      name: data.name,
+    }).send("OTP");
+    res.status(200).json({ success: true });
+  })
+);
+router.post(
+  "/forget-registerNo",
+  catchAsync(async (req, res, next) => {
+    let data = await CourseAccount.findOne({ email: req.body.email });
+    if (data) {
+      await new Email({
+        email: req.body.email,
+        registrationId: data.registrationId,
+        subject: "email from CPET dhiu",
+        name: data.name,
+      }).send("OTP");
+      res.status(200).json({ success: true });
+    } else {
+      res
+        .status(200)
+        .json({
+          message: "There is no user in this email, please create an account",
+        });
+    }
+  })
+);
 module.exports = router;

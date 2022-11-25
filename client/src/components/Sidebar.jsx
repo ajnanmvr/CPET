@@ -49,11 +49,6 @@ function Sidebar() {
       icon: faSchool,
     },
     {
-      name: "Create News",
-      route: "/create-news",
-      icon: faPager,
-    },
-    {
       name: "Create Course",
       route: "/create-course",
       icon: faClock,

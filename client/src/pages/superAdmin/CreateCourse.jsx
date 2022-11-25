@@ -14,7 +14,7 @@ function CreateCourse() {
   const initialState = {
     courseTitle: "",
     duration: "",
-    url: "",
+    description: "",
     amount: "",
     courseFor: "",
   };
@@ -49,7 +49,7 @@ function CreateCourse() {
     formData.append("amount", inputData.amount);
     formData.append("courseFor", inputData.courseFor);
     formData.append("duration", inputData.duration);
-    formData.append("url", inputData.url);
+    formData.append("description", inputData.description);
     formData.append("image", image);
     formData.append("details", html);
 
@@ -142,17 +142,17 @@ function CreateCourse() {
                     className="block capitalize text-sm font-bold mb-2"
                     htmlFor="username"
                   >
-                    course url
+                    course description
                   </label>
                   <input
                     className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     id="username"
                     type="text"
                     required
-                    value={inputData.url}
+                    value={inputData.description}
                     onChange={(e) => onChange(e)}
-                    placeholder="url"
-                    name="url"
+                    placeholder="description"
+                    name="description"
                   />
                 </div>
               </div>
@@ -310,7 +310,7 @@ function CreateCourse() {
                   <td className="px-5 py-3 bg-white text-sm">{index + 1}</td>
                   <td className="px-5 py-3 bg-white text-sm">
                     <a target={"_blank"} href={course.image}>
-                      <img src={course.image} alt={course.courseTitle} />
+                      <img src={course.image} className="w-[100px] rounded-[20px] " alt={course.courseTitle} />
                     </a>
                   </td>
                   <td className="px-5 py-3 bg-white text-sm">
