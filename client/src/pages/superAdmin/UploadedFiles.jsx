@@ -89,7 +89,7 @@ function UploadedFiles() {
                 </td>
                 <td className="py-4 px-6">
                   <p>
-                    {upload.fileName?.split(".").pop() == "pdf" ? (
+                    {upload.fileName?.split(".").pop()==="pdf" ? (
                       <FontAwesomeIcon
                         className="text-3xl text-red-400"
                         icon={faFilePdf}
@@ -97,10 +97,10 @@ function UploadedFiles() {
                     ) : (
                       ""
                     )}
-                    {upload.fileName?.split(".").pop() == "xlsx" ||
-                    upload.fileName?.split(".").pop() == "csv" ||
-                    upload.fileName?.split(".").pop() == "xls" ||
-                    upload.fileName?.split(".").pop() == "xlsm" ? (
+                    {upload.fileName?.split(".").pop()==="xlsx" ||
+                    upload.fileName?.split(".").pop()==="csv" ||
+                    upload.fileName?.split(".").pop()==="xls" ||
+                    upload.fileName?.split(".").pop()==="xlsm" ? (
                       <FontAwesomeIcon
                         className="text-3xl text-green-400"
                         icon={faFileExcel}
@@ -108,8 +108,8 @@ function UploadedFiles() {
                     ) : (
                       ""
                     )}
-                    {upload.fileName?.split(".").pop() == "doc" ||
-                    upload.fileName?.split(".").pop() == "docs" ? (
+                    {upload.fileName?.split(".").pop()==="doc" ||
+                    upload.fileName?.split(".").pop()==="docs" ? (
                       <FontAwesomeIcon
                         className="text-3xl text-blue-400"
                         icon={faFileWord}
@@ -117,7 +117,7 @@ function UploadedFiles() {
                     ) : (
                       ""
                     )}
-                    {upload.fileName?.split(".").pop() == "txt" ? (
+                    {upload.fileName?.split(".").pop()==="txt" ? (
                       <FontAwesomeIcon
                         className="text-3xl text-gray-400"
                         icon={faFileText}
@@ -125,9 +125,9 @@ function UploadedFiles() {
                     ) : (
                       ""
                     )}
-                    {upload.fileName?.split(".").pop() == "png" ||
-                    upload.fileName?.split(".").pop() == "jpg" ||
-                    upload.fileName?.split(".").pop() == "jpeg" ? (
+                    {upload.fileName?.split(".").pop()==="png" ||
+                    upload.fileName?.split(".").pop()==="jpg" ||
+                    upload.fileName?.split(".").pop()==="jpeg" ? (
                       <FontAwesomeIcon
                         className="text-3xl text-violet-400"
                         icon={faFileImage}

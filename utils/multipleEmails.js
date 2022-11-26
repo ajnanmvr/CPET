@@ -30,7 +30,6 @@ module.exports = class Email {
     this.email = email;
     this.url = url;
     this.from = `CPET Darul Huda`;
-    this.registrationId = registrationId;
     this.subject = subject;
     this.res = res;
     this.title = title;
@@ -42,7 +41,7 @@ module.exports = class Email {
     try {
       const mailOptions = {
         from: "cpet.dhiu.in",
-        to:this.email,
+        to: this.email,
         subject: "subject",
         template: template,
         context: {
