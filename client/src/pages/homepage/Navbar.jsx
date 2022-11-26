@@ -71,12 +71,12 @@ function Navbar({ navOpened, setNavOpened }) {
                     My Courses
                   </Link>
                 )}
-                <Link
-                  to="/admin"
+                <a
+                  href="/admin"
                   className=" block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Dashboard
-                </Link>
+                </a>
 
                 {courseAccount ? (
                   <>
@@ -143,12 +143,12 @@ function Navbar({ navOpened, setNavOpened }) {
             >
               Gallery
             </Link>
-            <Link
-              to="/admin"
+            <a
+              href="/admin"
               className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               Dashboard
-            </Link>
+            </a>
 
             {courseAccount ? (
               <>
