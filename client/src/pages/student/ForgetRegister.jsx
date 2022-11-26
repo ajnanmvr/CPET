@@ -1,9 +1,5 @@
-import React from "react";
-import { useContext } from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import Axios from "../../Axios";
-import { CourseAccountContext } from "../../context/courseAccount";
 
 function ForgetRegisterNumber() {
   const [email, setEmail] = useState(null);
@@ -25,6 +21,7 @@ function ForgetRegisterNumber() {
         alert("Check your gmail inbox");
         setEmail('')
         setLoading(false);
+        window.location.href = "/student-login";
       }
     } catch (error) {
         setLoading(false);
@@ -39,8 +36,7 @@ function ForgetRegisterNumber() {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 lg:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 lg:space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Forget Register Number
-              </h1>
+                Forget Register Number</h1>
               <form className="space-y-4 md:space-y-6" action="#">
                 <div>
                   <p className="text-red-500 text-center">{error}</p>
@@ -64,7 +60,7 @@ function ForgetRegisterNumber() {
                 ) : (
                   <button
                     type="submit"
-                    className="w-full text-white font-bold hover:bg-violet-400 bg-violet-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
+                    className="w-full text-white font-bold hover:bg-green-400 bg-green-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg text-sm px-5 py-2.5 text-center "
                     onClick={(e) => login(e)}
                   >
                     Request Mail

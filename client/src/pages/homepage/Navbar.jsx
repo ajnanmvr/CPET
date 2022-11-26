@@ -63,6 +63,14 @@ function Navbar({ navOpened, setNavOpened }) {
                 >
                   Courses
                 </Link>
+                {courseAccount && (
+                  <Link
+                    to="my-courses"
+                    className=" px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    My Courses
+                  </Link>
+                )}
                 <Link
                   to="/admin"
                   className=" block px-3 py-2 rounded-md text-base font-medium"
@@ -114,7 +122,14 @@ function Navbar({ navOpened, setNavOpened }) {
             >
               About
             </Link>
-
+            {courseAccount && (
+              <Link
+                to="my-courses"
+                className=" px-3 py-2 rounded-md text-sm font-medium"
+              >
+                My Courses
+              </Link>
+            )}
             <Link
               to="#courses"
               className=" block px-3 py-2 rounded-md text-base font-medium"

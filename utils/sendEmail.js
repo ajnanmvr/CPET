@@ -10,7 +10,7 @@ module.exports = class Email {
     this.registrationId = registrationId;
     this.subject = subject;
     this.res = res;
-    this.name=name
+    this.name = name;
   }
 
   transporter = nodemailer.createTransport({
@@ -28,8 +28,9 @@ module.exports = class Email {
     try {
       const html = pug.renderFile(`${__dirname}/../views/${template}.pug`, {
         name: this.name,
-        subject:this.subject,
+        subject: this.subject,
         registrationId: this.registrationId,
+        url: this.url,
       });
       // 2) define Email options
       const mailOptions = {
@@ -43,7 +44,6 @@ module.exports = class Email {
       let data = await this.transporter.sendMail(mailOptions); //sendMail is build in function
       return data;
     } catch (error) {
-      this.res.status(400).json(error);
       console.log(error);
     }
   }
@@ -51,10 +51,7 @@ module.exports = class Email {
     await this.send("welcome", "welcome to natours family");
   }
 
-  async sendText() {
-    await this.send(
-      "passwordReset",
-      "Your password reset token (valid for 10 minutes)"
-    );
+  async sendPasswordReset() {
+    await this.send("passwordReset");
   }
 };

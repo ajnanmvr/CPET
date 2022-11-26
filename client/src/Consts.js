@@ -13,6 +13,7 @@ import AdmissionRequests from "./pages/superAdmin/AdmissionRequests";
 import AllSubjects from "./pages/superAdmin/AllSubjects";
 import BranchStudents from "./pages/superAdmin/BranchStudents";
 import ClassManagment from "./pages/superAdmin/ClassManagment";
+import CourseStudents from "./pages/superAdmin/CourseStudents";
 import CreateCourse from "./pages/superAdmin/CreateCourse";
 import CreateExam from "./pages/superAdmin/CreateExam";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
@@ -264,6 +265,11 @@ export const RestrictedRoutes = [
   {
     route: "/uploaded-files/:id",
     component: <UploadedFiles />,
+    role: "superAdmin",
+  },
+  {
+    route: "/course-students/:id",
+    component: <CourseStudents />,
     role: "superAdmin",
   },
 ];

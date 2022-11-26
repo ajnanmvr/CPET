@@ -16,10 +16,15 @@ import Homepage from "./pages/homepage/Homepage";
 import Navbar from "./pages/homepage/Navbar";
 import NotificationView from "./pages/NotificationView";
 import Signup from "./pages/Signup";
+import CourseResetPassword from "./pages/student/CourseResetPassword";
+import ForgetPassword from "./pages/student/ForgetPassword";
 import ForgetRegisterNumber from "./pages/student/ForgetRegister";
 import StudentLogin from "./pages/student/StudentLogin";
+import UnprotectedRoute from "./pages/student/Unprotected";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
+import CourseProtected from './pages/student/CourseProtected'
+import MyCourses from "./pages/student/MyCourses";
 
 export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
@@ -53,9 +58,41 @@ export default function App() {
               <Route path="/not-allowed" element={<Auth.NotAllowed />} />
               <Route path="/all-notifications" element={<AllNotifications />} />
               <Route path="/notification/:id" element={<NotificationView />} />
-              <Route path="/forgot-registerNo" element={<ForgetRegisterNumber />} />
               {/* <Route path="/launch" element={<LaunchBtn />} /> */}
               <Route path="/downloads" element={<Downloads />} />
+
+              <Route
+                path="/my-courses"
+                element={
+                  <CourseProtected>
+                    <MyCourses />
+                  </CourseProtected>
+                }
+              />
+              <Route
+                path="/forgot-registerNo"
+                element={
+                  <UnprotectedRoute>
+                    <ForgetRegisterNumber />
+                  </UnprotectedRoute>
+                }
+              />
+              <Route
+                path="/course/resetPassword/:token"
+                element={
+                  <UnprotectedRoute>
+                    <CourseResetPassword />
+                  </UnprotectedRoute>
+                }
+              />
+              <Route
+                path="/forgot-password/"
+                element={
+                  <UnprotectedRoute>
+                    <ForgetPassword />
+                  </UnprotectedRoute>
+                }
+              />
               {ProtectRoutes.map((route, index) => (
                 <Route
                   key={index}

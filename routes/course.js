@@ -8,6 +8,7 @@ const CourseAccount = require("../models/courseAccountModel");
 const jwt = require("jsonwebtoken");
 const cron = require("node-cron");
 const Email = require("../utils/sendEmail");
+const crypto = require("crypto");
 
 cron.schedule("0 1 * * *", async () => {
   let data = await CourseAccount.find({ verified: false });
@@ -56,7 +57,6 @@ router.post("/signup", async (req, res, next) => {
     }).send("OTP");
     res.status(200).json({ newUser, emailResponse: emailResponse.response });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 });
@@ -166,7 +166,7 @@ router.delete(
 router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
-    let data = await Course.findById(req.params.id);
+    let data = await Course.findById(req.params.id).populate('learners.student')
     res.status(200).json(data);
   })
 );
@@ -202,9 +202,10 @@ router.patch(
     }
   })
 );
-router.get(
+router.post(
   "/my-courses",
-  catchAsync(courseProtect, async (req, res, next) => {
+  courseProtect,
+  catchAsync( async (req, res, next) => {
     let data = await Course.find({ "learners.student": req.user._id });
     res.status(200).json(data);
   })
@@ -235,11 +236,99 @@ router.post(
       }).send("OTP");
       res.status(200).json({ success: true });
     } else {
-      res
-        .status(200)
-        .json({
+      res.status(400).json({
+        message: "There is no user in this email, please create an account",
+      });
+    }
+  })
+);
+const createPasswordResetToken = (user) => {
+  const resetToken = crypto.randomBytes(32).toString("hex"); //create a normal string
+  user.passwordResetToken = crypto //convert the resetToken to encrypted
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  user.passwordResetExpires = Date.now() + 10 * 60 * 1000; //expires in 10 minutes
+  return resetToken;
+};
+router.post(
+  "/forget-password",
+  catchAsync(async (req, res, next) => {
+    if (!req.body.email) {
+      return res.status(400).json({ message: "Please enter your email" });
+    } else {
+      // 1) Get user by email
+      const user = await CourseAccount.findOne({ email: req.body.email });
+      if (!user) {
+        res.status(400).json({
           message: "There is no user in this email, please create an account",
         });
+      } else {
+        // 2) create random reset token
+        const resetToken = createPasswordResetToken(user);
+        await user.save({ validateBeforeSave: false });
+
+        try {
+          // 3 send to user's email
+          const resetUrl = `${req.protocol}://${req.get(
+            "host"
+          )}/course/resetPassword/${resetToken}`;
+
+          await new Email({
+            email: user.email,
+            url: resetUrl,
+            res: res,
+            subject: "Password Reset",
+            registrationId: user.registrationId,
+            name: user.name,
+          }).send("passwordReset");
+          res.status(200).json({
+            status: "success",
+            message: "token sent to email !",
+          });
+        } catch (error) {
+          console.log(error);
+          user.passwordResetToken = undefined;
+          user.passwordResetExpires = undefined;
+          await user.save({ validateBeforeSave: false });
+          return next(new AppError("there was an error in sending email", 500));
+        }
+      }
+    }
+  })
+);
+router.post(
+  "/resetPassword/:token",
+  catchAsync(async (req, res, next) => {
+    // 1) Get user based on token
+    const hashedToken = crypto
+      .createHash("sha256")
+      .update(req.params.token)
+      .digest("hex");
+
+    const user = await CourseAccount.findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() }, // check the token expired or not
+    });
+    // 2 if token not expires , set new password
+    if (!user) {
+      res.status(400).json({ message: "Token is invalid or has expired" });
+    } else {
+      user.password = req.body.password;
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+
+      await user.save();
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "90d",
+      });
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      res.cookie("course_token", token, {
+        httpOnly: true,
+        // max age 30 days
+        maxAge: decoded.exp,
+      });
+      res.status(200).json({ success: true });
     }
   })
 );

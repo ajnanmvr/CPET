@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "../../Axios";
+import { UserAuthContext } from "../../context/user";
 
 function AllCourses() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
+  const { authData } = useContext(UserAuthContext);
   const getAllCourses = async () => {
     try {
       let { data } = await Axios.get("/course");
@@ -31,6 +34,14 @@ function AllCourses() {
               className="rounded-t-[20px] w-full "
               alt={course.courseTitle}
             />
+            {authData && (
+              <Link
+                to={`/course-students/${course._id}`}
+                className="ml-3 mt-3 cursor-pointer hover:text-blue-600 text-green-400"
+              >
+                view details <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            )}
 
             <div className="mt-3">
               <h1 className="font-bold my-2 text-[14px] text-teal-700 leading-4 text-center">

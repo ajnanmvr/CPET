@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Axios from "../../Axios";
 import { CourseAccountContext } from "../../context/courseAccount";
 
@@ -8,6 +8,7 @@ function CourseDetails() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const { courseAccount } = useContext(CourseAccountContext);
+  const navigate = useNavigate();
 
   const getCourseDetails = async () => {
     try {
@@ -26,6 +27,7 @@ function CourseDetails() {
       });
 
       alert("Course Application successful");
+      navigate("/my-courses");
       getCourseDetails();
     } catch (error) {
       alert("something went wrong");

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 
 const courseAccountSchema = new mongoose.Schema(
   {
@@ -17,7 +18,8 @@ const courseAccountSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: true,
+      required: [true, "Phone number is required"],
+      // minLength: [10, "Please type atleast 10 digits"],
     },
     houseName: {
       type: String,
@@ -48,6 +50,12 @@ const courseAccountSchema = new mongoose.Schema(
     registrationId: {
       type: Number,
     },
+    passwordResetToken: {
+      type: String,
+    },
+    passwordResetExpires: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
@@ -70,5 +78,14 @@ courseAccountSchema.pre(/^find/, function (next) {
   this.find({ deleted: { $ne: true } });
   next();
 });
+courseAccountSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex"); //create a normal string
+  this.passwordResetToken = crypto //convert the resetToken to encrypted
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000; //expires in 10 minutes
+  return resetToken;
+};
 const CourseAccount = mongoose.model("CourseAccount", courseAccountSchema);
 module.exports = CourseAccount;
