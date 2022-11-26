@@ -54,6 +54,7 @@ router.post("/signup", async (req, res, next) => {
       name: newUser.name,
       res: res,
       subject: "Email from CPET Dhiu",
+      title:"Confirmation Email"
     }).send("OTP");
     res.status(200).json({ newUser, emailResponse: emailResponse.response });
   } catch (err) {

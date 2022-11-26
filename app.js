@@ -35,6 +35,7 @@ app.use(
   })
 );
 
+
 app.enable("trust proxy");
 const limiter = rateLimit({
   max: 100,
@@ -56,16 +57,11 @@ app.use(morgan("dev"));
 app.use(express.static("uploads"));
 app.use(express.static("public"));
 
-app.set("views", path.join(__dirname + "/views"));
-app.set("view engine", "pug");
 
-app.get('/test',(req,res)=>{
-  try {
-    res.render('passwordReset')
-  } catch (error) {
-    console.log(error);
-  }
-})
+
+app.get("/test", (req, res) => {
+  res.render("OTP");
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);
