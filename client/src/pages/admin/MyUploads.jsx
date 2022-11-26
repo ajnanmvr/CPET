@@ -13,9 +13,6 @@ function MyUploads() {
   const [downloads, setDownloads] = useState([]);
   const [uploads, setUploads] = useState([]);
 
-  console.log("uploads", uploads);
-  console.log("downlaods", downloads);
-
   const deleteFile = async (e, id) => {
     e.preventDefault();
     if (window.confirm("do you want to delete this file")) {
