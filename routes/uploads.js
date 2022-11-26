@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const { protect } = require("../controllers/authController");
 const multer = require("multer");
 const fs = require("fs");
+const {dirname} =require('path')
 
 const uploadSchema = new mongoose.Schema(
   {
@@ -55,7 +56,9 @@ router.get("/:referenceId", protect, async (req, res, next) => {
   try {
     let data = await Upload.find({
       referenceId: req.params.referenceId,
-    }).populate("uploadedBy", "branchName branchCode").populate('referenceId')
+    })
+      .populate("uploadedBy", "branchName branchCode")
+      .populate("referenceId");
     res.status(200).json(data);
   } catch (error) {
     next(error);
@@ -73,10 +76,11 @@ router.get("/", protect, async (req, res, next) => {
     next(error);
   }
 });
+
 router.delete("/:id", async (req, res, next) => {
   try {
     let data = await Upload.findByIdAndDelete(req.params.id);
-    fs.unlinkSync(`./uploads/${data.fileName}`);
+    fs.unlinkSync(dirname(require.main.filename) + `/uploads/${data.fileName}`);
     res.status(200).json({ deleted: true });
   } catch (error) {
     console.log(error);
