@@ -1,6 +1,4 @@
 const nodemailer = require("nodemailer");
-const pug = require("pug");
-const htmlToText = require("html-to-text");
 const hbs = require("nodemailer-express-handlebars");
 const path = require("path");
 const { dirname } = require("path");
