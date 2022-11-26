@@ -31,7 +31,7 @@ function UploadedFiles() {
   return (
     <div className="overflow-x-auto relative">
       <h1 className="text-center font-bold uppercase text-4xl my-12">
-        uploaded files 
+        uploaded files ({uploads?.length})
       </h1>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
