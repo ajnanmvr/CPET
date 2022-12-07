@@ -17,7 +17,7 @@ function MyUploads() {
     e.preventDefault();
     if (window.confirm("do you want to delete this file")) {
       try {
-        let res = await Axios.delete(`/uploads/${id}`);
+        let res = await Axios.post(`/uploads/${id}`);
         if (res.status === 200) {
           window.location.reload();
         }

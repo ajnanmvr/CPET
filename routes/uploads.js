@@ -79,7 +79,7 @@ router.get("/", protect, async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.post("/:id", async (req, res, next) => {
   try {
     await Upload.findByIdAndDelete(req.params.id);
     res.status(200).json({ deleted: true });
