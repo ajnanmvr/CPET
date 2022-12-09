@@ -37,12 +37,12 @@ function Courses() {
         {courses.slice(0, 3).map((course, i) => (
           <div className="bg-white relative p-[1rem] rounded-t-[20px] rounded-b-[20px] mt-2 mb-2 lg:mb-0">
             <img
-              src={"/images/dh.jpg"}
+              src={`/course/${course?.image}`}
               className="rounded-t-[20px] w-full "
               alt={course.courseTitle}
             />
             <div className="mt-3">
-              <h1 className="font-bold my-2 text-[14px] text-teal-700 leading-4 text-center">
+              <h1 className="font-bold my-2 uppercase text-[14px] text-teal-700 leading-4 text-center">
                 {course.courseTitle}
               </h1>
               <button

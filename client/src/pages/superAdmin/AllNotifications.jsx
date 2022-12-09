@@ -28,7 +28,7 @@ function AllNotifications() {
   const deleteNotification = async (id) => {
     if (window.confirm("Do you want to delete this item")) {
       try {
-        await Axios.delete("/notification/" + id);
+        await Axios.post("/notification/" + id);
         getAllNotifications();
       } catch (error) {
         console.log(error);
@@ -43,14 +43,7 @@ function AllNotifications() {
       <h1 className="text-teal-600 font-bold text-center text-3xl my-4">
         All Notifications
       </h1>
-      {authData?.role === "superAdmin" && (
-        <Link
-          to={"/create-notification"}
-          className="bg-[#05719f] ml-8 px-4 py-2 text-center text-white font-bold rounded-lg cursor-pointer hover:bg-sky-900 transition"
-        >
-          <FontAwesomeIcon icon={faAdd} /> Create New
-        </Link>
-      )}
+
       <div className="px-4 py-8 m-auto mt-5  grid grid-cols-1 lg:grid-cols-4">
         {notifications.length > 0 ? (
           <>

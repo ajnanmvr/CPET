@@ -26,7 +26,7 @@
     "react-dom": "^18.1.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-excel-renderer": "^1.1.0",
-    "react-ga": "^3.3.1",
+    "react-ga4": "^1.4.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.0.5",

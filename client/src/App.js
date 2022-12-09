@@ -23,10 +23,14 @@ import StudentLogin from "./pages/student/StudentLogin";
 import UnprotectedRoute from "./pages/student/Unprotected";
 import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
-import CourseProtected from './pages/student/CourseProtected'
+import CourseProtected from "./pages/student/CourseProtected";
 import MyCourses from "./pages/student/MyCourses";
+import ReactGA from "react-ga4";
 
 export default function App() {
+  ReactGA.initialize("G-K5QQWRHM78");
+  // ReactGA.send("pageview");
+
   const { checkUserLogin } = useContext(UserAuthContext);
   const [navOpened, setNavOpened] = useState(false);
 

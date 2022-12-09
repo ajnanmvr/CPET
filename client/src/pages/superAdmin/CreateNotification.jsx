@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
+import AllNotifications from "./AllNotifications";
 
 function CreateNotification() {
   const navigate = useNavigate();
@@ -43,14 +44,14 @@ function CreateNotification() {
   };
 
   return (
-    <div className="w-2/4 mx-auto">
-      <section className="bg-white p-6">
+    <div className="">
+      <section className="bg-white p-6 lg:w-2/4 mx-auto">
         <div className="max-w-screen-xl mx-auto">
           <h3 className="text-4xl font-bold text-teal-700 uppercase my-4">
             Create Notification
           </h3>
 
-          <form className="lg:grid lg:grid-cols-1 lg:gap-8">
+          <form>
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">
                 <label
@@ -91,7 +92,6 @@ function CreateNotification() {
                 />
               </div>
             </div>
-            
           </form>
           <div className="lg:col-span-1 mt-4">
             <div className="px-4 sm:px-0">
@@ -111,6 +111,7 @@ function CreateNotification() {
           </div>
         </div>
       </section>
+      <AllNotifications />
     </div>
   );
 }

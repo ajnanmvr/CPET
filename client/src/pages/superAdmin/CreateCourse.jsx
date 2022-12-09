@@ -10,6 +10,7 @@ import CreateHtml from "../../components/CreateHtml";
 function CreateCourse() {
   const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
+  console.log(courses);
 
   const initialState = {
     courseTitle: "",
@@ -36,6 +37,7 @@ function CreateCourse() {
         getAllCourses();
       }
     } catch (error) {
+      console.log(error.response.data);
       toast.error("something went wrong", {
         autoClose: 3000,
         position: toast.POSITION.TOP_CENTER,
@@ -238,9 +240,7 @@ function CreateCourse() {
                       Submit
                     </button>
                   ) : (
-                    <button
-                      className="w-full bg-violet-500 hover:bg-violet-800 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline uppercase"
-                    >
+                    <button className="w-full bg-violet-500 hover:bg-violet-800 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline uppercase">
                       Processing..
                     </button>
                   )}
@@ -310,7 +310,11 @@ function CreateCourse() {
                   <td className="px-5 py-3 bg-white text-sm">{index + 1}</td>
                   <td className="px-5 py-3 bg-white text-sm">
                     <a target={"_blank"} href={course.image}>
-                      <img src={course.image} className="w-[100px] rounded-[20px] " alt={course.courseTitle} />
+                      <img
+                        src={`/course/${course?.image}`}
+                        className="w-[100px]"
+                        alt={course.courseTitle}
+                      />
                     </a>
                   </td>
                   <td className="px-5 py-3 bg-white text-sm">

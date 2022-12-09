@@ -20,7 +20,7 @@ cron.schedule("0 1 * * *", async () => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./uploads");
+    cb(null, "./uploads/course");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + file.originalname);
@@ -54,7 +54,7 @@ router.post("/signup", async (req, res, next) => {
       name: newUser.name,
       res: res,
       subject: "Email from CPET Dhiu",
-      title:"Confirmation Email"
+      title: "Confirmation Email",
     }).send("OTP");
     res.status(200).json({ newUser, emailResponse: emailResponse.response });
   } catch (err) {
@@ -138,13 +138,15 @@ router.post(
   catchAsync(async (req, res, next) => {
     const uploadSingle = uploads.single("image");
     uploadSingle(req, res, async (err) => {
+      console.log(req.file);
       if (!err) {
         let data = await Course.create({
           ...req.body,
+          image: req.file.filename,
         });
         res.status(200).json(data);
       } else {
-        next(new AppError("Error occured", 400));
+        next(err);
       }
     });
   })
@@ -159,15 +161,20 @@ router.get(
 );
 router.delete(
   "/:id",
-  catchAsync(protect, restrictTo("superAdmin"), async (req, res, next) => {
+  protect,
+  restrictTo("superAdmin"),
+  catchAsync(async (req, res, next) => {
     await Course.findByIdAndDelete(req.params.id);
     res.status(200).json({ deleted: true });
   })
 );
+
 router.get(
   "/:id",
   catchAsync(async (req, res, next) => {
-    let data = await Course.findById(req.params.id).populate('learners.student')
+    let data = await Course.findById(req.params.id).populate(
+      "learners.student"
+    );
     res.status(200).json(data);
   })
 );
@@ -206,7 +213,7 @@ router.patch(
 router.post(
   "/my-courses",
   courseProtect,
-  catchAsync( async (req, res, next) => {
+  catchAsync(async (req, res, next) => {
     let data = await Course.find({ "learners.student": req.user._id });
     res.status(200).json(data);
   })
