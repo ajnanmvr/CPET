@@ -29,7 +29,7 @@ import ReactGA from "react-ga4";
 
 export default function App() {
   ReactGA.initialize("G-K5QQWRHM78");
-  // ReactGA.send("pageview");
+  ReactGA.send("pageview");
 
   const { checkUserLogin } = useContext(UserAuthContext);
   const [navOpened, setNavOpened] = useState(false);
