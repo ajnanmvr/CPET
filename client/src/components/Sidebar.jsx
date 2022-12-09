@@ -10,6 +10,7 @@ import {
   faPowerOff,
   faSchool,
   faUser,
+  faBell
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
@@ -52,6 +53,11 @@ function Sidebar() {
       name: "Create Course",
       route: "/create-course",
       icon: faClock,
+    },
+    {
+      name: "Create Notification",
+      route: "/create-notification",
+      icon: faBell,
     },
   ];
   return (

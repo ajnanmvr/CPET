@@ -7,9 +7,8 @@ function CreateNotification() {
   const navigate = useNavigate();
 
   const initialState = {
-    description: "",
     title: "",
-    type: "all",
+    url: "",
   };
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -64,11 +63,11 @@ function CreateNotification() {
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   id="username"
                   type="text"
-                  required
                   value={formData.title}
                   onChange={(e) => onChange(e)}
                   placeholder=" Notification Title"
                   name="title"
+                  required
                 />
               </div>
             </div>
@@ -78,41 +77,21 @@ function CreateNotification() {
                   className="block  text-sm font-bold mb-2"
                   htmlFor="username"
                 >
-                  Notification Description
+                  Notification Link
                 </label>
                 <input
                   className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
                   id="username"
                   type="text"
-                  required
-                  value={formData.description}
+                  value={formData.url}
                   onChange={(e) => onChange(e)}
-                  placeholder="Notification Description "
-                  name="description"
+                  placeholder="Notification Link "
+                  name="url"
+                  required
                 />
               </div>
             </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Type
-                </label>
-                <select
-                  className="focus:ring-indigo-500 focus:border-indigo-500 shadow appearance-none border rounded w-full py-4 px-3  leading-tight focus:outline-none focus:shadow-outline uppercase"
-                  required
-                  value={formData.type}
-                  onChange={(e) => onChange(e)}
-                  name="type"
-                >
-                  <option value="all">All</option>
-                  <option value="students">Students</option>
-                  <option value="admins">Admins</option>
-                </select>
-              </div>
-            </div>
+            
           </form>
           <div className="lg:col-span-1 mt-4">
             <div className="px-4 sm:px-0">
@@ -121,7 +100,7 @@ function CreateNotification() {
                   onClick={(e) => handleSubmit(e)}
                   className="w-full lg:w-1/2 bg-teal-500 hover:bg-teal-800 text-white font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase transition"
                 >
-                  Add Notification
+                  Create Notification
                 </button>
               ) : (
                 <h1 className="text-white text-center w-full lg:w-1/2 bg-violet-500 hover:bg-violet-500  font-bold py-4 px-4 rounded focus:outline-none focus:shadow-outline uppercase">

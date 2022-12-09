@@ -4,11 +4,15 @@ const {
   createNotification,
   getAllNotifications,
   getNotification,
+  deleteNotification,
 } = require("../controllers/notificationController");
 
 router
   .route("/")
   .post(protect, restrictTo("superAdmin"), createNotification)
   .get(getAllNotifications);
-router.route('/:id',).get(getNotification)
+router
+  .route("/:id")
+  .get(getNotification)
+  .delete(protect, restrictTo("superAdmin"), deleteNotification);
 module.exports = router;

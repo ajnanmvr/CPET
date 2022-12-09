@@ -1,4 +1,9 @@
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAdd,
+  faDeleteLeft,
+  faEye,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useContext } from "react";
@@ -15,9 +20,19 @@ function AllNotifications() {
   const getAllNotifications = async () => {
     try {
       let { data } = await Axios.get("/notification");
-      setNotifications(data);
+      setNotifications(data.docs);
     } catch (error) {
       console.log(error);
+    }
+  };
+  const deleteNotification = async (id) => {
+    if (window.confirm("Do you want to delete this item")) {
+      try {
+        await Axios.delete("/notification/" + id);
+        getAllNotifications();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   useEffect(() => {
@@ -31,25 +46,39 @@ function AllNotifications() {
       {authData?.role === "superAdmin" && (
         <Link
           to={"/create-notification"}
-          className="bg-[#10191d] ml-auto w-[140px] px-4 py-2 text-center text-white font-bold rounded-lg cursor-pointer hover:bg-sky-900 transition"
+          className="bg-[#05719f] ml-8 px-4 py-2 text-center text-white font-bold rounded-lg cursor-pointer hover:bg-sky-900 transition"
         >
           <FontAwesomeIcon icon={faAdd} /> Create New
         </Link>
       )}
-      <div className="px-4 py-8 m-auto mt-5  grid grid-cols-1 lg:grid-cols-2">
+      <div className="px-4 py-8 m-auto mt-5  grid grid-cols-1 lg:grid-cols-4">
         {notifications.length > 0 ? (
           <>
             {notifications.map((notification, key) => (
-              <Link to={`/notification/${notification._id}`}>
+              <div>
                 <div
                   key={key}
-                  className="py-4 h-[100px] m-4  overflow-hidden bg-teal-500 relative rounded-xl  duration-300 shadow-2xl group"
+                  className="py-2 m-4  overflow-hidden bg-gray-200 relative duration-300 shadow-2xl group"
                 >
-                  <h1 className="text-xl text-center font-bold mb-4 text-white mt-4 group-hover:text-gray-50 uppercase">
+                  <h1 className="text-xl text-center font-bold mb-4 text-teal-500 mt-4 group-hover:text-gray-50 uppercase">
                     {notification.title}
                   </h1>
+                  <button onClick={() => deleteNotification(notification._id)}>
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      color="#e74848"
+                      className="absolute top-2 right-2"
+                    />
+                  </button>
+                  <a href={`${notification?.url}`} target="_blank">
+                    <FontAwesomeIcon
+                      icon={faEye}
+                      color="#22a589"
+                      className="absolute bottom-2 right-2"
+                    />
+                  </a>
                 </div>
-              </Link>
+              </div>
             ))}
           </>
         ) : (
