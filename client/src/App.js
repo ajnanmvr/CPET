@@ -25,10 +25,10 @@ import AllNotifications from "./pages/superAdmin/AllNotifications";
 import ViewBranch from "./pages/superAdmin/ViewBranch";
 import CourseProtected from "./pages/student/CourseProtected";
 import MyCourses from "./pages/student/MyCourses";
-import ReactGA from "react-ga4";
+import ReactGA from "react-ga";
 
 export default function App() {
-  ReactGA.initialize("G-K5QQWRHM78");
+  ReactGA.initialize("G-K5QQWRHM78")
   ReactGA.send("pageview");
 
   const { checkUserLogin } = useContext(UserAuthContext);

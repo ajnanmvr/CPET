@@ -34,6 +34,7 @@
     "nodemailer-express-handlebars": "^5.0.0",
     "pug": "^3.0.2",
     "razorpay": "^2.8.2",
+    "react-ga": "^3.3.1",
     "sharp": "^0.30.7",
     "slugify": "^1.6.5",
     "uuid-v4": "^0.1.0",
