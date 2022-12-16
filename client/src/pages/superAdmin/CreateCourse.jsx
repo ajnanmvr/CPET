@@ -62,7 +62,7 @@ function CreateCourse() {
       if (res.status === 200) {
         setLoading(false);
         setinputData(initialState);
-        toast.success("User Added Successfully", {
+        toast.success("Course Added Successfully", {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
@@ -331,7 +331,7 @@ function CreateCourse() {
                   </td>
 
                   <td className="px-5 py-3 bg-white text-sm">
-                    <Link to={`/edit-news/${course._id}`}>
+                    <Link to={`/edit-course/${course._id}`}>
                       <FontAwesomeIcon
                         icon={faEdit}
                         className="cursor-pointer"

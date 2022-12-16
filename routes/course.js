@@ -138,7 +138,6 @@ router.post(
   catchAsync(async (req, res, next) => {
     const uploadSingle = uploads.single("image");
     uploadSingle(req, res, async (err) => {
-      console.log(req.file);
       if (!err) {
         let data = await Course.create({
           ...req.body,
@@ -157,6 +156,18 @@ router.get(
   catchAsync(async (req, res, next) => {
     let data = await Course.find().sort("-createdAt");
     res.status(200).json(data);
+  })
+);
+router.patch(
+  "/:id",
+  protect,
+  restrictTo("superAdmin"),
+  catchAsync(async (req, res, next) => {
+    console.log(req.files);
+    await Course.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.status(200).json({ deleted: true });
   })
 );
 router.delete(

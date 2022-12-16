@@ -19,6 +19,7 @@ import CreateExam from "./pages/superAdmin/CreateExam";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import CreateSchedule from "./pages/superAdmin/CreateSchedule";
+import EditCourse from "./pages/superAdmin/EditCourse";
 import EditNews from "./pages/superAdmin/EditNews";
 import EditPaymentData from "./pages/superAdmin/EditPayment";
 import EditSubject from "./pages/superAdmin/EditSubject";
@@ -240,6 +241,11 @@ export const RestrictedRoutes = [
   {
     route: "/create-course",
     component: <CreateCourse />,
+    role: "superAdmin",
+  },
+  {
+    route: "/edit-course/:id",
+    component: <EditCourse />,
     role: "superAdmin",
   },
   {

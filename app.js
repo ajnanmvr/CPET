@@ -26,6 +26,7 @@ const rateLimit = require("express-rate-limit");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const compression = require("compression");
+const expressFileupload = require("express-fileupload");
 
 dotenv.config();
 app.use(
@@ -34,7 +35,6 @@ app.use(
     credentials: true,
   })
 );
-
 
 app.enable("trust proxy");
 const limiter = rateLimit({
@@ -47,7 +47,7 @@ app.use(mongoSanitize());
 //data sanitization against xss
 app.use(xss()); //prevent from inserting HTML or others to DB
 app.use(compression()); //works on texts
-
+app.use(expressFileupload())
 app.use(bodyParser.json());
 app.use(express.json());
 // app.use(express.static('public'))
@@ -56,8 +56,6 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.static("uploads"));
 app.use(express.static("public"));
-
-
 
 app.get("/test", (req, res) => {
   res.render("OTP");
@@ -87,6 +85,5 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-
 
 module.exports = app;

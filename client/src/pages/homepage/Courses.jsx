@@ -24,8 +24,8 @@ function Courses() {
   }, []);
   return (
     <section className=" w-full bg-gray-100 lg:p-[5rem]">
-      <h1 className="text-3xl text-center font-bold text-green-500 pt-3">
-        our courses{" "}
+      <h1 className="text-3xl text-center font-bold text-green-500 pt-3 ">
+        Our Courses{" "}
       </h1>
       <Link
         to={"/all-courses"}
