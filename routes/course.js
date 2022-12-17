@@ -42,11 +42,8 @@ router.post("/signup", async (req, res, next) => {
         message: "User already exists",
       });
     }
-    let data = await CourseAccount.find().sort({ registrationId: -1 }).limit(1);
-
     const newUser = await CourseAccount.create({
       ...req.body,
-      registrationId: data[0] ? data[0].registrationId + 1 : 298377,
     });
     let emailResponse = await new Email({
       email: newUser.email,
@@ -55,13 +52,33 @@ router.post("/signup", async (req, res, next) => {
       res: res,
       subject: "Email from CPET Dhiu",
       title: "Confirmation Email",
+      otpToken: newUser.otpToken,
     }).send("OTP");
     res.status(200).json({ newUser, emailResponse: emailResponse.response });
   } catch (err) {
     next(err);
   }
 });
-
+router.get("/verify-token?:token", async (req, res) => {
+  try {
+    let user = await CourseAccount.findOne({
+      otpToken:
+        "b91e14a93b1b3859c66d9409d6f23f972755cac6bbcb96e8574f295bd059d3e6",
+    });
+    if (user) {
+      if (user.otpTokenExpires < Date.now) {
+        res.render("otp-expired");
+      } else {
+        res.render("account-verified");
+      }
+    } else {
+      res.status(400).json({ message: "invalid token" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json(error);
+  }
+});
 router.post("/login", async (req, res, next) => {
   try {
     const { registrationId, password } = req.body;
@@ -269,6 +286,15 @@ const createPasswordResetToken = (user) => {
     .digest("hex");
   user.passwordResetExpires = Date.now() + 10 * 60 * 1000; //expires in 10 minutes
   return resetToken;
+};
+const createOtpToken = (user) => {
+  const otpToken = crypto.randomBytes(32).toString("hex"); //create a normal string
+  user.otpToken = crypto //convert the otpToken to encrypted
+    .createHash("sha256")
+    .update(otpToken)
+    .digest("hex");
+  user.otpTokenExpires = Date.now() + 10 * 60 * 1000; //expires in 10 minutes
+  return otpToken;
 };
 router.post(
   "/forget-password",

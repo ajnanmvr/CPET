@@ -79,9 +79,7 @@ function Signup() {
                 <div>
                   <label className="block mb-2 lg:text-sm text-[12px]  font-medium text-gray-900 dark:text-white">
                     Whatsapp Number{" "}
-                    <span className="lg:text-sm text-[10px] text-blue-500">
-                      (with country code)
-                    </span>
+                  
                   </label>
 
                   <input

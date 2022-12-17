@@ -26,7 +26,16 @@ transporter.use(
   })
 );
 module.exports = class Email {
-  constructor({ email, url, registrationId, name, res, subject, title }) {
+  constructor({
+    email,
+    url,
+    registrationId,
+    name,
+    res,
+    subject,
+    title,
+    otpToken,
+  }) {
     this.email = email;
     this.url = url;
     this.from = `CPET Darul Huda`;
@@ -35,6 +44,7 @@ module.exports = class Email {
     this.res = res;
     this.title = title;
     this.name = name;
+    this.otpToken = otpToken;
   }
 
   async send(template) {
@@ -42,7 +52,7 @@ module.exports = class Email {
     try {
       const mailOptions = {
         from: "cpet.dhiu.in",
-        to:this.email,
+        to: this.email,
         subject: "subject",
         template: template,
         context: {
@@ -51,6 +61,7 @@ module.exports = class Email {
           registrationId: this.registrationId,
           url: this.url,
           title: this.title,
+          otpToken: this.otpToken,
         },
       };
       // 3) create a trasport and send

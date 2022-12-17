@@ -44,5 +44,8 @@
     "xss-clean": "^0.1.1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "moment": "^2.29.4"
+  }
 }
