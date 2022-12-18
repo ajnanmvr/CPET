@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 
-
 const courseAccountSchema = new mongoose.Schema(
   {
     name: {
@@ -63,6 +62,12 @@ const courseAccountSchema = new mongoose.Schema(
     otpTokenExpires: {
       type: Number,
     },
+    courses: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
   },
   {
     timestamps: true,

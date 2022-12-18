@@ -74,7 +74,7 @@ router.get("/verify-token/:token", async (req, res) => {
         res.render("account-verified");
       }
     } else {
-      res.render('something-went-wrong')
+      res.render("something-went-wrong");
     }
   } catch (error) {
     console.log(error);
@@ -223,18 +223,36 @@ const courseProtect = async (req, res, next) => {
 };
 router.post(
   "/apply/:id",
+  courseProtect,
   catchAsync(async (req, res) => {
     if (!req.body.student) {
       res.status(400).json({ message: "please type learner ID" });
     } else {
-      let course = await Course.findByIdAndUpdate(req.params.id, {
-        $push: {
-          learners: {
-            student: req.body.student,
+      let course = await Course.findById(req.params.id);
+      let exist = course.learners.find((item) =>
+        item.student.equals(req.user._id)
+      );
+      if (exist) {
+        res.status(200).json({ message: "already applied this course" });
+      } else {
+        let data = await Course.findByIdAndUpdate(req.params.id, {
+          $push: {
+            learners: {
+              student: req.body.student,
+            },
           },
-        },
-      });
-      res.status(200).json(course);
+        });
+        await CourseAccount.findByIdAndUpdate(
+          req.user._id,
+          {
+            $push: {
+              courses: req.params.id,
+            },
+          },
+          { new: true }
+        );
+        res.status(200).json(data);
+      }
     }
   })
 );

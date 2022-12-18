@@ -43,7 +43,7 @@ function Homepage() {
           {notifications.map((notification, key) => (
             <a
               href={notification?.url}
-              className="relative w-full group mt-2 mx-2"
+              className="relative  w-full group mt-2 mx-2"
               target={"_blank"}
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-[#97d7e9] to-[#96ffd8] rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
@@ -69,6 +69,7 @@ function Homepage() {
                     target="_blank"
                   >
                     Go to details
+                    <span className="text-white animate-pulse text-sm ml-3 bg-red-500 rounded-full px-2">new</span>
                   </a>
                 </div>
               </div>

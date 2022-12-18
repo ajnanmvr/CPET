@@ -10,6 +10,7 @@ function CourseDetails() {
   const { courseAccount } = useContext(CourseAccountContext);
   const navigate = useNavigate();
 
+
   const getCourseDetails = async () => {
     try {
       let { data } = await Axios.get(`/course/${id}`);
@@ -31,7 +32,7 @@ function CourseDetails() {
       getCourseDetails();
     } catch (error) {
       alert("something went wrong");
-      console.log(error);
+      console.log(error.response);
     }
   };
   useEffect(() => {
@@ -40,7 +41,7 @@ function CourseDetails() {
 
   return (
     <article className="px-6 text-left max-w-3xl  py-24 mx-auto space-y-12 ">
-      <img src="/images/dh.jpg" className="rounded-[20px]" alt="" />
+      <img src={`/course/${course?.image}`} className="rounded-[20px]" alt="" />
       <div className="mx-auto space-y-4">
         <p className="text-xs font-semibold tracking-wider uppercase">
           CPET COURSES
@@ -68,14 +69,10 @@ function CourseDetails() {
             </div>
           </div>
         </div>
-        <p>
-          This special diploma programme for doctors and medical students
-          explains the Islamic perspective on life, illness, treatment,
-          visitation, rituals during illness, death and post-death.
-        </p>
+        <p>{course?.description}</p>
       </div>
       <div className="mx-auto bg-gray-100 p-4 rounded-[20px]">
-        <h4 className="text-lg font-semibold">course details</h4>
+        <h4 className="text-lg font-semibold my-4">course details</h4>
         <div
           className="dark:text-gray-400 "
           dangerouslySetInnerHTML={{ __html: course?.details }}
@@ -91,9 +88,7 @@ function CourseDetails() {
         </a>
       ) : (
         <>
-          {course?.learners.find(
-            (item) => item?.student === courseAccount?._id
-          ) ? (
+          {courseAccount?.courses?.includes(course?._id) ? (
             <button className="bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 px-4 rounded-full">
               You Already Applied
             </button>

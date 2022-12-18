@@ -35,7 +35,7 @@ function Navbar({ navOpened, setNavOpened }) {
             <div className="flex flex-shrink-0 items-center">
               <Link to="/">
                 <img
-                  className="hidden h-8 w-auto lg:block cursor-pointer"
+                  className="hidden h-16 w-auto lg:block cursor-pointer"
                   src="/images/logo.png"
                   alt="Your Company"
                 />
