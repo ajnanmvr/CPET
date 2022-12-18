@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node server.js",
+    "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "nodemon server.js"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.150.0",
@@ -48,6 +49,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^7.6.0",
     "moment": "^2.29.4"
   }
 }

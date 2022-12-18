@@ -74,7 +74,7 @@ router.get("/verify-token/:token", async (req, res) => {
         res.render("account-verified");
       }
     } else {
-      res.status(400).json({ message: "invalid token" });
+      res.render('something-went-wrong')
     }
   } catch (error) {
     console.log(error);
@@ -130,7 +130,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.post("/checkLogin", async (req, res, next) => {
+router.post("/checkLogin", async (req, res) => {
   let token = req.cookies.course_token;
   if (!token) {
     res.status(200).json({ error: "user not logged in" });
@@ -170,7 +170,7 @@ router.post(
 
 router.get(
   "/",
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     let data = await Course.find().sort("-createdAt");
     res.status(200).json(data);
   })
@@ -179,7 +179,7 @@ router.patch(
   "/:id",
   protect,
   restrictTo("superAdmin"),
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     console.log(req.files);
     await Course.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -191,7 +191,7 @@ router.delete(
   "/:id",
   protect,
   restrictTo("superAdmin"),
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     await Course.findByIdAndDelete(req.params.id);
     res.status(200).json({ deleted: true });
   })
@@ -199,7 +199,7 @@ router.delete(
 
 router.get(
   "/:id",
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     let data = await Course.findById(req.params.id).populate(
       "learners.student"
     );
@@ -223,7 +223,7 @@ const courseProtect = async (req, res, next) => {
 };
 router.patch(
   "/apply/:id",
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     if (!req.body.student) {
       res.status(400).json({ message: "please type learner ID" });
     } else {
@@ -241,14 +241,14 @@ router.patch(
 router.post(
   "/my-courses",
   courseProtect,
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     let data = await Course.find({ "learners.student": req.user._id });
     res.status(200).json(data);
   })
 );
 router.post(
   "/resent-registerNo",
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     let data = await CourseAccount.findOne({ email: req.body.email });
     await new Email({
       email: req.body.email,
@@ -261,7 +261,7 @@ router.post(
 );
 router.post(
   "/forget-registerNo",
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     let data = await CourseAccount.findOne({ email: req.body.email });
     if (data) {
       await new Email({
@@ -286,15 +286,6 @@ const createPasswordResetToken = (user) => {
     .digest("hex");
   user.passwordResetExpires = Date.now() + 10 * 60 * 1000; //expires in 10 minutes
   return resetToken;
-};
-const createOtpToken = (user) => {
-  const otpToken = crypto.randomBytes(32).toString("hex"); //create a normal string
-  user.otpToken = crypto //convert the otpToken to encrypted
-    .createHash("sha256")
-    .update(otpToken)
-    .digest("hex");
-  user.otpTokenExpires = Date.now() + 10 * 60 * 1000; //expires in 10 minutes
-  return otpToken;
 };
 router.post(
   "/forget-password",
@@ -344,7 +335,7 @@ router.post(
 );
 router.post(
   "/resetPassword/:token",
-  catchAsync(async (req, res, next) => {
+  catchAsync(async (req, res) => {
     // 1) Get user based on token
     const hashedToken = crypto
       .createHash("sha256")
