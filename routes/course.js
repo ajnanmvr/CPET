@@ -59,16 +59,18 @@ router.post("/signup", async (req, res, next) => {
     next(err);
   }
 });
-router.get("/verify-token?:token", async (req, res) => {
+router.get("/verify-token/:token", async (req, res) => {
   try {
     let user = await CourseAccount.findOne({
-      otpToken:
-        "b91e14a93b1b3859c66d9409d6f23f972755cac6bbcb96e8574f295bd059d3e6",
+      otpToken: req.params.token,
     });
     if (user) {
       if (user.otpTokenExpires < Date.now) {
-        res.render("otp-expired");
+        res.render("token expired");
       } else {
+        user.verified = true;
+        user.otpToken = undefined;
+        user.save();
         res.render("account-verified");
       }
     } else {
@@ -81,15 +83,13 @@ router.get("/verify-token?:token", async (req, res) => {
 });
 router.post("/login", async (req, res, next) => {
   try {
-    const { registrationId, password } = req.body;
-    if (!registrationId || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       res.status(400).json({
-        message: "Please provide registration ID and password",
+        message: "Please provide email  and password",
       });
     } else {
-      const user = await CourseAccount.findOne({ registrationId }).select(
-        "+password"
-      );
+      const user = await CourseAccount.findOne({ email }).select("+password");
 
       if (!user) {
         res.status(400).json({

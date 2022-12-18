@@ -18,6 +18,7 @@ const courseRoute = require("./routes/course");
 const examRoute = require("./routes/exam");
 const downloadRoute = require("./routes/downloads");
 const uploadRoute = require("./routes/uploads");
+const hbs=require('hbs')
 
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
@@ -27,6 +28,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const compression = require("compression");
 const expressFileupload = require("express-fileupload");
+
 
 dotenv.config();
 app.use(
@@ -42,12 +44,15 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, //100 requests in one hour,
   message: "Too many requests, please try again after one hour",
 });
+// view engine setup
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
 //data sanitization against NoSql attacks
 app.use(mongoSanitize());
 //data sanitization against xss
 app.use(xss()); //prevent from inserting HTML or others to DB
 app.use(compression()); //works on texts
-app.use(expressFileupload())
+app.use(expressFileupload());
 app.use(bodyParser.json());
 app.use(express.json());
 // app.use(express.static('public'))
@@ -57,9 +62,6 @@ app.use(morgan("dev"));
 app.use(express.static("uploads"));
 app.use(express.static("public"));
 
-app.get("/test", (req, res) => {
-  res.render("OTP");
-});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/student", studentRoutes);

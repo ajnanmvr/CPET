@@ -6,7 +6,7 @@ import Axios from "../../Axios";
 import { CourseAccountContext } from "../../context/courseAccount";
 
 function StudentLogin() {
-  const [registrationId, setRegistrationId] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,7 @@ function StudentLogin() {
     setLoading(true);
     try {
       let res = await Axios.post("/course/login", {
-        registrationId,
+        email,
         password,
       });
       if (res.status === 200) {
@@ -43,13 +43,13 @@ function StudentLogin() {
                 <div>
                   <p className="text-red-500 text-center">{error}</p>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Your Register Number
+                    Your Email
                   </label>
                   <input
                     type="text"
-                    onChange={(e) => setRegistrationId(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Register number here"
+                    placeholder="Your email here"
                     required
                   />
                 </div>
