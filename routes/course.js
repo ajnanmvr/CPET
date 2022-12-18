@@ -221,7 +221,7 @@ const courseProtect = async (req, res, next) => {
     });
   }
 };
-router.patch(
+router.post(
   "/apply/:id",
   catchAsync(async (req, res) => {
     if (!req.body.student) {

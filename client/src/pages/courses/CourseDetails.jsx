@@ -22,7 +22,7 @@ function CourseDetails() {
   const applyCourse = async (e) => {
     e.preventDefault();
     try {
-      let res = await Axios.patch(`/course/apply/${id}`, {
+      let res = await Axios.post(`/course/apply/${id}`, {
         student: courseAccount?._id,
       });
 
