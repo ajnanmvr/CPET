@@ -162,7 +162,7 @@ router.post(
         });
         res.status(200).json(data);
       } else {
-        next(err);
+        console.log(err);
       }
     });
   })
@@ -180,7 +180,6 @@ router.patch(
   protect,
   restrictTo("superAdmin"),
   catchAsync(async (req, res) => {
-    console.log(req.files);
     await Course.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
