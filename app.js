@@ -58,7 +58,6 @@ app.use(bodyParser.urlencoded({ extended: false,limit:"50mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(express.static("uploads"));
-app.use(express.static("public"));
 
 
 app.use("/api/auth", authRoutes);
