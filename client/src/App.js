@@ -28,15 +28,17 @@ import MyCourses from "./pages/student/MyCourses";
 import ReactGA from "react-ga";
 
 export default function App() {
-  ReactGA.initialize("G-K5QQWRHM78")
+  ReactGA.initialize("G-K5QQWRHM78");
   ReactGA.send("pageview");
-
   const { checkUserLogin } = useContext(UserAuthContext);
   const [navOpened, setNavOpened] = useState(false);
+
 
   useEffect(() => {
     checkUserLogin();
   }, []);
+ 
+
   return (
     <>
       <div className="flex">

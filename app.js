@@ -18,6 +18,7 @@ const courseRoute = require("./routes/course");
 const examRoute = require("./routes/exam");
 const downloadRoute = require("./routes/downloads");
 const uploadRoute = require("./routes/uploads");
+const messageRoute = require("./routes/message");
 const hbs=require('hbs')
 
 const cookieParser = require("cookie-parser");
@@ -75,6 +76,7 @@ app.use("/api/course", courseRoute);
 app.use("/api/exam", examRoute);
 app.use("/api/downloads", downloadRoute);
 app.use("/api/uploads", uploadRoute);
+app.use("/api/messages", messageRoute);
 
 process.env.PWD = process.cwd();
 app.use(express.static(path.join(process.env.PWD, "public")));

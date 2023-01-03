@@ -10,7 +10,8 @@ import {
   faPowerOff,
   faSchool,
   faUser,
-  faBell
+  faBell,
+  faMessage
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
@@ -31,6 +32,11 @@ function Sidebar() {
       name: "New Teacher",
       route: "/create-teacher",
       icon: faPersonChalkboard,
+    },
+    {
+      name: "My Messages",
+      route: "/my-messages",
+      icon: faMessage,
     },
   ];
   const SuperAdmin = [
@@ -58,6 +64,11 @@ function Sidebar() {
       name: "Create Notification",
       route: "/create-notification",
       icon: faBell,
+    },
+    {
+      name: "Create Messages",
+      route: "/create-messages",
+      icon: faMessage,
     },
   ];
   return (

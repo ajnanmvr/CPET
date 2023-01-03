@@ -4,6 +4,7 @@ import AdminProfile from "./pages/admin/AdminProfile";
 import Admissions from "./pages/admin/Admissions";
 import BranchPayments from "./pages/admin/BranchPayments";
 import FileUpload from "./pages/admin/FileUpload";
+import MyMessages from "./pages/admin/MyMessages";
 import MyPayments from "./pages/admin/MyPayments";
 import MyUploads from "./pages/admin/MyUploads";
 import TransferStudent from "./pages/admin/TransferStudent";
@@ -16,6 +17,7 @@ import ClassManagment from "./pages/superAdmin/ClassManagment";
 import CourseStudents from "./pages/superAdmin/CourseStudents";
 import CreateCourse from "./pages/superAdmin/CreateCourse";
 import CreateExam from "./pages/superAdmin/CreateExam";
+import CreateMessage from "./pages/superAdmin/CreateMessage";
 import CreateNotification from "./pages/superAdmin/CreateNotification";
 import CreatePaymentData from "./pages/superAdmin/CreatePaymentData";
 import CreateSchedule from "./pages/superAdmin/CreateSchedule";
@@ -278,6 +280,11 @@ export const RestrictedRoutes = [
     component: <CourseStudents />,
     role: "superAdmin",
   },
+  {
+    route: "/create-messages",
+    component: <CreateMessage />,
+    role: "superAdmin",
+  },
 ];
 
 export const ProtectRoutes = [
@@ -352,5 +359,8 @@ export const ProtectRoutes = [
   {
     route: "/file-upload/:referenceId",
     component: <FileUpload />,
+  },  {
+    route: "/my-messages",
+    component: <MyMessages />,
   },
 ];

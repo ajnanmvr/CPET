@@ -1,0 +1,77 @@
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import Axios from "../Axios";
+
+function MessageTable() {
+  const [messages, setMessages] = useState([]);
+
+  const handleDelete = async (e, id) => {
+    e.preventDefault();
+    try {
+      if (window.confirm("are you sure")) {
+        let res = await Axios.delete(`/messages/${id}`);
+        toast.success("deleted successfully", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 3000,
+        });
+        getMessages();
+      }
+    } catch (error) {
+      console.log(error.response);
+      toast.error("error occured", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+    }
+  };
+  const getMessages = async () => {
+    Axios.get("/messages")
+      .then((res) => {
+        setMessages(res.data);
+      })
+      .catch((err) => console.error(err));
+  };
+  useEffect(() => {
+    getMessages();
+  }, []);
+
+  return (
+    <table class="table-auto w-full text-center bg-white shadow-md rounded-lg">
+      <thead class="bg-gray-300">
+        <tr>
+          <th class="px-4 py-2">title</th>
+          <th class="px-4 py-2">link</th>
+          <th class="px-4 py-2">recipient</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {messages.map((message) => (
+          <tr key={message._id}>
+            <td class="px-4 py-2">{message.title}</td>
+            <td class="px-4 py-2">
+              <a
+                href={message.link}
+                target={"_blank"}
+                className="text-blue-500"
+              >
+                view
+              </a>
+            </td>
+            <td class="px-4 py-2">{message.recipient.username}</td>
+            <td class="px-4 py-2">
+              <button
+                onClick={(e) => handleDelete(e, message._id)}
+                class=" text-red-400 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+export default MessageTable;

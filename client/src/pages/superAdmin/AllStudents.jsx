@@ -64,14 +64,14 @@ function AllStudents() {
             {className?.className} ({data?.myVerifiedStudents?.length})
           </h3>
           <div className="mx-auto ">
-            {/* {!showModal && (
+            {!showModal && (
               <button
                 onClick={(e) => setShowModal(true)}
                 className="bg-green-500 px-3 py-2 font-bold text-white hover:bg-green-400 ml-[60%]"
               >
                 Add Students
               </button>
-            )} */}
+            )}
             <div className="flex"></div>
             <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
               <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
