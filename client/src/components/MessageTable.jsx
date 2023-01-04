@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
 
-function MessageTable() {
-  const [messages, setMessages] = useState([]);
+function MessageTable({messages,getMessages}) {
 
   const handleDelete = async (e, id) => {
     e.preventDefault();
@@ -24,16 +23,8 @@ function MessageTable() {
       });
     }
   };
-  const getMessages = async () => {
-    Axios.get("/messages")
-      .then((res) => {
-        setMessages(res.data);
-      })
-      .catch((err) => console.error(err));
-  };
-  useEffect(() => {
-    getMessages();
-  }, []);
+  
+ 
 
   return (
     <table class="table-auto w-full text-center bg-white shadow-md rounded-lg">
