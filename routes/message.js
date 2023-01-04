@@ -3,7 +3,7 @@ const Message = require("../models/messageModel");
 
 const router = require("express").Router();
 
-router.post("/", protect, restrictTo("superAdmin"), async (req, res) => {
+router.post("/add", protect, restrictTo("superAdmin"), async (req, res) => {
   try {
     let data = await Message.create({
       title: req.body.title,
@@ -15,7 +15,7 @@ router.post("/", protect, restrictTo("superAdmin"), async (req, res) => {
     res.status(400).json(error);
   }
 });
-router.post("/:recipient", protect, async (req, res) => {
+router.put("/:recipient", protect, async (req, res) => {
   try {
     let data = await Message.find({ recipient: req.params.recipient });
     res.status(200).json(data);
@@ -53,7 +53,7 @@ router.patch("/:id", protect, async (req, res) => {
     res.status(400).json(error);
   }
 });
-router.delete("/", protect, async (req, res) => {
+router.post("/delete", protect, async (req, res) => {
   try {
     let data = await Message.findByIdAndDelete(req.query.id);
     res.status(200).json({ deleted: true });

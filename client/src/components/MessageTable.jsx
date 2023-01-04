@@ -7,7 +7,7 @@ function MessageTable({ messages, getMessages }) {
     e.preventDefault();
     try {
       if (window.confirm("are you sure")) {
-        let res = await Axios.delete(`/messages?id=${id}`);
+        let res = await Axios.post(`/messages/delete?id=${id}`);
         toast.success("deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,

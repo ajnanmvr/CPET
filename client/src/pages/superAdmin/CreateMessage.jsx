@@ -23,7 +23,7 @@ function CreateMessage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    Axios.post("/messages", {
+    Axios.post("/messages/add", {
       link,
       recipient,
       title,
