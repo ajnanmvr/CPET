@@ -2,13 +2,13 @@ import React from "react";
 import { useContext } from "react";
 import { useState, useEffect } from "react";
 import Axios from "../../Axios";
-import {UserAuthContext} from '../../context/user'
+import { UserAuthContext } from "../../context/user";
 
 function MyMessages() {
   const [messages, setMessages] = useState([]);
-  const {authData}=useContext(UserAuthContext)
+  const { authData } = useContext(UserAuthContext);
   const getMessages = async () => {
-    Axios.patch("/messages/")
+    Axios.patch("/messages/" )
       .then((res) => {
         setMessages(res.data);
       })
@@ -26,20 +26,21 @@ function MyMessages() {
         </tr>
       </thead>
       <tbody>
-        {messages.map((message) => (
-          <tr key={message._id}>
-            <td class="px-4 py-2 uppercase">{message.title}</td>
-            <td class="px-4 py-2">
-              <a
-                href={message.link}
-                target={"_blank"}
-                className="text-blue-500"
-              >
-                view
-              </a>
-            </td>
-          </tr>
-        ))}
+        {messages.length > 0 &&
+          messages.map((message) => (
+            <tr key={message._id}>
+              <td class="px-4 py-2 uppercase">{message.title}</td>
+              <td class="px-4 py-2">
+                <a
+                  href={message.link}
+                  target={"_blank"}
+                  className="text-blue-500"
+                >
+                  view
+                </a>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );
