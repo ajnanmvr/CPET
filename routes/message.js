@@ -53,9 +53,9 @@ router.patch("/:id", protect, async (req, res) => {
     res.status(400).json(error);
   }
 });
-router.delete("/:id", protect, async (req, res) => {
+router.delete("/", protect, async (req, res) => {
   try {
-    let data = await Message.findByIdAndDelete(req.params.id);
+    let data = await Message.findByIdAndDelete(req.query.id);
     res.status(200).json({ deleted: true });
   } catch (error) {
     res.status(400).json(error);

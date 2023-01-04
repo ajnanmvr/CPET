@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
 
-function MessageTable({messages,getMessages}) {
-
+function MessageTable({ messages, getMessages }) {
   const handleDelete = async (e, id) => {
     e.preventDefault();
     try {
       if (window.confirm("are you sure")) {
-        let res = await Axios.delete(`/messages/${id}`);
+        let res = await Axios.delete(`/messages?id=${id}`);
         toast.success("deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
@@ -23,8 +22,6 @@ function MessageTable({messages,getMessages}) {
       });
     }
   };
-  
- 
 
   return (
     <table class="table-auto w-full text-center bg-white shadow-md rounded-lg">
