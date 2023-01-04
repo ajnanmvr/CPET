@@ -15,9 +15,9 @@ router.post("/", protect, restrictTo("superAdmin"), async (req, res) => {
     res.status(400).json(error);
   }
 });
-router.patch("/", protect, async (req, res) => {
+router.post("/:recipient", protect, async (req, res) => {
   try {
-    let data = await Message.find({ recipient: req.user._id });
+    let data = await Message.find({ recipient: req.params.recipient });
     res.status(200).json(data);
   } catch (error) {
     res.status(400).json(error);

@@ -8,11 +8,11 @@ function MyMessages() {
   const [messages, setMessages] = useState([]);
   const { authData } = useContext(UserAuthContext);
   const getMessages = async () => {
-    Axios.patch("/messages/" )
+    Axios.post("/messages/" + authData._id)
       .then((res) => {
         setMessages(res.data);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.log(err.response));
   };
   useEffect(() => {
     getMessages();
