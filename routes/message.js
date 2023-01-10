@@ -15,7 +15,7 @@ router.post("/add", protect, restrictTo("superAdmin"), async (req, res) => {
     res.status(400).json(error);
   }
 });
-router.put("/:recipient", protect, async (req, res) => {
+router.post("/recipient/:recipient", protect, async (req, res) => {
   try {
     let data = await Message.find({ recipient: req.params.recipient });
     res.status(200).json(data);

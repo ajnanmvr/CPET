@@ -8,7 +8,7 @@ function MyMessages() {
   const [messages, setMessages] = useState([]);
   const { authData } = useContext(UserAuthContext);
   const getMessages = async () => {
-    Axios.put("/messages/" + authData._id)
+    Axios.post("/messages/recipient/" + authData._id)
       .then((res) => {
         setMessages(res.data);
       })
