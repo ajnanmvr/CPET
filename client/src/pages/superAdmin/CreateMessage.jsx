@@ -98,11 +98,13 @@ function CreateMessage() {
               required
             >
               <option selected>Choose one</option>
-              {users.map((user, key) => (
-                <option key={key} value={user._id}>
-                  {user.username}
-                </option>
-              ))}
+              {users
+                .sort((a, b) => (a.username > b.username ? 1 : -1))
+                .map((user, key) => (
+                  <option key={key} value={user._id}>
+                    {user.username}
+                  </option>
+                ))}
             </select>
           </div>
         </div>

@@ -34,29 +34,33 @@ function MessageTable({ messages, getMessages }) {
         </tr>
       </thead>
       <tbody>
-        {messages.map((message) => (
-          <tr key={message._id}>
-            <td class="px-4 py-2">{message.title}</td>
-            <td class="px-4 py-2">
-              <a
-                href={message.link}
-                target={"_blank"}
-                className="text-blue-500"
-              >
-                view
-              </a>
-            </td>
-            <td class="px-4 py-2">{message.recipient.username}</td>
-            <td class="px-4 py-2">
-              <button
-                onClick={(e) => handleDelete(e, message._id)}
-                class=" text-red-400 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-              >
-                Delete
-              </button>
-            </td>
-          </tr>
-        ))}
+        {messages
+          .sort((a, b) =>
+            a.recipient.username > b.recipient.username ? 1 : -1
+          )
+          .map((message) => (
+            <tr key={message._id}>
+              <td class="px-4 py-2">{message.title}</td>
+              <td class="px-4 py-2">
+                <a
+                  href={message.link}
+                  target={"_blank"}
+                  className="text-blue-500"
+                >
+                  view
+                </a>
+              </td>
+              <td class="px-4 py-2">{message.recipient.username}</td>
+              <td class="px-4 py-2">
+                <button
+                  onClick={(e) => handleDelete(e, message._id)}
+                  class=" text-red-400 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
       </tbody>
     </table>
   );
