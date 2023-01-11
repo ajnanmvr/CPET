@@ -27,6 +27,7 @@ function MessageTable({ messages, getMessages }) {
     <table class="table-auto w-full text-center bg-white shadow-md rounded-lg">
       <thead class="bg-gray-300">
         <tr>
+          <th class="px-4 py-2">#</th>
           <th class="px-4 py-2">title</th>
           <th class="px-4 py-2">link</th>
           <th class="px-4 py-2">recipient</th>
@@ -38,8 +39,9 @@ function MessageTable({ messages, getMessages }) {
           .sort((a, b) =>
             a.recipient.username > b.recipient.username ? 1 : -1
           )
-          .map((message) => (
+          .map((message,key) => (
             <tr key={message._id}>
+              <td class="px-4 py-2">{key+1}</td>
               <td class="px-4 py-2">{message.title}</td>
               <td class="px-4 py-2">
                 <a
