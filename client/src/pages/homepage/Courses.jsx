@@ -27,12 +27,7 @@ function Courses() {
       <h1 className="text-3xl text-center font-bold text-green-500 pt-3 ">
         Our Courses{" "}
       </h1>
-      <Link
-        to={"/all-courses"}
-        className="text-white text-xl ml-3 capitalize px-3 py-1 bg-green-400 my-3 rounded-[10px] hover:bg-green-300"
-      >
-        view all{" "}
-      </Link>
+
       <div className="grid lg:mx-autogrid-cols-1 lg:grid-cols-3 gap-x-3">
         {courses.slice(0, 3).map((course, i) => (
           <div className="bg-white relative p-[1rem] rounded-t-[20px] rounded-b-[20px] mt-2 mb-2 lg:mb-0">
@@ -54,6 +49,14 @@ function Courses() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="w-full flex-1 text-center items-center" >
+        <Link
+          to={"/all-courses"}
+          className="text-teal-500 font-semibold text-center ml-3  px-4 py-2 hover:text-white border-teal-500 border rounded-[30px] my-3  hover:bg-teal-500"
+        >
+          view more
+        </Link>
       </div>
     </section>
   );
