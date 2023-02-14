@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function About() {
   return (
@@ -11,6 +12,12 @@ function About() {
           programs for the public. CPET plans, designs and implements awareness
           programs aimed at different age groups of the public.
         </p>
+        <Link
+          to={"/about-us"}
+          className="bg-teal-500  px-3 py-1 rounded-[20px] hover:bg-transparent border mt-5 border-teal-500 hover:cursor-pointer hover:text-teal-500 transition text-white"
+        >
+          Know More
+        </Link>
       </div>
       <div className="video">
         <img
@@ -18,7 +25,6 @@ function About() {
           className="w-[500px] rounded-xl mt-4"
           alt=""
         />
-        <i className="fa-sharp fa-solid fa-circle-play" />
       </div>
     </section>
   );

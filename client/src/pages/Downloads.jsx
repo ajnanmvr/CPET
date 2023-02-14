@@ -10,6 +10,7 @@ function Downloads() {
   const { authData } = useContext(UserAuthContext);
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
+  const [type, setType] = useState("admin");
 
   const [downloads, setDownloads] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ function Downloads() {
 
   const getDownloads = async () => {
     try {
-      let { data } = await Axios.get("/downloads");
+      let { data } = await Axios.get("/downloads?type=" + type);
       setDownloads(data);
     } catch (error) {
       console.log(error.response);
@@ -43,6 +44,7 @@ function Downloads() {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("title", title);
+  formData.append("type", type);
   const fileUpload = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -68,7 +70,7 @@ function Downloads() {
   };
   useEffect(() => {
     getDownloads();
-  }, []);
+  }, [type]);
   return (
     <>
       <h1 className="text-3xl font-bold text-center">Downloads</h1>
@@ -177,11 +179,22 @@ function Downloads() {
           <input
             type="text"
             id="voice-search"
-            class="bg-gray-50 border w-1/2 mx-auto border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 my-2 border w-1/2 mx-auto border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Title here..."
             onChange={(e) => setTitle(e.target.value)}
             required
           />
+          <select
+            type="text"
+            id="voice-search"
+            class="bg-gray-50 border w-1/2 mx-auto border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Title here..."
+            onChange={(e) => setType(e.target.value)}
+            required
+          >
+            <option value={"admin"}>admin</option>
+            <option value={"student"}>student</option>
+          </select>
           {file && title && (
             <>
               {!loading ? (

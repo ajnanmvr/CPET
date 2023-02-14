@@ -63,6 +63,12 @@ function Navbar({ navOpened, setNavOpened }) {
                 >
                   Courses
                 </Link>
+                <Link
+                  to="student-downloads"
+                  className=" px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Downloads
+                </Link>
                 {courseAccount && (
                   <Link
                     to="my-courses"

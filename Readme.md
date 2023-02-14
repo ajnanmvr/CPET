@@ -2,7 +2,7 @@
 # CPET Mahdiyya Course
 
 
-`view the homepage only`
+`view the homepage`
 http://cpet.dhiu.in/
 
 

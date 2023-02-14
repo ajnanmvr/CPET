@@ -6,6 +6,7 @@ const fs = require("fs");
 const downloadSchema = new mongoose.Schema({
   fileName: { type: String, required: [true, "File is required"] },
   title: { type: String, required: [true, '"download" title is required'] },
+  type: { type: String, required: true, enum: ["student", "admin"] },
 });
 const Download = mongoose.model("Download", downloadSchema);
 
@@ -24,6 +25,7 @@ router.post("/", uploads.single("file"), async (req, res, next) => {
     let data = await Download.create({
       title: req.body.title,
       fileName: req.file.filename,
+      type: req.body.type,
     });
     res.status(200).json(data);
   } catch (error) {
@@ -32,7 +34,15 @@ router.post("/", uploads.single("file"), async (req, res, next) => {
 });
 router.get("/", async (req, res, next) => {
   try {
-    let data = await Download.find();
+    let data = await Download.find({ type: req.query.type });
+    res.status(200).json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+router.get("/student", async (req, res, next) => {
+  try {
+    let data = await Download.find({ type: "student" });
     res.status(200).json(data);
   } catch (error) {
     next(error);
