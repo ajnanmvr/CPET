@@ -9,7 +9,7 @@ function AllBranches() {
 
   const getAllBranches = async () => {
     try {
-      let { data } = await Axios.get(`/branch?sort=branchName`);
+      let { data } = await Axios.get(`/branch?sort=branchCode`);
       setBranches(data.docs);
     } catch (error) {
       console.log(error);

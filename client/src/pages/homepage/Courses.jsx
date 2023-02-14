@@ -42,12 +42,12 @@ function Courses() {
               alt={course.courseTitle}
             />
             <div className="mt-3">
-              <h1 className="font-bold my-2 uppercase text-[14px] text-teal-700 leading-4 text-center">
+              <h1 className="font-bold mt-5 mb-10 uppercase text-[17px] text-teal-700 leading-4 text-center">
                 {course.courseTitle}
               </h1>
               <button
                 onClick={(e) => moveToCourse(e, course._id)}
-                className="w-full bg-[#22a65d] text-white font-bold uppercase py-2 rounded-[20px] hover:bg-[#0f604b] "
+                className="w-full absolute bottom-1 left-0 bg-[#0c9d85] text-white font-bold uppercase py-3 rounded-[30px] hover:bg-[#0f604b] "
               >
                 apply now
               </button>

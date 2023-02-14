@@ -145,9 +145,8 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 });
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await Auth.find({ role: { $ne: "superAdmin" } }).populate(
-      "branch"
-    )
+    const users = await Auth.find({ role: { $ne: "superAdmin" } })
+      .populate("branch")
     res.status(200).json(users);
   } catch (err) {
     res.status(500).json({
@@ -208,4 +207,3 @@ exports.getMyProfile = catchAsync(async (req, res, next) => {
 //     console.log(error);
 //   }
 // }
-

@@ -91,7 +91,7 @@ const RootQuery = new GraphQLObjectType({
     branches: {
       type: new GraphQLList(BranchType),
       resolve(parent, args) {
-        return Branch.find();
+        return Branch.find().sort({ branchCode: -1 });
       },
     },
     branch: {
