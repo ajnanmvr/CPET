@@ -56,7 +56,7 @@ function StudentLogin() {
                 Sign in to your account
               </h1>
               <GoogleLogin
-                clientId="504304381401-lurd70laott0g5djebu60112qcs6kvr5.apps.googleusercontent.com"
+                clientId="518925825578-o3bsn8vmvvp9o8tt4goj12051id8i7oi.apps.googleusercontent.com"
                 onSuccess={loginWithGoogle}
                 onFailure={loginWithGoogle}
                 cookiePolicy={"single_host_origin"}
