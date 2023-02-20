@@ -11,56 +11,14 @@ const courseAccountSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
-    password: {
+    googleId: {
       type: String,
-      required: true,
+      unique: true,
     },
     phone: {
       type: String,
-      required: [true, "Phone number is required"],
-      // minLength: [10, "Please type atleast 10 digits"],
-    },
-    houseName: {
-      type: String,
-    },
-    fatherName: {
-      type: String,
-    },
-    place: {
-      type: String,
-    },
-    district: {
-      type: String,
-    },
-    postOffice: {
-      type: String,
-    },
-    pincode: {
-      type: String,
-    },
-    dateOfBirth: {
-      type: String,
-    },
-
-    verified: {
-      type: Boolean,
-      default: false,
-    },
-    registrationId: {
-      type: Number,
-    },
-    passwordResetToken: {
-      type: String,
-    },
-    passwordResetExpires: {
-      type: Date,
-    },
-    otpToken: {
-      type: String,
-    },
-    otpTokenExpires: {
-      type: Number,
     },
     courses: [
       {

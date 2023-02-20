@@ -10,7 +10,7 @@ function HeroSection() {
         </h2>
         <p className="lg:ml-[10px] text-white">
           Centre for Public Education and Training is an extension of the
-          University devised for providing socio-educational empowerment
+          Darul Huda Islamic University devised for providing socio-educational empowerment
           programs <br /> for the public. CPET plans, designs and implements
           awareness programs aimed at different age groups of the public.
         </p>

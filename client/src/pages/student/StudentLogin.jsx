@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "../../Axios";
 import { CourseAccountContext } from "../../context/courseAccount";
+import { GoogleLogin } from "react-google-login";
+import { toast } from "react-toastify";
 
 function StudentLogin() {
   const [email, setEmail] = useState("");
@@ -30,6 +32,20 @@ function StudentLogin() {
       setError(error.response?.data?.message);
     }
   };
+
+  const loginWithGoogle = async ({ profileObj }) => {
+    let res = await Axios.post("/course/google/login", {
+      email: profileObj.email,
+      name: profileObj.name,
+      googleId: profileObj.googleId,
+    });
+    if (res.data.success) {
+      toast.success("Login Successful", {
+        position: "top-right",
+      });
+      window.location.href = "/";
+    }
+  };
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900">
@@ -39,7 +55,27 @@ function StudentLogin() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <GoogleLogin
+                clientId="504304381401-lurd70laott0g5djebu60112qcs6kvr5.apps.googleusercontent.com"
+                onSuccess={loginWithGoogle}
+                onFailure={loginWithGoogle}
+                cookiePolicy={"single_host_origin"}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    className="flex items-center border border-gray-200 rounded-3xl px-4 py-2 hover:border-black transition hover:cursor-pointer"
+                  >
+                    <img
+                      src="https://img.icons8.com/color/48/000000/google-logo.png"
+                      alt="google"
+                      className="w-8 h-8 mr-2"
+                    />
+                    <span className="text-gray-500">Login with Google</span>
+                  </button>
+                )}
+              />
+              {/* <form className="space-y-4 md:space-y-6" action="#">
                 <div>
                   <p className="text-red-500 text-center">{error}</p>
                   <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -95,7 +131,7 @@ function StudentLogin() {
                     Sign in
                   </button>
                 )}
-              </form>
+              </form> */}
             </div>
           </div>
         </div>

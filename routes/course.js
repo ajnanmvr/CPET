@@ -81,49 +81,36 @@ router.get("/verify-token/:token", async (req, res) => {
     res.status(400).json(error);
   }
 });
-router.post("/login", async (req, res, next) => {
+router.post("/google/login", async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      res.status(400).json({
-        message: "Please provide email  and password",
+    const { googleId } = req.body;
+    let user = await CourseAccount.findOne({ googleId: googleId });
+    if (!user) {
+      let data = await CourseAccount.create(req.body);
+      let token = jwt.sign({ userId: data._id }, process.env.JWT_SECRET, {
+        expiresIn: "90d",
       });
-    } else {
-      const user = await CourseAccount.findOne({ email }).select("+password");
-
-      if (!user) {
-        res.status(400).json({
-          message: "User does not exist",
+      let decoded = jwt.verify(token, process.env.JWT_SECRET);
+      res
+        .status(200)
+        // .json({ success: true, data })
+        .cookie("course_token", token, {
+          httpOnly: true,
+          // max age 30 days
+          maxAge: decoded.exp,
         });
-      } else {
-        const isValidPassword = await user.correctPassword(
-          password,
-          user.password
-        );
-        if (!isValidPassword) {
-          return res.status(400).json({
-            message: "Invalid password",
-          });
-        } else {
-          const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: "90d",
-          });
-          const decoded = jwt.verify(token, process.env.JWT_SECRET);
-          user.verified = true;
-          await user.save();
-
-          res
-            .cookie("course_token", token, {
-              httpOnly: true,
-              // max age 30 days
-              maxAge: decoded.exp,
-            })
-            .status(200);
-          // remove password from user object
-          user.password = undefined;
-          res.json(user);
-        }
-      }
+      res.status(200).json({ success: true, data });
+    } else {
+      let token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "90d",
+      });
+      let decoded = jwt.verify(token, process.env.JWT_SECRET);
+      res.status(200).cookie("course_token", token, {
+        httpOnly: true,
+        // max age 30 days
+        maxAge: decoded.exp,
+      });
+      res.status(200).json({ success: true, user });
     }
   } catch (err) {
     next(err);

@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "../../Axios";
 import { CourseAccountContext } from "../../context/courseAccount";
+import "draft-js/dist/Draft.css";
 
 function CourseDetails() {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const { courseAccount } = useContext(CourseAccountContext);
   const navigate = useNavigate();
-
 
   const getCourseDetails = async () => {
     try {
@@ -71,13 +71,8 @@ function CourseDetails() {
         </div>
         <p>{course?.description}</p>
       </div>
-      <div className="mx-auto bg-gray-100 p-4 rounded-[20px]">
-        <h4 className="text-lg font-semibold my-4">course details</h4>
-        <div
-          className="dark:text-gray-400 "
-          dangerouslySetInnerHTML={{ __html: course?.details }}
-        ></div>
-      </div>
+      <h4 className="text-lg font-semibold my-4 uppercase">course details</h4>
+      <div dangerouslySetInnerHTML={{ __html: course?.details }}></div>
 
       {!courseAccount ? (
         <a

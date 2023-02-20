@@ -29,6 +29,7 @@ import ReactGA from "react-ga";
 import StudentDownloads from "./pages/StudentDownloads";
 import HallTicket from "./pages/HallTicket";
 import About from "./pages/About";
+import CreatePDF from "./pdf/Index";
 
 export default function App() {
   ReactGA.initialize("G-K5QQWRHM78");
@@ -52,6 +53,7 @@ export default function App() {
             <Routes>
               <Route path="*" element={<Auth.NotFound />} />
               <Route path="/" element={<Homepage />} />
+              <Route path="/create-pdf" element={<CreatePDF />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/login" element={<Auth.Login />} />
               <Route path="/signup" element={<Signup />} />

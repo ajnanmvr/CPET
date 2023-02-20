@@ -52,7 +52,7 @@ function Navbar({ navOpened, setNavOpened }) {
                   Home
                 </Link>
                 <Link
-                  to="#about"
+                  to="/about-us"
                   className=" px-3 py-2 rounded-md text-sm font-medium"
                 >
                   About
@@ -123,7 +123,7 @@ function Navbar({ navOpened, setNavOpened }) {
               Home
             </Link>
             <Link
-              to="#about"
+              to="/about-us"
               className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               About
