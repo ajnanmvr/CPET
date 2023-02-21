@@ -77,6 +77,34 @@ function Homepage() {
           ))}
         </div>
         <Counter />
+
+        <a
+          href="https://sites.google.com/dhiu.in/ccbp-certificatecourseinbehavi/home"
+          className="flex flex-col  mx-auto my-3 flex-1 items-center  bg-white border border-gray-200 lg:w-3/4 w-full rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+        >
+          <img
+            className="p-3 lg:w-3/4 w-full rounded-t-lg h-64   md:rounded-none md:rounded-l-lg"
+            src="/images/CCBP.jpg"
+            alt
+          />
+          <div className="flex flex-col justify-between p-4 leading-normal">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight capitalize text-teal-500 dark:text-white">
+              certificate course in behavioural pedagogy (CCBP)
+            </h5>
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              Certificate Course in Behavioral Pedagogy [CCBP] is introduced in
+              the year 2023 with the aim of rejuvenating the pathways of the
+              teaching faculties at the Darul Huda educational system in
+              perceiving and nurturing constructive and positive engagement with
+              its student communities sprawled across seven states and 36
+              campuses in India. 
+            </p>
+            <button className="bg-teal-500 text-white font-bold px-3 py-2 rounded-[20px] lg:w-1/4 w-full hover:bg-transparent border border-teal-500 transition hover:text-teal-500 hover:cursor-pointer">
+              Apply Now
+            </button>
+          </div>
+        </a>
+
         <Courses />
         <About />
         <ProgrameGallery />
