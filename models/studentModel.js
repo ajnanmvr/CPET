@@ -10,42 +10,42 @@ const studentSchema = new mongoose.Schema({
   houseName: {
     type: String,
     uppercase: true,
-    required: [true, "house name is required"],
+    // required: [true, "house name is required"],
     maxLength: [100, "100 characters are allowed"],
   },
   fatherName: {
     type: String,
     uppercase: true,
-    required: [true, "father name is required"],
+    // required: [true, "father name is required"],
     maxLength: [100, "100 characters are allowed"],
   },
   place: {
     type: String,
     uppercase: true,
-    required: [true, "place is required"],
+    // required: [true, "place is required"],
     maxLength: [100, "100 characters are allowed"],
   },
   district: {
     type: String,
     uppercase: true,
-    required: [true, "district is required"],
+    // required: [true, "district is required"],
     maxLength: [30, "30 characters are allowed"],
   },
   postOffice: {
     type: String,
     uppercase: true,
-    required: [true, "post office is required"],
+    // required: [true, "post office is required"],
     maxLength: [100, "100 characters are allowed"],
   },
   pinCode: {
     type: String,
-    required: [true, "pincode is required"],
+    // required: [true, "pincode is required"],
     maxLength: [10, "10 characters are allowed"],
   },
   state: {
     type: String,
     uppercase: true,
-    required: [true, "state is required"],
+    // required: [true, "state is required"],
     maxLength: [30, "30 characters are allowed"],
   },
   registerNo: {
@@ -53,21 +53,21 @@ const studentSchema = new mongoose.Schema({
     uppercase: true,
     maxLength: [50, "50 characters are allowed"],
   },
-  dobDate: {
-    type: String,
-    required: [true, "DOB Date is required"],
-    maxLength: [15, "15 characters are allowed"],
-  },
-  dobMonth: {
-    type: String,
-    required: [true, "DOB Month is required"],
-    maxLength: [15, "15 characters are allowed"],
-  },
-  dobYear: {
-    type: String,
-    required: [true, "DOB year is required"],
-    maxLength: [15, "15 characters are allowed"],
-  },
+  // dobDate: {
+  //   type: String,
+  //   required: [true, "DOB Date is required"],
+  //   maxLength: [15, "15 characters are allowed"],
+  // },
+  // dobMonth: {
+  //   type: String,
+  //   required: [true, "DOB Month is required"],
+  //   maxLength: [15, "15 characters are allowed"],
+  // },
+  // dobYear: {
+  //   type: String,
+  //   required: [true, "DOB year is required"],
+  //   maxLength: [15, "15 characters are allowed"],
+  // },
   phone: {
     type: String,
     maxLength: [15, "15 characters are allowed"],
@@ -78,10 +78,6 @@ const studentSchema = new mongoose.Schema({
     maxLength: [100, "100 characters are allowed"],
     ref: "Branch",
   },
-  verified: {
-    type: Boolean,
-    default: false,
-  },
   class: {
     type: mongoose.Types.ObjectId,
     required: [true, "Please select a class"],
@@ -90,13 +86,6 @@ const studentSchema = new mongoose.Schema({
   academicYear: {
     type: String,
   },
-  password: {
-    type: String,
-  },
-  certificateOne: String,
-  certificateTwo: String,
-  certificateThree: String,
-  certificateFour: String,
 });
 
 const Student = mongoose.model("Student", studentSchema);

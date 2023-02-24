@@ -4,14 +4,41 @@ import { useState } from "react";
 import Axios from "../../Axios";
 import { toast } from "react-toastify";
 import MessageTable from "../../components/MessageTable";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function CreateMessage() {
-  const [recipient, setRecipient] = useState("");
+  const [recipients, setRecipients] = useState([]);
   const [link, setLink] = useState("");
   const [users, setUsers] = useState([]);
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
+  const [forAll, setForAll] = useState(false);
+
+  const handleSelectChange = (event) => {
+    const value = event.target.value;
+    if (!recipients.includes(value)) {
+      setRecipients([...recipients, value]);
+    }
+  };
+
+  const removeSelected = (value) => {
+    if (recipients.includes(value)) {
+      // Remove the selected value
+      const updatedValues = recipients.filter((item) => item !== value);
+      setRecipients(updatedValues);
+    }
+  };
+  const handleSetAll = () => {
+    setForAll(!forAll);
+    if (!forAll) {
+      setRecipients(users.map((user) => user._id));
+    } else {
+      setRecipients([]);
+    }
+  };
+  const filteredUsers = users.filter((user) => recipients.includes(user._id));
 
   const getMessages = async () => {
     Axios.get("/messages")
@@ -25,7 +52,7 @@ function CreateMessage() {
     setLoading(true);
     Axios.post("/messages/add", {
       link,
-      recipient,
+      recipients,
       title,
     })
       .then((res) => {
@@ -36,9 +63,9 @@ function CreateMessage() {
             position: toast.POSITION.TOP_CENTER,
           });
           setLink("");
-          setRecipient("");
+          setRecipients(null);
           setTitle("");
-          getMessages();
+          window.location.reload();
         }
       })
       .catch((err) => {
@@ -88,26 +115,40 @@ function CreateMessage() {
               htmlFor="countries"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Select a recipient
+              Messages To All Study Centres
             </label>
-            <select
-              id="countries"
-              onChange={(e) => setRecipient(e.target.value)}
-              value={recipient}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            >
-              <option selected>Choose one</option>
-              {users
-                .sort((a, b) => (a.username > b.username ? 1 : -1))
-                .map((user, key) => (
-                  <option key={key} value={user._id}>
-                    {user.username}
-                  </option>
-                ))}
-            </select>
+            <input type={"checkbox"} onClick={() => handleSetAll()} />
           </div>
         </div>
+        {!forAll && (
+          <>
+            <div className="mb-4">
+              <div>
+                <label
+                  htmlFor="countries"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Select a recipient
+                </label>
+                <select
+                  id="countries"
+                  onChange={(e) => handleSelectChange(e)}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required
+                >
+                  <option hidden>Choose one</option>
+                  {users
+                    .sort((a, b) => (a.username > b.username ? 1 : -1))
+                    .map((user, key) => (
+                      <option key={key} value={user._id}>
+                        {user.username}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+          </>
+        )}
 
         <div className="mb-4">
           <label
@@ -140,6 +181,29 @@ function CreateMessage() {
               Send
             </button>
           )}
+        </div>
+        <div className="mb-4">
+          <div>
+            <label
+              htmlFor="countries"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Selected Recipients
+            </label>
+            <div className="grid lg:grid-cols-10">
+              {filteredUsers.map((item) => (
+                <div className="bg-gray-200  m-1 px-2 py-1 shadow-md">
+                  {item.username}
+                  <span
+                    className="pl-2 text-red-500 cursor-pointer"
+                    onClick={() => removeSelected(item._id)}
+                  >
+                    <FontAwesomeIcon icon={faClose} />
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </form>
       <MessageTable messages={messages} getMessages={getMessages} />

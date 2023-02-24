@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,16 +8,16 @@ import Axios from "../Axios";
 function ExamTable({ data, getExams }) {
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
-
+  const [hallTickets, setHallTickets] = useState([]);
+  console.log(hallTickets);
   const [exam, setExam] = useState({
     examName: "",
     academicYear: "",
   });
-  const deleteItem = async (e) => {
-    e.preventDefault();
+  const deleteItem = async (itemId) => {
     try {
       if (window.confirm("do you want to delete this item")) {
-        let res = await Axios.delete(`/exam/${id}`);
+        let res = await Axios.delete(`/exam/${itemId}`);
         if (res.status === 200) {
           getExams();
           setShowModal(false);
@@ -34,18 +35,91 @@ function ExamTable({ data, getExams }) {
       });
     }
   };
+  const deleteHallTicket = async (itemId) => {
+    try {
+      if (window.confirm("do you want to delete this item")) {
+        let res = await Axios.delete(`/hall-ticket/${itemId}`);
+        if (res.status === 200) {
+          getExams();
+          setShowModal(false);
+          toast.success("Deleted successfully", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          });
+          window.location.reload()
+        }
+      }
+    } catch (error) {
+      console.log(error.response);
+      toast.error("Error Occured", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+    }
+  };
+  const getHallTickets = async () => {
+    try {
+      let { data } = await Axios.get("/hall-ticket");
+      setHallTickets(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getHallTickets();
+  }, []);
   return (
     <div className="mt-4 h-[50vh]">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        {showModal && (
-          <EditModal
-            setShowModal={setShowModal}
-            id={id}
-            exam={exam}
-            setExam={setExam}
-            getExams={getExams}
-          />
-        )}
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="py-3 px-6">
+              Exam name
+            </th>
+
+            <th scope="col" className="py-3 px-6">
+              Class
+            </th>
+            <th scope="col" className="py-3 px-6">
+              Delete
+            </th>
+            <th scope="col" className="py-3 px-6">
+              Subjects
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {hallTickets.map((hallTicket) => (
+            <tr className="bg-white dark:bg-gray-800">
+              <td
+                scope="row"
+                className="py-4 px-6 font-medium whitespace-nowrap dark:text-white"
+              >
+                {hallTicket?.exam?.examName}
+              </td>
+              <td className="py-4 px-6">{hallTicket?.class?.className}</td>
+              <td
+                className="py-4 px-6 text-red-600 cursor-pointer"
+                onClick={() => deleteHallTicket(hallTicket._id)}
+              >
+                Delete
+              </td>
+              {hallTicket?.subjects.map((subject, key) => (
+                <>
+                  <tr className="py-4 px-6">
+                    {subject?.subjectId?.subjectName}{" "}
+                    {moment(subject.date).format("MMM-DD-YYYY  | hh:mm")}
+                  </tr>
+                </>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h1 className="font-bold mt-5 text-center text-indigo-600">
+        Exam Time Tables
+      </h1>
+      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="py-3 px-6">
@@ -70,9 +144,9 @@ function ExamTable({ data, getExams }) {
                 scope="row"
                 className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                {item?.academicYear}
+                {item?.examName}
               </th>
-              <td className="py-4 px-6">{item.examName}</td>
+              <td className="py-4 px-6">{item.academicYear}</td>
               <td class="py-4 px-6">
                 <button
                   onClick={() => {
@@ -87,8 +161,7 @@ function ExamTable({ data, getExams }) {
               <td class="py-4 px-6">
                 <button
                   onClick={(e) => {
-                    setId(item._id);
-                    deleteItem(e);
+                    deleteItem(item._id);
                   }}
                   class="font-medium text-red-600 dark:text-red-500 hover:underline"
                 >

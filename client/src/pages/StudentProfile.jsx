@@ -57,51 +57,9 @@ function StudentProfile() {
             <div className="container mx-auto my-5 p-5">
               <div className="md:flex no-wrap md:-mx-2 ">
                 {/* Left Side */}
-                <div className="w-full md:w-3/12 md:mx-2">
-                  {/* Profile Card */}
-                  <div className="bg-white p-3 border-t-4 border-green-400">
-                    <div className="image overflow-hidden">
-                      <img
-                        className="h-auto w-full mx-auto"
-                        src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-                        alt
-                      />
-                    </div>
-                    <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
-                      {student.studentName}
-                    </h1>
-                    <h3 className="text-gray-600 font-lg text-semibold leading-6">
-                      {student?.admissionNo}
-                    </h3>
-
-                    <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-                      <li className="flex items-center py-3">
-                        <span>Status</span>
-                        <span className="ml-auto">
-                          {student.verified ? (
-                            <span className="bg-green-400 py-1 px-2 rounded text-white text-sm">
-                              Active
-                            </span>
-                          ) : (
-                            <span
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setShowAlert(true);
-                              }}
-                              className="bg-red-400 cursor-pointer py-1 px-2 rounded text-white text-sm"
-                            >
-                              Not Activated
-                            </span>
-                          )}
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                  {/* End of profile card */}
-                  <div className="my-4" />
-                </div>
+               
                 {/* Right Side */}
-                <div className="w-full md:w-9/12 mx-2 h-64">
+                <div className="w-full mx-2 h-64">
                   {/* Profile tab */}
                   {/* About Section */}
                   <div className="bg-white p-3 shadow-sm rounded-sm">
@@ -131,6 +89,12 @@ function StudentProfile() {
                             Student Name
                           </div>
                           <div className="px-4 py-2">{student.studentName}</div>
+                        </div>
+                        <div className="grid grid-cols-2">
+                          <div className="px-4 py-2 font-semibold">
+                            Register Number
+                          </div>
+                          <div className="px-4 py-2">{student.registerNo}</div>
                         </div>
 
                         <div className="grid grid-cols-2">

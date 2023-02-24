@@ -117,9 +117,6 @@ exports.getAllDetails = async (req, res) => {
     if (req.query.branch) {
       data = await Student.aggregate([
         {
-          $match: { verified: true },
-        },
-        {
           $group: {
             _id: "$branch",
             numStudents: { $sum: 1 },
@@ -243,6 +240,7 @@ async function importExcelData2MongoDB(filePath, req, res) {
           K: "dobYear",
           L: "phone",
           M: "houseName",
+          N: "registerNo",
         },
       },
     ],

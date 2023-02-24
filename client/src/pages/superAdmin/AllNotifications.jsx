@@ -1,15 +1,8 @@
 import {
-  faAdd,
-  faDeleteLeft,
-  faEye,
-  faTrash,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useContext } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import Axios from "../../Axios";
 import { UserAuthContext } from "../../context/user";
 
@@ -44,32 +37,43 @@ function AllNotifications() {
         All Notifications
       </h1>
 
-      <div className="px-4 py-8 m-auto mt-5  grid grid-cols-1 lg:grid-cols-4">
+      <div className="px-4 py-8 m-auto mt-5  grid grid-cols-1 lg:grid-cols-2">
         {notifications.length > 0 ? (
           <>
             {notifications.map((notification, key) => (
-              <div>
-                <div
-                  key={key}
-                  className="py-2 m-4  overflow-hidden bg-gray-200 relative duration-300 shadow-2xl group"
-                >
-                  <h1 className="text-xl text-center font-bold mb-4 text-teal-500 mt-4 group-hover:text-gray-50 uppercase">
-                    {notification.title}
-                  </h1>
-                  <button onClick={() => deleteNotification(notification._id)}>
-                    <FontAwesomeIcon
-                      icon={faTrash}
-                      color="#e74848"
-                      className="absolute top-2 right-2"
+              <div className="relative  w-full group mt-2 mx-2">
+                <div className="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
+                <button onClick={() => deleteNotification(notification._id)}>
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    color="#e74848"
+                    className="absolute top-4 right-2"
+                  />
+                </button>
+                  <svg
+                    className="w-8 h-8 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.5"
+                      d="M6.75 6.75C6.75 5.64543 7.64543 4.75 8.75 4.75H15.25C16.3546 4.75 17.25 5.64543 17.25 6.75V19.25L12 14.75L6.75 19.25V6.75Z"
                     />
-                  </button>
-                  <a href={`${notification?.url}`} target="_blank">
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      color="#22a589"
-                      className="absolute bottom-2 right-2"
-                    />
-                  </a>
+                  </svg>
+                  <div className="space-y-2">
+                    <p className="text-slate-800">{notification?.title}</p>
+                    <a
+                      href={notification?.url}
+                      className="block text-indigo-400 group-hover:text-slate-800 transition duration-200"
+                      target="_blank"
+                    >
+                      Go to details
+                      {/* <span className="text-white animate-pulse text-sm ml-3 bg-red-500 rounded-full px-2">new</span> */}
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}

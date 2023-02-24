@@ -3,6 +3,11 @@ import { toast } from "react-toastify";
 import Axios from "../Axios";
 
 function MessageTable({ messages, getMessages }) {
+  const [showMore, setShowMore] = useState(null);
+  const handleExpandRow = (rowIndex) => {
+    setShowMore(showMore === rowIndex ? null : rowIndex);
+  };
+
   const handleDelete = async (e, id) => {
     e.preventDefault();
     try {
@@ -29,40 +34,57 @@ function MessageTable({ messages, getMessages }) {
         <tr>
           <th class="px-4 py-2">#</th>
           <th class="px-4 py-2">title</th>
+          <th class="px-4 py-2">recipients</th>
           <th class="px-4 py-2">link</th>
-          <th class="px-4 py-2">recipient</th>
           <th class="px-4 py-2">Actions</th>
         </tr>
       </thead>
       <tbody>
-        {messages
-          .sort((a, b) =>
-            a.recipient.username > b.recipient.username ? 1 : -1
-          )
-          .map((message,key) => (
-            <tr key={message._id}>
-              <td class="px-4 py-2">{key+1}</td>
-              <td class="px-4 py-2">{message.title}</td>
-              <td class="px-4 py-2">
-                <a
-                  href={message.link}
-                  target={"_blank"}
-                  className="text-blue-500"
-                >
-                  view
-                </a>
-              </td>
-              <td class="px-4 py-2">{message.recipient.username}</td>
-              <td class="px-4 py-2">
+        {messages.map((message, key) => (
+          <tr key={message._id} className="border border-t-1 border-gray-600">
+            <td class="px-4 py-2 ">{key + 1}</td>
+            <td class="px-4 py-2">{message.title}</td>
+            {showMore === key ? (
+              <>
+                <div class="grid grid-cols-3">
+                  {message?.recipients?.map((item) => (
+                    <div className="bg-gray-200 m-1">{item.user.username}</div>
+                  ))}
+                </div>
                 <button
-                  onClick={(e) => handleDelete(e, message._id)}
-                  class=" text-red-400 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+                  className="text-center"
+                  onClick={() => handleExpandRow(key)}
                 >
-                  Delete
+                  show less
                 </button>
-              </td>
-            </tr>
-          ))}
+              </>
+            ) : (
+              <button
+                className="text-center"
+                onClick={() => handleExpandRow(key)}
+              >
+                show details
+              </button>
+            )}
+            <td class="px-4 py-2">
+              <a
+                href={message.link}
+                target={"_blank"}
+                className="text-blue-500"
+              >
+                view
+              </a>
+            </td>
+            <td class="px-4 py-2">
+              <button
+                onClick={(e) => handleDelete(e, message._id)}
+                class=" text-red-400 py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

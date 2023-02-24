@@ -11,16 +11,28 @@ import {
   faSchool,
   faUser,
   faBell,
-  faMessage
+  faMessage,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import Axios from "../Axios";
 import { UserAuthContext } from "./../context/user";
 
 function Sidebar() {
   const { authData, logout } = useContext(UserAuthContext);
   const [openSidebar, setOpenSidebar] = useState(false);
+  const [unreadMessages, setUnreadMessages] = useState(0);
+
+  const getUnreadMessages = async () => {
+    try {
+      let data = await Axios.post("/messages/unread-messages");
+
+      setUnreadMessages(data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   const navigations = [
     {
       name: "Dashboard",
@@ -33,11 +45,11 @@ function Sidebar() {
       route: "/create-teacher",
       icon: faPersonChalkboard,
     },
-    {
-      name: "My Messages",
-      route: "/my-messages",
-      icon: faMessage,
-    },
+    // {
+    //   name: "My Messages",
+    //   route: "/my-messages",
+    //   icon: faMessage,
+    // },
   ];
   const SuperAdmin = [
     {
@@ -71,6 +83,9 @@ function Sidebar() {
       icon: faMessage,
     },
   ];
+  useEffect(() => {
+    getUnreadMessages();
+  }, []);
   return (
     <>
       <div onClick={() => setOpenSidebar(!openSidebar)}>
@@ -114,23 +129,40 @@ function Sidebar() {
             </div>
             <div className="my-2 bg-gray-600 h-[1px]" />
           </div>
-
+          {authData?.role === "admin" && (
+            <NavLink
+              to={"/my-messages"}
+              className={({ isActive }) =>
+                isActive
+                  ? "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 bg-blue-600 cursor-pointer hover:bg-blue-600 text-white"
+                  : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+              }
+            >
+              <FontAwesomeIcon icon={faMessage} />
+              <span className="text-[15px] ml-4 text-gray-200 font-bold">
+                My Messages
+              </span>
+              {/* <span className="text-white ml-2 bg-red-500 px-2 rounded-full">{unreadMessages}</span> */}
+            </NavLink>
+          )}
           {authData?.role === "admin" &&
             navigations.map((navigation, index) => (
-              <NavLink
-                to={navigation.route}
-                key={index}
-                className={({ isActive }) =>
-                  isActive
-                    ? "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 bg-blue-600 cursor-pointer hover:bg-blue-600 text-white"
-                    : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
-                }
-              >
-                <FontAwesomeIcon icon={navigation.icon} />
-                <span className="text-[15px] ml-4 text-gray-200 font-bold">
-                  {navigation.name}
-                </span>
-              </NavLink>
+              <>
+                <NavLink
+                  to={navigation.route}
+                  key={index}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 bg-blue-600 cursor-pointer hover:bg-blue-600 text-white"
+                      : "p-2.5 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-blue-600 text-white"
+                  }
+                >
+                  <FontAwesomeIcon icon={navigation.icon} />
+                  <span className="text-[15px] ml-4 text-gray-200 font-bold">
+                    {navigation.name}
+                  </span>
+                </NavLink>
+              </>
             ))}
           {authData?.role === "superAdmin" &&
             SuperAdmin.map((navigation, index) => (

@@ -9,11 +9,19 @@ const messageSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  recipient: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Auth",
-    required: true,
-  },
+  recipients: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Auth",
+        required: true,
+      },
+      read: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  ],
 });
 
 const Message = mongoose.model("Message", messageSchema);
