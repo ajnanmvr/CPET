@@ -27,53 +27,54 @@ function HallTicket() {
     }
   };
   return (
-    <div>
+    <div className="flex-1 items-center">
       <section
         ref={hallTicketRef}
         style={{ border: "2px", borderColor: "#000", marginBottom: 100 }}
       >
         <div
-          style={{ width: 650, height: 900, marginRight: 10, marginTop: 100 }}
+          style={{ width: 650, height: 900, marginRight: 10, marginTop: 10 }}
         >
           <div className="border border-gray-900">
-            <div className=" p-4">
-              <div className="flex ">
-                <div className="pr-4 pl-4">
-                  <h5 className="uppercase">{data?._doc?.exam?.examName}</h5>
-
-                  <p>{data?._doc?.exam?.academicYear}</p>
-                </div>
-
-                <div></div>
-              </div>
-            </div>
-            <div className=" border m-4 border-gray-900 p-4 ">
+            <div className=" border-b-2 border-gray-800 p-2 ">
               <div className="flex flex-wrap ">
                 <div className="pr-4 pl-4 flex-1">
-                  <h5 className="text-center">Hall Ticket</h5>
+                  <h5 className="text-center font-bold">
+                    جامعة دار الهدى الاسلامية, كيرلا, الهند{" "}
+                  </h5>
+                  <h5 className="text-center font-bold text-xl">
+                    Centre for Public Education and Training (CPET)
+                  </h5>
+                  <p className="text-center">
+                    Hidaya Nagar, Chemmad, Tirurangadi P.O, Malappuram Dt.,
+                    Kerala, PIN: 676306 Ph: +91 494-2463155, 2464502, Fax: +91
+                    494-2460575, cpet.dhiu.in
+                  </p>
                 </div>
               </div>
             </div>
-            <div className=" border border-gray-900 m-4 p-4">
-              <div className="flex flex-wrap ">
-                <div className="sm:w-4/5 pr-4 pl-4">
-                  <table className="w-full max-w-full mb-4">
-                    <tbody>
-                      <tr>
-                        <td>ENROLLMENT NO : {data?.data?.registerNo}</td>
-                      </tr>
-                      <tr>
-                        <td>Student Name: {data?.data?.studentName}</td>
-                      </tr>
-                      <tr>
-                        <td>Class: {data?.data?.class?.className}</td>
-                      </tr>
-                      <tr>
-                        <td>Institution: {data?.data?.branch?.branchName}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <h5 className="text-center border-b p-2 border-gray-800">
+              DEGREE FOURTH SEMESTER EXAMINATION - MARCH 2023
+            </h5>
+            <div className="border-t mt-1 border-gray-800 p-3">
+              <h5 className="font-semibold text-center">HALL TICKET</h5>
+              <div className="border-[1px] border-gray-800 p-3">
+                <p>
+                  Exam Reg. No:{" "}
+                  <span className="text-black font-semibold">210982</span>
+                </p>
+                <p>
+                  Name Of The Student:{" "}
+                  <span className="text-black font-semibold">210982</span>
+                </p>
+                <p>
+                  Name of the Institution:{" "}
+                  <span className="text-black font-semibold">210982</span>
+                </p>
+                <p>
+                  Exam Reg. No:
+                  <span className="text-black font-semibold">210982</span>
+                </p>
               </div>
             </div>
 
@@ -92,9 +93,9 @@ function HallTicket() {
                     <tbody>
                       {data?._doc?.subjects?.map((subject, key) => (
                         <tr className="border border-gray-900">
-                          <td>{key+1}</td>
+                          <td>{key + 1}</td>
                           <td>{subject?.subjectId?.subjectName}</td>
-                          <td>{moment(subject?.date).format('DD-MM-YYYY')}</td>
+                          <td>{moment(subject?.date).format("DD-MM-YYYY")}</td>
                           <td>{subject?.time}</td>
                         </tr>
                       ))}

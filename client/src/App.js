@@ -29,6 +29,7 @@ import ReactGA from "react-ga";
 import StudentDownloads from "./pages/StudentDownloads";
 import HallTicket from "./pages/HallTicket";
 import About from "./pages/About";
+import CenterRegister from "./pages/CenterRegister";
 
 export default function App() {
   ReactGA.initialize("G-K5QQWRHM78");
@@ -69,6 +70,7 @@ export default function App() {
               <Route path="/all-notifications" element={<AllNotifications />} />
               <Route path="/notification/:id" element={<NotificationView />} />
               <Route path="/student-downloads" element={<StudentDownloads />} />
+              <Route path="/CenterRegister" element={<CenterRegister />} />
               <Route path="/hall-ticket" element={<HallTicket />} />
               {/* <Route path="/launch" element={<LaunchBtn />} /> */}
               <Route path="/downloads" element={<Downloads />} />
