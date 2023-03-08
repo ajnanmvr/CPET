@@ -42,7 +42,7 @@ function Courses() {
               </h1>
               <button
                 onClick={(e) => moveToCourse(e, course._id)}
-                className="w-full absolute bottom-1 left-0 bg-[#0c9d85] text-white font-bold uppercase py-3 rounded-[30px] hover:bg-[#0f604b] "
+                className="w-full absolute bottom-1 left-0 bg-teal-700 text-white font-bold uppercase py-3 rounded-[30px] hover:bg-[#0f604b] "
               >
                 apply now
               </button>

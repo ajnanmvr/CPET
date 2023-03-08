@@ -79,7 +79,7 @@ function Homepage() {
         <Counter />
 
         <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfb_S31WKWCzDglCQokIOkyfrUSWSmqCjlaPuyMxfE8g_CXOg/viewform"
+          href="/about-us"
           className="flex flex-col  mx-auto my-3 flex-1 items-center  bg-white border border-gray-200 lg:w-3/4 w-full rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
         >
           <img
