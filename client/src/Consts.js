@@ -150,9 +150,9 @@ export const RestrictedRoutes = [
     role: "superAdmin",
   },
   {
-    route: "/edit-branch",
+    route: "/edit-branch/:id",
     component: <Branch.EditBranch />,
-    role: "admin",
+    role: "superAdmin",
   },
 
   {

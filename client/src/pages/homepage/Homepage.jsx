@@ -43,11 +43,11 @@ function Homepage() {
           {notifications.map((notification, key) => (
             <a
               href={notification?.url}
-              className="relative lg:w-1/2  w-full group mt-2 mx-2"
+              className="relative lg:w-1/2   w-full group mt-2 mx-2"
               target={"_blank"}
             >
               <div className="absolute -inset-1 bg-gradient-to-r from-[#97d7e9] to-[#96ffd8] rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-              <div className="relative px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
+              <div className="relative px-7 py-6 h-[120px] bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
                 <svg
                   className="w-8 h-8 text-purple-600"
                   fill="none"

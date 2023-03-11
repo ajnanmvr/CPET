@@ -13,8 +13,7 @@ function CreateBranch() {
     district: "",
     state: "",
     pinCode: "",
-    phone1: "",
-    phone2: "",
+    phone: "",
     branchImg: "",
     password: "",
     username: "",
@@ -125,9 +124,9 @@ function CreateBranch() {
                   htmlFor="username"
                 >
                   Phone Number 1
-                  {errors.phone1 && (
+                  {errors.phone && (
                     <h1 className="text-red-500 font-sm text-center">
-                      {errors.phone1}
+                      {errors.phone}
                     </h1>
                   )}
                 </label>
@@ -136,38 +135,14 @@ function CreateBranch() {
                   id="username"
                   type="text"
                   required
-                  value={inputData.phone1}
+                  value={inputData.phone}
                   onChange={(e) => onChange(e)}
-                  placeholder="Phone No 1:"
-                  name="phone1"
+                  placeholder="Phone No :"
+                  name="phone"
                 />
               </div>
             </div>
-            <div className="lg:col-span-1">
-              <div className="px-4 sm:px-0">
-                <label
-                  className="block  text-sm font-bold mb-2"
-                  htmlFor="username"
-                >
-                  Phone Number 2
-                  {errors.phone2 && (
-                    <h1 className="text-red-500 font-sm text-center">
-                      {errors.phone2}
-                    </h1>
-                  )}
-                </label>
-                <input
-                  className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  id="username"
-                  type="text"
-                  required
-                  value={inputData.phone2}
-                  onChange={(e) => onChange(e)}
-                  placeholder="Phone No 2:"
-                  name="phone2"
-                />
-              </div>
-            </div>
+            
 
             <div className="lg:col-span-1">
               <div className="px-4 sm:px-0">

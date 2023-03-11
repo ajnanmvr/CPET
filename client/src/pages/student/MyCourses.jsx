@@ -37,33 +37,45 @@ function MyCourses() {
             <div className="flow-root">
               <ul role="list" className="-my-6 divide-y divide-gray-200">
                 {courses?.map((item, index) => (
-                  <li className="flex py-6">
-                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                      <img
-                        src={item.image}
-                        alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
-                        className="h-full w-full object-cover object-center"
-                      />
-                    </div>
-                    <div className="ml-4 flex flex-1 flex-col">
-                      <div>
-                        <div className="lg:flex lg:justify-between text-base font-medium text-gray-900">
-                          <h3>
-                            <a href="#">{item.courseTitle}</a>
-                          </h3>
-                          <p className="lg:ml-4">Rs: {item.amount}</p>
-                        </div>
+                  <>
+                    <a
+                      href={`/course-details/${item._id}`}
+                      key={index}
+                      className="lg:flex py-6"
+                    >
+                      <div className="flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                        <img
+                          src={`https://cpet.dhiu.in/course/${item?.image}`}
+                          className="object-fit h-40 w-80"
+                        />
                       </div>
-                      <div className="lg:flex lg:flex-1 lg:items-end lg:justify-between text-sm">
-                        <p className="text-gray-500"></p>
-                        <div className="flex">
-                          <div className="font-medium text-indigo-600 hover:text-indigo-500">
-                            Duration : {item.duration}
+                      <div className="ml-4 lg:flex lg:flex-1 flex-col">
+                        <div>
+                          <div className="lg:flex lg:justify-between ">
+                            <div>
+                              <p className="font-bold my-3 ">
+                                {item.courseTitle}
+                              </p>
+                              <p className="lg:w-3/4 w-full">
+                                {item.description}
+                              </p>
+                              <p className="font-bold mt-1 lg:mt-4">
+                                Rs: {item.amount}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="lg:flex lg:flex-1 lg:items-end lg:justify-between text-sm">
+                          <p className="text-gray-500"></p>
+                          <div className="flex">
+                            <div className="font-medium text-indigo-600 hover:text-indigo-500">
+                              Duration : {item.duration}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
+                    </a>
+                  </>
                 ))}
                 {/* More products... */}
               </ul>

@@ -58,7 +58,7 @@ function Sidebar() {
       icon: faHome,
     },
     {
-      name: "Create Study Center",
+      name: "Add Study Center",
       route: "/create-branch",
       icon: faPlus,
     },

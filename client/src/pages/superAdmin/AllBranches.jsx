@@ -1,5 +1,7 @@
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 
@@ -82,6 +84,12 @@ function AllBranches() {
                       >
                         Phone
                       </th>
+                      <th
+                        scope="col"
+                        className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                      >
+                        Edit
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -103,7 +111,12 @@ function AllBranches() {
                           {branch.district}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                          {branch.phone1}
+                          {branch.phone}
+                        </td>
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                          <Link to={`/edit-branch/${branch._id}`}>
+                            <FontAwesomeIcon icon={faEdit} />
+                          </Link>
                         </td>
                       </tr>
                     ))}

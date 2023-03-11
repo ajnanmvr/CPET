@@ -8,15 +8,12 @@ const branchSchema = new mongoose.Schema({
     required: [true, "Branch Name is required"],
     maxLength: [100, "100 characters are allowed"],
   },
-  phone1: {
+  phone: {
     type: String,
     // required: [true, "Phone number is required"],
     maxLength: [15, "15 characters are allowed"],
   },
-  phone2: {
-    type: String,
-    maxLength: [15, "15 characters are allowed"],
-  },
+
   branchCode: {
     type: String,
     uppercase: true,

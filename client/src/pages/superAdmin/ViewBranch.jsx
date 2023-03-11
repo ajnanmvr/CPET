@@ -87,17 +87,6 @@ function ViewBranch() {
                     {data.branch?.district}
                   </span>
                 </div>
-                <div className="flex">
-                  <p className="block text-indigo-600 mr-3 xl:inline">
-                    <FontAwesomeIcon icon={faPhone} /> {data.branch?.phone1}
-                  </p>
-                  {data.branch?.phone2 && (
-                    <span className="block text-sky-600 xl:inline">
-                      <FontAwesomeIcon icon={faLocationDot} />{" "}
-                      {data.branch?.phone2}
-                    </span>
-                  )}
-                </div>
               </div>
             </main>
           </div>

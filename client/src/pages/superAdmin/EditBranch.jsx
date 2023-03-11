@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../../Axios";
 import { DISTRICT } from "../../Consts";
@@ -19,27 +19,26 @@ function EditBranch() {
   };
 
   const [inputData, setInputData] = useState(initialState);
-  const [oldName, setOldName] = useState("");
   const [loading, setLoading] = useState(false);
   const { authData } = useContext(UserAuthContext);
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const getBranch = async () => {
-    let { data } = await Axios.get("/branch/" + authData?.branch?._id);
+    let { data } = await Axios.get("/branch/" + id);
     setInputData(data);
-    setOldName(data?.username);
   };
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    setInputData((prevState) => ({ ...prevState, [name]: value, oldName }));
+    setInputData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      let res = await Axios.patch("/branch/" + authData?.branch._id, inputData);
+      let res = await Axios.patch("/branch/" + id, inputData);
       if (res.status === 200) {
         setLoading(false);
         setInputData(initialState);
