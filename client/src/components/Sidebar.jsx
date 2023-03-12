@@ -183,7 +183,7 @@ function Sidebar() {
                 </NavLink>
               </>
             ))}
-          {/* <a
+          <a
             href="/add-student"
             target={"_blank"}
             className={
@@ -194,7 +194,7 @@ function Sidebar() {
             <span className="text-[15px] ml-4 text-gray-200 font-bold">
               new admission
             </span>
-          </a> */}
+          </a>
 
           <div className="my-4 bg-gray-600 h-[1px]" />
 
