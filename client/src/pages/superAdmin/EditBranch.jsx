@@ -46,7 +46,7 @@ function EditBranch() {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
-        navigate("/admin");
+        navigate("/all-branches");
       }
     } catch (error) {
       setLoading(false);
