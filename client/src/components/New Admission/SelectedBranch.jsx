@@ -142,7 +142,7 @@ function SelectedBranch({
                     setFormData({ ...formData, branch: branch._id })
                   }
                 >
-                  {branch.branchName}
+                  {branch.branchName}, {branch?.place}
                 </div>
               ))}
             </div>
