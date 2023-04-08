@@ -69,7 +69,6 @@ exports.updateStudent = globalFunctions.updateOne(Student);
 exports.verifyStudent = async (req, res, next) => {
   try {
     let branch = await Branch.findById(req.user.branch);
-    console.log(branch);
     let data = await Student.findByIdAndUpdate(req.params.id, {
       verified: true,
     });

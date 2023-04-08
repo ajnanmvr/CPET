@@ -109,11 +109,12 @@ function AddStudents() {
           autoClose: 2000,
           position: toast.POSITION.TOP_CENTER,
         });
-        if (selectedClass === "MAHDIYYA THIRD YEAR") {
-          navigate("/mahdiyya-third-year");
-        } else {
-          navigate("/admission-created");
-        }
+        // if (selectedClass === "MAHDIYYA THIRD YEAR") {
+        //   navigate("/mahdiyya-third-year");
+        // } else {
+        //   navigate("/admission-created");
+        // }
+        navigate('/admission-created')
       }
     } catch (error) {
       setErrors(error.response.data);

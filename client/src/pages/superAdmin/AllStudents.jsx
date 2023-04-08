@@ -33,7 +33,7 @@ function AllStudents() {
     formData.append("file", file);
     formData.append("class", classId);
     try {
-      let res = await Axios.post("/student/excel",formData);
+      let res = await Axios.post("/student/excel", formData);
       if (res.status === 200) {
         alert("File uploaded successfully");
         window.location.reload();
@@ -94,7 +94,12 @@ function AllStudents() {
                           type="file"
                           onChange={(e) => setFile(e.target.files[0])}
                         />
-                        <button onClick={(e)=>handleExcelUpload(e)} className="bg-green-400 text-white float-right font-bold px-3 py-2 mt-3">Upload </button>
+                        <button
+                          onClick={(e) => handleExcelUpload(e)}
+                          className="bg-green-400 text-white float-right font-bold px-3 py-2 mt-3"
+                        >
+                          Upload{" "}
+                        </button>
                       </div>
                     </div>
                   </>
@@ -149,6 +154,12 @@ function AllStudents() {
                     >
                       VIEW
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      Status
+                    </th>
                     {/* <th
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
@@ -181,6 +192,13 @@ function AllStudents() {
                         <Link to={"/profile/" + student.id}>
                           <FontAwesomeIcon icon={faEye} />
                         </Link>
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
+                        {student.verified ? (
+                          <p className="text-green-500">verified</p>
+                        ) : (
+                          <p className="text-red-500">not verified</p>
+                        )}
                       </td>
                       {/* <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/edit-student/" + student.id}>

@@ -25,7 +25,7 @@ function StudentProfile() {
     e.preventDefault();
     setLoading(true);
     try {
-      let res = await Axios.post("/student/verify/" + id);
+      let res = await Axios.post("/student/admission/verify/" + id);
       if (res.status === 200) {
         setLoading(false);
         toast.success("Student Verified Successfully", {
@@ -57,7 +57,7 @@ function StudentProfile() {
             <div className="container mx-auto my-5 p-5">
               <div className="md:flex no-wrap md:-mx-2 ">
                 {/* Left Side */}
-               
+
                 {/* Right Side */}
                 <div className="w-full mx-2 h-64">
                   {/* Profile tab */}
@@ -166,6 +166,29 @@ function StudentProfile() {
                     </div>
                   </div>
                   {/* End of profile tab */}
+                  <ul className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                    <li className="flex items-center py-3">
+                      <span>Status</span>
+                      <span className="ml-auto">
+                        {student.verified ? (
+                          <span className="bg-green-400 py-1 px-2 rounded text-white text-sm">
+                            Active
+                          </span>
+                        ) : (
+                          <span
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setShowAlert(true);
+                            }}
+                            className="bg-red-400 cursor-pointer py-1 px-2 rounded text-white text-sm"
+                          >
+                            Not Verified
+                          </span>
+                        )}
+                      </span>
+                    </li>
+                    
+                  </ul>
                 </div>
               </div>
             </div>

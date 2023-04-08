@@ -38,7 +38,7 @@ router.post(
 router.get("/:id", studentController.getStudent);
 router.delete("/:id", studentController.deleteStudent);
 router.patch("/:id", studentController.updateStudent);
-router.post("/verify/:id", protect, studentController.verifyStudent);
+router.post("/admission/verify/:id", protect, studentController.verifyStudent);
 router.post(
   "/excel",
   protect,
