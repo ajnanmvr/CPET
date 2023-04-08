@@ -141,7 +141,7 @@ function CreateMessage() {
                     .sort((a, b) => (a.username > b.username ? 1 : -1))
                     .map((user, key) => (
                       <option key={key} value={user._id}>
-                        {user.username}
+                       {user?.branch?.branchName} , {user.username}
                       </option>
                     ))}
                 </select>
@@ -190,10 +190,10 @@ function CreateMessage() {
             >
               Selected Recipients
             </label>
-            <div className="grid lg:grid-cols-10">
+            <div className="grid lg:grid-cols-3">
               {filteredUsers.map((item) => (
                 <div className="bg-gray-200  m-1 px-2 py-1 shadow-md">
-                  {item.username}
+                  {item?.branch?.branchName} ,{item.username}
                   <span
                     className="pl-2 text-red-500 cursor-pointer"
                     onClick={() => removeSelected(item._id)}
