@@ -70,7 +70,7 @@ exports.signIn = async (req, res, next) => {
         return res.status(400).json({
           message: "Invalid password",
         });
-      } else {
+      } else {  
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
           expiresIn: "90d",
         });

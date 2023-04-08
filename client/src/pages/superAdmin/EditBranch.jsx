@@ -38,7 +38,7 @@ function EditBranch() {
     e.preventDefault();
     setLoading(true);
     try {
-      let res = await Axios.patch("/branch/" + id, inputData);
+      let res = await Axios.post("/branch/" + id, inputData);
       if (res.status === 200) {
         setLoading(false);
         setInputData(initialState);
