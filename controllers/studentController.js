@@ -16,7 +16,7 @@ exports.getAllStudents = async (req, res, next) => {
     let data = await Student.find({
       branch: req.params.branchId,
       class: req.params.classId,
-    }).populate("class");
+    }).populate("class").populate('branch')
     res.status(200).json(data);
   } catch (error) {
     console.log(error);

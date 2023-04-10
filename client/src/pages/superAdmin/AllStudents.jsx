@@ -7,6 +7,7 @@ import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 import { UserAuthContext } from "../../context/user";
 import { MY_VERIFIED_STUDENTS } from "../../queries/student";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 function AllStudents() {
   const { classId } = useParams();
@@ -76,7 +77,7 @@ function AllStudents() {
             <div className="overflow-x-auto sm:-mx-6 lg:mx-auto">
               <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                 {!showModal ? (
-                  <StudentsTable />
+                  <StudentsTable className={className?.className} />
                 ) : (
                   <>
                     {" "}
@@ -115,13 +116,14 @@ function AllStudents() {
     );
   }
 
-  function StudentsTable() {
+  function StudentsTable({ className }) {
     return (
       <div>
         <div className=" sm:-mx-6 lg:-mx-8 w-full">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
-              <table className="min-w-full">
+         
+              <table className="min-w-full" id="table-data">
                 <thead className="border-b">
                   <tr>
                     <th
@@ -181,9 +183,7 @@ function AllStudents() {
                         {student?.admissionNo}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
-                        <Link to={`/profile/${student.id}`}>
-                          {student.studentName}
-                        </Link>
+                        {student.studentName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
                         {student.district}
@@ -209,6 +209,14 @@ function AllStudents() {
                   ))}
                 </tbody>
               </table>
+              <ReactHTMLTableToExcel
+                table="table-data"
+                filename={className}
+                sheet="sheet1"
+                buttonText="Download as Excel"
+                fileType="xlsx"
+                className="bg-blue-500 float-right mt-2 text-white px-3 py-2 border-blue-600 hover:bg-transparent hover:text-blue-600 hover:cursor-pointer border"
+              />
             </div>
           </div>
         </div>

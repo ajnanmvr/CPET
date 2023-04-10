@@ -81,7 +81,6 @@ const RootQuery = new GraphQLObjectType({
       },
       resolve(parent, args) {
         return Student.find({
-          verified: true,
           branch: args.adminId,
           class: args.classId,
         });

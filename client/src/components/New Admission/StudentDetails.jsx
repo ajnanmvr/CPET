@@ -32,7 +32,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
 
     {
       labelName: "Phone Number",
-      type: "tel",
+      type: "number",
       name: "phone",
       placeholder: "Enter Phone Number",
       required: true,
@@ -60,7 +60,7 @@ function StudentDetails({ onChange, formData, nextPage, formErrors }) {
     },
     {
       labelName: "Pin Code",
-      type: "text",
+      type: "number",
       name: "pinCode",
       placeholder: "Enter Your Pincode",
       required: true,
