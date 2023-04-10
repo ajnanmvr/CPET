@@ -47,6 +47,7 @@ export const DISTRICT = [
   "PATHANAMTHITTA",
   "TRIVANDRUM",
   "WAYANAD",
+  "MANGLORE"
 ];
 export const MONTHS = [
   "JANUARY",
