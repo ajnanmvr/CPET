@@ -20,6 +20,10 @@ const StudentType = new GraphQLObjectType({
     class: { type: GraphQLString },
     verified: { type: GraphQLBoolean },
     district: { type: GraphQLString },
+    place: { type: GraphQLString },
+    phone: { type: GraphQLString },
+    fatherName: { type: GraphQLString },
+    dob: { type: GraphQLString },
     branch: {
       type: BranchType,
       resolve(parent, args) {

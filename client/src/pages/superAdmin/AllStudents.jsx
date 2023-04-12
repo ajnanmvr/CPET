@@ -2,28 +2,37 @@ import { useQuery } from "@apollo/client";
 import { faEye, faUserEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams ,useLocation} from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 import { UserAuthContext } from "../../context/user";
 import { MY_VERIFIED_STUDENTS } from "../../queries/student";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import moment from "moment";
 
 function AllStudents() {
   const { classId } = useParams();
+  const location = useLocation();
+const [students,setStudents]=useState([])
   const [showModal, setShowModal] = useState(false);
   const { authData } = useContext(UserAuthContext);
   const [className, setClassName] = useState(null);
-  const { data, error, loading } = useQuery(MY_VERIFIED_STUDENTS, {
+  const { data, error, loading,refetch } = useQuery(MY_VERIFIED_STUDENTS, {
     variables: { adminId: authData?.branch?._id, classId: classId },
   });
-
   const [file, setFile] = useState(null);
-
   const getClass = async () => {
     try {
       let { data } = await Axios.get(`/class/${classId}`);
       setClassName(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getStudents = async () => {
+    try {
+      let { data } = await Axios.post(`/student/my-students`);
+      setStudents(data);
     } catch (error) {
       console.log(error);
     }
@@ -44,17 +53,15 @@ function AllStudents() {
       alert("something went wrong");
     }
   };
-
+  useEffect(() => {
+   getStudents()
+  }, [location]);
   useEffect(() => {
     getClass();
   }, [classId]);
 
-  if (error) {
-    return (
-      <h1 className="text-3xl font-bold text-red-500">Something Went Wrong</h1>
-    );
-  }
-  if (loading) {
+
+  if (students.length<0) {
     return <Loading />;
   }
   if (!error && !loading) {
@@ -132,12 +139,12 @@ function AllStudents() {
                     >
                       #
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
                     >
                       ADM
-                    </th>
+                    </th> */}
                     <th
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
@@ -162,6 +169,54 @@ function AllStudents() {
                     >
                       Status
                     </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      Phone
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      DOB
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      Father
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      Place
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      House Name
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      Post Office
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      Pin
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+                    >
+                      State
+                    </th>
                     {/* <th
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
@@ -171,7 +226,7 @@ function AllStudents() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.myVerifiedStudents?.map((student, index) => (
+                  {students.map((student, index) => (
                     <tr
                       key={index}
                       className="border-b hover:bg-blue-900 hover:cursor-pointer group"
@@ -179,9 +234,9 @@ function AllStudents() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-white ">
                         {index + 1}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-white ">
+                      {/* <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 group-hover:text-white ">
                         {student?.admissionNo}
-                      </td>
+                      </td> */}
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
                         {student.studentName}
                       </td>
@@ -189,16 +244,40 @@ function AllStudents() {
                         {student.district}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
-                        <Link to={"/profile/" + student.id}>
+                        <Link to={"/profile/" + student._id}>
                           <FontAwesomeIcon icon={faEye} />
                         </Link>
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
-                        {student.verified ? (
+                        {student?.verified ? (
                           <p className="text-green-500">verified</p>
                         ) : (
                           <p className="text-red-500">not verified</p>
                         )}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.phone}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                      {moment(student?.dob).format("DD-MM-YYYY")}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.fatherName}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.place}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.houseName}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.postOffice}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.pinCode}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
+                        {student?.state}
                       </td>
                       {/* <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         <Link to={"/edit-student/" + student.id}>
@@ -215,7 +294,7 @@ function AllStudents() {
                 sheet="sheet1"
                 buttonText="Download as Excel"
                 fileType="xlsx"
-                className="bg-blue-500 float-right mt-2 text-white px-3 py-2 border-blue-600 hover:bg-transparent hover:text-blue-600 hover:cursor-pointer border"
+                className="bg-blue-500  mt-2 text-white px-3 py-2 border-blue-600 hover:bg-transparent hover:text-blue-600 hover:cursor-pointer border"
               />
             </div>
           </div>

@@ -17,6 +17,10 @@ const MY_VERIFIED_STUDENTS = gql`
       id
       studentName
       district
+      verified
+      fatherName
+      dob
+      place
     }
   }
 `;

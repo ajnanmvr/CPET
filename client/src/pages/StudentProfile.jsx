@@ -151,7 +151,7 @@ function StudentProfile() {
                         </div>
 
                         <div className="grid grid-cols-2">
-                          <div className="px-4 py-2 font-semibold">Branch</div>
+                          <div className="px-4 py-2 font-semibold">Study Center</div>
                           <div className="px-4 py-2">
                             {student?.branch?.branchName}
                           </div>
@@ -170,7 +170,7 @@ function StudentProfile() {
                     <li className="flex items-center py-3">
                       <span>Status</span>
                       <span className="ml-auto">
-                        {student.verified ? (
+                        {student?.verified ? (
                           <span className="bg-green-400 py-1 px-2 rounded text-white text-sm">
                             Active
                           </span>
