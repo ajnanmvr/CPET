@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 import Axios from "../../Axios";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 function AllBranchCard() {
-  const [branches, setBranches] = useState([]);
+  const [students, setStudents] = useState([]);
   const [branchDetails, setBranchDetails] = useState([]);
   const [start, setStart] = useState(0);
-
-  const getAllBranches = async () => {
-    try {
-      let { data } = await Axios.get("/branch?sort=branchName");
-      setBranches(data.docs);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const getAllDetails = async () => {
     try {
       let { data } = await Axios.post("/student/all-details?branch=true");
-      console.log(data);
       setBranchDetails(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getAllStudents = async () => {
+    try {
+      let { data } = await Axios.post("/student");
+      console.log(data);
+      setStudents(data.docs);
     } catch (error) {
       console.log(error);
     }
@@ -39,19 +38,27 @@ function AllBranchCard() {
     }
   };
   useEffect(() => {
-    getAllBranches();
+    getAllStudents();
     getAllDetails();
   }, []);
   return (
     <>
       <div className="flex flex-col">
-        <h1 className="text-3xl text-center font-bold my-4 text-teal-500">
-          Students
+        <h1 className="text-3xl text-center font-bold uppercase my-4 text-teal-500">
+          All Students
         </h1>
-        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <ReactHTMLTableToExcel
+          table="table-data"
+          filename="Student Data"
+          sheet="sheet1"
+          buttonText="Download as Excel"
+          fileType="xlsx"
+          className="bg-blue-500 float-right mt-2 text-white px-3 py-2 border-blue-600 hover:bg-transparent hover:text-blue-600 hover:cursor-pointer border"
+        />
+        <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 ">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
-              <table className="min-w-full">
+              <table className="min-w-full ml-4" id="table-data">
                 <thead className="border-b">
                   <tr>
                     <th
@@ -64,19 +71,25 @@ function AllBranchCard() {
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Study Centre
+                      Name
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Code
+                      Father
                     </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      Students
+                      House
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      DOB
                     </th>
                     <th
                       scope="col"
@@ -84,47 +97,109 @@ function AllBranchCard() {
                     >
                       Place
                     </th>
+
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Post Office
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      PIN
+                    </th>
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
                       District
                     </th>
-
                     <th
                       scope="col"
                       className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
                     >
-                      View
+                      State
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Phone
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Centre
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Class
+                    </th>
+                    <th
+                      scope="col"
+                      className="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+                    >
+                      Status
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {branchDetails.map((details, i) => (
+                  {students.map((student, i) => (
                     <tr className="border-b">
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         {i + 1}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {details?.branch[0]?.branchName}
+                        {student?.studentName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {details?.branch[0]?.branchCode}
-                      </td>
-                      <td className=" font-bold text-gray-900 px-6 py-4 whitespace-nowrap">
-                        {details?.numStudents}
+                        {student?.fatherName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {details?.branch[0]?.place}
+                        {student?.houseName}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        {details?.branch[0]?.district}
+                        {student?.dobDate}-{student?.dobMonth}-
+                        {student?.dobYear}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                        <Link className="px-4 py-2 bg-gray-800 text-white font-bold rounded-[20px]" to={`/all-branch-students/${details._id}`}>
-                          view
-                        </Link>
+                        {student?.place}
                       </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {student?.postOffice}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {student?.pinCode}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {student?.district}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {student?.state}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {student?.phone}
+                      </td>
+                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                        {student?.branch?.branchName}
+                      </td>
+                      <td className=" font-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                        {student?.class?.className}
+                      </td>
+                      {student.verified ? (
+                        <td className="font-sm text-green-500 px-6 py-4 whitespace-nowrap">
+                          verified
+                        </td>
+                      ) : (
+                        <td className="font-sm text-orange-500 px-6 py-4 whitespace-nowrap">
+                          not verified
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>
@@ -133,7 +208,15 @@ function AllBranchCard() {
           </div>
         </div>
       </div>
-
+      <div className="lg:grid lg:grid-cols-4 gap-1">
+        {branchDetails.map((branch, key) => (
+          <div className="bg-gray-200 text-center uppercase">
+            <h1 className="text-teal-900">{branch?.branch[0]?.branchName} </h1>
+            <h4 className="text-sm">{branch?.branch[0]?.branchCode}</h4>
+            <h4 className="text-sm">({branch?.numStudents}) students</h4>
+          </div>
+        ))}
+      </div>
       {/* <div className="lg:w-1/4 ml-auto mr-4 my-4">
         <label className="block  text-sm font-bold mb-2" htmlFor="username">
           ADMISSION NUMBER STARTING:
