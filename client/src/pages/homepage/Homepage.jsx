@@ -79,27 +79,26 @@ function Homepage() {
         <Counter />
 
         <a
-          href="/about-us"
+          href="/admission-started"
           className="flex flex-col  mx-auto my-3 flex-1 items-center  bg-white border border-gray-200 lg:w-3/4 w-full rounded-lg shadow md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
         >
           <img
             className="p-3 lg:w-3/4 w-full rounded-t-lg h-64   md:rounded-none md:rounded-l-lg"
-            src="/images/mahdiyya_registration.jpg"
+            src="/images/admission.jpg"
             alt
           />
           <div className="flex flex-col justify-between p-4 leading-normal">
             <h5 className="mb-2 text-2xl font-bold tracking-tight capitalize text-teal-500 dark:text-white">
-              APPLICATION FORM FOR MAHDIYYA STUDY CENTRE
+              MAHDIYYA COURSE ADMISSION STARTED
             </h5>
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-              ദാറുൽ ഹുദാ ഇസ്‌ലാമിക് യൂണിവേഴ്സിറ്റി പൊതു വിദ്യാഭ്യാസ വിഭാഗം
-              സെന്റർ ഫോർ പബ്ലിക് എഡ്യൂക്കേഷൻ ആൻഡ് ട്രൈനിങ്ങിന് കീഴിൽ
-              ഹയർസെക്കണ്ടറി, ഡിഗ്രി തലത്തിൽ പഠനം നടത്തുന്ന വിദ്യാർഥിനികൾക്ക്
-              ഭൗതിക പഠനത്തോടൊപ്പം മത പഠനം ഉറപ്പ് വരുത്താൻ 2016ൽ ആരംഭിച്ച
-              വിദ്യാഭ്യാസ സംരംഭമാണ് Certificate in Moral Studies (CMS).
+              ദാറുൽഹുദാ ഇസ്‌ലാമിക് യൂനിവേഴ്സിറ്റി പൊതു വിദ്യാഭ്യാസ വിഭാഗം
+              CPET(Centre for Public Education and Training) ന് കീഴിൽ 2016 ൽ
+              പെൺകുട്ടികൾക്കായി തുടക്കം കുറിച്ച പാഠ്യ പദ്ധതിയാണ് മഹ്ദിയ്യ
+              കോഴ്സ്....
             </p>
             <button className="bg-teal-500 text-white font-bold px-3 py-2 rounded-[20px] lg:w-1/4 w-full hover:bg-transparent border border-teal-500 transition hover:text-teal-500 hover:cursor-pointer">
-              Apply Now
+              Read More 
             </button>
           </div>
         </a>
