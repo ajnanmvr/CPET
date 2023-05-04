@@ -14,30 +14,29 @@ function Navbar({ navOpened, setNavOpened }) {
     <nav className="bg-gray-200">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute  inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
-            <div className="flex justify-between items-center transition">
-              <Link to={"/"}>
-                <img
-                  className="block h-8 w-auto mr-[10rem] lg:hidden cursor-pointer"
-                  src="/images/logo.png"
-                  alt="Your Company"
-                />
-              </Link>
-              <FontAwesomeIcon
-                onClick={() => setNavOpened(!navOpened)}
-                icon={navOpened ? faClose : faBars}
-                className="ml-auto"
+          {/* Mobile menu button*/}
+          <div className="flex w-full sm:hidden justify-between items-center transition">
+            <Link to={"/"}>
+              <img
+                className="block h-[48px]  lg:hidden cursor-pointer"
+                src="/images/logo.png"
+                alt="CPET darul huda"
               />
-            </div>
+            </Link>
+            <FontAwesomeIcon
+              onClick={() => setNavOpened(!navOpened)}
+              icon={navOpened ? faClose : faBars}
+              className="mr-4"
+            />
           </div>
+
           <div className="flex flex-1 items-center lg:justify-between sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <Link to="/">
                 <img
                   className="hidden h-16 w-auto lg:block cursor-pointer"
                   src="/images/logo.png"
-                  alt="Your Company"
+                  alt="CPET Darul Huda"
                 />
               </Link>
             </div>
