@@ -58,6 +58,12 @@ function Navbar({ navOpened, setNavOpened }) {
                   About
                 </Link>
                 <Link
+                  to="/notifications"
+                  className=" px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  Notifications
+                </Link>
+                <Link
                   to="all-courses"
                   className=" px-3 py-2 rounded-md text-sm font-medium"
                 >
@@ -127,6 +133,12 @@ function Navbar({ navOpened, setNavOpened }) {
               className=" block px-3 py-2 rounded-md text-base font-medium"
             >
               About
+            </Link>
+            <Link
+              to="/notifications"
+              className=" block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Notifications
             </Link>
             {courseAccount && (
               <Link

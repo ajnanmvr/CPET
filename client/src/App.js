@@ -31,6 +31,7 @@ import HallTicket from "./pages/HallTicket";
 import About from "./pages/About";
 import CenterRegister from "./pages/CenterRegister";
 import AdmissionStarted from "./pages/AdmissionStarted";
+import Notifications from "./pages/Notifications";
 
 export default function App() {
   ReactGA.initialize("G-K5QQWRHM78");
@@ -56,6 +57,7 @@ export default function App() {
               <Route path="/" element={<Homepage />} />
               <Route path="/about-us" element={<About />} />
               <Route path="/admission-started" element={<AdmissionStarted />} />
+              <Route path="/notifications" element={<Notifications />} />
               <Route path="/login" element={<Auth.Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/student-login" element={<StudentLogin />} />
