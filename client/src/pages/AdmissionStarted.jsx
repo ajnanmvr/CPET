@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "../Axios";
+import { DISTRICT } from "../Consts";
 
 function AdmissionStarted() {
+  const [branches, setBranches] = useState([]);
+  const [selectedBranch, setSelectedBranch] = useState([]);
+  const getBranches = async () => {
+    try {
+      let { data } = await Axios.get(`/branch?district=${selectedBranch}`);
+      console.log(data);
+      setBranches(data.docs);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  useEffect(() => {
+    getBranches();
+  }, [selectedBranch]);
   return (
     <div className="isolate bg-white">
       <main>
@@ -16,7 +32,12 @@ function AdmissionStarted() {
                 {/* Centre for Public Education and Training (CPET)  */}
                 Admission Started
               </h1>
-              <p className="mt-6 text-lg  leading-8 text-gray-600">
+              <p
+                className="mt-6 text-lg  leading-8 text-gray-600"
+                style={{
+                  fontFamily: "MalayalamFont, sans-serif",
+                }}
+              >
                 <b>🎓 മഹ്ദിയ്യ കോഴ്സ് 🎓</b> <br />
                 ദാറുൽഹുദാ ഇസ്‌ലാമിക് യൂനിവേഴ്സിറ്റി പൊതു വിദ്യാഭ്യാസ വിഭാഗം
                 CPET(Centre for Public Education and Training) ന് കീഴിൽ 2016 ൽ
@@ -76,8 +97,46 @@ function AdmissionStarted() {
                 ---------------------------- <br />
                 CPET DARUL HUDA
               </p>
-              
-              <div className="flex items-center justify-center gap-x-6 mb-7">
+              <div className="lg:col-span-1">
+                <label
+                  className="block  text-sm my-4 font-bold mb-2"
+                  htmlFor="username"
+                >
+                  Which district you prefer for your campus ?
+                </label>
+
+                <select
+                  name="branch"
+                  onChange={(e) => setSelectedBranch(e.target.value)}
+                  id=""
+                  className="bg-gray-50 mb-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                >
+                  <option hidden>Select </option>
+                  {DISTRICT.map((district, index) => (
+                    <>
+                      {" "}
+                      <option key={index} value={district}>
+                        {district}
+                      </option>
+                    </>
+                  ))}
+                </select>
+              </div>
+              <div className="lg:grid lg:grid-cols-3 gap-2">
+                {branches.length > 0 &&
+                  branches.map((item, index) => (
+                    <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                      <p className="mb-2  font-semibold tracking-tight text-teal-700 dark:text-white">
+                        {item?.branchName}
+                      </p>
+                      <p className="font-normal text-gray-700 dark:text-gray-400">
+                        {item?.district}
+                      </p>
+                    </div>
+                  ))}
+              </div>
+
+              <div className="flex items-center mt-3 justify-center gap-x-6 mb-7">
                 <a
                   href="/add-student"
                   target={"_blank"}

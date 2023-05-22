@@ -1,6 +1,8 @@
 import React from "react";
 
+
 function About() {
+
   return (
     <div className="isolate bg-white">
       <main>
