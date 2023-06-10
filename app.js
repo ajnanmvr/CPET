@@ -20,7 +20,6 @@ const downloadRoute = require("./routes/downloads");
 const uploadRoute = require("./routes/uploads");
 const messageRoute = require("./routes/message");
 const hallTicketRoute = require("./routes/hallTicket");
-const hbs=require('hbs')
 
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
