@@ -39,6 +39,7 @@ jobs:
             script: |
                 whoami
                 cd  ./CPET
+                git pull 
                 npm install
                 pm2 reload server.js
                 sudo nginx -t
