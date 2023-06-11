@@ -39,9 +39,6 @@ jobs:
             script: |
                 whoami
                 cd  ./CPET
-                git pull --rebase
                 npm install
-                sudo rm -rf /var/www/cpet.dhiu.in/html/*
-                sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html
                 pm2 reload server.js
                 sudo nginx -t
