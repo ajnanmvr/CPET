@@ -1,10 +1,10 @@
-name: 'CPET'
+name: 'CICD FOR CPET'
 
 on:
   push:
     branches: [ "master" ]
 
-jobs:
+jobs: 
   test:
     strategy:
       matrix:
@@ -20,7 +20,7 @@ jobs:
       - name: test site
         run: |
           npm install
-        env:
+        env: 
           CI: true
 
   deploy:
@@ -28,10 +28,24 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Install sshpass
-        run: sudo apt-get update && sudo apt-get install -y sshpass
+    steps: 
+      - name: connect to SSH
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USER }}
+            password: ${{ secrets.SSH_PASSWORD }}
+          
+            script: |
+                whoami
+                cd  ./CPET
+                # git pull origin master
+                git pull --rebase
+                npm install
+                sudo rm -rf /var/www/cpet.dhiu.in/html/*
+                sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html
+                pm2 reload server.js
+                sudo nginx -t
+                sudo systemctl restart nginx
+                sudo systemctl reload nginx
 
-      - name: Connect to SSH
-        run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'whoami && cd ./CPET && npm install && sudo rm -rf /var/www/cpet.dhiu.in/html/* && sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html && pm2 reload server.js && sudo nginx -t && sudo systemctl restart nginx && sudo systemctl reload nginx'
