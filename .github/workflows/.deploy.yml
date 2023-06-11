@@ -30,21 +30,18 @@ jobs:
 
     steps: 
       - name: connect to SSH
-        uses: appleboy/ssh-action@v0.1.10
+        uses: appleboy/ssh-action@master
         with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USER }}
-            password: ${{ secrets.SSH_PASSWORD }}
-          
+            host: ${{secrets.HOST}}     
+            username: ${{secrets.USER}}  
+            password: ${{secrets.SSH_PASSWORD}}  
+            
             script: |
                 whoami
                 cd  ./CPET
-                # git pull origin master
+                git pull --rebase
                 npm install
-                # sudo rm -rf /var/www/cpetdhiu.in/html/*
-                # sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html
+                sudo rm -rf /var/www/cpet.dhiu.in/html/*
+                sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html
                 pm2 reload server.js
                 sudo nginx -t
-                sudo systemctl restart nginx
-                sudo systemctl reload nginx
-
