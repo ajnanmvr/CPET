@@ -1,8 +1,8 @@
-name: "CICD FOR CPET"
+name: 'CICD FOR CPET'
 
 on:
   push:
-    branches: ["master"]
+    branches: [ "master" ]
 
 jobs:
   test:
@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: connect to SSH
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Connect to SSH
         run: |
-          sudo apt-get update
-          sudo apt-get install -y openssh-client
-          sshpass -p ${{secrets.SSH_PASSWORD}} 
-          ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} 'whoami && cd ./CPET && npm install --force && sudo rm -rf /var/www/cpet.dhiu.in/html/* && sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html && pm2 reload server.js && sudo nginx -t && sudo systemctl restart nginx && sudo systemctl reload nginx'
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'whoami && cd ./CPET && npm install && sudo rm -rf /var/www/cpet.dhiu.in/html/* && sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html && pm2 reload server.js && sudo nginx -t && sudo systemctl restart nginx && sudo systemctl reload nginx'
