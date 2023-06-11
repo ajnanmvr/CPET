@@ -1,4 +1,4 @@
-name: 'CICD FOR CPET'
+name: 'CPET'
 
 on:
   push:
