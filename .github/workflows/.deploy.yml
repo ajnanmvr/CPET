@@ -1,45 +1,46 @@
-name: 'CICD FOR CPET'
+name: CICD FOR CPET
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
 
-jobs: 
+jobs:
   test:
     strategy:
       matrix:
         node-version: [14.x]
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v2
-      - name: use nodejs
-        uses: actions/setup-node@v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: ${{matrix.node-version}}
-      - name: test site
-        run: |
-          npm install
-        env: 
+
+      - name: Test site
+        run: npm install
+        env:
           CI: true
 
   deploy:
-    timeout-minutes: 10
-    needs: [test]
+    needs: test
     runs-on: ubuntu-latest
-
-    steps: 
-      - name: connect to SSH
-        uses: appleboy/ssh-action@master
+    steps:
+      - name: Connect to SSH
+        uses: appleboy/ssh-action@v1
         with:
-            host: ${{secrets.HOST}}     
-            username: ${{secrets.USER}}  
-            password: ${{secrets.SSH_KEY}}  
-            
-            script: |
-                whoami
-                cd  ./CPET
-                git pull 
-                npm install
-                pm2 reload server.js
-                sudo nginx -t
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+
+          script: |
+            whoami
+            cd ./CPET
+            git pull
+            npm install
+            pm2 reload server.js
+            sudo nginx -t
