@@ -21,6 +21,7 @@ function CreateHtml({  setHtml }) {
         wrapperClassName="wrapperClassName"
         editorClassName="editorClassName"
         placeholder="Enter your content here"
+        
       />
     </div>
   );

@@ -39,11 +39,9 @@ export default function App() {
   const { checkUserLogin } = useContext(UserAuthContext);
   const [navOpened, setNavOpened] = useState(false);
 
-
   useEffect(() => {
     checkUserLogin();
   }, []);
- 
 
   return (
     <>
@@ -137,6 +135,15 @@ export default function App() {
             <Routes></Routes>
           </div>
         </CourseAccountProvider>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-CELLQQWRXC"
+        ></script>
+        <script>
+          window.dataLayer = window.dataLayer || []; function gtag()
+          {dataLayer.push(arguments)}
+          gtag('js', new Date()); gtag('config', 'G-CELLQQWRXC');
+        </script>
       </div>
       {/* <Footer/> */}
     </>
