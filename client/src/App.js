@@ -34,13 +34,16 @@ import AdmissionStarted from "./pages/AdmissionStarted";
 import Notifications from "./pages/Notifications";
 
 export default function App() {
-  ReactGA.initialize("G-K5QQWRHM78");
-  ReactGA.send("pageview");
+  ReactGA.initialize("G-CELLQQWRXC");
+
   const { checkUserLogin } = useContext(UserAuthContext);
   const [navOpened, setNavOpened] = useState(false);
 
   useEffect(() => {
     checkUserLogin();
+  }, []);
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
   return (
@@ -135,15 +138,6 @@ export default function App() {
             <Routes></Routes>
           </div>
         </CourseAccountProvider>
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-CELLQQWRXC"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || []; function gtag()
-          {dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-CELLQQWRXC');
-        </script>
       </div>
       {/* <Footer/> */}
     </>
