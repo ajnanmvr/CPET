@@ -12,6 +12,7 @@ function Homepage() {
   const [notifications, setNotifications] = useState([]);
   const [index, setIndex] = React.useState(0);
 
+
   const getAllNotifications = async () => {
     try {
       let { data } = await Axios.get("/notification");
@@ -37,6 +38,7 @@ function Homepage() {
   }, []);
   return (
     <div>
+
       <div id="container" className={"active"}>
         <HeroSection />
         <div className="lg:flex lg:gap-2">
