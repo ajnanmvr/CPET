@@ -42,10 +42,11 @@ jobs:
                 git pull origin master
                 npm install --force
                 cd ./client
-                npm install
+                npm install --force
                 npm run build
                 # sudo rm -rf /var/www/cpetdhiu.in/html/*
                 # sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpetdhiu.in/html
+                cd ..
                 pm2 reload server.js
                 sudo nginx -t
                 sudo systemctl restart nginx
