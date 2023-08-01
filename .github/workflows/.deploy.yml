@@ -39,7 +39,7 @@ jobs:
             script: |
                 whoami
                 cd  ./CPET
-                git pull origin master
+                git pull --rebase
                 npm install --force
                 # sudo rm -rf /var/www/cpetdhiu.in/html/*
                 # sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpetdhiu.in/html
