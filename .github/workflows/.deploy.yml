@@ -35,6 +35,7 @@ jobs:
             host: ${{secrets.HOST}}     
             username: ${{secrets.USER}}  
             passphrase: ${{secrets.PASSWORD}}
+            password: ${{secrets.PASSWORD}}
             script: |
                 whoami
                 cd  ./CPET
