@@ -9,14 +9,23 @@ const excelToJson = require("convert-excel-to-json");
 const fs = require("fs");
 
 exports.getStudent = globalFunctions.getOne(Student, "branch", "class");
-exports.deleteStudent = globalFunctions.deleteStatus(Student);
+exports.deleteStudent = async (req, res, next) => {
+  try {
+    await Student.findByIdAndDelete(req.params.id);
+    res.status(200).json({ deleted: true });
+  } catch (error) {
+    next(error);
+  }
+};
 
 exports.getAllStudents = async (req, res, next) => {
   try {
     let data = await Student.find({
       branch: req.params.branchId,
       class: req.params.classId,
-    }).populate("class").populate('branch')
+    })
+      .populate("class")
+      .populate("branch");
     res.status(200).json(data);
   } catch (error) {
     console.log(error);
@@ -81,10 +90,9 @@ exports.verifyStudent = async (req, res, next) => {
 
 exports.getMyStudents = async (req, res, next) => {
   try {
-    let data = await Student.find({ branch: req.user.branch }).populate(
-      "class",
-      "className"
-    );
+    let data = await Student.find({ branch: req.user.branch })
+      .populate("class", "className")
+      .sort({ createdAt: 1 });
     res.status(200).json(data);
   } catch (error) {
     next(error);

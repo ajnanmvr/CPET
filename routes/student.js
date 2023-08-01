@@ -36,9 +36,24 @@ router.post(
 );
 
 router.get("/:id", studentController.getStudent);
-router.delete("/:id", studentController.deleteStudent);
-router.patch("/:id", studentController.updateStudent);
-router.post("/admission/verify/:id", protect, studentController.verifyStudent);
+router.delete(
+  "/:id",
+  protect,
+  restrictTo("admin"),
+  studentController.deleteStudent
+);
+router.patch(
+  "/:id",
+  protect,
+  restrictTo("admin"),
+  studentController.updateStudent
+);
+router.post(
+  "/admission/verify/:id",
+  protect,
+  restrictTo("admin"),
+  studentController.verifyStudent
+);
 router.post(
   "/excel",
   protect,

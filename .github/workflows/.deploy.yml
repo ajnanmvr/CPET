@@ -34,15 +34,17 @@ jobs:
         with:
             host: ${{secrets.HOST}}     
             username: ${{secrets.USER}}  
-            key: ${{secrets.SSH_KEY}}
-            port: ${{secrets.PORT}}
+            passphrase: ${{secrets.PASSWORD}}
             script: |
                 whoami
                 cd  ./CPET
                 git pull origin master
                 npm install --force
-                # sudo rm -rf /var/www/cpet.dhiu.in/html/*
-                # sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpet.dhiu.in/html
+                cd ./client
+                npm install
+                npm run build
+                # sudo rm -rf /var/www/cpetdhiu.in/html/*
+                # sudo cp -r /home/ubuntu/CPET/client/build/* /var/www/cpetdhiu.in/html
                 pm2 reload server.js
                 sudo nginx -t
                 sudo systemctl restart nginx

@@ -1,23 +1,21 @@
 import { useQuery } from "@apollo/client";
-import { faEye, faUserEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams ,useLocation} from "react-router-dom";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Axios from "../../Axios";
 import Loading from "../../components/Loading";
 import { UserAuthContext } from "../../context/user";
 import { MY_VERIFIED_STUDENTS } from "../../queries/student";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
-import moment from "moment";
 
 function AllStudents() {
   const { classId } = useParams();
   const location = useLocation();
-const [students,setStudents]=useState([])
+  const [students, setStudents] = useState([]);
+
   const [showModal, setShowModal] = useState(false);
   const { authData } = useContext(UserAuthContext);
   const [className, setClassName] = useState(null);
-  const { data, error, loading,refetch } = useQuery(MY_VERIFIED_STUDENTS, {
+  const { data, error, loading, refetch } = useQuery(MY_VERIFIED_STUDENTS, {
     variables: { adminId: authData?.branch?._id, classId: classId },
   });
   const [file, setFile] = useState(null);
@@ -54,14 +52,15 @@ const [students,setStudents]=useState([])
     }
   };
   useEffect(() => {
-   getStudents()
+    getStudents();
+    window.scrollTo(0, 0);
   }, [location]);
+
   useEffect(() => {
     getClass();
   }, [classId]);
 
-
-  if (students.length<0) {
+  if (students.length < 0) {
     return <Loading />;
   }
   if (!error && !loading) {
@@ -129,7 +128,6 @@ const [students,setStudents]=useState([])
         <div className=" sm:-mx-6 lg:-mx-8 w-full">
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden">
-         
               <table className="min-w-full" id="table-data">
                 <thead className="border-b">
                   <tr>
@@ -157,12 +155,7 @@ const [students,setStudents]=useState([])
                     >
                       DISTRICT
                     </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-                    >
-                      VIEW
-                    </th>
+
                     <th
                       scope="col"
                       className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
@@ -238,16 +231,17 @@ const [students,setStudents]=useState([])
                         {student?.admissionNo}
                       </td> */}
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
-                        {student.studentName}
+                        <Link
+                          to={"/profile/" + student._id}
+                          className="text-blue-700"
+                        >
+                          {student.studentName}
+                        </Link>
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
                         {student.district}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
-                        <Link to={"/profile/" + student._id}>
-                          <FontAwesomeIcon icon={faEye} />
-                        </Link>
-                      </td>
+
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap group-hover:text-white  ">
                         {student?.verified ? (
                           <p className="text-green-500">verified</p>
@@ -259,7 +253,8 @@ const [students,setStudents]=useState([])
                         {student?.phone}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
-                      {moment(student?.dob).format("DD-MM-YYYY")}
+                        {/* {moment(student?.dob).format("DD-MM-YYYY")} */}
+                        {student.dobDate}-{student.dobMonth}-{student.dobYear}
                       </td>
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap  group-hover:text-white ">
                         {student?.fatherName}

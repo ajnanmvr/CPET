@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Axios from "../Axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function StudentProfile() {
   const { id } = useParams();
@@ -43,6 +45,29 @@ function StudentProfile() {
       console.log(error.response);
     }
   };
+  const handleDelete = async (e, studentId) => {
+    e.preventDefault();
+    if (window.confirm("Do you want to delete the student")) {
+      try {
+        let res = await Axios.delete("/student/" + studentId);
+        if (res.status === 200) {
+          setLoading(false);
+          toast.success("Student Deleted Successfully", {
+            autoClose: 2000,
+            position: toast.POSITION.TOP_CENTER,
+          });
+          navigate(-1);
+        }
+      } catch (error) {
+        setLoading(false);
+        toast.error("Something went wrong", {
+          autoClose: 2000,
+          position: toast.POSITION.TOP_CENTER,
+        });
+        console.log(error.response);
+      }
+    }
+  };
   useEffect(() => {
     getStudent();
   }, []);
@@ -64,23 +89,9 @@ function StudentProfile() {
                   {/* About Section */}
                   <div className="bg-white p-3 shadow-sm rounded-sm">
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                      <span clas="text-green-500">
-                        <svg
-                          className="h-5"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                          />
-                        </svg>
+                      <span className="tracking-wide text-green-500 font-bold uppercase text-3xl text-center">
+                        Student Profile
                       </span>
-                      <span className="tracking-wide">Student Profile</span>
                     </div>
                     <div className="text-gray-700">
                       <div className="grid md:grid-cols-2 text-sm">
@@ -151,7 +162,9 @@ function StudentProfile() {
                         </div>
 
                         <div className="grid grid-cols-2">
-                          <div className="px-4 py-2 font-semibold">Study Center</div>
+                          <div className="px-4 py-2 font-semibold">
+                            Study Center
+                          </div>
                           <div className="px-4 py-2">
                             {student?.branch?.branchName}
                           </div>
@@ -187,7 +200,16 @@ function StudentProfile() {
                         )}
                       </span>
                     </li>
-                    
+                    <button
+                      onClick={(e) => handleDelete(e, student._id)}
+                      className="bg-red-500 text-white rounded-xl py-1 px-2"
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="text-gray-300"
+                      />{" "}
+                      Delete Student
+                    </button>
                   </ul>
                 </div>
               </div>
