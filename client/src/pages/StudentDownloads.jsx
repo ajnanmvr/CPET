@@ -22,25 +22,28 @@ function StudentDownloads() {
       <h1 className="text-center font-bold text-2xl my-2 uppercase">
         Downloads
       </h1>
-      <div className="lg:flex">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
         {downloads.map((download, key) => (
           <a
             key={key}
             href={download.fileName}
-            className="relative lg:w-1/4   w-full group mt-2 mx-2"
-            target={"_blank"}
+            className="group mt-2 mx-2 flex w-full items-center justify-center"
+            target="_blank"
           >
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#97d7e9] to-[#d9e3ff] rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-            <div className="relative min-h-[150px] px-7 py-6 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start space-x-6">
-              <div className="space-y-2">
-                <p className="text-slate-800 uppercase">{download.title}</p>
+            <div className="w-full rounded-lg overflow-hidden shadow-lg bg-white">
+              <div className="px-6 py-4">
+                <p className="text-slate-800 text-center font-bold uppercase">
+                  {download.title}
+                </p>
+              </div>
+              <div className="px-6 py-4 text-center">
                 <a
-                  href={`/${download.fileName}`}
-                  className="block text-indigo-400 group-hover:text-slate-800 transition duration-200"
+                  href={download.fileName}
+                  className="text-indigo-400 group-hover:text-slate-800 transition duration-200"
                   target="_blank"
                 >
+                  <FontAwesomeIcon icon={faDownload} className="mr-2" />
                   Download
-                  <FontAwesomeIcon icon={faDownload} />
                 </a>
               </div>
             </div>
