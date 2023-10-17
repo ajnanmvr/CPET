@@ -121,16 +121,20 @@ function HallTicket() {
                           </span>
                         </p>
                         <p>
-                          Name Of The Student:{" "}
+                          Name of the Student:{" "}
                           <span className="text-black font-semibold">
                             {data?.data?.studentName}
                           </span>
                         </p>
                         <p className="text-[13px]">
-                          Name of the Institution:{" "}
+                          Name of the institution:{" "}
                           <span className="text-black font-semibold font-sans text-[11px]">
                             {data?.data?.branchName}
                           </span>
+                        </p>
+
+                        <p className="text-black font-semibold text-center">
+                          -{data?.data?.className}-
                         </p>
                       </div>
                     )}
