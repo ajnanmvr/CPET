@@ -9,11 +9,8 @@ function ExamTable({ data, getExams }) {
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
   const [hallTickets, setHallTickets] = useState([]);
-  console.log(hallTickets);
-  const [exam, setExam] = useState({
-    examName: "",
-    academicYear: "",
-  });
+
+console.log(hallTickets);
   const deleteItem = async (itemId) => {
     try {
       if (window.confirm("do you want to delete this item")) {
@@ -69,7 +66,7 @@ function ExamTable({ data, getExams }) {
     getHallTickets();
   }, []);
   return (
-    <div className="mt-4 h-[50vh]">
+    <div className="mt-4">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -88,9 +85,9 @@ function ExamTable({ data, getExams }) {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="p-4">
           {hallTickets.map((hallTicket) => (
-            <tr className="bg-white dark:bg-gray-800">
+            <tr className="bg-white dark:bg-gray-800 border border-gray-200 my-3">
               <td
                 scope="row"
                 className="py-4 px-6 font-medium whitespace-nowrap dark:text-white"
@@ -106,9 +103,9 @@ function ExamTable({ data, getExams }) {
               </td>
               {hallTicket?.subjects.map((subject, key) => (
                 <>
-                  <tr className="py-4 px-6">
-                    {subject?.subjectId?.subjectName}{" "}
-                    {moment(subject.date).format("MMM-DD-YYYY  | hh:mm")}
+                  <tr className="py-4 px-6 p-4">
+                    {subject?.subjectId?.subjectName}
+                    {/* {moment(subject?.date).format("MMM-DD-YYYY  | hh")} */}
                   </tr>
                 </>
               ))}

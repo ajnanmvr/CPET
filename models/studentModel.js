@@ -79,18 +79,24 @@ const studentSchema = new mongoose.Schema(
       maxLength: [100, "100 characters are allowed"],
       ref: "Branch",
     },
+    branchCode: {
+      type: String,
+      // required: [true, "Please select a branch"],
+      // maxLength: [100, "100 characters are allowed"],
+      // ref: "Branch",
+    },
+    className: {
+      type: String,
+      // required: [true, "Please select a branch"],
+      // maxLength: [100, "100 characters are allowed"],
+      // ref: "Branch",
+    },
     class: {
       type: mongoose.Types.ObjectId,
       required: [true, "Please select a class"],
       ref: "Class",
     },
-    academicYear: {
-      type: String,
-    },
-    verified: {
-      default: false,
-      type: Boolean,
-    },
+ 
   },
   { timestamps: true }
 );

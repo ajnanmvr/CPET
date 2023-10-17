@@ -85,7 +85,7 @@ function CreateExam() {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
-        window.location.reload()
+        window.location.reload();
       }
     } catch (error) {
       console.log(error.response);
@@ -162,7 +162,7 @@ function CreateExam() {
 
                   {subjects.map((subject, key) => (
                     <option key={key} value={subject._id}>
-                      {subject.subjectName}
+                      {subject.subjectCode} - {subject.subjectName}
                     </option>
                   ))}
                 </select>

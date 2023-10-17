@@ -19,6 +19,7 @@ function HallTicket() {
     e.preventDefault();
     try {
       let res = await Axios.post("/hall-ticket/download", { registerNo });
+      console.log(res.data);
       setData(res.data);
       setError(null); // Clear any previous errors
     } catch (error) {
@@ -91,22 +92,22 @@ function HallTicket() {
                 <div className=" border-b-2 border-gray-800 p-2 ">
                   <div className="flex flex-wrap ">
                     <div className="pr-4 pl-4 flex-1">
-                      <h5 className="text-center font-bold">
+                      <img
+                        src="/images/logo.png"
+                        className="h-36 mx-auto"
+                        alt=""
+                      />
+                      {/* <h5 className="text-center font-bold">
                         جامعة دار الهدى الاسلامية, كيرلا, الهند{" "}
                       </h5>
                       <h5 className="text-center font-bold text-xl uppercase">
                         Centre for Public Education and Training (CPET)
-                      </h5>
-                      <p className="text-center">
-                        Hidaya Nagar, Chemmad, Tirurangadi P.O, Malappuram Dt.,
-                        Kerala, PIN: 676306 Ph: +91 494-2463155, 2464502, Fax:
-                        +91 494-2460575, cpet.dhiu.in
-                      </p>
+                      </h5> */}
                     </div>
                   </div>
                 </div>
                 <h5 className="text-center border-b p-2 border-gray-800">
-                  DEGREE FOURTH SEMESTER EXAMINATION - MARCH 2023
+                  CMS, MAHDIYYA ODD SEMESTER EXAMINATION, OCT 2023
                 </h5>
                 <div className="border-t mt-1 border-gray-800 p-3">
                   <h5 className="font-semibold text-center">HALL TICKET</h5>
@@ -125,10 +126,10 @@ function HallTicket() {
                             {data?.data?.studentName}
                           </span>
                         </p>
-                        <p>
+                        <p className="text-[13px]">
                           Name of the Institution:{" "}
-                          <span className="text-black font-semibold">
-                            {data?.data?.branch?.branchName}
+                          <span className="text-black font-semibold font-sans text-[11px]">
+                            {data?.data?.branchName}
                           </span>
                         </p>
                       </div>
@@ -150,14 +151,15 @@ function HallTicket() {
                             <th className=" border-r border-black">Date</th>
                             <th className=" border-r border-black">Subject</th>
                             <th className=" border-r border-black">Code</th>
+                            <th className=" border-r border-black">Time</th>
                             <th className=" border-r border-black">
                               Sign of invigilator
                             </th>
                           </tr>
                         </thead>
                         <tbody>
-                          {data?._doc?.subjects?.map((subject, key) => (
-                            <tr className="border border-gray-900">
+                          {data?.subjects?.map((subject, key) => (
+                            <tr key={key} className="border border-gray-900">
                               <td className="text-sm  border-r border-black ">
                                 {moment(subject?.date).format("DD-MM-YYYY")}
                               </td>
@@ -165,7 +167,13 @@ function HallTicket() {
                                 {subject?.subjectId?.subjectName}
                               </td>
                               <td className="text-sm  border-r border-black">
-                                {"X52304 "}
+                                {subject?.subjectId?.subjectCode}
+                              </td>
+                              <td className="text-sm  border-r text-[12px] border-black">
+                                {subject?.time}
+                              </td>
+                              <td className="text-sm  border-r border-black">
+                                {"            "}
                               </td>
                             </tr>
                           ))}
@@ -174,7 +182,7 @@ function HallTicket() {
                     </div>
                   </div>
                 </div>
-                <div className=" border  border-gray-900 m-4 p-4  mt-12 mb-24">
+                <div className=" border  border-gray-900 m-4 p-4  mt-2 mb-2">
                   <h5 className="text-center bg-gray-900 text-white rounded-[30px] font-bold uppercase mb-4">
                     Rules and Regulations
                   </h5>
@@ -206,6 +214,12 @@ function HallTicket() {
                     will be announced on time.
                   </p>
                 </div>
+
+                <p className="text-center text-black p-3">
+                  Hidaya Nagar, Chemmad, Tirurangadi P.O, Malappuram Dt.,
+                  Kerala, PIN: 676306 Ph: +91 494-2463155, 2464502, Fax: +91
+                  494-2460575, cpet.dhiu.in
+                </p>
               </div>
             </div>
           </section>

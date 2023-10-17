@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { protect, restrictTo } = require("../controllers/authController");
 const HallTicket = require("../models/hallTicketModel");
 const Student = require("../models/studentModel");
+const Branch = require("../models/branchModel");
+const Class = require("../models/classModel");
 
 router.post("/", protect, restrictTo("superAdmin"), async (req, res) => {
   try {
@@ -41,22 +43,39 @@ router.delete("/:id", async (req, res) => {
 });
 router.post("/download", async (req, res) => {
   try {
-    let data = await Student.findOne({
+    const student = await Student.findOne({
       registerNo: req.body.registerNo,
-    })
-      .populate("branch", "branchName")
-      .populate("class", "className");
-    if (!data) {
-      res.status(400).json({ message: "Invalid Register Number" });
-    } else {
-      let hallTicket = await HallTicket.findOne({ class: data.class })
-        .populate("exam")
-        .populate("class")
-        .populate("subjects.subjectId");
-      res.status(200).json({ ...hallTicket, data });
+    });
+
+    if (!student) {
+      return res.status(400).json({ message: "Invalid Register Number" });
     }
+
+    // Extract all the unique branch codes from the student data
+    const branchCodes = [student.branchCode];
+
+    // Fetch all the branches with the matching branch codes
+    const branch = await Branch.findOne({ branchCode: student.branchCode });
+
+    const classData = await Class.findOne({ className: student.className });
+
+    let hallTicket = await HallTicket.findOne({ class: classData._id })
+      .populate("exam")
+      .populate("subjects.subjectId");
+
+    const studentsWithBranchAndClassName = {
+      ...student._doc,
+      branchName: branch ? branch.branchName : null,
+      className: classData ? classData.className : null,
+    };
+    console.log(studentsWithBranchAndClassName);
+    return res
+      .status(200)
+      .json({ ...hallTicket._doc, data: studentsWithBranchAndClassName });
   } catch (error) {
-    res.status(400).json(error);
+    console.log(error);
+    return res.status(400).json(error);
   }
 });
+
 module.exports = router;
