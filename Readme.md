@@ -3,7 +3,7 @@
 
 
 `view the homepage`
-http://cpet.dhiu.in/
+http://cpetdhiu.in/
 
 
 ## Environment Variables

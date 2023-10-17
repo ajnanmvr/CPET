@@ -45,7 +45,7 @@ function MyCourses() {
                     >
                       <div className="flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                         <img
-                          src={`https://cpet.dhiu.in/course/${item?.image}`}
+                          src={`https://cpetdhiu.in/course/${item?.image}`}
                           className="object-fit h-40 w-80"
                         />
                       </div>

@@ -33,12 +33,12 @@ function LaunchBtn() {
         </ul>
       </div>
       <div className="absolute top-[45%] left-[35%] flex flex-col">
-        <h1 className="text-center font-bold text-green-900">CPET.DHIU.IN</h1>
+        <h1 className="text-center font-bold text-green-900">cpetdhiu.in</h1>
         <h1 className="font-bold capitalize text-gray-600">
           center for public education and training
         </h1>
         <a
-          href="http://cpet.dhiu.in"
+          href="http://cpetdhiu.in"
           target={"_blank"}
           className="btn-5 font-bold text-white text-3xl launch-btn text-center"
         >

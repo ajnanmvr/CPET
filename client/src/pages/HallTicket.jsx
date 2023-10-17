@@ -218,7 +218,7 @@ function HallTicket() {
                 <p className="text-center text-black p-3">
                   Hidaya Nagar, Chemmad, Tirurangadi P.O, Malappuram Dt.,
                   Kerala, PIN: 676306 Ph: +91 494-2463155, 2464502, Fax: +91
-                  494-2460575, cpet.dhiu.in
+                  494-2460575, cpetdhiu.in
                 </p>
               </div>
             </div>

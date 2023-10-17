@@ -51,7 +51,7 @@ module.exports = class Email {
     //1) render HTML based on pug
     try {
       const mailOptions = {
-        from: "cpet.dhiu.in",
+        from: "cpetdhiu.in",
         to: this.email,
         subject: "subject",
         template: template,

@@ -88,12 +88,12 @@ function AdmissionStarted() {
                 <br />
                 ------------------------
                 <br />
-                🌐 www.cpet.dhiu.in <br />
+                🌐 www.cpetdhiu.in <br />
                 📧 cpet@dhiu.in <br />
                 ☎91 9746 2295 47 <br />
                 <br />
                 FOR ADMISSION <br />
-                cpet.dhiu.in <br />
+                cpetdhiu.in <br />
                 ---------------------------- <br />
                 CPET DARUL HUDA
               </p>
