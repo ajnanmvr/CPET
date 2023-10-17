@@ -39,7 +39,32 @@ function Homepage() {
     <div>
       <div id="container" className={"active"}>
         <HeroSection />
-        <p className="text-xl text-center font-bold uppercase my-4 text-[#3f6495]">notifications</p>
+
+        {/*  */}
+        {/* component */}
+        <a href="/hall-ticket" className="flex justify-center items-center mx-4 bg-gray-100">
+          <div className="lg:w-[35%] w-full my-5 ">
+            <div className="">
+              <div className=" items-center justify-end p-4 bg-blue-800 rounded-xl">
+                <p className="w-full text-2xl font-semibold text-white">
+                  Hall Ticket
+                </p>
+                <div className="lg:flex justify-between items-center">
+                  <p className="text-white">
+                    Download your hall ticket right now!
+                  </p>
+                  <p className="text-blue-900  bg-white rounded-full px-3 py-1 font-semibold cursor-pointer transition border border-white  hover:bg-transparent hover:text-white">Download Now</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        {/*  */}
+
+        <p className="text-xl text-center font-bold uppercase my-4 text-[#3f6495]">
+          notifications
+        </p>
         <div className="lg:grid lg:grid-cols-2 lg:gap-4">
           {notifications.map((notification, key) => (
             <a
