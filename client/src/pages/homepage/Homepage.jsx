@@ -47,7 +47,7 @@ function Homepage() {
             <div className="">
               <div className=" items-center justify-end p-4 bg-blue-800 rounded-xl">
                 <p className="w-full text-2xl font-semibold text-white">
-                  Hall Ticket
+                 CMS, MAHDIYYA ODD SEM EXAM OCT 2023 HALL TICKET
                 </p>
                 <div className="lg:flex justify-between items-center">
                   <p className="text-white">

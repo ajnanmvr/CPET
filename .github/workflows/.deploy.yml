@@ -48,3 +48,9 @@ jobs:
                 sudo systemctl restart nginx
                 sudo systemctl reload nginx
 
+
+                # git fetch origin
+                # git merge origin/master
+                # git pull --rebase origin master
+                # git fetch --all
+                # git reset --hard origin/master
