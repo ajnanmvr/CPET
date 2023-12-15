@@ -45,22 +45,21 @@ function Homepage() {
         <a
           href="https://shefest.cpetdhiu.in/"
           target="_blank"
-          className="flex justify-center items-center mx-4 bg-gray-100"
+          className="flex justify-center  items-center mx-4 bg-gray-100"
         >
-          <div className="lg:w-[35%] w-full my-5 ">
-            <div className="">
-              <div className=" items-center justify-end p-4 bg-yellow-500 rounded-xl">
-                <p className="w-full text-2xl font-semibold text-white">
-                  SheFest 2023-24 Arts Fest
+          <div className=" bg-yellow-100 max-w-2xl flex-wrap items-center justify-center  p-3 rounded-xl flex w-full my-5 ">
+            <img src="/images/shefest-logo.svg" alt="" className="w-72" />
+            <div className=" p-4  rounded-xl">
+              <p className="w-full text-2xl font-semibold text-black">
+                SheFest 2023-24 Arts Fest
+              </p>
+              <p className="w-full text-sm pb-4 font-semibold text-gray-500">
+                Candidate Registration Started
+              </p>
+              <div className="lg:flex justify-between items-center">
+                <p className="text-white animate-pulse hover:bg-yellow-600 bg-yellow-500 rounded-full px-3 py-1 font-semibold cursor-pointer transition border border-white  hover:bg-transparent ">
+                  Register Now
                 </p>
-                <p className="w-full text-sm pb-4 font-semibold text-gray-100">
-                  Candidate Registration Started
-                </p>
-                <div className="lg:flex justify-between items-center">
-                  <p className="text-blue-900  bg-white rounded-full px-3 py-1 font-semibold cursor-pointer transition border border-white  hover:bg-transparent hover:text-white">
-                    Register Now
-                  </p>
-                </div>
               </div>
             </div>
           </div>
