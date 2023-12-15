@@ -42,18 +42,24 @@ function Homepage() {
 
         {/*  */}
         {/* component */}
-        <a href="/hall-ticket" className="flex justify-center items-center mx-4 bg-gray-100">
+        <a
+          href="https://shefest.cpetdhiu.in/"
+          target="_blank"
+          className="flex justify-center items-center mx-4 bg-gray-100"
+        >
           <div className="lg:w-[35%] w-full my-5 ">
             <div className="">
-              <div className=" items-center justify-end p-4 bg-blue-800 rounded-xl">
+              <div className=" items-center justify-end p-4 bg-yellow-500 rounded-xl">
                 <p className="w-full text-2xl font-semibold text-white">
-                 CMS, MAHDIYYA ODD SEM EXAM OCT 2023 HALL TICKET
+                  SheFest 2023-24 Arts Fest
+                </p>
+                <p className="w-full text-sm pb-4 font-semibold text-gray-100">
+                  Candidate Registration Started
                 </p>
                 <div className="lg:flex justify-between items-center">
-                  <p className="text-white">
-                    Download your hall ticket right now!
+                  <p className="text-blue-900  bg-white rounded-full px-3 py-1 font-semibold cursor-pointer transition border border-white  hover:bg-transparent hover:text-white">
+                    Register Now
                   </p>
-                  <p className="text-blue-900  bg-white rounded-full px-3 py-1 font-semibold cursor-pointer transition border border-white  hover:bg-transparent hover:text-white">Download Now</p>
                 </div>
               </div>
             </div>
