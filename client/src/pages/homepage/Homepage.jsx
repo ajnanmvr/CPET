@@ -54,11 +54,11 @@ function Homepage() {
                 SheFest 2023-24 Arts Fest
               </p>
               <p className="w-full text-sm pb-4 font-semibold text-gray-500">
-                Candidate Registration Started
+               Results Published
               </p>
               <div className="lg:flex justify-between items-center">
                 <p className="text-white animate-pulse hover:bg-yellow-600 bg-yellow-500 rounded-full px-3 py-1 font-semibold cursor-pointer transition border border-white  hover:bg-transparent ">
-                  Register Now
+                  Check Now
                 </p>
               </div>
             </div>
