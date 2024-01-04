@@ -11,7 +11,7 @@ function Navbar({ navOpened, setNavOpened }) {
     checkCourseLogin();
   }, []);
   return (
-    <nav className="bg-gray-200">
+    <nav className="bg-gray-200 p-2">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu button*/}
@@ -34,14 +34,14 @@ function Navbar({ navOpened, setNavOpened }) {
             <div className="flex flex-shrink-0 items-center">
               <Link to="/">
                 <img
-                  className="hidden h-16 w-auto lg:block cursor-pointer"
+                  className="hidden h-20 w-auto lg:block cursor-pointer"
                   src="/images/logo.png"
                   alt="CPET Darul Huda"
                 />
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4 items-center">
+              <div className="flex space-x-2 items-center h-full">
                 {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                 <Link
                   to="/"
@@ -84,7 +84,7 @@ function Navbar({ navOpened, setNavOpened }) {
                 )}
                 <a
                   href="/admin"
-                  className=" block px-3 py-2 rounded-md text-base font-medium"
+                  className=" block px-3 py-2 rounded-md text-sm font-medium"
                 >
                   Dashboard
                 </a>

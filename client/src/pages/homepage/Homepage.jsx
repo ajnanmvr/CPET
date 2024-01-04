@@ -70,7 +70,7 @@ function Homepage() {
         <p className="text-xl text-center font-bold uppercase my-4 text-[#3f6495]">
           notifications
         </p>
-        <div className="lg:grid lg:grid-cols-2 lg:gap-4">
+        <div className="lg:grid lg:grid-cols-2 lg:gap-4 p-5">
           {notifications.map((notification, key) => (
             <a
               href={notification?.url}

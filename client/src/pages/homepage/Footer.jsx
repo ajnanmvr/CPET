@@ -81,7 +81,7 @@ function Footer() {
         </div>
       </div>
       <div className="mx-6 py-10 text-center md:text-left">
-        <div className="lg:flex lg:justify-between lg:items-center">
+        <div className="lg:flex lg:justify-between lg:items-center p-5 gap-5">
           <div className="lg:max-w-[50%]">
             <h6 className=" uppercase font-semibold mb-4 flex items-center justify-center md:justify-start ">
               <svg
@@ -171,13 +171,12 @@ function Footer() {
         </div>
       </div>
       <div className="text-center p-6 bg-gray-200">
-        <span>© 2022 Copyright:</span>
+        <span>© 2024 Copyright | </span>
         <a
-          className="text-[#175e53] ml-3 font-semibold"
+          className="text-[#175e53] font-semibold"
           target={'_blank'}
           href="https://digitio-stack-portfolio-hd3wbcla3-janishnehyan03.vercel.app/"
-        >
-          Digitio Stack
+        >Digitio Stack
         </a>
       </div>
     </footer>
